@@ -14,6 +14,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private float _boostGazy;
+    public float boostGazy
+    {
+        get
+        {
+            return _boostGazy;
+        }
+        protected set
+        {
+            _boostGazy = Mathf.Clamp(value, 0, 3);
+        }
+    }
+
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
     [SerializeField] private float _moveSpeed;
@@ -50,7 +63,7 @@ public class Player : MonoBehaviour
         rotation.y = _rigid.position.x - position.x;
 
         position.y = Mathf.Max(0, _rigid.position.y + _VelocityY * Time.fixedDeltaTime);
-        if (position.y > 0)  
+        if (position.y > 0)
         {
             float yDelta = 9.8f * Time.fixedDeltaTime;
 
@@ -78,6 +91,21 @@ public class Player : MonoBehaviour
         {
             _VelocityY = +_jumpPower;
         }
+    }
+
+    public void ChargeBoost(float value)
+    {
+        boostGazy += value;
+    }
+
+    public bool UseBoost()
+    {
+        if (boostGazy > 1)
+        {
+            boostGazy -= 1;
+            return true;
+        }
+        return false;
     }
 
     #region 체력 관리
