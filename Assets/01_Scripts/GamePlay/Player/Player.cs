@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
     public int CurruntHealth { get; set; }
     public float MoveSpeed
     {
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         _rigid = GetComponent<Rigidbody>();
     }
 
