@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    #region Ã¼·Â °ü¸®
+    #region ì²´ë ¥ ê´€ë¦¬
 
     public void TakeDamage(int damage = 1)
     {

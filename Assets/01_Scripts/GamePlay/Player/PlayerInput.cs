@@ -11,7 +11,6 @@ public class PlayerInput : MonoBehaviour
         _player = GetComponent<Player>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButton(0))
