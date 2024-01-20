@@ -5,6 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraTracker : MonoBehaviour
 {
+    public Transform playerTransform;
     [SerializeField] private Vector3 _cameraPos;
     [SerializeField] private Vector3 _cameraLookPos;
 
@@ -15,7 +16,7 @@ public class CameraTracker : MonoBehaviour
     private void Start()
     {
         _cameraTransform = Camera.main.transform;
-        if (_cameraTransform == null)
+        if (_cameraTransform is null)
         {
             Debug.LogWarning("카메라가 존재하지 않습니다!");
             Destroy(this);
@@ -29,8 +30,11 @@ public class CameraTracker : MonoBehaviour
 
     private void CameraTrackHandler()
     {
-        _cameraTransform.position = _curruntOrigin + _cameraPos;
-        _cameraTransform.LookAt(_curruntOrigin + _cameraLookPos);
+        if (_cameraTransform != null)
+        {
+            _cameraTransform.position = _curruntOrigin + _cameraPos;
+            _cameraTransform.LookAt(_curruntOrigin + _cameraLookPos);
+        }
     }
 
     private void OnDrawGizmosSelected()
