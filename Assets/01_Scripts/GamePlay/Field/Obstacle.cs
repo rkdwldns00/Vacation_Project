@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        collision.gameObject.GetComponent<Player>()?.TakeDamage();
+        other.GetComponent<Player>()?.TakeDamage();
     }
 }
