@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     private Rigidbody _rigid;
     private float _targetX;
     private float _VelocityY;
+    private bool _isDead;
 
     private void Awake()
     {
@@ -132,6 +133,9 @@ public class Player : MonoBehaviour
 
     private void DieHandler()
     {
+        if (_isDead) return;
+        _isDead = true;
+
         Destroy(gameObject);
     }
     #endregion
