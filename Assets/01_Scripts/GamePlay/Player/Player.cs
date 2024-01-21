@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _maxX;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
+    [SerializeField] private float _fallingSensorY;
     [SerializeField] private int _MaxHealth;
 
     private Rigidbody _rigid;
@@ -77,7 +78,11 @@ public class Player : MonoBehaviour
         }
 
         _rigid.rotation = Quaternion.Euler(rotation);
-        _rigid.position = position;
+        _rigid.MovePosition(position);
+        if(position.y < _fallingSensorY)
+        {
+            DieHandler();
+        }
     }
 
     public void Move(float xRate)
