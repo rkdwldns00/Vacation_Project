@@ -10,7 +10,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        //SceneManager.LoadScene("");
+        SceneManager.LoadScene("GameScene");
     }
 
     private void SetBestScoreText(int score)
