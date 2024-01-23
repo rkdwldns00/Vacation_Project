@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
+    public event Action OnDie;
+
     public int CurruntHealth { get; set; }
     public float MoveSpeed
     {
@@ -136,6 +139,7 @@ public class Player : MonoBehaviour
         if (_isDead) return;
         _isDead = true;
 
+        OnDie?.Invoke();
         Destroy(gameObject);
     }
     #endregion
