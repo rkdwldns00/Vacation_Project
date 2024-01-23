@@ -26,7 +26,7 @@ public class FallingObstacle : MonoBehaviour
         float fallingObjectHeight = -Physics.gravity.y * _warringTime / 2 * _warringTime;
 
         Instantiate(_warringObjectPrefab, transform.position, Quaternion.identity).GetComponent<Warring>().SetTime(_warringTime);
-        Instantiate(_fallingObjectPrefab, transform.position + Vector3.up * fallingObjectHeight, Quaternion.identity);
+        Destroy(Instantiate(_fallingObjectPrefab, transform.position + Vector3.up * fallingObjectHeight, Quaternion.identity),_warringTime + 3);
 
         StartCoroutine(HitDelay());
     }
