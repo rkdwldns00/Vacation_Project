@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        GameManager.Instance.score = (int)transform.position.z;
     }
 
     private void FixedUpdate()
