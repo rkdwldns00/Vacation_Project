@@ -10,6 +10,17 @@ public class FallingObstacle : MonoBehaviour
     [SerializeField] private GameObject _fallingObjectPrefab;
     [SerializeField] private float _hitBoxRadius;
 
+    bool isStarted = false;
+
+    private void FixedUpdate()
+    {
+        if (!isStarted && transform.position.z <= Player.Instance.transform.position.z + _warringTime * Player.Instance.MoveSpeed)
+        {
+            isStarted = true;
+            StartWarring();
+        }
+    }
+
     public void StartWarring()
     {
         float fallingObjectHeight = -Physics.gravity.y * _warringTime / 2 * _warringTime;
