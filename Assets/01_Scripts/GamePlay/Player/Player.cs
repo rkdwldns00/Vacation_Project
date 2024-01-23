@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
 
         position.z = _rigid.position.z + _moveSpeed * Time.fixedDeltaTime;
 
-        position.x = Mathf.Lerp(_targetX, _rigid.position.x, Time.fixedDeltaTime);
+        position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
         rotation.y = _rigid.position.x - position.x;
 
         position.y = Mathf.Max(0, _rigid.position.y + _VelocityY * Time.fixedDeltaTime);
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
-        if(position.y < _fallingSensorY)
+        if (position.y < _fallingSensorY)
         {
             DieHandler();
         }
