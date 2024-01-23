@@ -33,11 +33,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float _maxX;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
+    [SerializeField] private float _fallingSensorY;
     [SerializeField] private int _MaxHealth;
 
     private Rigidbody _rigid;
     private float _targetX;
     private float _VelocityY;
+    private bool _isDead;
 
     private void Awake()
     {
@@ -62,7 +64,7 @@ public class Player : MonoBehaviour
 
         position.z = _rigid.position.z + _moveSpeed * Time.fixedDeltaTime;
 
-        position.x = Mathf.Lerp(_targetX, _rigid.position.x, Time.fixedDeltaTime);
+        position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
         rotation.y = _rigid.position.x - position.x;
 
         position.y = Mathf.Max(0, _rigid.position.y + _VelocityY * Time.fixedDeltaTime);
@@ -80,7 +82,11 @@ public class Player : MonoBehaviour
         }
 
         _rigid.rotation = Quaternion.Euler(rotation);
-        _rigid.position = position;
+        _rigid.MovePosition(position);
+        if (position.y < _fallingSensorY)
+        {
+            DieHandler();
+        }
     }
 
     public void Move(float xRate)
@@ -130,6 +136,9 @@ public class Player : MonoBehaviour
 
     private void DieHandler()
     {
+        if (_isDead) return;
+        _isDead = true;
+
         Destroy(gameObject);
     }
     #endregion
