@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
+    
+    public event Action OnDie;
 
     public int CurruntHealth { get; set; }
     public float MoveSpeed
@@ -54,7 +57,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        GameManager.Instance.score = (int)transform.position.z;
     }
 
     private void FixedUpdate()
@@ -139,6 +142,7 @@ public class Player : MonoBehaviour
         if (_isDead) return;
         _isDead = true;
 
+        OnDie?.Invoke();
         Destroy(gameObject);
     }
     #endregion
