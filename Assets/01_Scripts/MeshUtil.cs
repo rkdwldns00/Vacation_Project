@@ -2,8 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MeshCut
+public static class MeshUtil
 {
+    public static Mesh Merge(Mesh a, Mesh b)
+    {
+        Vector3[] vertices = new Vector3[a.vertexCount + b.vertexCount];
+        Vector3[] normals = new Vector3[a.normals.Length + b.normals.Length];
+        Vector2[] uv = new Vector2[a.uv.Length + b.uv.Length];
+        int[] tri = new int[a.triangles.Length + b.triangles.Length];
+        int index = 0;
+        for (int i = 0; i < a.vertexCount; i++)
+        {
+            vertices[index] = a.vertices[i];
+            normals[index] = a.normals[i];
+            uv[index] = a.uv[i];
+            index++;
+        }
+        for (int i = 0; i < b.vertexCount; i++)
+        {
+            vertices[index] = b.vertices[i];
+            normals[index] = b.normals[i];
+            uv[index] = b.uv[i];
+            index++;
+        }
+        index = 0;
+        for (int i = 0; i < a.triangles.Length; i++)
+        {
+            tri[index] = a.triangles[i];
+            index++;
+        }
+        for (int i = 0; i < b.triangles.Length; i++)
+        {
+            tri[index] = b.triangles[i] + a.vertexCount;
+            index++;
+        }
+
+        return new Mesh()
+        {
+            name = a.name,
+            vertices = vertices,
+            normals = normals,
+            uv = uv,
+            triangles = tri,
+        };
+    }
+
     public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal)
     {
         //정점마다 절단면의 앞쪽인지 뒷쪽인지 확인
