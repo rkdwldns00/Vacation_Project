@@ -143,6 +143,11 @@ public class Player : MonoBehaviour
         _isDead = true;
 
         OnDie?.Invoke();
+        GameManager.Instance.isHighScore = GameManager.Instance.Score > GameManager.Instance.HighScore;
+        if (GameManager.Instance.isHighScore)
+        {
+            GameManager.Instance.HighScore = GameManager.Instance.Score;
+        }
         Destroy(gameObject);
     }
     #endregion

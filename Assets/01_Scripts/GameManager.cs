@@ -18,4 +18,11 @@ public class GameManager : MonoBehaviour
     }
 
     public int Score { get; set; }
+    public bool isHighScore { get; set; }
+
+    public int HighScore
+    {
+        get => PlayerPrefs.GetInt("HighScore");
+        set => PlayerPrefs.SetInt("HighScore", value);
+    }
 }
