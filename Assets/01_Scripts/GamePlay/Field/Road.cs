@@ -50,7 +50,7 @@ public class Road : MonoBehaviour
 
     private void Update()
     {
-        if (Player.Instance.transform.position.z - playerBackSpaceLength > lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount)
+        if (Player.Instance != null && Player.Instance.transform.position.z - playerBackSpaceLength > lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount)
         {
             MoveMesh();
         }

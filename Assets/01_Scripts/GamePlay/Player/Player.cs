@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
 
     private Rigidbody _rigid;
     private float _targetX;
-    private float _VelocityY;
     private bool _isDead;
 
     private void Awake()
@@ -68,19 +67,9 @@ public class Player : MonoBehaviour
         position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
         rotation.y = _rigid.position.x - position.x;
 
-        position.y = Mathf.Max(0, _rigid.position.y + _VelocityY * Time.fixedDeltaTime);
-        if (position.y > 0)
-        {
-            float yDelta = 9.8f * Time.fixedDeltaTime;
+        position.y = _rigid.position.y;
 
-            rotation.x = -yDelta;
-
-            _VelocityY -= 9.8f * Time.fixedDeltaTime;
-        }
-        else
-        {
-            _VelocityY = 0;
-        }
+        rotation.x = -_rigid.velocity.y;
 
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
@@ -99,7 +88,7 @@ public class Player : MonoBehaviour
     {
         if (_rigid.position.y < 0.1f)
         {
-            _VelocityY = +_jumpPower;
+            _rigid.AddForce(Vector3.up * _jumpPower);
         }
     }
 
