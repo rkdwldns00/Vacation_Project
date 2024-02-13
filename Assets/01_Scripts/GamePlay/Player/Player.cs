@@ -7,8 +7,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
-    
-    public event Action OnDie;
 
     public int CurruntHealth { get; set; }
     public float MoveSpeed
@@ -142,7 +140,6 @@ public class Player : MonoBehaviour
         if (_isDead) return;
         _isDead = true;
 
-        OnDie?.Invoke();
         GameManager.Instance.isHighScore = GameManager.Instance.Score > GameManager.Instance.HighScore;
         if (GameManager.Instance.isHighScore)
         {
