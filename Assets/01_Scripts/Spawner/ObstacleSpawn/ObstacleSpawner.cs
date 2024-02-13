@@ -24,13 +24,13 @@ public class ObstacleSpawner : MonoBehaviour
     private void SpawnObstacle()
     {
         int rand = Random.Range(1, 101);
-        int _spawnProbability = 0;
+        int spawnProbability = 0;
 
         for (int i=0; i<_obstacleSpawnDatas.Count; i++)
         {
-            _spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
+            spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
 
-            if (rand <= _spawnProbability)
+            if (rand <= spawnProbability)
             {
                 _obstacleSpawnDatas[i].SpawnObstacle(Vector3.zero);
                 _obstacleSpawnCoolTime = Time.time + _obstacleSpawnDatas[i].NextSpawnCoolTime;
