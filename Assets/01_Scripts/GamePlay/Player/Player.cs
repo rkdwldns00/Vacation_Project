@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     }
 
     private float _boostGazy;
-    public float boostGazy
+    public float BoostGazy
     {
         get
         {
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        GameManager.Instance.score = (int)transform.position.z;
+        GameManager.Instance.Score = (int)transform.position.z;
     }
 
     private void FixedUpdate()
@@ -107,14 +107,14 @@ public class Player : MonoBehaviour
 
     public void ChargeBoost(float value)
     {
-        boostGazy += value;
+        BoostGazy += value;
     }
 
     public bool UseBoost()
     {
-        if (boostGazy > 1)
+        if (BoostGazy > 1)
         {
-            boostGazy -= 1;
+            BoostGazy -= 1;
             return true;
         }
         return false;

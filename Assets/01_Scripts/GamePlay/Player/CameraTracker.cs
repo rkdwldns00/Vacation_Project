@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraTracker : MonoBehaviour
 {
-    public Transform playerTransform;
+    public Transform PlayerTransform;
     [SerializeField] private Vector3 _cameraPos;
     [SerializeField] private Vector3 _cameraLookPos;
 

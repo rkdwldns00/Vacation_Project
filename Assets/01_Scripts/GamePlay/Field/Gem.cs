@@ -6,8 +6,9 @@ public class Gem : MonoBehaviour
 {
     [SerializeField] private float _chargeValue;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        collision.gameObject.GetComponent<Player>().ChargeBoost(_chargeValue);
+        other.GetComponent<Player>().ChargeBoost(_chargeValue);
+        Destroy(gameObject);
     }
 }

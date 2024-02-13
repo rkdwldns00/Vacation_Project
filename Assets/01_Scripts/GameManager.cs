@@ -17,5 +17,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int score { get; set; }
+    public int Score { get; set; }
 }
