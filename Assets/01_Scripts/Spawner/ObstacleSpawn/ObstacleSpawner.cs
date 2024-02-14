@@ -8,11 +8,6 @@ public class ObstacleSpawner : MonoBehaviour
 
     private float _obstacleSpawnCoolTime;
 
-    private void Awake()
-    {
-        CheckObstacleSpawnProbability();
-    }
-
     private void Update()
     {
         if (_obstacleSpawnCoolTime <= Time.time)
@@ -42,25 +37,6 @@ public class ObstacleSpawner : MonoBehaviour
             }
 
             spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
-        }
-    }
-
-    private void CheckObstacleSpawnProbability()
-    {
-        int probability = 0;
-
-        foreach (ObstacleSpawnData data in _obstacleSpawnDatas)
-        {
-            probability += data.SpawnProbability;
-        }
-
-        if (probability < 100)
-        {
-            Debug.LogWarning("probability less than 100");
-        }
-        else if (probability > 100)
-        {
-            Debug.LogWarning("probability greater than 100");
         }
     }
 }
