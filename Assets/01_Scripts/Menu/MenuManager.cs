@@ -6,7 +6,7 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI bestScoreText;
+    [SerializeField] private TextMeshProUGUI _bestScoreText;
 
     public void StartGame()
     {
@@ -15,6 +15,6 @@ public class MenuManager : MonoBehaviour
 
     private void SetBestScoreText(int score)
     {
-        bestScoreText.text = "Best Score : " + score; 
+        _bestScoreText.text = "Best Score : " + score; 
     }
 }
