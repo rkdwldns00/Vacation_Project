@@ -23,19 +23,25 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        int rand = Random.Range(1, 101);
         int spawnProbability = 0;
+
+        foreach (ObstacleSpawnData data in _obstacleSpawnDatas)
+        {
+            spawnProbability += data.SpawnProbability;
+        }
+
+        int rand = Random.Range(0, spawnProbability);
 
         for (int i=0; i<_obstacleSpawnDatas.Count; i++)
         {
-            spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
-
             if (rand <= spawnProbability)
             {
                 _obstacleSpawnDatas[i].SpawnObstacle(Vector3.zero);
                 _obstacleSpawnCoolTime = Time.time + _obstacleSpawnDatas[i].NextSpawnCoolTime;
                 break;
             }
+
+            spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
         }
     }
 
