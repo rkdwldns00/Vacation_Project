@@ -88,9 +88,9 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        if (_rigid.position.y < 0.1f)
+        if (_rigid.position.y < 0.1f && _rigid.position.y >= 0f)
         {
-            _rigid.AddForce(Vector3.up * _jumpPower);
+            _rigid.velocity = (Vector3.up * _jumpPower);
         }
     }
 
