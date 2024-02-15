@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _layer: {fileID: 5908888653591308039}
-  _highScoreMassage: {fileID: 0}
+  _highScoreMassage: {fileID: 7246717733154390860}
   _scoreText: {fileID: 5908888652933049389}
   _closeButton: {fileID: 5908888653552551992}
 --- !u!1 &5908888652933049427
