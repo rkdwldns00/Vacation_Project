@@ -37,6 +37,7 @@ public class FallingObstacle : MonoBehaviour
 
         if (CheckPlayerInHitBox())
         {
+            Debug.Log("Damaged");
             Player.Instance.TakeDamage();
         }
     }
@@ -49,7 +50,7 @@ public class FallingObstacle : MonoBehaviour
         playerPos.y = 0;
         Vector3 hitBoxPos = transform.position;
         hitBoxPos.y = 0;
-
+        Debug.Log(Vector3.Distance(hitBoxPos, playerPos));
         return Vector3.Distance(hitBoxPos, playerPos) < _hitBoxRadius;
     }
 
