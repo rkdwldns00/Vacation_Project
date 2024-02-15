@@ -31,7 +31,8 @@ public class ObstacleSpawner : MonoBehaviour
         {
             if (rand <= spawnProbability)
             {
-                _obstacleSpawnDatas[i].SpawnObstacle(Vector3.zero);
+                Vector3 playerPos = new Vector3(0, 0, Player.Instance.transform.position.z);
+                _obstacleSpawnDatas[i].SpawnObstacle(playerPos);
                 _obstacleSpawnCoolTime = Time.time + _obstacleSpawnDatas[i].NextSpawnCoolTime;
                 break;
             }
