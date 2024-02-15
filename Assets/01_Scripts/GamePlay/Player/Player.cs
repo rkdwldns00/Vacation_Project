@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    public event Action OnDie;
+
     public int CurruntHealth { get; set; }
     public float MoveSpeed
     {
@@ -134,6 +136,8 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.HighScore = GameManager.Instance.Score;
         }
+
+        OnDie?.Invoke();
         Destroy(gameObject);
     }
     #endregion
