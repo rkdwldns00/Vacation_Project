@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextSpawnCoolTime: 5
   SpawnProbability: 1
-  _spawnDistance: 5
+  _spawnDistance: 10
   _fallingObstaclePrefab: {fileID: 2867260696588579288, guid: 2c8f4ad3c5ad0104cb15a311e21b7bed, type: 3}
   _spawnCount: 5
   _spawnXRange: 8
