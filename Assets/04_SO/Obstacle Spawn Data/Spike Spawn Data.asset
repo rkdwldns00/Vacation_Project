@@ -16,6 +16,8 @@ MonoBehaviour:
   SpawnProbability: 1
   _spawnDistance: 100
   _spikeObjectPrefab: {fileID: 7653950590000120774, guid: 90e8fdaf1313a8e4daf46265eb438808, type: 3}
-  _spawnCount: 4
-  _spawnXRange: 8
-  _spawnZRange: 1.5
+  _minSpikeSpawnCount: 2
+  _maxSpikeSpawnCount: 4
+  _minLineSpawnCount: 1
+  _maxLineSpawnCount: 3
+  _lineDistance: 20
