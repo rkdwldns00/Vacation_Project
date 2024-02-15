@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
         {
             if(_instance == null)
             {
-                _instance = new GameObject("GameManager").AddComponent<GameManager>();
+                GameObject g = new GameObject("GameManager");
+                DontDestroyOnLoad(g);
+                _instance = g.AddComponent<GameManager>();
             }
             return _instance;
         }
