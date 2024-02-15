@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        if (_rigid.position.y < 0.1f && _rigid.position.y >= 0f)
+        if (_rigid.position.y < 0.05f && _rigid.position.y >= -0.05f)
         {
             _rigid.velocity = (Vector3.up * _jumpPower);
         }
