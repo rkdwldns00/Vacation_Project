@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b1883c6d1861248a2fbc53dcfc650c, type: 3}
+  m_Name: SinkHole Spawn Data
+  m_EditorClassIdentifier: 
+  NextSpawnCoolTime: 5
+  SpawnProbability: 1
+  _spawnDistance: 5
+  _sinkHoleObjectPrefab: {fileID: 1173139562085285156, guid: ad1ff02296341c44a81fb56554f8e008, type: 3}
+  _spawnCount: 2
+  _spawnXRange: 10
+  _spawnZRange: 10
