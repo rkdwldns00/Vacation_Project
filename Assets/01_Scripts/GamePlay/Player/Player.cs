@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody _rigid;
     private float _targetX;
+    private float _colliderBoundMinY;
     private bool _isDead;
 
     private void Awake()
@@ -52,6 +53,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         CurruntHealth = _MaxHealth;
+
+        MeshCollider meshCollder = GetComponentInChildren<MeshCollider>();
+        float meshLocalY = meshCollder.transform.position.y - transform.position.y;
+        Bounds bounds = meshCollder.sharedMesh.bounds;
+        float meshMinY = bounds.min.y;
+        _colliderBoundMinY = meshLocalY + meshMinY;
     }
 
     private void Update()
@@ -88,7 +95,11 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        if (_rigid.position.y < 0.05f && _rigid.position.y >= -0.05f)
+        Vector3 rayOrigin = new Vector3(_rigid.position.x,
+            _rigid.position.y + _colliderBoundMinY + 0.05f,
+            _rigid.position.z);
+        Debug.DrawRay(rayOrigin, Vector3.down, Color.blue, 100);
+        if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
             _rigid.velocity = (Vector3.up * _jumpPower);
         }
