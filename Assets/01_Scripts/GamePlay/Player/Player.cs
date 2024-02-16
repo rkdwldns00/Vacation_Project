@@ -139,6 +139,7 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.HighScore = GameManager.Instance.Score;
         }
+        InGameUIManager.Instance.ActiveGameResultUI();
         Destroy(gameObject);
     }
     #endregion

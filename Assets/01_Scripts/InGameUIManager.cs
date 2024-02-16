@@ -7,6 +7,24 @@ using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
 {
+    private static InGameUIManager _instance;
+
+    public static InGameUIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<InGameUIManager>();
+                if (_instance == null)
+                {
+                    _instance = new GameObject("InGameUIManager").AddComponent<InGameUIManager>();
+                }
+            }
+            return _instance;
+        }
+    }
+
     [Header("Score UI")]
     [SerializeField] private TextMeshProUGUI _currentScoreText;
     [SerializeField] private GameObject _highScoreRecord;
@@ -34,6 +52,11 @@ public class InGameUIManager : MonoBehaviour
     {
         UpdateScoreUI();
         UpdatePlayerUI();
+    }
+
+    public void ActiveGameResultUI()
+    {
+        _gameResultUI.OpenUI();
     }
 
     private void UpdateScoreUI()

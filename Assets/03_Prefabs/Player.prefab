@@ -83,7 +83,7 @@ MonoBehaviour:
   _moveSpeed: 15
   _jumpPower: 5
   _fallingSensorY: -5
-  _MaxHealth: 3
+  _maxHealth: 3
 --- !u!114 &7915677668266142392
 MonoBehaviour:
   m_ObjectHideFlags: 0
