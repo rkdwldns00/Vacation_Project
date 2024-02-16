@@ -40,18 +40,20 @@ public class SinkHole : MonoBehaviour
 
     public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2)
     {
+        Vector3 centor = new Vector3(mesh.bounds.center.x, 0, 0);
+
         Mesh before;
         Mesh middle;
         Mesh after;
 
-        (before, middle) = MeshUtil.Cut(mesh, Vector3.forward * startZ, Vector3.forward);
-        (middle, after) = MeshUtil.Cut(mesh, Vector3.forward * (startZ + HoleDistance), Vector3.forward);
+        (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
+        (middle, after) = MeshUtil.Cut(mesh, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward);
 
         Mesh result = MeshUtil.Merge(before, after);
-        Vector3 leftPoint = new Vector3(startX1, 0, startZ);
-        Vector3 rightPoint = new Vector3(startX2, 0, startZ);
-        Vector3 leftNormal = Vector3.Cross(new Vector3(startX1, 0, startZ) - new Vector3(endX1, 0, startZ + HoleDistance), Vector3.down);
-        Vector3 rightNormal = Vector3.Cross(new Vector3(startX2, 0, startZ) - new Vector3(endX2, 0, startZ + HoleDistance), Vector3.up);
+        Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
+        Vector3 rightPoint = new Vector3(startX2, 0, startZ) + centor;
+        Vector3 leftNormal = Vector3.Cross(leftPoint - new Vector3(endX1, 0, startZ + HoleDistance) - centor, Vector3.down);
+        Vector3 rightNormal = Vector3.Cross(rightPoint - new Vector3(endX2, 0, startZ + HoleDistance) - centor, Vector3.up);
 
         if (isHole)
         {

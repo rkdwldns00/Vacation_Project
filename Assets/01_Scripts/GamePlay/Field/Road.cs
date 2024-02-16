@@ -24,6 +24,8 @@ public class Road : MonoBehaviour
 
     private void Start()
     {
+        transform.position = new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, 0);
+
         originRoadMeshMinZ = originRoadMesh.vertices[0].z;
         float maxZ = originRoadMesh.vertices[0].z;
         for (int i = 1; i < originRoadMesh.vertexCount; i++)
@@ -72,5 +74,15 @@ public class Road : MonoBehaviour
         curruntRoadMesh = mesh;
         meshFilter.sharedMesh = curruntRoadMesh;
         meshCollider.sharedMesh = curruntRoadMesh;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        /*for (int i = 0; i < 10; i++)
+        {
+            float roadLength = originRoadMesh.bounds.max.z - originRoadMesh.bounds.min.z;
+            Gizmos.DrawMesh(originRoadMesh, new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, roadLength * i));
+        }*/
+        Gizmos.DrawWireMesh(curruntRoadMesh,transform.position);
     }
 }
