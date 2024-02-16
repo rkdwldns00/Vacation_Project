@@ -27,11 +27,13 @@ public class ObstacleSpawner : MonoBehaviour
 
         int rand = Random.Range(0, spawnProbability);
 
+        spawnProbability = 0;
+
         for (int i=0; i<_obstacleSpawnDatas.Count; i++)
         {
             if (rand <= spawnProbability)
             {
-                _obstacleSpawnDatas[i].SpawnObstacle(Vector3.zero);
+                _obstacleSpawnDatas[i].SpawnObstacle(Player.Instance.transform.position);
                 _obstacleSpawnCoolTime = Time.time + _obstacleSpawnDatas[i].NextSpawnCoolTime;
                 break;
             }

@@ -8,6 +8,11 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _bestScoreText;
 
+    private void Start()
+    {
+        SetBestScoreText(GameManager.Instance.HighScore);
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene");
