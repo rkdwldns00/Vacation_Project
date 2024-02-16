@@ -35,7 +35,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
     [SerializeField] private float _fallingSensorY;
-    [SerializeField] private int _MaxHealth;
+    [SerializeField] private int _maxHealth;
+
+    public int MaxHealth
+    {
+        get => _maxHealth;
+    }
 
     private Rigidbody _rigid;
     private float _targetX;
@@ -49,7 +54,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        CurruntHealth = _MaxHealth;
+        CurruntHealth = _maxHealth;
     }
 
     private void Update()
