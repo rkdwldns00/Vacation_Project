@@ -98,7 +98,6 @@ public class Player : MonoBehaviour
         Vector3 rayOrigin = new Vector3(_rigid.position.x,
             _rigid.position.y + _colliderBoundMinY + 0.05f,
             _rigid.position.z);
-        Debug.DrawRay(rayOrigin, Vector3.down, Color.blue, 100);
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
             _rigid.velocity = (Vector3.up * _jumpPower);
