@@ -14,7 +14,7 @@ public class FallingObstacle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isStarted && transform.position.z <= Player.Instance.transform.position.z + _warringTime * Player.Instance.MoveSpeed)
+        if (!isStarted && Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _warringTime * Player.Instance.MoveSpeed)
         {
             isStarted = true;
             StartWarring();
