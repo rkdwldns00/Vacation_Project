@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    public event Action OnDie;
+    public event Action OnDamaged;
+
     public int CurruntHealth { get; set; }
     public float MoveSpeed
     {
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody _rigid;
     private float _targetX;
+    private float _colliderBoundMinY;
     private bool _isDead;
 
     private void Awake()
@@ -50,6 +54,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         CurruntHealth = _MaxHealth;
+
+        MeshCollider meshCollder = GetComponentInChildren<MeshCollider>();
+        float meshLocalY = meshCollder.transform.position.y - transform.position.y;
+        Bounds bounds = meshCollder.sharedMesh.bounds;
+        float meshMinY = bounds.min.y;
+        _colliderBoundMinY = meshLocalY + meshMinY;
     }
 
     private void Update()
@@ -86,9 +96,12 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        if (_rigid.position.y < 0.1f)
+        Vector3 rayOrigin = new Vector3(_rigid.position.x,
+            _rigid.position.y + _colliderBoundMinY + 0.05f,
+            _rigid.position.z);
+        if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
-            _rigid.AddForce(Vector3.up * _jumpPower);
+            _rigid.velocity = (Vector3.up * _jumpPower);
         }
     }
 
@@ -113,6 +126,8 @@ public class Player : MonoBehaviour
     {
         CurruntHealth -= damage;
 
+        OnDamaged?.Invoke();
+
         if (CurruntHealth <= 0)
         {
             DieHandler();
@@ -134,6 +149,8 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.HighScore = GameManager.Instance.Score;
         }
+
+        OnDie?.Invoke();
         Destroy(gameObject);
     }
     #endregion
