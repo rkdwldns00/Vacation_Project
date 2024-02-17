@@ -71,14 +71,9 @@ public class InGameUIManager : MonoBehaviour
 
     private void UpdatePlayerUI()
     {
-        foreach (GameObject hp in _playerHps)
+        for (int i=0; i<_playerHps.Count; i++)
         {
-            hp.SetActive(false);
-        }
-
-        for (int i=0; i<Player.Instance.CurruntHealth; i++)
-        {
-            _playerHps[i].SetActive(true);
+            _playerHps[i].SetActive(i < Player.Instance.CurruntHealth);
         }
     }
 }
