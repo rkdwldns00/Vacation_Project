@@ -60,11 +60,9 @@ public class Player : MonoBehaviour
     {
         CurruntHealth = _maxHealth;
 
-        MeshCollider meshCollder = GetComponentInChildren<MeshCollider>();
-        float meshLocalY = meshCollder.transform.position.y - transform.position.y;
-        Bounds bounds = meshCollder.sharedMesh.bounds;
-        float meshMinY = bounds.min.y;
-        _colliderBoundMinY = meshLocalY + meshMinY;
+        BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
+        float meshMinY = meshCollder.center.y - meshCollder.size.y / 2;
+        _colliderBoundMinY = meshMinY;
     }
 
     private void Update()
@@ -157,7 +155,7 @@ public class Player : MonoBehaviour
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
-        
+
         Destroy(gameObject);
     }
     #endregion
