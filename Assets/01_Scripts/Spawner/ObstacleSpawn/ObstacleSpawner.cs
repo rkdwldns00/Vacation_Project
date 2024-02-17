@@ -10,7 +10,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_obstacleSpawnCoolTime <= Time.time)
+        if (_obstacleSpawnCoolTime <= Time.time && Player.Instance)
         {
             SpawnObstacle();
         }
