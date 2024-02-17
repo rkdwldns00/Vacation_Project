@@ -43,6 +43,11 @@ public static class MeshUtil
 
     public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal)
     {
+        return Cut(mesh, cutterPoint, cutterNormal, false, Vector2.zero);
+    }
+
+    public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal, bool showCuttedSlice, Vector2 cuttedSliceUV)
+    {
         if (!mesh.isReadable)
         {
             Debug.LogError("자를 Mesh 에셋의 Read/Write 설정이 비활성화 되어있어 메시를 읽을 수 없습니다.");
@@ -228,28 +233,43 @@ public static class MeshUtil
                 }
 
                 //절단면 추가
-                Vertex bottom1 = GetBottomVertex(middle1);
-                Vertex bottom2 = GetBottomVertex(middle2);
+                if (showCuttedSlice)
+                {
+                    middle1.uv = cuttedSliceUV;
+                    middle2.uv = cuttedSliceUV;
+                    Vertex bottom1 = GetBottomVertex(middle1);
+                    Vertex bottom2 = GetBottomVertex(middle2);
 
-                int doubleBottom1Index = doublesList.Count;
-                doublesList.Add(bottom1);
-                int doubleBottom2Index = doublesList.Count;
-                doublesList.Add(bottom2);
+                    middle1Index = doublesList.Count;
+                    doublesList.Add(middle1);
+                    middle2Index = doublesList.Count;
+                    doublesList.Add(middle2);
 
-                int crossedBottom1Index = crossedList.Count;
-                crossedList.Add(bottom1);
-                int crossedBottom2Index = crossedList.Count;
-                crossedList.Add(bottom2);
+                    middle1CrossedIndex = crossedList.Count;
+                    crossedList.Add(middle1);
+                    middle2CrossedIndex = crossedList.Count;
+                    crossedList.Add(middle2);
 
-                AddTri(middle1CrossedIndex, middle2CrossedIndex, crossedBottom1Index, !doubleVertexIsForward);
-                AddTri(middle1CrossedIndex, crossedBottom1Index, middle2CrossedIndex, !doubleVertexIsForward);
-                AddTri(middle2CrossedIndex, crossedBottom2Index, crossedBottom1Index, !doubleVertexIsForward);
-                AddTri(middle2CrossedIndex, crossedBottom1Index, crossedBottom2Index, !doubleVertexIsForward);
+                    int doubleBottom1Index = doublesList.Count;
+                    doublesList.Add(bottom1);
+                    int doubleBottom2Index = doublesList.Count;
+                    doublesList.Add(bottom2);
 
-                AddTri(middle1Index, middle2Index, doubleBottom1Index, doubleVertexIsForward);
-                AddTri(middle1Index, doubleBottom1Index, middle2Index, doubleVertexIsForward);
-                AddTri(middle2Index, doubleBottom2Index, doubleBottom1Index, doubleVertexIsForward);
-                AddTri(middle2Index, doubleBottom1Index, doubleBottom2Index, doubleVertexIsForward);
+                    int crossedBottom1Index = crossedList.Count;
+                    crossedList.Add(bottom1);
+                    int crossedBottom2Index = crossedList.Count;
+                    crossedList.Add(bottom2);
+
+                    AddTri(middle1CrossedIndex, middle2CrossedIndex, crossedBottom1Index, !doubleVertexIsForward);
+                    AddTri(middle1CrossedIndex, crossedBottom1Index, middle2CrossedIndex, !doubleVertexIsForward);
+                    AddTri(middle2CrossedIndex, crossedBottom2Index, crossedBottom1Index, !doubleVertexIsForward);
+                    AddTri(middle2CrossedIndex, crossedBottom1Index, crossedBottom2Index, !doubleVertexIsForward);
+
+                    AddTri(middle1Index, middle2Index, doubleBottom1Index, doubleVertexIsForward);
+                    AddTri(middle1Index, doubleBottom1Index, middle2Index, doubleVertexIsForward);
+                    AddTri(middle2Index, doubleBottom2Index, doubleBottom1Index, doubleVertexIsForward);
+                    AddTri(middle2Index, doubleBottom1Index, doubleBottom2Index, doubleVertexIsForward);
+                }
             }
         }
 

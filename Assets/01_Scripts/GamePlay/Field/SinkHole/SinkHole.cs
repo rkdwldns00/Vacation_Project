@@ -8,7 +8,8 @@ public class SinkHole : MonoBehaviour
     public float maxSize;
     public float minDistance;
     public float maxDistance;
-    public Material cuttedSliceMaterial;
+
+    public Vector2 cuttedSliceUV;
 
     private void Start()
     {
@@ -47,7 +48,7 @@ public class SinkHole : MonoBehaviour
         Mesh after;
 
         (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
-        (middle, after) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward);
+        (middle, after) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward, true, cuttedSliceUV);
 
         Mesh result = MeshUtil.Merge(before, after);
         Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
@@ -58,16 +59,16 @@ public class SinkHole : MonoBehaviour
         if (isHole)
         {
             Mesh temp1, temp2;
-            (_, temp1) = MeshUtil.Cut(middle, leftPoint, leftNormal);
+            (_, temp1) = MeshUtil.Cut(middle, leftPoint, leftNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp1);
-            (_, temp2) = MeshUtil.Cut(middle, rightPoint, rightNormal);
+            (_, temp2) = MeshUtil.Cut(middle, rightPoint, rightNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp2);
         }
         else
         {
             Mesh temp;
-            (temp, _) = MeshUtil.Cut(middle, leftPoint, leftNormal);
-            (temp, _) = MeshUtil.Cut(temp, rightPoint, rightNormal);
+            (temp, _) = MeshUtil.Cut(middle, leftPoint, leftNormal, true, cuttedSliceUV);
+            (temp, _) = MeshUtil.Cut(temp, rightPoint, rightNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp);
         }
 
