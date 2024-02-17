@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     public event Action OnDie;
+    public event Action OnDamaged;
 
     public int CurruntHealth { get; set; }
     public float MoveSpeed
@@ -124,6 +125,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage = 1)
     {
         CurruntHealth -= damage;
+
+        OnDamaged?.Invoke();
 
         if (CurruntHealth <= 0)
         {
