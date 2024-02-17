@@ -43,6 +43,12 @@ public static class MeshUtil
 
     public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal)
     {
+        if (!mesh.isReadable)
+        {
+            Debug.LogError("자를 Mesh 에셋의 Read/Write 설정이 비활성화 되어있어 메시를 읽을 수 없습니다.");
+            return (mesh, mesh);
+        }
+
         Vector3[] meshVertices = mesh.vertices;
         Vector3[] meshNormals = mesh.normals;
         Vector2[] meshUv = mesh.uv;

@@ -24,6 +24,13 @@ public class Road : MonoBehaviour
 
     private void Start()
     {
+        if (!originRoadMesh.isReadable)
+        {
+            Debug.LogError("OriginRoadMesh 에셋의 Read/Write 설정이 비활성화 되어있어 메시를 읽을 수 없습니다.");
+            Destroy(gameObject);
+            return;
+        }
+
         transform.position = new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, 0);
 
         originRoadMeshMinZ = originRoadMesh.vertices[0].z;
