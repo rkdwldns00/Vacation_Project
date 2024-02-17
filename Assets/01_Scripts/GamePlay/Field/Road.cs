@@ -78,11 +78,11 @@ public class Road : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        /*for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             float roadLength = originRoadMesh.bounds.max.z - originRoadMesh.bounds.min.z;
             Gizmos.DrawMesh(originRoadMesh, new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, roadLength * i));
-        }*/
+        }
         Gizmos.DrawWireMesh(curruntRoadMesh,transform.position);
     }
 }

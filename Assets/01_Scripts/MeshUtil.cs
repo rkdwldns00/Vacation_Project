@@ -5,6 +5,8 @@ using UnityEngine;
 
 public static class MeshUtil
 {
+    const float BOTTOM_Y = -10f;
+
     public static Mesh Merge(Mesh a, Mesh b)
     {
         return Merge(a, b, Vector3.zero);
@@ -198,6 +200,7 @@ public static class MeshUtil
                 middle1 = GetMiddlePoint(doublesList[point1.index], crossedList[crossedPoint.index]);
                 middle2 = GetMiddlePoint(doublesList[point2.index], crossedList[crossedPoint.index]);
 
+                //절단된 삼각형을 각 메시에 나눠서 추가
                 int middle1Index = doublesList.Count;
                 doublesList.Add(middle1);
                 int middle2Index = doublesList.Count;
@@ -210,6 +213,37 @@ public static class MeshUtil
                 AddTri(crossedPoint.index, middle1CrossedIndex, middle2CrossedIndex, !doubleVertexIsForward);
                 AddTri(point1.index, point2.index, middle1Index, doubleVertexIsForward);
                 AddTri(point2.index, middle2Index, middle1Index, doubleVertexIsForward);
+
+                Vertex GetBottomVertex(Vertex a)
+                {
+                    Vertex bottom = a;
+                    bottom.point = new Vector3(bottom.point.x, BOTTOM_Y, bottom.point.z);
+                    return bottom;
+                }
+
+                //절단면 추가
+                Vertex bottom1 = GetBottomVertex(middle1);
+                Vertex bottom2 = GetBottomVertex(middle2);
+
+                int doubleBottom1Index = doublesList.Count;
+                doublesList.Add(bottom1);
+                int doubleBottom2Index = doublesList.Count;
+                doublesList.Add(bottom2);
+
+                int crossedBottom1Index = crossedList.Count;
+                crossedList.Add(bottom1);
+                int crossedBottom2Index = crossedList.Count;
+                crossedList.Add(bottom2);
+
+                AddTri(middle1CrossedIndex, middle2CrossedIndex, crossedBottom1Index, !doubleVertexIsForward);
+                AddTri(middle1CrossedIndex, crossedBottom1Index, middle2CrossedIndex, !doubleVertexIsForward);
+                AddTri(middle2CrossedIndex, crossedBottom2Index, crossedBottom1Index, !doubleVertexIsForward);
+                AddTri(middle2CrossedIndex, crossedBottom1Index, crossedBottom2Index, !doubleVertexIsForward);
+
+                AddTri(middle1Index, middle2Index, doubleBottom1Index, doubleVertexIsForward);
+                AddTri(middle1Index, doubleBottom1Index, middle2Index, doubleVertexIsForward);
+                AddTri(middle2Index, doubleBottom2Index, doubleBottom1Index, doubleVertexIsForward);
+                AddTri(middle2Index, doubleBottom1Index, doubleBottom2Index, doubleVertexIsForward);
             }
         }
 

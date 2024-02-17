@@ -47,7 +47,7 @@ public class SinkHole : MonoBehaviour
         Mesh after;
 
         (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
-        (middle, after) = MeshUtil.Cut(mesh, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward);
+        (middle, after) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward);
 
         Mesh result = MeshUtil.Merge(before, after);
         Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
