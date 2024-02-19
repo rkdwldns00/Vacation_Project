@@ -119,7 +119,7 @@ public class GetSpawner : MonoBehaviour
             {
                 if (blankCount == random)
                 {
-                    SpawnGemPrefab(new Vector3(x, 0.5f, z));
+                    SpawnGemPrefab(new Vector3(x, 0, z));
                     break;
                 }
                 blankCount++;
