@@ -5,6 +5,8 @@ using UnityEngine;
 
 public static class MeshUtil
 {
+    const float BOTTOM_Y = -10f;
+
     public static Mesh Merge(Mesh a, Mesh b)
     {
         return Merge(a, b, Vector3.zero);
@@ -41,6 +43,17 @@ public static class MeshUtil
 
     public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal)
     {
+        return Cut(mesh, cutterPoint, cutterNormal, false, Vector2.zero);
+    }
+
+    public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal, bool showCuttedSlice, Vector2 cuttedSliceUV)
+    {
+        if (!mesh.isReadable)
+        {
+            Debug.LogError("자를 Mesh 에셋의 Read/Write 설정이 비활성화 되어있어 메시를 읽을 수 없습니다.");
+            return (mesh, mesh);
+        }
+
         Vector3[] meshVertices = mesh.vertices;
         Vector3[] meshNormals = mesh.normals;
         Vector2[] meshUv = mesh.uv;
@@ -198,6 +211,7 @@ public static class MeshUtil
                 middle1 = GetMiddlePoint(doublesList[point1.index], crossedList[crossedPoint.index]);
                 middle2 = GetMiddlePoint(doublesList[point2.index], crossedList[crossedPoint.index]);
 
+                //절단된 삼각형을 각 메시에 나눠서 추가
                 int middle1Index = doublesList.Count;
                 doublesList.Add(middle1);
                 int middle2Index = doublesList.Count;
@@ -210,6 +224,52 @@ public static class MeshUtil
                 AddTri(crossedPoint.index, middle1CrossedIndex, middle2CrossedIndex, !doubleVertexIsForward);
                 AddTri(point1.index, point2.index, middle1Index, doubleVertexIsForward);
                 AddTri(point2.index, middle2Index, middle1Index, doubleVertexIsForward);
+
+                Vertex GetBottomVertex(Vertex a)
+                {
+                    Vertex bottom = a;
+                    bottom.point = new Vector3(bottom.point.x, BOTTOM_Y, bottom.point.z);
+                    return bottom;
+                }
+
+                //절단면 추가
+                if (showCuttedSlice)
+                {
+                    middle1.uv = cuttedSliceUV;
+                    middle2.uv = cuttedSliceUV;
+                    Vertex bottom1 = GetBottomVertex(middle1);
+                    Vertex bottom2 = GetBottomVertex(middle2);
+
+                    middle1Index = doublesList.Count;
+                    doublesList.Add(middle1);
+                    middle2Index = doublesList.Count;
+                    doublesList.Add(middle2);
+
+                    middle1CrossedIndex = crossedList.Count;
+                    crossedList.Add(middle1);
+                    middle2CrossedIndex = crossedList.Count;
+                    crossedList.Add(middle2);
+
+                    int doubleBottom1Index = doublesList.Count;
+                    doublesList.Add(bottom1);
+                    int doubleBottom2Index = doublesList.Count;
+                    doublesList.Add(bottom2);
+
+                    int crossedBottom1Index = crossedList.Count;
+                    crossedList.Add(bottom1);
+                    int crossedBottom2Index = crossedList.Count;
+                    crossedList.Add(bottom2);
+
+                    AddTri(middle1CrossedIndex, middle2CrossedIndex, crossedBottom1Index, !doubleVertexIsForward);
+                    AddTri(middle1CrossedIndex, crossedBottom1Index, middle2CrossedIndex, !doubleVertexIsForward);
+                    AddTri(middle2CrossedIndex, crossedBottom2Index, crossedBottom1Index, !doubleVertexIsForward);
+                    AddTri(middle2CrossedIndex, crossedBottom1Index, crossedBottom2Index, !doubleVertexIsForward);
+
+                    AddTri(middle1Index, middle2Index, doubleBottom1Index, doubleVertexIsForward);
+                    AddTri(middle1Index, doubleBottom1Index, middle2Index, doubleVertexIsForward);
+                    AddTri(middle2Index, doubleBottom2Index, doubleBottom1Index, doubleVertexIsForward);
+                    AddTri(middle2Index, doubleBottom1Index, doubleBottom2Index, doubleVertexIsForward);
+                }
             }
         }
 
