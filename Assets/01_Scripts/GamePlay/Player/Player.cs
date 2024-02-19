@@ -147,10 +147,10 @@ public class Player : MonoBehaviour
         if (_isDead) return;
         _isDead = true;
 
-        GameManager.Instance.isHighScore = GameManager.Instance.Score > GameManager.Instance.HighScore;
-        if (GameManager.Instance.isHighScore)
+        GameManager.Instance.isBestScore = GameManager.Instance.Score > GameManager.Instance.BestScore;
+        if (GameManager.Instance.isBestScore)
         {
-            GameManager.Instance.HighScore = GameManager.Instance.Score;
+            GameManager.Instance.BestScore = GameManager.Instance.Score;
         }
         InGameUIManager.Instance.ActiveGameResultUI();
 

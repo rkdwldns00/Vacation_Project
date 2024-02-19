@@ -10,7 +10,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        SetBestScoreText(GameManager.Instance.HighScore);
+        SetBestScoreText(GameManager.Instance.BestScore);
     }
 
     public void StartGame()
