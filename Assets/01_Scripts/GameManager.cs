@@ -20,11 +20,11 @@ public class GameManager : MonoBehaviour
     }
 
     public int Score { get; set; }
-    public bool isHighScore { get; set; }
+    public bool isBestScore { get; set; }
 
-    public int HighScore
+    public int BestScore
     {
-        get => PlayerPrefs.GetInt("HighScore");
-        set => PlayerPrefs.SetInt("HighScore", value);
+        get => PlayerPrefs.GetInt("BestScore");
+        set => PlayerPrefs.SetInt("BestScore", value);
     }
 }

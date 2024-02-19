@@ -27,7 +27,7 @@ public class InGameUIManager : MonoBehaviour
 
     [Header("Score UI")]
     [SerializeField] private TextMeshProUGUI _currentScoreText;
-    [SerializeField] private GameObject _highScoreRecord;
+    [SerializeField] private GameObject _bestScoreRecord;
 
     [Header("Player UI")]
     [SerializeField] private GameObject _playerHpPrefab;
@@ -63,9 +63,9 @@ public class InGameUIManager : MonoBehaviour
     {
         _currentScoreText.text = GameManager.Instance.Score + "m";
 
-        if (GameManager.Instance.Score > GameManager.Instance.HighScore)
+        if (GameManager.Instance.Score > GameManager.Instance.BestScore)
         {
-            _highScoreRecord.SetActive(true);
+            _bestScoreRecord.SetActive(true);
         }
     }
 
