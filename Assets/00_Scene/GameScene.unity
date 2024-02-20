@@ -701,7 +701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentScoreText: {fileID: 2002337039}
-  _highScoreRecord: {fileID: 2078819011}
+  _bestScoreRecord: {fileID: 2078819011}
   _playerHpPrefab: {fileID: 7795302500553491364, guid: b2f2cbc047d34944a8f561c844f4487c, type: 3}
   _playerHpParent: {fileID: 145583172}
   _playerHps: []
@@ -1219,7 +1219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2078819012}
   m_Layer: 5
-  m_Name: High Score Record
+  m_Name: Best Score Record
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
