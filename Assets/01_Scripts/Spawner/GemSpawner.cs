@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class GetSpawner : MonoBehaviour
+public class GemSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject _gemPrefab;
-    [SerializeField] float _gemSpawnPercent;
+    [SerializeField] private GameObject _gemPrefab;
+    [SerializeField] private float _gemSpawnPercent;
     [SerializeField] private int _obstacleScanerZ;
     [SerializeField] private int _gemSpawnZ;
     [SerializeField] private int _minX;
@@ -74,7 +74,6 @@ public class GetSpawner : MonoBehaviour
                 {
                     allIsObstacle = false;
                 }
-                Color c = isObstacle ? Color.red : Color.green;
                 _scanDatas[i - _minX, z] = isObstacle ? ScanDataType.Obstacle : ScanDataType.None;
             }
             if (allIsObstacle)
@@ -137,11 +136,5 @@ public class GetSpawner : MonoBehaviour
         None,
         Obstacle,
         WithoutGemSpace
-    }
-
-    private struct GemNode
-    {
-        public int x;
-        public bool isStraight;
     }
 }
