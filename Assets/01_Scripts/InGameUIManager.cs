@@ -45,13 +45,15 @@ public class InGameUIManager : MonoBehaviour
             _playerHps.Add(hp);
         }
 
+        Player.Instance.OnDamaged += UpdatePlayerHpUI;
+        Player.Instance.OnDie += ActiveGameResultUI;
+
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
     }
 
     private void Update()
     {
         UpdateScoreUI();
-        UpdatePlayerUI();
     }
 
     public void ActiveGameResultUI()
@@ -69,7 +71,7 @@ public class InGameUIManager : MonoBehaviour
         }
     }
 
-    private void UpdatePlayerUI()
+    private void UpdatePlayerHpUI()
     {
         for (int i=0; i<_playerHps.Count; i++)
         {
