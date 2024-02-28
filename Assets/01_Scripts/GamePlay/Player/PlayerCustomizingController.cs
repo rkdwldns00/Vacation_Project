@@ -14,12 +14,22 @@ public class PlayerCustomizingController : MonoBehaviour
         Instantiate(playerModel, _customModelPos);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Mesh mesh = _customModels[0].GetComponentInChildren<MeshFilter>().sharedMesh;
-        for (int i = 0; i < mesh.subMeshCount; i++)
+        if (!UnityEditor.EditorApplication.isPlaying)
         {
-            Gizmos.DrawMesh(mesh, i, _customModelPos.position, _customModelPos.rotation, _customModelPos.lossyScale);
+            MeshFilter filter = _customModels[0].GetComponentInChildren<MeshFilter>();
+            Mesh mesh = filter.sharedMesh;
+            for (int i = 0; i < mesh.subMeshCount; i++)
+            {
+                Vector3 scale = filter.transform.lossyScale;
+                scale.x *= _customModelPos.lossyScale.x;
+                scale.y *= _customModelPos.lossyScale.y;
+                scale.z *= _customModelPos.lossyScale.z;
+                Gizmos.DrawMesh(mesh, i, _customModelPos.position, _customModelPos.rotation, scale);
+            }
         }
     }
+#endif
 }
