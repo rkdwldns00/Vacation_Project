@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 GameObject g = new GameObject("GameManager");
                 DontDestroyOnLoad(g);
@@ -26,5 +26,11 @@ public class GameManager : MonoBehaviour
     {
         get => PlayerPrefs.GetInt("BestScore");
         set => PlayerPrefs.SetInt("BestScore", value);
+    }
+
+    public int PlayerModelId
+    {
+        get => PlayerPrefs.GetInt("PlayerModelId");
+        set => PlayerPrefs.SetInt("PlayerModelId", value);
     }
 }
