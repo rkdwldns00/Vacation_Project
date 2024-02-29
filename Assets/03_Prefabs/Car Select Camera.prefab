@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6203438218759150374}
   - component: {fileID: 6203438218759150373}
-  - component: {fileID: 6203438218759150372}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -107,14 +106,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6203438218759150372
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6203438218759150395}
-  m_Enabled: 1
 --- !u!1 &6203438219225972699
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +117,7 @@ GameObject:
   - component: {fileID: 6203438219225972676}
   - component: {fileID: 6203438219225972677}
   m_Layer: 0
-  m_Name: Customizing Camera
+  m_Name: Car Select Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,15 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea124196f19fa741adec25cccf5d502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelPrefabs:
-  - {fileID: 4695957159649180562, guid: d8a38e887e96d694894a36eaf7ec145b, type: 3}
-  - {fileID: 2672864514906475514, guid: 22c9c216bad815c41ab718efa15f912b, type: 3}
-  - {fileID: 864538881232866547, guid: a686086459191ea4994078fe68c2bf63, type: 3}
-  - {fileID: 4849416383976443089, guid: 1d0173f883989e14493677c41ae5a073, type: 3}
-  - {fileID: 2749458917958626468, guid: 70b6b2f84042c5546b88956fe74b0c66, type: 3}
-  - {fileID: 2270258410762528488, guid: 2eeca4fa75195b14d9063034a4d2c63f, type: 3}
-  - {fileID: 2686982419682777703, guid: dc8c2427d4e766843b3b93ad9de149ba, type: 3}
-  - {fileID: 1900681226621404113, guid: 7e4d049e6a79539479a2e9e98c071bfe, type: 3}
   prefabSliderTransform: {fileID: 6203438217650773854}
   startRot: 135
   rotateSpeed: 30

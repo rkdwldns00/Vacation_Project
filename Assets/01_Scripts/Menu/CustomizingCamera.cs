@@ -6,24 +6,28 @@ public class CustomizingCamera : MonoBehaviour
 {
     private const float MODEL_SPACING = 5f;
 
-    [SerializeField] private GameObject[] modelPrefabs;
     [SerializeField] private Transform prefabSliderTransform;
     [SerializeField] private float startRot;
     [SerializeField] private float rotateSpeed;
 
     private GameObject[] models;
     private int showedCarIndex;
+    private bool _isModelSpawned = false;
 
-    private void Start()
+    public void ShowModels(GameObject[] modelPrefabs)
     {
-        models = new GameObject[modelPrefabs.Length];
-        for (int i = 0; i < modelPrefabs.Length; i++)
+        if (!_isModelSpawned)
         {
-            GameObject g = Instantiate(modelPrefabs[i], prefabSliderTransform);
-            g.transform.localPosition = new Vector3(i * MODEL_SPACING, 0, 0);
-            g.transform.rotation = Quaternion.Euler(0, startRot, 0);
+            models = new GameObject[modelPrefabs.Length];
+            for (int i = 0; i < modelPrefabs.Length; i++)
+            {
+                GameObject g = Instantiate(modelPrefabs[i], prefabSliderTransform);
+                g.transform.localPosition = new Vector3(i * MODEL_SPACING, 0, 0);
+                g.transform.rotation = Quaternion.Euler(0, startRot, 0);
 
-            models[i] = g;
+                models[i] = g;
+            }
+            _isModelSpawned = true;
         }
 
         showedCarIndex = GameManager.Instance.PlayerModelId;
@@ -32,11 +36,14 @@ public class CustomizingCamera : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < models.Length; i++)
+        if (_isModelSpawned)
         {
-            models[i].transform.rotation *= Quaternion.Euler(0, rotateSpeed * Time.deltaTime, 0);
+            for (int i = 0; i < models.Length; i++)
+            {
+                models[i].transform.rotation *= Quaternion.Euler(0, rotateSpeed * Time.deltaTime, 0);
+            }
+            prefabSliderTransform.localPosition = Vector3.Lerp(prefabSliderTransform.localPosition, new Vector3(-showedCarIndex * MODEL_SPACING, 0, 0), Time.deltaTime * 3);
         }
-        prefabSliderTransform.localPosition = Vector3.Lerp(prefabSliderTransform.localPosition, new Vector3(-showedCarIndex * MODEL_SPACING, 0, 0), Time.deltaTime * 3);
     }
 
     public void ShowCar(int index)
