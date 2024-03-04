@@ -21,8 +21,6 @@ public class CustomizingUI : MonoBehaviour
         _afterButton.onClick.AddListener(ShowAfterCar);
         _closeButton.onClick.AddListener(CloseUI);
         _selectButton.onClick.AddListener(SelectCar);
-
-        
     }
 
     public void OpenUI()
