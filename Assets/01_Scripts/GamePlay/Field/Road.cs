@@ -83,13 +83,18 @@ public class Road : MonoBehaviour
         meshCollider.sharedMesh = curruntRoadMesh;
     }
 
-    private void OnDrawGizmosSelected()
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
     {
-        for (int i = 0; i < 10; i++)
+        if (!UnityEditor.EditorApplication.isPlaying)
         {
-            float roadLength = originRoadMesh.bounds.max.z - originRoadMesh.bounds.min.z;
-            Gizmos.DrawMesh(originRoadMesh, new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, roadLength * i));
+            for (int i = 0; i < 10; i++)
+            {
+                float roadLength = originRoadMesh.bounds.max.z - originRoadMesh.bounds.min.z;
+                Gizmos.DrawMesh(originRoadMesh, new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, roadLength * i));
+            }
+            Gizmos.DrawWireMesh(curruntRoadMesh, transform.position);
         }
-        Gizmos.DrawWireMesh(curruntRoadMesh,transform.position);
     }
+#endif
 }
