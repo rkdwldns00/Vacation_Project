@@ -59,7 +59,7 @@ public class GemSpawner : MonoBehaviour
 
     private void ScanHandler()
     {
-        while (_playerZWhenLastScan < Player.Instance.transform.position.z + _obstacleScanerZ)
+        while (Player.Instance != null && _playerZWhenLastScan < Player.Instance.transform.position.z + _obstacleScanerZ)
         {
             _playerZWhenLastScan++;
 
