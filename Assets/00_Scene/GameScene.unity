@@ -945,10 +945,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5908888653591308039, guid: 1265ae317ace301499ac6ef4e49d30ba, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1265ae317ace301499ac6ef4e49d30ba, type: 3}
 --- !u!224 &1689438299 stripped
@@ -1162,7 +1158,7 @@ GameObject:
   - component: {fileID: 2061790421}
   - component: {fileID: 2061790420}
   m_Layer: 5
-  m_Name: High Score Record Text
+  m_Name: Best Score Record Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
