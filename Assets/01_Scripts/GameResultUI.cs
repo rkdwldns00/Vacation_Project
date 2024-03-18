@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,8 @@ public class GameResultUI : MonoBehaviour
     public event Action OnClose;
 
     [SerializeField] private GameObject _layer;
-    [SerializeField] private Text _bestScoreMassage;
-    [SerializeField] private Text _scoreText;
+    [SerializeField] private GameObject _bestScoreMassage;
+    [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private Button _closeButton;
 
     private void Awake()
@@ -23,7 +24,7 @@ public class GameResultUI : MonoBehaviour
     {
         _layer.SetActive(true);
         _scoreText.text = GameManager.Instance.Score.ToString() + "m";
-        _bestScoreMassage.gameObject.SetActive(GameManager.Instance.isBestScore);
+        _bestScoreMassage.SetActive(GameManager.Instance.isBestScore);
 
         OnOpen?.Invoke();
     }
