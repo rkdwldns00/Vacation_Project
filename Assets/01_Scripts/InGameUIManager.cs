@@ -30,6 +30,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private GameObject _bestScoreRecord;
 
     [Header("Player UI")]
+    [SerializeField] private GameObject _playerLossHpPrefab;
+    [SerializeField] private Transform _playerLossHpParent;
     [SerializeField] private GameObject _playerHpPrefab;
     [SerializeField] private Transform _playerHpParent;
     [SerializeField] private List<GameObject> _playerHps = new List<GameObject>();
@@ -41,6 +43,7 @@ public class InGameUIManager : MonoBehaviour
     {
         for (int i=0; i<Player.Instance.MaxHealth; i++)
         {
+            GameObject lossHp = Instantiate(_playerLossHpPrefab, _playerLossHpParent);
             GameObject hp = Instantiate(_playerHpPrefab, _playerHpParent);
             _playerHps.Add(hp);
         }
