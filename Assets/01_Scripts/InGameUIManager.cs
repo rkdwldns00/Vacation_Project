@@ -30,9 +30,12 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private GameObject _bestScoreRecord;
 
     [Header("Player UI")]
+    [SerializeField] private GameObject _playerLossHpPrefab;
+    [SerializeField] private Transform _playerLossHpParent;
     [SerializeField] private GameObject _playerHpPrefab;
     [SerializeField] private Transform _playerHpParent;
     [SerializeField] private List<GameObject> _playerHps = new List<GameObject>();
+    [SerializeField] private Image _playerDamagedEffectImg;
 
     [Header("Result UI")]
     [SerializeField] private GameResultUI _gameResultUI;
@@ -41,11 +44,13 @@ public class InGameUIManager : MonoBehaviour
     {
         for (int i=0; i<Player.Instance.MaxHealth; i++)
         {
+            GameObject lossHp = Instantiate(_playerLossHpPrefab, _playerLossHpParent);
             GameObject hp = Instantiate(_playerHpPrefab, _playerHpParent);
             _playerHps.Add(hp);
         }
 
         Player.Instance.OnDamaged += UpdatePlayerHpUI;
+        Player.Instance.OnDamaged += ShowDamagedEffect;
         Player.Instance.OnDie += ActiveGameResultUI;
 
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
@@ -77,5 +82,23 @@ public class InGameUIManager : MonoBehaviour
         {
             _playerHps[i].SetActive(i < Player.Instance.CurruntHealth);
         }
+    }
+
+    private void ShowDamagedEffect()
+    {
+        StartCoroutine(ShowDamagedEffectCoroutine());
+    }
+
+    private IEnumerator ShowDamagedEffectCoroutine()
+    {
+        _playerDamagedEffectImg.color = new Color(1, 0, 0, 0.5f);
+
+        while (_playerDamagedEffectImg.color.a > 0)
+        {
+            _playerDamagedEffectImg.color = new Color(1, 0, 0, _playerDamagedEffectImg.color.a - Time.deltaTime / 1.5f);
+            yield return null;
+        }
+
+        yield break;
     }
 }
