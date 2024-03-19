@@ -11,9 +11,9 @@ public class CustomizingUI : MonoBehaviour
     [SerializeField] private Button _afterButton;
     [SerializeField] private Button _selectButton;
     [SerializeField] private Button _closeButton;
-    [SerializeField] private GameObject[] _playerModelPrefabs;
 
     private int _curruntCarIndex;
+    GameObject[] _playerModels;
 
     private void Awake()
     {
@@ -23,12 +23,17 @@ public class CustomizingUI : MonoBehaviour
         _selectButton.onClick.AddListener(SelectCar);
     }
 
+    private void Start()
+    {
+        _playerModels = PlayerSpawner.Instance.PlayerModels;
+    }
+
     public void OpenUI()
     {
         _curruntCarIndex = GameManager.Instance.PlayerModelId;
         OnChangeShowedCar();
 
-        _customizingCamera.ShowModels(_playerModelPrefabs);
+        _customizingCamera.ShowModels(PlayerSpawner.Instance.PlayerModels);
 
         _layer.SetActive(true);
     }
@@ -47,7 +52,7 @@ public class CustomizingUI : MonoBehaviour
 
     private void ShowAfterCar()
     {
-        _curruntCarIndex = Mathf.Min(_curruntCarIndex + 1, _playerModelPrefabs.Length - 1);
+        _curruntCarIndex = Mathf.Min(_curruntCarIndex + 1, _playerModels.Length - 1);
         _customizingCamera.ShowCar(_curruntCarIndex);
         OnChangeShowedCar();
     }
@@ -55,7 +60,7 @@ public class CustomizingUI : MonoBehaviour
     private void OnChangeShowedCar()
     {
         _beforeButton.interactable = _curruntCarIndex > 0;
-        _afterButton.interactable = _curruntCarIndex < _playerModelPrefabs.Length - 1;
+        _afterButton.interactable = _curruntCarIndex < _playerModels.Length - 1;
         _selectButton.interactable = _curruntCarIndex != GameManager.Instance.PlayerModelId;
     }
 

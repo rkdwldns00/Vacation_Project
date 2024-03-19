@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    public GameObject playerMesh;
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
     [SerializeField] private float _moveSpeed;
@@ -88,6 +89,16 @@ public class Player : MonoBehaviour
         if (position.y < _fallingSensorY)
         {
             DieHandler();
+        }
+    }
+
+    protected virtual void Reset()
+    {
+        MeshFilter meshFilter = GetComponentInChildren<MeshFilter>();
+
+        if(meshFilter != null)
+        {
+            playerMesh = meshFilter.gameObject;
         }
     }
 
