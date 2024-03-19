@@ -97,11 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMesh: {fileID: 1858727678222815716}
-  _minX: -5
-  _maxX: 5
+  _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
   _moveSpeed: 15
   _jumpPower: 5
-  _fallingSensorY: -5
   _maxHealth: 3
 --- !u!114 &7915677668266142392
 MonoBehaviour:

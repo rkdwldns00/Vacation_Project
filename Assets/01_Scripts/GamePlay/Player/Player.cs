@@ -32,11 +32,9 @@ public class Player : MonoBehaviour
     }
 
     public GameObject playerMesh;
-    [SerializeField] private float _minX;
-    [SerializeField] private float _maxX;
+    [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
-    [SerializeField] private float _fallingSensorY;
     [SerializeField] private int _maxHealth;
 
     public int MaxHealth
@@ -86,7 +84,7 @@ public class Player : MonoBehaviour
 
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
-        if (position.y < _fallingSensorY)
+        if (position.y < _playerSetting._fallingSensorY)
         {
             DieHandler();
         }
@@ -96,7 +94,7 @@ public class Player : MonoBehaviour
     {
         MeshFilter meshFilter = GetComponentInChildren<MeshFilter>();
 
-        if(meshFilter != null)
+        if (meshFilter != null)
         {
             playerMesh = meshFilter.gameObject;
         }
@@ -117,7 +115,7 @@ public class Player : MonoBehaviour
 
     public virtual void Move(float xRate)
     {
-        _targetX = Mathf.Lerp(_minX, _maxX, xRate);
+        _targetX = Mathf.Lerp(_playerSetting._minX, _playerSetting._maxX, xRate);
     }
 
     public virtual void Jump()
