@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
         get => _maxHealth;
     }
 
+    [SerializeField] private float _damagedInvincibleDuration;
+    private float _invincibleTime;
     private Rigidbody _rigid;
     private float _targetX;
     private float _colliderBoundMinY;
@@ -127,13 +129,26 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage = 1)
     {
-        CurruntHealth -= damage;
-
-        OnDamaged?.Invoke();
-
-        if (CurruntHealth <= 0)
+        if (_invincibleTime < Time.time)
         {
-            DieHandler();
+            CurruntHealth -= damage;
+
+            OnDamaged?.Invoke();
+
+            SetInvincibleTime(_damagedInvincibleDuration);
+
+            if (CurruntHealth <= 0)
+            {
+                DieHandler();
+            }
+        }
+    }
+
+    public void SetInvincibleTime(float addTime)
+    {
+        if (addTime + Time.time > _invincibleTime)
+        {
+            _invincibleTime = addTime + Time.time;
         }
     }
 
