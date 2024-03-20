@@ -40,6 +40,16 @@ public class InGameUIManager : MonoBehaviour
     [Header("Result UI")]
     [SerializeField] private GameResultUI _gameResultUI;
 
+    private void Awake()
+    {
+        PlayerSpawner.Instance.OnSpawned += (player) =>
+        {
+            player.OnDamaged += UpdatePlayerHpUI;
+            player.OnDamaged += ShowDamagedEffect;
+            player.OnDie += ActiveGameResultUI;
+        };
+    }
+
     private void Start()
     {
         for (int i=0; i<Player.Instance.MaxHealth; i++)
@@ -48,10 +58,6 @@ public class InGameUIManager : MonoBehaviour
             GameObject hp = Instantiate(_playerHpPrefab, _playerHpParent);
             _playerHps.Add(hp);
         }
-
-        Player.Instance.OnDamaged += UpdatePlayerHpUI;
-        Player.Instance.OnDamaged += ShowDamagedEffect;
-        Player.Instance.OnDie += ActiveGameResultUI;
 
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
     }

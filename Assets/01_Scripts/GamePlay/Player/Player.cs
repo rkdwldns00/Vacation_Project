@@ -1,15 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
     public event Action OnDie;
     public event Action OnDamaged;
+    public event Action<float> OnChangedBoostGazy;
 
     public int CurruntHealth { get; set; }
     public float MoveSpeed
@@ -33,11 +31,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    [SerializeField] private float _minX;
-    [SerializeField] private float _maxX;
+    public GameObject playerMesh;
+    [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
-    [SerializeField] private float _fallingSensorY;
     [SerializeField] private int _maxHealth;
 
     public int MaxHealth
@@ -45,18 +42,18 @@ public class Player : MonoBehaviour
         get => _maxHealth;
     }
 
-    private Rigidbody _rigid;
+    protected Rigidbody _rigid;
     private float _targetX;
     private float _colliderBoundMinY;
     private bool _isDead;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         CurruntHealth = _maxHealth;
 
@@ -65,12 +62,13 @@ public class Player : MonoBehaviour
         _colliderBoundMinY = meshMinY;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         GameManager.Instance.Score = (int)transform.position.z;
+        MoveHandler();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         Vector3 rotation = Vector3.zero;
         Vector3 position = Vector3.zero;
@@ -86,18 +84,41 @@ public class Player : MonoBehaviour
 
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
-        if (position.y < _fallingSensorY)
+        if (position.y < _playerSetting._fallingSensorY)
         {
             DieHandler();
         }
     }
 
-    public void Move(float xRate)
+    protected virtual void Reset()
     {
-        _targetX = Mathf.Lerp(_minX, _maxX, xRate);
+        MeshFilter meshFilter = GetComponentInChildren<MeshFilter>();
+
+        if (meshFilter != null)
+        {
+            playerMesh = meshFilter.gameObject;
+        }
     }
 
-    public void Jump()
+    protected virtual void MoveHandler()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            float xRate = Input.mousePosition.x / Screen.width;
+            Move(xRate);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Jump();
+        }
+    }
+
+    public virtual void Move(float xRate)
+    {
+        _targetX = Mathf.Lerp(_playerSetting._minX, _playerSetting._maxX, xRate);
+    }
+
+    public virtual void Jump()
     {
         Vector3 rayOrigin = new Vector3(_rigid.position.x,
             _rigid.position.y + _colliderBoundMinY + 0.05f,
@@ -108,9 +129,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ChargeBoost(float value)
+    public virtual void ChargeBoost(float value)
     {
         BoostGazy += value;
+        OnChangedBoostGazy?.Invoke(value);
     }
 
     public bool UseBoost()
@@ -118,6 +140,7 @@ public class Player : MonoBehaviour
         if (BoostGazy > 1)
         {
             BoostGazy -= 1;
+            OnChangedBoostGazy?.Invoke(-1);
             return true;
         }
         return false;
@@ -125,7 +148,7 @@ public class Player : MonoBehaviour
 
     #region 체력 관리
 
-    public void TakeDamage(int damage = 1)
+    public virtual void TakeDamage(int damage = 1)
     {
         CurruntHealth -= damage;
 
