@@ -490,6 +490,7 @@ MonoBehaviour:
   _cameraStartPos: {x: 2.5, y: 3, z: 4}
   _cameraTargetPos: {x: 7.5, y: 20, z: -15}
   _cameraLookPos: {x: 0, y: 0, z: 5}
+  _startZoomTime: 3
 --- !u!1 &1023311391
 GameObject:
   m_ObjectHideFlags: 0
