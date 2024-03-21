@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -453,7 +454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.36206007, y: -0.16570696, z: 0.06557203, w: 0.9149612}
-  m_LocalPosition: {x: 7.49, y: 20.04, z: -15}
+  m_LocalPosition: {x: 7.5, y: 20, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -474,6 +475,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _xRatio: 9
   _yRatio: 16
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17cf61cdb489f5d4faa3a41d0779d987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraStartPos: {x: 2.5, y: 3, z: 4}
+  _cameraTargetPos: {x: 7.5, y: 20, z: -15}
+  _cameraLookPos: {x: 0, y: 0, z: 5}
 --- !u!1 &1023311391
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +665,7 @@ MonoBehaviour:
   _buildingSpacingZ: 1
   _groundX: 6
   _buildingX: 9
+  _backGroundStartZ: -20
   _backGroundSpawnZ: 70
 --- !u!4 &1254890633
 Transform:

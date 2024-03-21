@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 7915677668266142343}
   - component: {fileID: 7915677668266142342}
   - component: {fileID: 7915677668266142340}
-  - component: {fileID: 7915677668266142392}
   - component: {fileID: 2347226784395539068}
   m_Layer: 0
   m_Name: Player7
@@ -101,21 +100,6 @@ MonoBehaviour:
   _moveSpeed: 15
   _jumpPower: 5
   _maxHealth: 3
---- !u!114 &7915677668266142392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7915677668266142339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17cf61cdb489f5d4faa3a41d0779d987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 9001555363535262136}
-  _cameraPos: {x: 7.49, y: 20.04, z: -15}
-  _cameraLookPos: {x: 0, y: 0, z: 5}
 --- !u!65 &2347226784395539068
 BoxCollider:
   m_ObjectHideFlags: 0
