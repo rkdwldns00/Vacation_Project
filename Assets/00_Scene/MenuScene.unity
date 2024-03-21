@@ -1920,6 +1920,10 @@ PrefabInstance:
       value: -325
       objectReference: {fileID: 0}
     - target: {fileID: 1515026554523216272, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
+      propertyPath: _playerSetting
+      value: 
+      objectReference: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
+    - target: {fileID: 1515026554523216272, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
       propertyPath: _customizingCamera
       value: 
       objectReference: {fileID: 658548800}
@@ -1937,7 +1941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1515026554523216275, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1515026554523216275, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
       propertyPath: m_AnchorMax.x

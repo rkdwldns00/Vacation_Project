@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d8d61f0d4685946991758c9ff36adf, type: 3}
   m_Name: "\uD50C\uB808\uC774\uC5B4 \uC124\uC815"
   m_EditorClassIdentifier: 
-  _minX: 0
-  _maxX: 0
-  _fallingSensorY: 0
+  _minX: -5
+  _maxX: 5
+  _fallingSensorY: -5
+  _playerPrefabs:
+  - {fileID: 7915677668266142339, guid: 4f34ff5b6453e9f4cbca856c4674bf5d, type: 3}
+  - {fileID: 7915677668266142339, guid: 350b58892bc90e04993b774718b9de7a, type: 3}
+  - {fileID: 7915677668266142339, guid: 19c24519f2c5ee24fbf835236dcc8daa, type: 3}
+  - {fileID: 7915677668266142339, guid: d064c806c43d64f49b1a761bc67b9812, type: 3}
+  - {fileID: 7915677668266142339, guid: ae60a205d76bb2444a27861e7de1f7c4, type: 3}
+  - {fileID: 7915677668266142339, guid: 14cbe783b35dc944cb085426becf10ff, type: 3}
+  - {fileID: 7915677668266142339, guid: ca31512a10fd9cc4da97341ef79e81ef, type: 3}
+  - {fileID: 7915677668266142339, guid: 8df3652bc390af34c99102cbc5908e1d, type: 3}

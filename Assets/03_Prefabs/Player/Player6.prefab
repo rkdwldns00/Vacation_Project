@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a44c8817c63f34ca61f07c4a1019ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMesh: {fileID: 4165785101385657068}
+  playerMesh: {fileID: 2270258410762528488, guid: 2eeca4fa75195b14d9063034a4d2c63f, type: 3}
   _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
   _moveSpeed: 15
   _jumpPower: 5
@@ -190,10 +190,5 @@ PrefabInstance:
 --- !u!4 &3738123907225296881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1562255828397593589, guid: 2eeca4fa75195b14d9063034a4d2c63f, type: 3}
-  m_PrefabInstance: {fileID: 2760218961581902852}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4165785101385657068 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2270258410762528488, guid: 2eeca4fa75195b14d9063034a4d2c63f, type: 3}
   m_PrefabInstance: {fileID: 2760218961581902852}
   m_PrefabAsset: {fileID: 0}
