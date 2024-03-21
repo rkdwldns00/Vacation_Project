@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
-        if (position.y < _playerSetting._fallingSensorY)
+        if (position.y < _playerSetting.fallingSensorY)
         {
             DieHandler();
         }
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
 
     public virtual void Move(float xRate)
     {
-        _targetX = Mathf.Lerp(_playerSetting._minX, _playerSetting._maxX, xRate);
+        _targetX = Mathf.Lerp(_playerSetting.minX, _playerSetting.maxX, xRate);
     }
 
     public virtual void Jump()

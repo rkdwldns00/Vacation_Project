@@ -30,7 +30,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnHandler()
     {
-        GameObject g = Instantiate(_playerSetting._playerPrefabs[GameManager.Instance.PlayerModelId], transform.position, transform.rotation);
+        GameObject g = Instantiate(_playerSetting.playerPrefabs[GameManager.Instance.PlayerModelId], transform.position, transform.rotation);
         Player player = g.GetComponent<Player>();
 
         OnSpawned?.Invoke(player);
