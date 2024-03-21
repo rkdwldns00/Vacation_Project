@@ -6,11 +6,11 @@ public class ParticleDestroyer : MonoBehaviour
 {
     private void Awake()
     {
-        float time = 0;
+        float destoryTime = 0;
 
-        if (GetComponent<ParticleSystem>()) time = GetComponent<ParticleSystem>().main.duration;
-        else if (GetComponentInChildren<ParticleSystem>()) time = GetComponentInChildren<ParticleSystem>().main.duration;
+        if (GetComponent<ParticleSystem>()) destoryTime = GetComponent<ParticleSystem>().main.duration;
+        else if (GetComponentInChildren<ParticleSystem>()) destoryTime = GetComponentInChildren<ParticleSystem>().main.duration;
 
-        Destroy(gameObject, time);
+        Destroy(gameObject, destoryTime);
     }
 }
