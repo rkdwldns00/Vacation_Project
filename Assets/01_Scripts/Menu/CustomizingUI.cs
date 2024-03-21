@@ -12,6 +12,9 @@ public class CustomizingUI : MonoBehaviour
     [SerializeField] private Button _afterButton;
     [SerializeField] private Button _selectButton;
     [SerializeField] private Button _closeButton;
+    [SerializeField] private Transform _menuPlayerModelTransform;
+
+    private GameObject[] _menuPlayerModels;
 
     private int _curruntCarIndex;
 
@@ -21,6 +24,16 @@ public class CustomizingUI : MonoBehaviour
         _afterButton.onClick.AddListener(ShowAfterCar);
         _closeButton.onClick.AddListener(CloseUI);
         _selectButton.onClick.AddListener(SelectCar);
+
+        _menuPlayerModels = new GameObject[_playerSetting.PlayerModels.Length];
+        for (int i = 0; i < _playerSetting.PlayerModels.Length; i++)
+        {
+            _menuPlayerModels[i] = Instantiate(_playerSetting.PlayerModels[i], _menuPlayerModelTransform);
+            if (GameManager.Instance.PlayerModelId != i)
+            {
+                _menuPlayerModels[i].SetActive(false);
+            }
+        }
     }
 
     public void OpenUI()
@@ -36,6 +49,11 @@ public class CustomizingUI : MonoBehaviour
     public void CloseUI()
     {
         _layer.SetActive(false);
+
+        for (int i = 0; i < _playerSetting.PlayerModels.Length; i++)
+        {
+            _menuPlayerModels[i].SetActive(_curruntCarIndex == i);
+        }
     }
 
     private void ShowBeforeCar()
