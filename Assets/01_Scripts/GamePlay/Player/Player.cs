@@ -88,14 +88,15 @@ public class Player : MonoBehaviour
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
 
-        Debug.DrawRay(transform.position + Vector3.forward * _mesh.bounds.max.z, Vector3.forward);
-        if (position.y < 0 && Physics.Raycast(transform.position + Vector3.forward * _mesh.bounds.max.z, Vector3.forward, 1f))
+        if (position.y < -10)
         {
             DieHandler();
         }
         else if (position.y < _playerSetting.fallingSensorY)
         {
-            DieHandler();
+            if (_rigid.SweepTest(Vector3.forward, out _, 0.1f) || _rigid.SweepTest(Vector3.right, out _, 0.1f) || _rigid.SweepTest(Vector3.left, out _, 0.1f)) {
+                DieHandler();
+            }
         }
     }
 
