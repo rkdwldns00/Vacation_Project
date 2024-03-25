@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     }
 
     public GameObject playerMesh;
+    private Mesh _mesh;
     [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
@@ -60,6 +61,8 @@ public class Player : MonoBehaviour
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
         float meshMinY = meshCollder.center.y - meshCollder.size.y / 2;
         _colliderBoundMinY = meshMinY;
+
+        _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
     }
 
     protected virtual void Update()
@@ -84,7 +87,13 @@ public class Player : MonoBehaviour
 
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
-        if (position.y < _playerSetting.fallingSensorY)
+
+        Debug.DrawRay(transform.position + Vector3.forward * _mesh.bounds.max.z, Vector3.forward);
+        if (position.y < 0 && Physics.Raycast(transform.position + Vector3.forward * _mesh.bounds.max.z, Vector3.forward, 1f))
+        {
+            DieHandler();
+        }
+        else if (position.y < _playerSetting.fallingSensorY)
         {
             DieHandler();
         }
