@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d8d61f0d4685946991758c9ff36adf, type: 3}
   m_Name: "\uD50C\uB808\uC774\uC5B4 \uC124\uC815"
   m_EditorClassIdentifier: 
-  _minX: -5
-  _maxX: 5
-  _fallingSensorY: -5
-  _playerPrefabs:
+  minX: -5
+  maxX: 5
+  fallingSensorY: -5
+  playerPrefabs:
   - {fileID: 7915677668266142339, guid: 4f34ff5b6453e9f4cbca856c4674bf5d, type: 3}
   - {fileID: 7915677668266142339, guid: 350b58892bc90e04993b774718b9de7a, type: 3}
   - {fileID: 7915677668266142339, guid: 19c24519f2c5ee24fbf835236dcc8daa, type: 3}

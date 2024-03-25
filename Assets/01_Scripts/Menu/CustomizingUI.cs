@@ -52,7 +52,7 @@ public class CustomizingUI : MonoBehaviour
 
         for (int i = 0; i < _playerSetting.PlayerModels.Length; i++)
         {
-            _menuPlayerModels[i].SetActive(_curruntCarIndex == i);
+            _menuPlayerModels[i].SetActive(GameManager.Instance.PlayerModelId == i);
         }
     }
 
