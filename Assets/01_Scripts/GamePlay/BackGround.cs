@@ -10,6 +10,7 @@ public class BackGround : MonoBehaviour
     [SerializeField] private float _buildingSpacingZ;
     [SerializeField] private float _groundX;
     [SerializeField] private float _buildingX;
+    [SerializeField] private float _backGroundStartZ;
     [SerializeField] private float _backGroundSpawnZ;
 
     private float _lastBuildingSpawnedLeftZ;
@@ -22,6 +23,10 @@ public class BackGround : MonoBehaviour
     private void Start()
     {
         _groundMesh = _groundPrefab.GetComponent<MeshFilter>().sharedMesh;
+
+        _lastBuildingSpawnedLeftZ = _backGroundStartZ;
+        _lastBuildingSpawnedRightZ = _backGroundStartZ;
+        _lastGroundSpawnedZ = _backGroundStartZ;
     }
 
     private void Update()
@@ -31,9 +36,16 @@ public class BackGround : MonoBehaviour
 
     private void GenerateHandler()
     {
-        if (Player.Instance == null) return;
+        float f;
+        if (Player.Instance == null)
+        {
+            f = transform.position.z + _backGroundSpawnZ;
+        }
+        else
+        {
+            f = Player.Instance.transform.position.z + _backGroundSpawnZ;
+        }
 
-        float f = Player.Instance.transform.position.z + _backGroundSpawnZ;
 
         while (_lastBuildingSpawnedLeftZ < f)
         {

@@ -42,22 +42,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void Awake()
     {
-        PlayerSpawner.Instance.OnSpawned += (player) =>
-        {
-            player.OnDamaged += UpdatePlayerHpUI;
-            player.OnDamaged += ShowDamagedEffect;
-            player.OnDie += ActiveGameResultUI;
-        };
-    }
-
-    private void Start()
-    {
-        for (int i=0; i<Player.Instance.MaxHealth; i++)
-        {
-            GameObject lossHp = Instantiate(_playerLossHpPrefab, _playerLossHpParent);
-            GameObject hp = Instantiate(_playerHpPrefab, _playerHpParent);
-            _playerHps.Add(hp);
-        }
+        PlayerSpawner.Instance.OnSpawned += OnPlayerSpawned;
 
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
     }
@@ -65,6 +50,31 @@ public class InGameUIManager : MonoBehaviour
     private void Update()
     {
         UpdateScoreUI();
+    }
+
+    private void OnPlayerSpawned(Player player)
+    {
+        player.OnDamaged += UpdatePlayerHpUI;
+        player.OnDamaged += ShowDamagedEffect;
+        player.OnDie += ActiveGameResultUI;
+
+        for (int i = 0; i < Player.Instance.MaxHealth; i++)
+        {
+            GameObject lossHp = Instantiate(_playerLossHpPrefab, _playerLossHpParent);
+            GameObject hp = Instantiate(_playerHpPrefab, _playerHpParent);
+            _playerHps.Add(hp);
+        }
+
+        player.OnDie += OnPlayerDied;
+    }
+
+    private void OnPlayerDied()
+    {
+        foreach(var hp in _playerHps)
+        {
+            Destroy(hp);
+        }
+        _playerHps.Clear();
     }
 
     public void ActiveGameResultUI()
@@ -84,7 +94,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void UpdatePlayerHpUI()
     {
-        for (int i=0; i<_playerHps.Count; i++)
+        for (int i = 0; i < _playerHps.Count; i++)
         {
             _playerHps[i].SetActive(i < Player.Instance.CurruntHealth);
         }

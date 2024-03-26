@@ -8,7 +8,11 @@ public class Gem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<Player>().ChargeBoost(_chargeValue);
-        Destroy(gameObject);
+        Player p = other.GetComponent<Player>();
+        if (p != null)
+        {
+            p.ChargeBoost(_chargeValue);
+            Destroy(gameObject);
+        }
     }
 }

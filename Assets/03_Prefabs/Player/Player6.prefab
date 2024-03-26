@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 7915677668266142343}
   - component: {fileID: 7915677668266142342}
   - component: {fileID: 7915677668266142340}
-  - component: {fileID: 7915677668266142392}
   - component: {fileID: 2347226784395539068}
   m_Layer: 0
   m_Name: Player6
@@ -96,26 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a44c8817c63f34ca61f07c4a1019ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMesh: {fileID: 4165785101385657068}
+  playerMesh: {fileID: 3697216461458619359}
   _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
   _moveSpeed: 15
   _jumpPower: 5
   _maxHealth: 3
---- !u!114 &7915677668266142392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7915677668266142339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17cf61cdb489f5d4faa3a41d0779d987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 9001555363535262136}
-  _cameraPos: {x: 7.49, y: 20.04, z: -15}
-  _cameraLookPos: {x: 0, y: 0, z: 5}
 --- !u!65 &2347226784395539068
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -190,10 +174,5 @@ PrefabInstance:
 --- !u!4 &3738123907225296881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1562255828397593589, guid: 2eeca4fa75195b14d9063034a4d2c63f, type: 3}
-  m_PrefabInstance: {fileID: 2760218961581902852}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4165785101385657068 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2270258410762528488, guid: 2eeca4fa75195b14d9063034a4d2c63f, type: 3}
   m_PrefabInstance: {fileID: 2760218961581902852}
   m_PrefabAsset: {fileID: 0}

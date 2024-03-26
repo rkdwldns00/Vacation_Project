@@ -19,20 +19,8 @@ public class PlayerSpawner : MonoBehaviour
     }
 
     public event Action<Player> OnSpawned;
-    public GameObject[] PlayerModels
-    {
-        get
-        {
-            GameObject[] meshes = new GameObject[PlayerModels.Length];
-            for(int i=0; i<meshes.Length; i++)
-            {
-                meshes[i] = _playerModelPrefabs[i].GetComponentInChildren<Player>().playerMesh;
-            }
-            return meshes;
-        }
-    }
 
-    [SerializeField] private GameObject[] _playerModelPrefabs;
+    [SerializeField] private PlayerSetting _playerSetting;
 
 
     private void Start()
@@ -42,7 +30,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnHandler()
     {
-        GameObject g = Instantiate(_playerModelPrefabs[GameManager.Instance.PlayerModelId], transform.position, transform.rotation);
+        GameObject g = Instantiate(_playerSetting.playerPrefabs[GameManager.Instance.PlayerModelId], transform.position, transform.rotation);
         Player player = g.GetComponent<Player>();
 
         OnSpawned?.Invoke(player);

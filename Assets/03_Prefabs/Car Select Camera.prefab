@@ -152,6 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea124196f19fa741adec25cccf5d502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSliderTransform: {fileID: 6203438217650773854}
-  startRot: 135
-  rotateSpeed: 30
+  _prefabSliderTransform: {fileID: 6203438217650773854}
+  _startYRot: 180
+  _rotateSpeed: 40
