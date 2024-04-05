@@ -48,7 +48,7 @@ public class Road : MonoBehaviour
             }
         }
         originRoadMeshLength = maxZ - originRoadMeshMinZ;
-        lastSummonedMeshMinZ = originRoadMeshMinZ;
+        lastSummonedMeshMinZ = -playerBackSpaceLength;
         curruntRoadMesh = new Mesh() { name = "Road" };
 
         for (int i = 0; i < roadMeshCount; i++)

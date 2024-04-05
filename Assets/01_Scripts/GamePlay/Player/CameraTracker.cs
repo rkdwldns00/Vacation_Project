@@ -2,25 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class CameraTracker : MonoBehaviour
 {
-    public Transform PlayerTransform;
-    [SerializeField] private Vector3 _cameraPos;
+    [SerializeField] private Vector3 _cameraStartPos;
+    [SerializeField] private Vector3 _cameraTargetPos;
     [SerializeField] private Vector3 _cameraLookPos;
+    [SerializeField] private float _startZoomTime;
 
-    private Transform _cameraTransform;
+    private Transform _playerTransform;
+    private Vector3 _curruntOrigin => Vector3.forward * _playerTransform.position.z;
+    private float _spawnedTime;
 
-    private Vector3 _curruntOrigin => Vector3.forward * transform.position.z;
+    private void Awake()
+    {
+        PlayerSpawner.Instance.OnSpawned += (player) =>
+        {
+            _playerTransform = player.transform;
+        };
+    }
 
     private void Start()
     {
-        _cameraTransform = Camera.main.transform;
-        if (_cameraTransform is null)
-        {
-            Debug.LogWarning("카메라가 존재하지 않습니다!");
-            Destroy(this);
-        }
+        _spawnedTime = Time.time;
     }
 
     private void Update()
@@ -30,19 +33,11 @@ public class CameraTracker : MonoBehaviour
 
     private void CameraTrackHandler()
     {
-        if (_cameraTransform != null)
+        if (_playerTransform != null)
         {
-            _cameraTransform.position = _curruntOrigin + _cameraPos;
-            _cameraTransform.LookAt(_curruntOrigin + _cameraLookPos);
+            float rate = (Time.time - _spawnedTime) / _startZoomTime;
+            transform.position = _curruntOrigin + Vector3.Lerp(_cameraStartPos, _cameraTargetPos, rate);
+            transform.LookAt(_curruntOrigin + Vector3.Lerp(Vector3.zero, _cameraLookPos, rate));
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(_curruntOrigin, _curruntOrigin + _cameraPos);
-        Gizmos.DrawSphere(_curruntOrigin + _cameraPos, 0.5f);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(_curruntOrigin + _cameraPos, _curruntOrigin + _cameraLookPos);
     }
 }
