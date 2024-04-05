@@ -8,6 +8,7 @@ public class FallingObstacle : MonoBehaviour
     [SerializeField] private GameObject _warringObjectPrefab;
     [SerializeField] private float _warringTime;
     [SerializeField] private GameObject _fallingObjectPrefab;
+    [SerializeField] private GameObject _fallingObjectEffect;
     [SerializeField] private float _hitBoxRadius;
 
     bool isStarted = false;
@@ -34,6 +35,8 @@ public class FallingObstacle : MonoBehaviour
     private IEnumerator HitDelay()
     {
         yield return new WaitForSeconds(_warringTime);
+
+        Destroy(Instantiate(_fallingObjectEffect, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), 3);
 
         if (CheckPlayerInHitBox())
         {
