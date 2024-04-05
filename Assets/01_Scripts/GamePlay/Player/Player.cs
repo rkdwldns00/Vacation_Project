@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     }
 
     public GameObject playerMesh;
+    private Mesh _mesh;
     [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
@@ -60,6 +61,8 @@ public class Player : MonoBehaviour
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
         float meshMinY = meshCollder.center.y - meshCollder.size.y / 2;
         _colliderBoundMinY = meshMinY;
+
+        _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
     }
 
     protected virtual void Update()
@@ -84,9 +87,16 @@ public class Player : MonoBehaviour
 
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
-        if (position.y < _playerSetting._fallingSensorY)
+
+        if (position.y < -10)
         {
             DieHandler();
+        }
+        else if (position.y < _playerSetting.fallingSensorY)
+        {
+            if (_rigid.SweepTest(Vector3.forward, out _, 0.1f) || _rigid.SweepTest(Vector3.right, out _, 0.1f) || _rigid.SweepTest(Vector3.left, out _, 0.1f)) {
+                DieHandler();
+            }
         }
     }
 
@@ -115,7 +125,7 @@ public class Player : MonoBehaviour
 
     public virtual void Move(float xRate)
     {
-        _targetX = Mathf.Lerp(_playerSetting._minX, _playerSetting._maxX, xRate);
+        _targetX = Mathf.Lerp(_playerSetting.minX, _playerSetting.maxX, xRate);
     }
 
     public virtual void Jump()

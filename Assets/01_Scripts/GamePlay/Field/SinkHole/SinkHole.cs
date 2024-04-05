@@ -11,9 +11,9 @@ public class SinkHole : MonoBehaviour
 
     public Vector2 cuttedSliceUV;
 
-    private void Start()
+    private void Update()
     {
-        Collider[] cols = Physics.OverlapBox(transform.position, Vector3.one);
+        Collider[] cols = Physics.OverlapBox(transform.position + Vector3.forward * (maxDistance + 1f), Vector3.one);
         foreach (Collider col in cols)
         {
             if (col.CompareTag("Road"))
@@ -32,11 +32,11 @@ public class SinkHole : MonoBehaviour
                         startX1, startX1 + size,
                         startX2, startX2 + size));
 
+                    Destroy(gameObject);
                     break;
                 }
             }
         }
-        Destroy(gameObject);
     }
 
     public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2)
