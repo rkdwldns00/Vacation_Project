@@ -2056,10 +2056,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1089854765}
     m_Modifications:
-    - target: {fileID: 1515026554388218019, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -325
-      objectReference: {fileID: 0}
     - target: {fileID: 1515026554523216272, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
       propertyPath: _playerSetting
       value: 
