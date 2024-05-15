@@ -9749,6 +9749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3125736332446637516}
+  - component: {fileID: 2998706968022467540}
   m_Layer: 0
   m_Name: Falling Object Effect
   m_TagString: Untagged
@@ -9773,3 +9774,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2998706968022467540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3125736332446637519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c752a7f9def9b2b47833bcff985a9cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
