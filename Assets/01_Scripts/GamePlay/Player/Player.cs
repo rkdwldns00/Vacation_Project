@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     [Header("Effect")]
     [SerializeField] private GameObject _playerDamagedEffect;
     [SerializeField] private GameObject _playerJumpEffect;
+    [SerializeField] private GameObject _playerDeadObject;
 
     public int MaxHealth
     {
@@ -195,6 +196,12 @@ public class Player : MonoBehaviour
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
+
+        Material[] materials = playerMesh.GetComponentInChildren<MeshRenderer>().materials;
+        Vector3 scale = playerMesh.GetComponentInChildren<MeshRenderer>().transform.localScale;
+        float yPos = playerMesh.transform.localPosition.y;
+        PlayerDeadObject obj = Instantiate(_playerDeadObject, transform.position, Quaternion.identity).GetComponent<PlayerDeadObject>();
+        obj.SetDeadObjectData(_mesh, materials, MoveSpeed, scale, yPos);
 
         Destroy(gameObject);
     }
