@@ -101,6 +101,7 @@ MonoBehaviour:
   _moveSpeed: 15
   _jumpPower: 5
   _maxHealth: 3
+  _playerDamagedEffect: {fileID: 8604753374929458426, guid: 94296261c15f4fb40ace257da623508e, type: 3}
 --- !u!65 &2347226784395539068
 BoxCollider:
   m_ObjectHideFlags: 0

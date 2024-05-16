@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpPower;
     [SerializeField] private int _maxHealth;
 
+    [Header("Effect")]
+    [SerializeField] private GameObject _playerDamagedEffect;
+
     public int MaxHealth
     {
         get => _maxHealth;
@@ -163,6 +166,8 @@ public class Player : MonoBehaviour
         CurruntHealth -= damage;
 
         OnDamaged?.Invoke();
+
+        Instantiate(_playerDamagedEffect, transform.position, Quaternion.identity);
 
         if (CurruntHealth <= 0)
         {
