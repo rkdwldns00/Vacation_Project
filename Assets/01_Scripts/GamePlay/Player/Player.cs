@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
 
     [Header("Effect")]
     [SerializeField] private GameObject _playerDamagedEffect;
+    [SerializeField] private GameObject _playerJumpEffect;
 
     public int MaxHealth
     {
@@ -139,6 +140,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
             _rigid.velocity = (Vector3.up * _jumpPower);
+            Instantiate(_playerJumpEffect, transform.position, Quaternion.identity);
         }
     }
 
