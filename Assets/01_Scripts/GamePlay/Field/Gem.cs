@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gem : MonoBehaviour
 {
     [SerializeField] private float _chargeValue;
+    [SerializeField] private GameObject _getGemEffect;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +13,7 @@ public class Gem : MonoBehaviour
         if (p != null)
         {
             p.ChargeBoost(_chargeValue);
+            Instantiate(_getGemEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
