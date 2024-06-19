@@ -36,6 +36,12 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private Transform _playerHpParent;
     [SerializeField] private List<GameObject> _playerHps = new List<GameObject>();
     [SerializeField] private Image _playerDamagedEffectImg;
+    [SerializeField] private GameObject _playerLossBoostGazyPrefab;
+    [SerializeField] private Transform _playerLossBoostGazyParent;
+    [SerializeField] private GameObject _playerBoostGazyPrefab;
+    [SerializeField] private Transform _playerBoostGazyParent;
+    [SerializeField] private List<Image> _playerBoostGazys = new List<Image>();
+
 
     [Header("Result UI")]
     [SerializeField] private GameResultUI _gameResultUI;
@@ -57,6 +63,7 @@ public class InGameUIManager : MonoBehaviour
         player.OnDamaged += UpdatePlayerHpUI;
         player.OnDamaged += ShowDamagedEffect;
         player.OnDie += ActiveGameResultUI;
+        player.OnChangedBoostGazy += UpdatePlayerBoostGazyUI;
 
         for (int i = 0; i < Player.Instance.MaxHealth; i++)
         {
@@ -64,13 +71,19 @@ public class InGameUIManager : MonoBehaviour
             GameObject hp = Instantiate(_playerHpPrefab, _playerHpParent);
             _playerHps.Add(hp);
         }
+        for (int i = 0; i < Player.Instance.MaxBoostGazy; i++)
+        {
+            GameObject lossBoost = Instantiate(_playerLossBoostGazyPrefab, _playerLossBoostGazyParent);
+            GameObject Boost = Instantiate(_playerBoostGazyPrefab, _playerBoostGazyParent);
+            _playerBoostGazys.Add(Boost.GetComponent<Image>());
+        }
 
         player.OnDie += OnPlayerDied;
     }
 
     private void OnPlayerDied()
     {
-        foreach(var hp in _playerHps)
+        foreach (var hp in _playerHps)
         {
             Destroy(hp);
         }
@@ -89,6 +102,14 @@ public class InGameUIManager : MonoBehaviour
         if (GameManager.Instance.Score > GameManager.Instance.BestScore)
         {
             _bestScoreRecord.SetActive(true);
+        }
+    }
+
+    private void UpdatePlayerBoostGazyUI(float delta)
+    {
+        for (int i = 0; i < _playerBoostGazys.Count; i++)
+        {
+            _playerBoostGazys[i].fillAmount = Player.Instance.BoostGazy - i;
         }
     }
 

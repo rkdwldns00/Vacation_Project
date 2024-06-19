@@ -100,6 +100,7 @@ MonoBehaviour:
   _moveSpeed: 15
   _jumpPower: 5
   _maxHealth: 3
+  _maxBoostGazy: 3
 --- !u!65 &2347226784395539068
 BoxCollider:
   m_ObjectHideFlags: 0
