@@ -66,6 +66,8 @@ public class Player : MonoBehaviour
         _colliderBoundMinY = meshMinY;
 
         _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+
+        OnChangedBoostGazy?.Invoke(0);
     }
 
     protected virtual void Update()
