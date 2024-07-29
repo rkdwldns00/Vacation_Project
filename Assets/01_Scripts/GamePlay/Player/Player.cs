@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         }
         protected set
         {
-            _boostGazy = Mathf.Clamp(value, 0, 3);
+            _boostGazy = Mathf.Clamp(value, 0, _maxBoostGazy);
         }
     }
 
@@ -37,11 +37,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
     [SerializeField] private int _maxHealth;
+    [SerializeField] private float _maxBoostGazy;
 
     public int MaxHealth
     {
         get => _maxHealth;
     }
+
+    public float MaxBoostGazy => _maxBoostGazy;
 
     protected Rigidbody _rigid;
     private float _targetX;
