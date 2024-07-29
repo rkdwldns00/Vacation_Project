@@ -38,11 +38,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpPower;
     [SerializeField] private int _maxHealth;
 
-    [Header("Effect")]
-    [SerializeField] private GameObject _playerDamagedEffect;
-    [SerializeField] private GameObject _playerJumpEffect;
-    [SerializeField] private GameObject _playerDeadObject;
-
     public int MaxHealth
     {
         get => _maxHealth;
@@ -141,7 +136,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
             _rigid.velocity = (Vector3.up * _jumpPower);
-            Instantiate(_playerJumpEffect, transform.position, Quaternion.identity);
+            Instantiate(_playerSetting.playerJumpEffect, transform.position, Quaternion.identity);
         }
     }
 
@@ -170,7 +165,7 @@ public class Player : MonoBehaviour
 
         OnDamaged?.Invoke();
 
-        Instantiate(_playerDamagedEffect, transform.position, Quaternion.identity);
+        Instantiate(_playerSetting.playerDamagedEffect, transform.position, Quaternion.identity);
 
         if (CurruntHealth <= 0)
         {
@@ -200,7 +195,7 @@ public class Player : MonoBehaviour
         Material[] materials = playerMesh.GetComponentInChildren<MeshRenderer>().materials;
         Vector3 scale = playerMesh.GetComponentInChildren<MeshRenderer>().transform.localScale;
         float yPos = playerMesh.transform.localPosition.y;
-        PlayerDeadObject obj = Instantiate(_playerDeadObject, transform.position, Quaternion.identity).GetComponent<PlayerDeadObject>();
+        PlayerDeadObject obj = Instantiate(_playerSetting.playerDeadObject, transform.position, Quaternion.identity).GetComponent<PlayerDeadObject>();
         obj.SetDeadObjectData(_mesh, materials, MoveSpeed, scale, yPos);
 
         Destroy(gameObject);
