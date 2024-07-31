@@ -8,8 +8,7 @@ public class ParticleDestroyer : MonoBehaviour
     {
         float destoryTime = 0;
 
-        if (GetComponent<ParticleSystem>()) destoryTime = GetComponent<ParticleSystem>().main.duration;
-        else if (GetComponentInChildren<ParticleSystem>()) destoryTime = GetComponentInChildren<ParticleSystem>().main.duration;
+        if (GetComponentInChildren<ParticleSystem>()) destoryTime = GetComponentInChildren<ParticleSystem>().main.duration;
 
         Destroy(gameObject, destoryTime);
     }
