@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     private float _targetX;
     private float _colliderBoundMinY;
     private bool _isDead;
+    private bool _isDebuggingMode;
 
     protected virtual void Awake()
     {
@@ -161,6 +162,12 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    [ContextMenu("StartDebuggingMode")]
+    public void StartDubuggingMode()
+    {
+        _isDebuggingMode = true;
+    }
+
     #region 체력 관리
 
     public virtual void TakeDamage(int damage = 1)
@@ -183,6 +190,9 @@ public class Player : MonoBehaviour
     private void DieHandler()
     {
         if (_isDead) return;
+#if UNITY_EDITOR
+        if (_isDebuggingMode) return;
+#endif
         _isDead = true;
 
         GameManager.Instance.isBestScore = GameManager.Instance.Score > GameManager.Instance.BestScore;

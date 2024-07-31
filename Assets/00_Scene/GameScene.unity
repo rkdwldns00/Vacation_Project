@@ -1405,8 +1405,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gemPrefab: {fileID: 1882350243345646977, guid: cc39cd2fe22965947ad9cfdb4dbd5a97, type: 3}
   _gemSpawnPercent: 10
-  _obstacleScanerZ: 100
-  _gemSpawnZ: 80
+  _obstacleScanerZ: 80
+  _gemSpawnZ: 60
   _minX: -5
   _maxX: 5
 --- !u!4 &1915923139

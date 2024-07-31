@@ -69,8 +69,17 @@ public class GemSpawner : MonoBehaviour
             for (int i = _minX; i < _maxX + 1; i++)
             {
                 RaycastHit hit;
-                bool isObstacle = Physics.Raycast(new Vector3(i, 10, _playerZWhenLastScan), Vector3.down, out hit, 11, ~(1 << LayerMask.NameToLayer("Road")));
-                if (!isObstacle)
+                bool isHit = Physics.Raycast(new Vector3(i, 10, _playerZWhenLastScan), Vector3.down, out hit, 11);
+                bool isObstacle;
+                if (isHit)
+                {
+                    isObstacle = hit.transform.gameObject.layer != LayerMask.NameToLayer("Road");
+                }
+                else
+                {
+                    isObstacle = true;
+                }
+                if (isHit)
                 {
                     allIsObstacle = false;
                 }
