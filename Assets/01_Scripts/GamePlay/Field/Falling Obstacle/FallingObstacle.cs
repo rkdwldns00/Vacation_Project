@@ -8,7 +8,7 @@ public class FallingObstacle : MonoBehaviour
     [SerializeField] private GameObject _warringObjectPrefab;
     [SerializeField] private float _warringTime;
     [SerializeField] private GameObject _fallingObjectPrefab;
-    [SerializeField] private GameObject _fallingObjectEffect;
+    [SerializeField] private GameObject _fallingObjectEffectPrefab;
     [SerializeField] private float _hitBoxRadius;
 
     bool isStarted = false;
