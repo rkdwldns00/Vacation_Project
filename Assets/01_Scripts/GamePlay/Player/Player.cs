@@ -139,6 +139,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
             _rigid.velocity = (Vector3.up * _jumpPower);
+            Instantiate(_playerSetting.playerJumpEffect, transform.position, Quaternion.identity);
         }
     }
 
@@ -167,6 +168,8 @@ public class Player : MonoBehaviour
 
         OnDamaged?.Invoke();
 
+        Instantiate(_playerSetting.playerDamagedEffect, transform.position, Quaternion.identity);
+
         if (CurruntHealth <= 0)
         {
             DieHandler();
@@ -191,6 +194,12 @@ public class Player : MonoBehaviour
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
+
+        Material[] materials = playerMesh.GetComponentInChildren<MeshRenderer>().materials;
+        Vector3 scale = playerMesh.GetComponentInChildren<MeshRenderer>().transform.localScale;
+        float yPos = playerMesh.transform.localPosition.y;
+        PlayerDeadObject obj = Instantiate(_playerSetting.playerDeadObject, transform.position, Quaternion.identity).GetComponent<PlayerDeadObject>();
+        obj.SetDeadObjectData(_mesh, materials, MoveSpeed, scale, yPos);
 
         Destroy(gameObject);
     }

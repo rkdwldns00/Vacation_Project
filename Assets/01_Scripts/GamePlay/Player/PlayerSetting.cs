@@ -12,6 +12,9 @@ public class PlayerSetting : ScriptableObject
     public float fallingSensorY;
     [Header("에셋 관리")]
     public GameObject[] playerPrefabs;
+    public GameObject playerDamagedEffect;
+    public GameObject playerJumpEffect;
+    public GameObject playerDeadObject;
 
     private static GameObject[] _playerModels = null;
     public GameObject[] PlayerModels
