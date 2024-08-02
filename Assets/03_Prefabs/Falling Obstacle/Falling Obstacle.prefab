@@ -48,7 +48,7 @@ MonoBehaviour:
   _warringObjectPrefab: {fileID: 7617954487986883371, guid: 6393ee6694293fe4c9b6fa0c10cfa9c6, type: 3}
   _warringTime: 3
   _fallingObjectPrefab: {fileID: 7390078363034589881, guid: 3ec516c7d7c04084aa084753d1bd9d2c, type: 3}
-  _fallingObjectEffect: {fileID: 3125736332446637519, guid: 9cb25a2829e04d841b92bc15f96aa390, type: 3}
+  _fallingObjectEffectPrefab: {fileID: 3125736332446637519, guid: 9cb25a2829e04d841b92bc15f96aa390, type: 3}
   _hitBoxRadius: 1
 --- !u!135 &3765544073468088226
 SphereCollider:
