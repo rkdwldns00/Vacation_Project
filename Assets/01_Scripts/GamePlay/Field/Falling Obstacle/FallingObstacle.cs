@@ -36,7 +36,7 @@ public class FallingObstacle : MonoBehaviour
     {
         yield return new WaitForSeconds(_warringTime);
 
-        Instantiate(_fallingObjectEffect, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        Instantiate(_fallingObjectEffectPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
 
         if (CheckPlayerInHitBox())
         {
