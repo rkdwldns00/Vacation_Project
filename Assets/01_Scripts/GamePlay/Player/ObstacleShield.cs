@@ -18,7 +18,7 @@ public class ObstacleShield : MonoBehaviour
         }
     }
 
-    public void AddDurationTime(float durationTime, GameObject obstacleShieldEffectPrefab)
+    public void SetObstacleShieldData(float durationTime, GameObject obstacleShieldEffectPrefab)
     {
         if (_durationTime < durationTime)
         {

@@ -23,12 +23,12 @@ public class MagnetBuff : MonoBehaviour
         }
     }
 
-    public void AddMagnetStrength(float magnetStrength, float durationTime)
+    public void SetMagnetBuffData(float magnetStrength, float durationTime)
     {
-        StartCoroutine(AddMagnetStrengthCoroutine(magnetStrength, durationTime));
+        StartCoroutine(SetMagnetBuffDataCoroutine(magnetStrength, durationTime));
     }
 
-    private IEnumerator AddMagnetStrengthCoroutine(float magnetStrength, float durationTime)
+    private IEnumerator SetMagnetBuffDataCoroutine(float magnetStrength, float durationTime)
     {
         _magnetStrength += magnetStrength;
         yield return new WaitForSeconds(durationTime);

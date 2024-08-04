@@ -11,12 +11,8 @@ public class ObstacleShieldItem : Item
     protected override void UseItem(Player p)
     {
         ObstacleShield o = p.GetComponent<ObstacleShield>();
+        if (o == null) o = p.AddComponent<ObstacleShield>();
 
-        if (o == null)
-        {
-            o = p.AddComponent<ObstacleShield>();
-        }
-
-        o.AddDurationTime(_durationTime, _obstacleShieldEffectPrefab);
+        o.SetObstacleShieldData(_durationTime, _obstacleShieldEffectPrefab);
     }
 }
