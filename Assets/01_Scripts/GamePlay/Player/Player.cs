@@ -37,9 +37,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    public int PlayerLevel { get; set; }
+    public int PlayerLevel
+    {
+        get => PlayerPrefs.GetInt("Player" + CarID + "Level");
+        set => PlayerPrefs.SetInt("Player" + CarID + "Level", value);
+    }
+
+
     public GameObject playerMesh;
     private Mesh _mesh;
+    [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
@@ -83,7 +90,7 @@ public class Player : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+
         OnChangedBoostGazy?.Invoke(0);
     }
 
