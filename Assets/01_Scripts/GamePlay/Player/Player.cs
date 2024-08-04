@@ -173,6 +173,8 @@ public class Player : MonoBehaviour
 
     public virtual void TakeDamage(int damage = 1)
     {
+        if (GetComponent<ObstacleShield>()) return;
+
         CurruntHealth -= damage;
 
         OnDamaged?.Invoke();
