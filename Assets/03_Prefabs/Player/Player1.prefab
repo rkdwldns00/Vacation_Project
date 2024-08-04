@@ -41,8 +41,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7915677668266142343}
-  - component: {fileID: 7915677668266142342}
   - component: {fileID: 7915677668266142340}
+  - component: {fileID: 7915677668266142342}
+  - component: {fileID: 6642788082369385468}
   - component: {fileID: 2347226784395539068}
   m_Layer: 0
   m_Name: Player1
@@ -67,6 +68,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7915677668266142340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915677668266142339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a44c8817c63f34ca61f07c4a1019ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMesh: {fileID: 3697216461458619359}
+  _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
+  _moveSpeed: 15
+  _jumpPower: 5
+  _maxHealth: 3
+  _maxBoostGazy: 3
 --- !u!54 &7915677668266142342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83,7 +102,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 96
   m_CollisionDetection: 0
---- !u!114 &7915677668266142340
+--- !u!114 &6642788082369385468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +111,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7915677668266142339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03a44c8817c63f34ca61f07c4a1019ff, type: 3}
+  m_Script: {fileID: 11500000, guid: a5275a2b07f37754690d6c1efdd7d5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerMesh: {fileID: 3697216461458619359}
