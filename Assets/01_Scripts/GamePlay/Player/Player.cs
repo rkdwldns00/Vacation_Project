@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 
     public event Action OnDie;
     public event Action OnDamaged;
+    public event Action OnHealed;
+    public event Action OnChangedHealth;
     public event Action<float> OnChangedBoostGazy;
 
     public int CurruntHealth { get; set; }
@@ -15,6 +17,10 @@ public class Player : MonoBehaviour
         get
         {
             return _moveSpeed;
+        }
+        protected set
+        {
+            _moveSpeed = value;
         }
     }
 
@@ -31,6 +37,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    public int PlayerLevel { get; set; }
     public GameObject playerMesh;
     private Mesh _mesh;
     [SerializeField] private PlayerSetting _playerSetting;
@@ -42,9 +49,16 @@ public class Player : MonoBehaviour
     public int MaxHealth
     {
         get => _maxHealth;
+
+        protected set => _maxHealth = value;
     }
 
-    public float MaxBoostGazy => _maxBoostGazy;
+    public float MaxBoostGazy
+    {
+        get => _maxBoostGazy;
+
+        protected set => _maxBoostGazy = value;
+    }
 
     protected Rigidbody _rigid;
     private float _targetX;
@@ -61,6 +75,7 @@ public class Player : MonoBehaviour
     protected virtual void Start()
     {
         CurruntHealth = _maxHealth;
+        OnChangedHealth?.Invoke();
 
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
         float meshMinY = meshCollder.center.y - meshCollder.size.y / 2;
@@ -100,7 +115,8 @@ public class Player : MonoBehaviour
         }
         else if (position.y < _playerSetting.fallingSensorY)
         {
-            if (_rigid.SweepTest(Vector3.forward, out _, 0.1f) || _rigid.SweepTest(Vector3.right, out _, 0.1f) || _rigid.SweepTest(Vector3.left, out _, 0.1f)) {
+            if (_rigid.SweepTest(Vector3.forward, out _, 0.1f) || _rigid.SweepTest(Vector3.right, out _, 0.1f) || _rigid.SweepTest(Vector3.left, out _, 0.1f))
+            {
                 DieHandler();
             }
         }
@@ -152,7 +168,7 @@ public class Player : MonoBehaviour
         OnChangedBoostGazy?.Invoke(value);
     }
 
-    public bool UseBoost()
+    public virtual bool UseBoost()
     {
         if (BoostGazy > 1)
         {
@@ -169,6 +185,11 @@ public class Player : MonoBehaviour
         _isDebuggingMode = true;
     }
 
+    protected void RunOnChargeBoostGazy(float value)
+    {
+        OnChangedBoostGazy?.Invoke(value);
+    }
+
     #region 체력 관리
 
     public virtual void TakeDamage(int damage = 1)
@@ -176,6 +197,7 @@ public class Player : MonoBehaviour
         CurruntHealth -= damage;
 
         OnDamaged?.Invoke();
+        OnChangedHealth?.Invoke();
 
         Instantiate(_playerSetting.playerDamagedEffect, transform.position, Quaternion.identity);
 
@@ -183,6 +205,16 @@ public class Player : MonoBehaviour
         {
             DieHandler();
         }
+    }
+
+    public void TakeHeal(int heal = 1)
+    {
+        if (CurruntHealth == MaxHealth || _isDead) return;
+
+        CurruntHealth = Mathf.Min(CurruntHealth + heal, MaxHealth);
+
+        OnHealed?.Invoke();
+        OnChangedHealth?.Invoke();
     }
 
     public void Kill()
