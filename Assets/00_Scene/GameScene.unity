@@ -1427,6 +1427,7 @@ MonoBehaviour:
   _itemPrefabs:
   - {fileID: 1564634454559830271, guid: 28283e666aef5384b8a47420fdcbde4e, type: 3}
   - {fileID: 5832819373333901426, guid: b2e35a229dc365d4a9f5be10bf62b164, type: 3}
+  - {fileID: 8299827473846782282, guid: d166b253fdc25ec47a04a1ea3ad8b220, type: 3}
   _itemSpawnPercent: 1
   _obstacleScanerZ: 80
   _itemSpawnZ: 60
