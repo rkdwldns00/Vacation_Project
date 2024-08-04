@@ -1424,7 +1424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6047d78f17ddc4342b6da53dce6402a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemPrefabs: []
+  _itemPrefabs:
+  - {fileID: 1564634454559830271, guid: 28283e666aef5384b8a47420fdcbde4e, type: 3}
   _itemSpawnPercent: 1
   _obstacleScanerZ: 80
   _itemSpawnZ: 60

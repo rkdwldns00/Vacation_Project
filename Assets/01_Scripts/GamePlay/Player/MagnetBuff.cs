@@ -19,7 +19,7 @@ public class MagnetBuff : MonoBehaviour
         foreach (Collider gem in gems)
         {
             Vector3 dir = player.transform.position - gem.transform.position;
-            gem.transform.Translate(dir * player.MoveSpeed * Time.deltaTime);
+            gem.transform.Translate(dir.normalized * player.MoveSpeed * 2 * Time.deltaTime);
         }
     }
 
