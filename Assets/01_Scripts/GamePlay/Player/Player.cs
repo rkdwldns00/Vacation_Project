@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
     public virtual void ChargeBoost(float value)
     {
         BoostGazy += value;
-        GameManager.Instance.GemScore++;
+        GameManager.Instance.GemScore += 10;
         OnChangedBoostGazy?.Invoke(value);
     }
 
