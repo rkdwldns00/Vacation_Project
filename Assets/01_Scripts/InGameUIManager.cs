@@ -60,7 +60,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void OnPlayerSpawned(Player player)
     {
-        player.OnDamaged += UpdatePlayerHpUI;
+        player.OnChangedHealth += UpdatePlayerHpUI;
         player.OnDamaged += ShowDamagedEffect;
         player.OnDie += ActiveGameResultUI;
         player.OnChangedBoostGazy += UpdatePlayerBoostGazyUI;

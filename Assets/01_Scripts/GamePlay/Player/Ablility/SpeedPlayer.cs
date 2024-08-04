@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SpeedPlayer : Player
 {
-    protected override void Start()
+    protected override void Awake()
     {
         MoveSpeed *= 1f + PlayerLevel / 10f;
-        base.Start();
+        base.Awake();
     }
 }

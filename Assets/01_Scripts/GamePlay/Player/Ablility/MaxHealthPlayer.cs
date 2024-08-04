@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MaxHealthPlayer : Player
 {
-    protected override void Start()
+    protected override void Awake()
     {
         MaxHealth += 1;
-        base.Start();
+        base.Awake();
     }
 }

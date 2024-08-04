@@ -70,10 +70,7 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
-    }
 
-    protected virtual void Start()
-    {
         CurruntHealth = _maxHealth;
         OnChangedHealth?.Invoke();
 
@@ -82,7 +79,11 @@ public class Player : MonoBehaviour
         _colliderBoundMinY = meshMinY;
 
         _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+    }
 
+    protected virtual void Start()
+    {
+        
         OnChangedBoostGazy?.Invoke(0);
     }
 

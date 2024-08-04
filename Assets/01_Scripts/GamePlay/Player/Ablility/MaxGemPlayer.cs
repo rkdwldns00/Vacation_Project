@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MaxGemPlayer : Player
 {
-    protected override void Start()
+    protected override void Awake()
     {
         MaxBoostGazy += PlayerLevel / 5f;
-        base.Start();
+        base.Awake();
     }
 }
