@@ -12,6 +12,8 @@ public class GameResultUI : MonoBehaviour
 
     [SerializeField] private GameObject _layer;
     [SerializeField] private GameObject _bestScoreMassage;
+    [SerializeField] private TextMeshProUGUI _distanceScoreText;
+    [SerializeField] private TextMeshProUGUI _gemScoreText;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private Button _closeButton;
 
@@ -23,7 +25,9 @@ public class GameResultUI : MonoBehaviour
     public void OpenUI()
     {
         _layer.SetActive(true);
-        _scoreText.text = GameManager.Instance.Score.ToString();
+        _distanceScoreText.text = "+ Distance Score : " + GameManager.Instance.DistanceScore;
+        _gemScoreText.text = "+ Gem Score : " + GameManager.Instance.GemScore;
+        _scoreText.text = "Score : " + GameManager.Instance.Score;
         _bestScoreMassage.SetActive(GameManager.Instance.isBestScore);
 
         OnOpen?.Invoke();
