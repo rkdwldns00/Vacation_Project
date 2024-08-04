@@ -23,7 +23,7 @@ public class GameResultUI : MonoBehaviour
     public void OpenUI()
     {
         _layer.SetActive(true);
-        _scoreText.text = GameManager.Instance.Score.ToString() + "m";
+        _scoreText.text = GameManager.Instance.Score.ToString();
         _bestScoreMassage.SetActive(GameManager.Instance.isBestScore);
 
         OnOpen?.Invoke();

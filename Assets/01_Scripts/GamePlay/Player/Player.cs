@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
 
     protected virtual void Update()
     {
-        GameManager.Instance.Score = (int)transform.position.z;
+        GameManager.Instance.DistanceScore = (int)transform.position.z;
         MoveHandler();
     }
 
@@ -149,6 +149,7 @@ public class Player : MonoBehaviour
     public virtual void ChargeBoost(float value)
     {
         BoostGazy += value;
+        GameManager.Instance.GemScore++;
         OnChangedBoostGazy?.Invoke(value);
     }
 

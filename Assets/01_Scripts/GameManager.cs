@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int Score { get; set; }
+    public int DistanceScore { get; set; }
+    public int GemScore { get; set; }
+    public int Score { get => DistanceScore + GemScore; }
     public bool isBestScore { get; set; }
 
     public int BestScore
