@@ -25,6 +25,7 @@ public class ObstacleShield : MonoBehaviour
         if (_instantiatedObstacleShieldEffect == null)
         {
             _instantiatedObstacleShieldEffect = Instantiate(obstacleShieldEffectPrefab, transform);
+            _instantiatedObstacleShieldEffect.transform.localPosition = Vector3.zero;
         }
     }
 }

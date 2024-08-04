@@ -110,7 +110,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnItemPrefab(Vector3 position)
     {
-        int index = Random.Range(0, _itemPrefabs.Length - 1);
+        int index = Random.Range(0, _itemPrefabs.Length);
 
         Instantiate(_itemPrefabs[index], position, Quaternion.identity);
     }
