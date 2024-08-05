@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class HealPlayer : Player
 {
-    float chargeValue;
+    private float _chargeValue;
 
     public override void ChargeBoost(float value)
     {
         base.ChargeBoost(value);
-        chargeValue = Mathf.Min(chargeValue + value / (10 - PlayerLevel), 1);
+        _chargeValue = Mathf.Min(_chargeValue + value / (10 - PlayerLevel), 1);
 
-        if (chargeValue == 1 && CurruntHealth < MaxHealth)
+        if (_chargeValue == 1 && CurruntHealth < MaxHealth)
         {
-            chargeValue = 0;
+            _chargeValue = 0;
             TakeHeal();
         }
     }

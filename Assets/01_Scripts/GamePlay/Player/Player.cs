@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
