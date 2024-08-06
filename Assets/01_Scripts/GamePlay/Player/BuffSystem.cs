@@ -9,14 +9,14 @@ public class BuffSystem : MonoBehaviour
     public void AddBuff(Buff buff)
     {
         _buffs.Add(buff);
-        buff.StartBuff();
+        buff.StartBuff(this);
     }
 
     private void Update()
     {
         foreach (Buff buff in _buffs)
         {
-            buff.UpdateBuff();
+            buff.UpdateBuff(this);
         }
     }
 }
