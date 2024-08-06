@@ -4,14 +4,14 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
-    protected abstract void UseItem(Player p);
+    protected abstract void UseItem(BuffSystem buffSystem);
 
     private void OnTriggerEnter(Collider other)
     {
-        Player p = other.GetComponent<Player>();
-        if (p != null)
+        BuffSystem buffSystem = other.GetComponent<BuffSystem>();
+        if (buffSystem != null)
         {
-            UseItem(p);
+            UseItem(buffSystem);
             Destroy(gameObject);
         }
     }

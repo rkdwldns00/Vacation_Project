@@ -9,12 +9,12 @@ public class BoostItem : Item
     [SerializeField] private float _durationTime;
     [SerializeField] private GameObject _shieldEffectPrefab;
 
-    protected override void UseItem(Player p)
+    protected override void UseItem(BuffSystem buffSystem)
     {
         ObstacleShieldBuff obstacleShieldBuff = new ObstacleShieldBuff(_shieldEffectPrefab, _durationTime + 1);
-        p.GetComponent<BuffSystem>().AddBuff(obstacleShieldBuff);
+        buffSystem.AddBuff(obstacleShieldBuff);
 
         BoostBuff boostBuff = new BoostBuff(_boostSpeed, _durationTime);
-        p.GetComponent<BuffSystem>().AddBuff(boostBuff);
+        buffSystem.AddBuff(boostBuff);
     }
 }

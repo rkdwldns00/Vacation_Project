@@ -8,9 +8,9 @@ public class MagnetItem : Item
     [SerializeField] private float _magnetStrength;
     [SerializeField] private float _durationTime;
 
-    protected override void UseItem(Player p)
+    protected override void UseItem(BuffSystem buffSystem)
     {
         MagnetBuff magnetBuff = new MagnetBuff(_magnetStrength, _durationTime);
-        p.GetComponent<BuffSystem>().AddBuff(magnetBuff);
+        buffSystem.AddBuff(magnetBuff);
     }
 }
