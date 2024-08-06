@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class ObstacleShieldItem : Item
 {
-    [SerializeField] private GameObject _obstacleShieldEffectPrefab;
+    [SerializeField] private GameObject _shieldEffectPrefab;
     [SerializeField] private float _durationTime;
 
     protected override void UseItem(Player p)
     {
-        ObstacleShield o = p.GetComponent<ObstacleShield>();
-        if (o == null) o = p.AddComponent<ObstacleShield>();
-
-        o.SetObstacleShieldData(_durationTime, _obstacleShieldEffectPrefab);
+        ObstacleShieldBuff obstacleShieldBuff = new ObstacleShieldBuff(_shieldEffectPrefab, _durationTime);
+        p.GetComponent<BuffSystem>().AddBuff(obstacleShieldBuff);
     }
 }

@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ed35ca90af0374d98a80a4375714b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacleShieldEffectPrefab: {fileID: 7745192753267332765, guid: f174ba3960a92cf4e91b869b097bbb9d, type: 3}
+  _shieldEffectPrefab: {fileID: 7745192753267332765, guid: f174ba3960a92cf4e91b869b097bbb9d, type: 3}
   _durationTime: 5
 --- !u!1001 &5832819374039409277
 PrefabInstance:

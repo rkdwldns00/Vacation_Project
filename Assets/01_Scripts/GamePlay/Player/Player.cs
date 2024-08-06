@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
 
     public virtual void TakeDamage(int damage = 1)
     {
-        if (GetComponent<ObstacleShield>()) return;
+        if (GetComponent<BuffSystem>().ContainBuff<ObstacleShieldBuff>()) return;
 
         CurruntHealth -= damage;
 

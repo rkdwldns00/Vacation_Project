@@ -7,14 +7,12 @@ public class BoostItem : Item
 {
     [SerializeField] private float _boostSpeed;
     [SerializeField] private float _durationTime;
-    [SerializeField] private GameObject _obstacleShieldEffectPrefab;
+    [SerializeField] private GameObject _shieldEffectPrefab;
 
     protected override void UseItem(Player p)
     {
-        ObstacleShield o = p.GetComponent<ObstacleShield>();
-        if (o == null) o = p.AddComponent<ObstacleShield>();
-
-        o.SetObstacleShieldData(_durationTime + 1, _obstacleShieldEffectPrefab);
+        ObstacleShieldBuff obstacleShieldBuff = new ObstacleShieldBuff(_shieldEffectPrefab, _durationTime + 1);
+        p.GetComponent<BuffSystem>().AddBuff(obstacleShieldBuff);
 
         BoostBuff boostBuff = new BoostBuff(_boostSpeed, _durationTime);
         p.GetComponent<BuffSystem>().AddBuff(boostBuff);

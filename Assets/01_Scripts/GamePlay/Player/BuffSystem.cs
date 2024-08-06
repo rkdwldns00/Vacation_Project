@@ -17,6 +17,16 @@ public class BuffSystem : MonoBehaviour
         _buffs.Remove(buff);
     }
 
+    public bool ContainBuff<T>() where T : Buff
+    {
+        foreach (Buff buff in _buffs)
+        {
+            if (buff.GetType() == typeof(T)) return true;
+        }
+
+        return false;
+    }
+
     private void Update()
     {
         for (int i=0; i< _buffs.Count; i++)
