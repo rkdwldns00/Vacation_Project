@@ -19,9 +19,9 @@ public class BuffSystem : MonoBehaviour
 
     private void Update()
     {
-        foreach (Buff buff in _buffs)
+        for (int i=0; i< _buffs.Count; i++)
         {
-            buff.UpdateBuff(this);
+            _buffs[i].UpdateBuff(this);
         }
     }
 }

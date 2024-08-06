@@ -2,20 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagnetBuff : MonoBehaviour
+public class MagnetBuff : Buff
 {
     private Player player;
     private float _magnetStrength;
+    private float _durationTime;
 
-    private void Awake()
+    public MagnetBuff(float magnetStrength, float durationTime)
     {
-        player = GetComponent<Player>();
+        _magnetStrength = magnetStrength;
+        _durationTime = durationTime;
     }
 
-    private void Update()
+    public override void StartBuff(BuffSystem buffSystem)
     {
-        Collider[] gems = Physics.OverlapSphere(transform.position, _magnetStrength, LayerMask.GetMask("Gem"));
-        
+        player = buffSystem.GetComponent<Player>();
+    }
+
+    public override void UpdateBuff(BuffSystem buffSystem)
+    {
+        _durationTime -= Time.deltaTime;
+
+        if (_durationTime <= 0) buffSystem.RemoveBuff(this);
+
+        Collider[] gems = Physics.OverlapSphere(player.transform.position, _magnetStrength, LayerMask.GetMask("Gem"));
+
         foreach (Collider gem in gems)
         {
             Vector3 dir = player.transform.position - gem.transform.position;
@@ -23,22 +34,8 @@ public class MagnetBuff : MonoBehaviour
         }
     }
 
-    public void SetMagnetBuffData(float magnetStrength, float durationTime)
+    public override void EndBuff(BuffSystem buffSystem)
     {
-        StartCoroutine(SetMagnetBuffDataCoroutine(magnetStrength, durationTime));
-    }
-
-    private IEnumerator SetMagnetBuffDataCoroutine(float magnetStrength, float durationTime)
-    {
-        _magnetStrength += magnetStrength;
-        yield return new WaitForSeconds(durationTime);
-        _magnetStrength -= magnetStrength;
-
-        if (_magnetStrength <= 0)
-        {
-            Destroy(this);
-        }
-
-        yield break;
+        throw new System.NotImplementedException();
     }
 }

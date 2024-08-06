@@ -10,9 +10,7 @@ public class MagnetItem : Item
 
     protected override void UseItem(Player p)
     {
-        MagnetBuff m = p.GetComponent<MagnetBuff>();
-        if (m == null) m = p.AddComponent<MagnetBuff>();
-
-        m.SetMagnetBuffData(_magnetStrength, _durationTime);
+        MagnetBuff magnetBuff = new MagnetBuff(_magnetStrength, _durationTime);
+        p.GetComponent<BuffSystem>().AddBuff(magnetBuff);
     }
 }
