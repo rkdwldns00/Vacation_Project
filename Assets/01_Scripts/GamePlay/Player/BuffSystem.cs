@@ -12,6 +12,11 @@ public class BuffSystem : MonoBehaviour
         buff.StartBuff(this);
     }
 
+    public void RemoveBuff(Buff buff)
+    {
+        _buffs.Remove(buff);
+    }
+
     private void Update()
     {
         foreach (Buff buff in _buffs)
