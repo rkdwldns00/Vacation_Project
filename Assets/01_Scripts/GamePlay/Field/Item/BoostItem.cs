@@ -16,9 +16,7 @@ public class BoostItem : Item
 
         o.SetObstacleShieldData(_durationTime + 1, _obstacleShieldEffectPrefab);
 
-        Boost b = p.GetComponent<Boost>();
-        if (b == null) b = p.AddComponent<Boost>();
-
-        b.SetBoostData(_boostSpeed, _durationTime);
+        BoostBuff boostBuff = new BoostBuff(_boostSpeed, _durationTime);
+        p.GetComponent<BuffSystem>().AddBuff(boostBuff);
     }
 }
