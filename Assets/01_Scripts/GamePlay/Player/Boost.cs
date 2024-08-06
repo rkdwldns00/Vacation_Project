@@ -5,13 +5,13 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Boost : MonoBehaviour
 {
-    private Rigidbody playerRigid;
+    private Rigidbody _playerRigid;
     private float _boostSpeed;
     private float _durationTime;
 
     private void Awake()
     {
-        playerRigid = GetComponent<Rigidbody>();
+        _playerRigid = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -28,8 +28,9 @@ public class Boost : MonoBehaviour
     {
         Vector3 position = Vector3.zero;
 
-        position.z = playerRigid.position.z + _boostSpeed * Time.fixedDeltaTime;
-        playerRigid.MovePosition(position);
+        position.x = Mathf.Lerp(_playerRigid.position.x, 0, Time.fixedDeltaTime);
+        position.z = _playerRigid.position.z + _boostSpeed * Time.fixedDeltaTime;
+        _playerRigid.MovePosition(position);
     }
 
     public void SetBoostData(float boostSpeed, float durationTime)
