@@ -1,0 +1,11 @@
+name: 기능 추천
+description: 게임에 추가됬으면 하는 기능, 보완할점
+title: "제목"
+labels: [feature]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "기능에 대한 상세설명"
+    validations:
+      required: true
