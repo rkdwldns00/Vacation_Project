@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 7279183214396476302}
+  - {fileID: 3139230625645919926}
   m_Father: {fileID: 7915677668266142343}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -203,10 +203,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 759697272693536762, guid: cd20e9e2008d3404bacfed5091bfe5e2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cd20e9e2008d3404bacfed5091bfe5e2, type: 3}
---- !u!4 &7279183214396476302 stripped
+--- !u!4 &3139230625645919926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7500364505831148981, guid: cd20e9e2008d3404bacfed5091bfe5e2, type: 3}
-  m_PrefabInstance: {fileID: 941955282053170747}
+  m_PrefabInstance: {fileID: 4865695575546622723}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6862935491433684619
 PrefabInstance:
