@@ -1,12 +1,15 @@
 using System;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
     public event Action OnDie;
     public event Action OnDamaged;
+    public event Action OnHealed;
+    public event Action OnChangedHealth;
     public event Action<float> OnChangedBoostGazy;
 
     public int CurruntHealth { get; set; }
@@ -15,6 +18,10 @@ public class Player : MonoBehaviour
         get
         {
             return _moveSpeed;
+        }
+        protected set
+        {
+            _moveSpeed = value;
         }
     }
 
@@ -31,8 +38,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    public int PlayerLevel
+    {
+        get => PlayerPrefs.GetInt("Player" + CarID + "Level");
+        set => PlayerPrefs.SetInt("Player" + CarID + "Level", value);
+    }
+
+
     public GameObject playerMesh;
     private Mesh _mesh;
+    [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpPower;
@@ -42,9 +57,16 @@ public class Player : MonoBehaviour
     public int MaxHealth
     {
         get => _maxHealth;
+
+        protected set => _maxHealth = value;
     }
 
-    public float MaxBoostGazy => _maxBoostGazy;
+    public float MaxBoostGazy
+    {
+        get => _maxBoostGazy;
+
+        protected set => _maxBoostGazy = value;
+    }
 
     protected Rigidbody _rigid;
     private float _targetX;
@@ -56,24 +78,26 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
-    }
 
-    protected virtual void Start()
-    {
         CurruntHealth = _maxHealth;
+        OnChangedHealth?.Invoke();
 
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
         float meshMinY = meshCollder.center.y - meshCollder.size.y / 2;
         _colliderBoundMinY = meshMinY;
 
         _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+    }
+
+    protected virtual void Start()
+    {
 
         OnChangedBoostGazy?.Invoke(0);
     }
 
     protected virtual void Update()
     {
-        GameManager.Instance.Score = (int)transform.position.z;
+        GameManager.Instance.DistanceScore = (int)transform.position.z;
         MoveHandler();
     }
 
@@ -100,7 +124,8 @@ public class Player : MonoBehaviour
         }
         else if (position.y < _playerSetting.fallingSensorY)
         {
-            if (_rigid.SweepTest(Vector3.forward, out _, 0.1f) || _rigid.SweepTest(Vector3.right, out _, 0.1f) || _rigid.SweepTest(Vector3.left, out _, 0.1f)) {
+            if (_rigid.SweepTest(Vector3.forward, out _, 0.1f) || _rigid.SweepTest(Vector3.right, out _, 0.1f) || _rigid.SweepTest(Vector3.left, out _, 0.1f))
+            {
                 DieHandler();
             }
         }
@@ -149,10 +174,11 @@ public class Player : MonoBehaviour
     public virtual void ChargeBoost(float value)
     {
         BoostGazy += value;
+        GameManager.Instance.GemScore += 10;
         OnChangedBoostGazy?.Invoke(value);
     }
 
-    public bool UseBoost()
+    public virtual bool UseBoost()
     {
         if (BoostGazy > 1)
         {
@@ -169,6 +195,11 @@ public class Player : MonoBehaviour
         _isDebuggingMode = true;
     }
 
+    protected void RunOnChargeBoostGazy(float value)
+    {
+        OnChangedBoostGazy?.Invoke(value);
+    }
+
     #region 체력 관리
 
     public virtual void TakeDamage(int damage = 1)
@@ -178,6 +209,7 @@ public class Player : MonoBehaviour
         CurruntHealth -= damage;
 
         OnDamaged?.Invoke();
+        OnChangedHealth?.Invoke();
 
         Instantiate(_playerSetting.playerDamagedEffect, transform.position, Quaternion.identity);
 
@@ -185,6 +217,16 @@ public class Player : MonoBehaviour
         {
             DieHandler();
         }
+    }
+
+    public void TakeHeal(int heal = 1)
+    {
+        if (CurruntHealth == MaxHealth || _isDead) return;
+
+        CurruntHealth = Mathf.Min(CurruntHealth + heal, MaxHealth);
+
+        OnHealed?.Invoke();
+        OnChangedHealth?.Invoke();
     }
 
     public void Kill()
