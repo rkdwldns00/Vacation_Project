@@ -25,9 +25,9 @@ public class GameResultUI : MonoBehaviour
     public void OpenUI()
     {
         _layer.SetActive(true);
-        _distanceScoreText.text = "+ Distance Score : " + GameManager.Instance.DistanceScore;
-        _gemScoreText.text = "+ Gem Score : " + GameManager.Instance.GemScore;
-        _scoreText.text = "Score : " + GameManager.Instance.Score;
+        _distanceScoreText.text = "+ 거리 점수 : " + GameManager.Instance.DistanceScore;
+        _gemScoreText.text = "+ 젬 점수 : " + GameManager.Instance.GemScore;
+        _scoreText.text = "총 점수 : " + GameManager.Instance.Score;
         _bestScoreMassage.SetActive(GameManager.Instance.isBestScore);
 
         OnOpen?.Invoke();

@@ -20,6 +20,6 @@ public class MenuManager : MonoBehaviour
 
     private void SetBestScoreText(int score)
     {
-        _bestScoreText.text = "Best Score : " + score; 
+        _bestScoreText.text = "최고 점수 : " + score; 
     }
 }

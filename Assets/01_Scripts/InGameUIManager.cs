@@ -97,7 +97,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void UpdateScoreUI()
     {
-        _currentScoreText.text = "Score : " + GameManager.Instance.Score;
+        _currentScoreText.text = "점수 : " + GameManager.Instance.Score;
 
         if (GameManager.Instance.Score > GameManager.Instance.BestScore)
         {
