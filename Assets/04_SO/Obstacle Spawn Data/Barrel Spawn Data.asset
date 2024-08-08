@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4f9417035cd5d43b65d049596dbe42, type: 3}
+  m_Name: Barrel Spawn Data
+  m_EditorClassIdentifier: 
+  NextSpawnCoolTime: 5
+  SpawnProbability: 1
+  _spawnDistance: 100
+  _barrelObjectPrefab: {fileID: 7092548174093946046, guid: d8cb297cd42e95e4ca2b51496739566f, type: 3}
+  _minSpawnCount: 1
+  _maxSpawnCount: 5
+  _nextSpawnDistance: 6
