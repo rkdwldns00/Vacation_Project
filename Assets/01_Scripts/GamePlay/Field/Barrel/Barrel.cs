@@ -9,6 +9,7 @@ public class Barrel : MonoBehaviour
     [SerializeField] private float _minBarrelSpeed;
     [SerializeField] private float _maxBarrelSpeed;
     [SerializeField] private float _startTime;
+    [SerializeField] private float _warningTime;
     [SerializeField] private float _startXPos;
 
     private float _barrelSpeed;
@@ -19,6 +20,7 @@ public class Barrel : MonoBehaviour
         _isBarrelStartLeft = Random.Range(0, 2) == 0;
         float startXPos = _startXPos * (_isBarrelStartLeft ? -1 : 1);
         _barrelObject.localPosition = new Vector3(startXPos, 0, 0);
+        _warningObject.localPosition = new Vector3(startXPos, 0, 0);
 
         _barrelSpeed = Random.Range(_minBarrelSpeed, _maxBarrelSpeed);
     }
@@ -29,6 +31,14 @@ public class Barrel : MonoBehaviour
         {
             Vector3 moveDir = _isBarrelStartLeft ? Vector3.right : Vector3.left;
             _barrelObject.Translate(moveDir * _barrelSpeed * Time.fixedDeltaTime);
+        }
+
+        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _warningTime * Player.Instance.MoveSpeed)
+        {
+            if (!_warningObject.gameObject.activeSelf)
+            {
+                _warningObject.gameObject.SetActive(true);
+            }
         }
     }
 }
