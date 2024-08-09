@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,14 @@ public class CustomizingUI : MonoBehaviour
     [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private CustomizingCamera _customizingCamera;
     [SerializeField] private GameObject _layer;
+    [SerializeField] private Button _upgradeButton;
+    [SerializeField] private TextMeshProUGUI _upgradeCostText;
+    [SerializeField] private TextMeshProUGUI _carInfoText;
     [SerializeField] private Button _beforeButton;
     [SerializeField] private Button _afterButton;
     [SerializeField] private Button _selectButton;
+    [SerializeField] private Button _unlockButton;
+    [SerializeField] private TextMeshProUGUI _unlockCostText;
     [SerializeField] private Button _closeButton;
     [SerializeField] private Transform _menuPlayerModelTransform;
 
@@ -24,6 +30,8 @@ public class CustomizingUI : MonoBehaviour
         _afterButton.onClick.AddListener(ShowAfterCar);
         _closeButton.onClick.AddListener(CloseUI);
         _selectButton.onClick.AddListener(SelectCar);
+        _upgradeButton.onClick.AddListener(TryUpgradeCar);
+        _unlockButton.onClick.AddListener(TryUnlockCar);
 
         _menuPlayerModels = new GameObject[_playerSetting.PlayerModels.Length];
         for (int i = 0; i < _playerSetting.PlayerModels.Length; i++)
@@ -75,6 +83,41 @@ public class CustomizingUI : MonoBehaviour
         _beforeButton.interactable = _curruntCarIndex > 0;
         _afterButton.interactable = _curruntCarIndex < _playerSetting.PlayerModels.Length - 1;
         _selectButton.interactable = _curruntCarIndex != GameManager.Instance.PlayerModelId;
+
+        UpdateCarInfo();
+    }
+
+    private void TryUnlockCar()
+    {
+        Player p = _playerSetting.playerPrefabs[_curruntCarIndex].GetComponent<Player>();
+        if (p.UnlockCost <= Currency.Crystal && p.PlayerLevel == 0)
+        {
+            Currency.Crystal -= p.UnlockCost;
+            p.PlayerLevel = 1;
+            UpdateCarInfo();
+        }
+    }
+
+    private void TryUpgradeCar()
+    {
+        Player p = _playerSetting.playerPrefabs[_curruntCarIndex].GetComponent<Player>();
+        if (p.UpgradeCost <= Currency.Gold && p.IsUpgradable)
+        {
+            Currency.Gold -= p.UpgradeCost;
+            p.PlayerLevel += 1;
+            UpdateCarInfo();
+        }
+    }
+
+    private void UpdateCarInfo()
+    {
+        Player p = _playerSetting.playerPrefabs[_curruntCarIndex].GetComponent<Player>();
+        _unlockButton.gameObject.SetActive(p.PlayerLevel == 0);
+        _upgradeButton.gameObject.SetActive(p.PlayerLevel > 0 && p.IsUpgradable);
+        _selectButton.gameObject.SetActive(p.PlayerLevel > 0);
+        _carInfoText.text = p.CarInfo;
+        _unlockCostText.text = p.UnlockCost.ToString();
+        _upgradeCostText.text = p.UpgradeCost.ToString();
     }
 
     private void SelectCar()

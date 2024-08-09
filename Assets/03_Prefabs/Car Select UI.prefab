@@ -1053,12 +1053,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117cb72c4aad1a1479c51143e876913a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSetting: {fileID: 0}
+  _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
   _customizingCamera: {fileID: 0}
   _layer: {fileID: 1515026554860438711}
+  _upgradeButton: {fileID: 3347760015498029590}
+  _upgradeCostText: {fileID: 1147277232265976317}
+  _carInfoText: {fileID: 8883741704770232583}
   _beforeButton: {fileID: 1515026554388218016}
   _afterButton: {fileID: 1515026555153144743}
   _selectButton: {fileID: 1515026554655893526}
+  _unlockButton: {fileID: 1749710584811877361}
+  _unlockCostText: {fileID: 3822091969812834495}
   _closeButton: {fileID: 1515026553132396342}
   _menuPlayerModelTransform: {fileID: 0}
 --- !u!1 &1515026554655893528
