@@ -17,11 +17,11 @@ public class Player : MonoBehaviour
     {
         get
         {
-            return _moveSpeed;
+            return _playerSetting._moveSpeed;
         }
         protected set
         {
-            _moveSpeed = value;
+            _playerSetting._moveSpeed = value;
         }
     }
 
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         }
         protected set
         {
-            _boostGazy = Mathf.Clamp(value, 0, _maxBoostGazy);
+            _boostGazy = Mathf.Clamp(value, 0, _playerSetting._maxBoostGazy);
         }
     }
 
@@ -49,23 +49,19 @@ public class Player : MonoBehaviour
     private Mesh _mesh;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _jumpPower;
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private float _maxBoostGazy;
 
     public int MaxHealth
     {
-        get => _maxHealth;
+        get => _playerSetting._maxHealth;
 
-        protected set => _maxHealth = value;
+        protected set => _playerSetting._maxHealth = value;
     }
 
     public float MaxBoostGazy
     {
-        get => _maxBoostGazy;
+        get => _playerSetting._maxBoostGazy;
 
-        protected set => _maxBoostGazy = value;
+        protected set => _playerSetting._maxBoostGazy = value;
     }
 
     protected Rigidbody _rigid;
@@ -79,7 +75,7 @@ public class Player : MonoBehaviour
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
 
-        CurruntHealth = _maxHealth;
+        CurruntHealth = _playerSetting._maxHealth;
         OnChangedHealth?.Invoke();
 
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
@@ -106,7 +102,7 @@ public class Player : MonoBehaviour
         Vector3 rotation = Vector3.zero;
         Vector3 position = Vector3.zero;
 
-        position.z = _rigid.position.z + _moveSpeed * Time.fixedDeltaTime;
+        position.z = _rigid.position.z + _playerSetting._moveSpeed * Time.fixedDeltaTime;
 
         position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
         rotation.y = _rigid.position.x - position.x;
@@ -176,7 +172,7 @@ public class Player : MonoBehaviour
             _rigid.position.z);
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
-            _rigid.velocity = (Vector3.up * _jumpPower);
+            _rigid.velocity = (Vector3.up * _playerSetting._jumpPower);
             Instantiate(_playerSetting.playerJumpEffect, transform.position, Quaternion.identity);
         }
     }
