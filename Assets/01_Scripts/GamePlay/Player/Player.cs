@@ -91,13 +91,13 @@ public class Player : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        SetGoldRate();
         OnChangedBoostGazy?.Invoke(0);
     }
 
     protected virtual void Update()
     {
-        GameManager.Instance.DistanceScore = (int)transform.position.z;
+        UpdaateDistanceScore();
         MoveHandler();
     }
 
@@ -139,6 +139,16 @@ public class Player : MonoBehaviour
         {
             playerMesh = meshFilter.gameObject;
         }
+    }
+
+    protected virtual void SetGoldRate()
+    {
+        GameManager.Instance.RewardGoldRate = 0.1f;
+    }
+
+    protected virtual void UpdaateDistanceScore()
+    {
+        GameManager.Instance.DistanceScore = (int)transform.position.z;
     }
 
     protected virtual void MoveHandler()
@@ -200,6 +210,11 @@ public class Player : MonoBehaviour
         OnChangedBoostGazy?.Invoke(value);
     }
 
+    protected void RunOnChangedBoostGazy(float value)
+    {
+        OnChangedBoostGazy?.Invoke(value);
+    }
+
     #region 체력 관리
 
     public virtual void TakeDamage(int damage = 1)
@@ -247,6 +262,7 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.BestScore = GameManager.Instance.Score;
         }
+        Currency.Gold += GameManager.Instance.RewardGold;
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
