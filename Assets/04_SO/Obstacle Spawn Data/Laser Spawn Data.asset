@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextSpawnCoolTime: 5
   SpawnProbability: 1
+  SpawnScore: 5000
   _spawnDistance: 100
   _laserObjectPrefab: {fileID: 1368248454812949147, guid: fc870a278c6b82f45b90c4447a1b1fe1, type: 3}

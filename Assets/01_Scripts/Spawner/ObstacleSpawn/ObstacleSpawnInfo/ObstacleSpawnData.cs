@@ -8,6 +8,7 @@ public class ObstacleSpawnData : ScriptableObject, IObstacleSpawnable
     [Space()]
     public float NextSpawnCoolTime;
     public int SpawnProbability;
+    public int SpawnScore;
     [SerializeField] protected float _spawnDistance;
 
     public virtual void SpawnObstacle(Vector3 playerPos) {}

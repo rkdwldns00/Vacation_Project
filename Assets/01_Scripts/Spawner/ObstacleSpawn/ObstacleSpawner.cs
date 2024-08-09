@@ -26,12 +26,13 @@ public class ObstacleSpawner : MonoBehaviour
         }
 
         int rand = Random.Range(1, spawnProbability + 1);
+        spawnProbability = 0;
 
         for (int i=0; i<_obstacleSpawnDatas.Count; i++)
         {
             spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
 
-            if (rand <= spawnProbability)
+            if (rand <= spawnProbability && _obstacleSpawnDatas[i].SpawnScore <= GameManager.Instance.Score)
             {
                 _obstacleSpawnDatas[i].SpawnObstacle(Player.Instance.transform.position);
                 _obstacleSpawnCoolTime = Time.time + _obstacleSpawnDatas[i].NextSpawnCoolTime;
