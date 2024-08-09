@@ -25,20 +25,18 @@ public class ObstacleSpawner : MonoBehaviour
             spawnProbability += data.SpawnProbability;
         }
 
-        int rand = Random.Range(0, spawnProbability);
-
-        spawnProbability = 0;
+        int rand = Random.Range(1, spawnProbability + 1);
 
         for (int i=0; i<_obstacleSpawnDatas.Count; i++)
         {
+            spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
+
             if (rand <= spawnProbability)
             {
                 _obstacleSpawnDatas[i].SpawnObstacle(Player.Instance.transform.position);
                 _obstacleSpawnCoolTime = Time.time + _obstacleSpawnDatas[i].NextSpawnCoolTime;
                 break;
             }
-
-            spawnProbability += _obstacleSpawnDatas[i].SpawnProbability;
         }
     }
 }
