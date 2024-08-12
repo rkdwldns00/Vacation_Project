@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextSpawnCoolTime: 5
   SpawnProbability: 1
+  SpawnScore: 500
   _spawnDistance: 100
   _sinkHoleObjectPrefab: {fileID: 1173139562085285156, guid: ad1ff02296341c44a81fb56554f8e008, type: 3}
-  _spawnCount: 2
   _spawnXRange: 10
   _spawnZRange: 10

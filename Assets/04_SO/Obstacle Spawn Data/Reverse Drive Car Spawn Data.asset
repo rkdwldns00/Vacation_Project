@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextSpawnCoolTime: 5
   SpawnProbability: 1
+  SpawnScore: 3000
   _spawnDistance: 100
   _reverseDriveCarObjectPrefab: {fileID: 5902981605605666747, guid: 1ca6642d71f99db429310cd3a50dd3ec, type: 3}
   _spawnCount: 4
