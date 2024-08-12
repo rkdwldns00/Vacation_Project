@@ -99,10 +99,6 @@ MonoBehaviour:
   playerMesh: {fileID: 3697216461458619359}
   CarID: 1
   _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
-  _moveSpeed: 15
-  _jumpPower: 5
-  _maxHealth: 3
-  _maxBoostGazy: 3
 --- !u!65 &2347226784395539068
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -195,11 +191,16 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5175783810145805729, guid: 47c790a4041f5ac429a8c8f69327182c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5714347492970008778, guid: 47c790a4041f5ac429a8c8f69327182c, type: 3}
       propertyPath: m_Name
       value: SM_Vehicle_Land_Sedan_02
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5175783810145805729, guid: 47c790a4041f5ac429a8c8f69327182c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47c790a4041f5ac429a8c8f69327182c, type: 3}
 --- !u!4 &1537964567435673262 stripped
 Transform:
