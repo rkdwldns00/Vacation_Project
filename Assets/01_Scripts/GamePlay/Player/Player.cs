@@ -12,16 +12,21 @@ public class Player : MonoBehaviour
     public event Action OnChangedHealth;
     public event Action<float> OnChangedBoostGazy;
 
+    public virtual bool IsUpgradable => false;
+    public virtual int UpgradeCost => 0;
+    public virtual int UnlockCost => 0;
+    public virtual string CarInfo => "기본 차량";
+
     public int CurruntHealth { get; set; }
     public float MoveSpeed
     {
         get
         {
-            return _moveSpeed;
+            return _playerSetting._moveSpeed;
         }
         protected set
         {
-            _moveSpeed = value;
+            _playerSetting._moveSpeed = value;
         }
     }
 
@@ -34,7 +39,7 @@ public class Player : MonoBehaviour
         }
         protected set
         {
-            _boostGazy = Mathf.Clamp(value, 0, _maxBoostGazy);
+            _boostGazy = Mathf.Clamp(value, 0, _playerSetting._maxBoostGazy);
         }
     }
 
@@ -49,23 +54,19 @@ public class Player : MonoBehaviour
     private Mesh _mesh;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _jumpPower;
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private float _maxBoostGazy;
 
     public int MaxHealth
     {
-        get => _maxHealth;
+        get => _playerSetting._maxHealth;
 
-        protected set => _maxHealth = value;
+        protected set => _playerSetting._maxHealth = value;
     }
 
     public float MaxBoostGazy
     {
-        get => _maxBoostGazy;
+        get => _playerSetting._maxBoostGazy;
 
-        protected set => _maxBoostGazy = value;
+        protected set => _playerSetting._maxBoostGazy = value;
     }
 
     protected Rigidbody _rigid;
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
 
-        CurruntHealth = _maxHealth;
+        CurruntHealth = _playerSetting._maxHealth;
         OnChangedHealth?.Invoke();
 
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
@@ -91,13 +92,13 @@ public class Player : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        SetGoldRate();
         OnChangedBoostGazy?.Invoke(0);
     }
 
     protected virtual void Update()
     {
-        GameManager.Instance.DistanceScore = (int)transform.position.z;
+        UpdaateDistanceScore();
         MoveHandler();
     }
 
@@ -106,7 +107,7 @@ public class Player : MonoBehaviour
         Vector3 rotation = Vector3.zero;
         Vector3 position = Vector3.zero;
 
-        position.z = _rigid.position.z + _moveSpeed * Time.fixedDeltaTime;
+        position.z = _rigid.position.z + _playerSetting._moveSpeed * Time.fixedDeltaTime;
 
         position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
         rotation.y = _rigid.position.x - position.x;
@@ -141,6 +142,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    protected virtual void SetGoldRate()
+    {
+        GameManager.Instance.RewardGoldRate = 0.1f;
+    }
+
+    protected virtual void UpdaateDistanceScore()
+    {
+        GameManager.Instance.DistanceScore = (int)transform.position.z;
+    }
+
     protected virtual void MoveHandler()
     {
         if (Input.GetMouseButton(0))
@@ -166,7 +177,7 @@ public class Player : MonoBehaviour
             _rigid.position.z);
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
-            _rigid.velocity = (Vector3.up * _jumpPower);
+            _rigid.velocity = (Vector3.up * _playerSetting._jumpPower);
             Instantiate(_playerSetting.playerJumpEffect, transform.position, Quaternion.identity);
         }
     }
@@ -196,6 +207,11 @@ public class Player : MonoBehaviour
     }
 
     protected void RunOnChargeBoostGazy(float value)
+    {
+        OnChangedBoostGazy?.Invoke(value);
+    }
+
+    protected void RunOnChangedBoostGazy(float value)
     {
         OnChangedBoostGazy?.Invoke(value);
     }
@@ -247,6 +263,7 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.BestScore = GameManager.Instance.Score;
         }
+        Currency.Gold += GameManager.Instance.RewardGold;
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
