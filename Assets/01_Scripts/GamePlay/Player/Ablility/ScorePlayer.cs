@@ -8,9 +8,8 @@ public class ScorePlayer : Player
 
     public override void ChargeBoost(float value)
     {
-        value *= Bonus;
         BoostGazy += value;
-        GameManager.Instance.GemScore += 10;
+        GameManager.Instance.GemScore += (int)(10 * Bonus);
         RunOnChangedBoostGazy(value);
     }
 
