@@ -30,7 +30,7 @@ public class Chaser : MonoBehaviour
             {
                 Vector3 p = Vector3.zero;
 
-                p.z = Player.Instance.transform.position.z - _timer * (_moveSpeed - Player.Instance.MoveSpeed) - _hitSpacingToPlayer;
+                p.z = Player.Instance.transform.position.z - _timer * (_moveSpeed - Player.Instance.OriginMoveSpeed) - _hitSpacingToPlayer;
                 p.z = Mathf.Max(transform.position.z, p.z);
 
                 p.x = Mathf.Lerp(transform.position.x, Player.Instance.transform.position.x, Time.deltaTime * 5);

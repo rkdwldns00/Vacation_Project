@@ -18,17 +18,15 @@ public class Player : MonoBehaviour
     public virtual string CarInfo => "기본 차량";
 
     public int CurruntHealth { get; set; }
+
+    private float _moveSpeed;
     public float MoveSpeed
     {
-        get
-        {
-            return _playerSetting._moveSpeed;
-        }
-        protected set
-        {
-            _playerSetting._moveSpeed = value;
-        }
+        get => _moveSpeed;
+        set => _moveSpeed = value;
     }
+
+    public float OriginMoveSpeed => _playerSetting._moveSpeed;
 
     private float _boostGazy;
     public float BoostGazy
@@ -88,6 +86,7 @@ public class Player : MonoBehaviour
         _colliderBoundMinY = meshMinY;
 
         _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
+        _moveSpeed = _playerSetting._moveSpeed;
     }
 
     protected virtual void Start()
@@ -107,7 +106,7 @@ public class Player : MonoBehaviour
         Vector3 rotation = Vector3.zero;
         Vector3 position = Vector3.zero;
 
-        position.z = _rigid.position.z + _playerSetting._moveSpeed * Time.fixedDeltaTime;
+        position.z = _rigid.position.z + MoveSpeed * Time.fixedDeltaTime;
 
         position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
         rotation.y = _rigid.position.x - position.x;
