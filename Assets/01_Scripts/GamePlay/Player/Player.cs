@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     public event Action OnChangedHealth;
     public event Action<float> OnChangedBoostGazy;
 
-    public virtual bool IsUpgradable => false;
-    public virtual int UpgradeCost => 0;
+    public virtual int MaxLevel => 1;
+    public virtual bool IsUpgradable => PlayerLevel < MaxLevel;
+    public virtual int UpgradeCost => PlayerLevel * UnlockCost * 10;
     public virtual int UnlockCost => 0;
     public virtual string CarInfo => "기본 차량";
 
