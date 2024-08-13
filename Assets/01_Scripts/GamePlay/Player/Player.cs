@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
         set => PlayerPrefs.SetInt("Player" + CarID + "Level", value);
     }
 
-
+    public bool CanControl { get; set; } = true;
     public GameObject playerMesh;
     private Mesh _mesh;
     [SerializeField] private int CarID;
@@ -154,6 +154,8 @@ public class Player : MonoBehaviour
 
     protected virtual void MoveHandler()
     {
+        if (!CanControl) return;
+
         if (Input.GetMouseButton(0))
         {
             float xRate = Input.mousePosition.x / Screen.width;

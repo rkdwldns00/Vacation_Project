@@ -10,6 +10,11 @@ public class Chaser : MonoBehaviour
 
     private float _timer;
 
+    public float Timer
+    {
+        set => _timer = value;
+    }
+
     private void Start()
     {
         _timer = _hitToPlayerTimer;
