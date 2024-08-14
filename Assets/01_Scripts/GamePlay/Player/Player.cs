@@ -265,6 +265,7 @@ public class Player : MonoBehaviour
             GameManager.Instance.BestScore = GameManager.Instance.Score;
         }
         Currency.Gold += GameManager.Instance.RewardGold;
+        Currency.Crystal += GameManager.Instance.RewardCrystal;
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
