@@ -15,6 +15,7 @@ public class BuffSystem : MonoBehaviour
     public void RemoveBuff(Buff buff)
     {
         _buffs.Remove(buff);
+        buff.EndBuff(this);
     }
 
     public bool ContainBuff<T>() where T : Buff
@@ -32,6 +33,13 @@ public class BuffSystem : MonoBehaviour
         for (int i=0; i< _buffs.Count; i++)
         {
             _buffs[i].UpdateBuff(this);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        while (_buffs.Count > 0) { 
+            RemoveBuff( _buffs[0]);
         }
     }
 }

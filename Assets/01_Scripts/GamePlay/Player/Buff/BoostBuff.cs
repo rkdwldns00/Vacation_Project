@@ -8,6 +8,7 @@ public class BoostBuff : Buff
     private Rigidbody _playerRigid;
     private float _boostSpeed;
     private float _durationTime;
+    private Player _player;
 
     public BoostBuff(float boostSpeed, float durationTime)
     {
@@ -18,6 +19,8 @@ public class BoostBuff : Buff
     public override void StartBuff(BuffSystem buffSystem)
     {
         _playerRigid = buffSystem.GetComponent<Rigidbody>();
+        _player = buffSystem.GetComponent<Player>();
+        _player.MoveSpeed += _boostSpeed;
     }
 
     public override void UpdateBuff(BuffSystem buffSystem)
@@ -25,11 +28,10 @@ public class BoostBuff : Buff
         _durationTime -= Time.deltaTime;
 
         if (_durationTime <= 0) buffSystem.RemoveBuff(this);
+    }
 
-        Vector3 position = Vector3.zero;
-
-        position.x = Mathf.Lerp(_playerRigid.position.x, 0, Time.deltaTime);
-        position.z = _playerRigid.position.z + _boostSpeed * Time.deltaTime;
-        _playerRigid.MovePosition(position);
+    public override void EndBuff(BuffSystem buffSystem)
+    {
+        _player.MoveSpeed -= _boostSpeed;
     }
 }

@@ -30,4 +30,9 @@ public class ObstacleShieldBuff : Buff
             buffSystem.RemoveBuff(this);
         }
     }
+
+    public override void EndBuff(BuffSystem buffSystem)
+    {
+
+    }
 }

@@ -2569,7 +2569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe5fb5e1334cea488403995863db53a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSetting: {fileID: 0}
+  playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
   deleteObjects:
   - {fileID: 1743121329}
   - {fileID: 1915923137}

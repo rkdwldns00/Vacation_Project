@@ -33,4 +33,9 @@ public class MagnetBuff : Buff
             gem.transform.Translate(dir.normalized * player.MoveSpeed * 2 * Time.deltaTime);
         }
     }
+
+    public override void EndBuff(BuffSystem buffSystem)
+    {
+
+    }
 }
