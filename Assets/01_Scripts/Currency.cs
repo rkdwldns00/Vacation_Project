@@ -42,8 +42,11 @@ public static class Currency
 
     public static int MaxTicket => 5;
 
-    public static int TicketHealTime => 5;
-
+#if UNITY_EDITOR
+    public static int TicketHealTime => 30;
+#else
+    public static int TicketHealTime => 300;
+#endif
     private static int RealTimeTick => (int)((DateTime.Now.Ticks / 10000000) % 1000000000);
 
     public static int Ticket
