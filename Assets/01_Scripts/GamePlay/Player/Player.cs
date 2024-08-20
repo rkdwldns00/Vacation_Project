@@ -265,14 +265,19 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.BestScore = GameManager.Instance.Score;
         }
-        Currency.Gold += GameManager.Instance.RewardGold;
-        Currency.Crystal += GameManager.Instance.RewardCrystal;
         if (Currency.Ticket > 0)
         {
             Currency.Ticket--;
-            Currency.Gold += (int)(GameManager.Instance.RewardGold * 0.5f);
-            Currency.Crystal++;
+            GameManager.Instance.RewardGoldAdded = (int)(GameManager.Instance.RewardGold * 0.5f);
+            GameManager.Instance.RewardCrystalAdded = 1;
         }
+        else
+        {
+            GameManager.Instance.RewardGoldAdded = 0;
+            GameManager.Instance.RewardCrystalAdded = 0;
+        }
+        Currency.Gold += GameManager.Instance.RewardGold;
+        Currency.Crystal += GameManager.Instance.RewardCrystal;
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
