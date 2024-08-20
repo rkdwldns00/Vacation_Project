@@ -267,6 +267,12 @@ public class Player : MonoBehaviour
         }
         Currency.Gold += GameManager.Instance.RewardGold;
         Currency.Crystal += GameManager.Instance.RewardCrystal;
+        if (Currency.Ticket > 0)
+        {
+            Currency.Ticket--;
+            Currency.Gold += (int)(GameManager.Instance.RewardGold * 0.5f);
+            Currency.Crystal++;
+        }
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();
