@@ -90,6 +90,7 @@ public class Player : MonoBehaviour
     {
         SetGoldRate();
         OnChangedBoostGazy?.Invoke(0);
+        GameManager.Instance.GemScore = 0;
     }
 
     protected virtual void Update()
