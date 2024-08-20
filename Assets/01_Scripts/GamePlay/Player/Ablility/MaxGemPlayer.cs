@@ -22,14 +22,10 @@ public class MaxGemPlayer : Player
         }
     }
 
+    public override float MaxBoostGazy => base.MaxBoostGazy + GetAddMax(PlayerLevel);
+
     private float GetAddMax(int playerLevel)
     {
         return playerLevel / 5f;
-    }
-
-    protected override void Awake()
-    {
-        MaxBoostGazy += GetAddMax(PlayerLevel);
-        base.Awake();
     }
 }

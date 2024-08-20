@@ -54,18 +54,14 @@ public class Player : MonoBehaviour
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 
-    public int MaxHealth
+    public virtual int MaxHealth
     {
         get => _playerSetting._maxHealth;
-
-        protected set => _playerSetting._maxHealth = value;
     }
 
-    public float MaxBoostGazy
+    public virtual float MaxBoostGazy
     {
         get => _playerSetting._maxBoostGazy;
-
-        protected set => _playerSetting._maxBoostGazy = value;
     }
 
     protected Rigidbody _rigid;
