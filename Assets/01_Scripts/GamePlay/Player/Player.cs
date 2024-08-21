@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
     private float _colliderBoundMinY;
     private bool _isDead;
     private bool _isDebuggingMode;
+    private float _beforeX;
 
     protected virtual void Awake()
     {
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        _beforeX = transform.position.x;
         Vector3 rotation = Vector3.zero;
         Vector3 position = Vector3.zero;
 
@@ -283,7 +285,8 @@ public class Player : MonoBehaviour
         Vector3 scale = playerMesh.GetComponentInChildren<MeshRenderer>().transform.localScale;
         float yPos = playerMesh.transform.localPosition.y;
         PlayerDeadObject obj = Instantiate(_playerSetting.playerDeadObject, transform.position, Quaternion.identity).GetComponent<PlayerDeadObject>();
-        obj.SetDeadObjectData(_mesh, materials, MoveSpeed, scale, yPos);
+        Vector3 velocity = new Vector3((transform.position.x - _beforeX) * 10, GetComponent<Rigidbody>().velocity.y, MoveSpeed);
+        obj.SetDeadObjectData(_mesh, materials, MoveSpeed, scale, yPos, velocity);
 
         Destroy(gameObject);
     }
