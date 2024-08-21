@@ -20,7 +20,7 @@ public class BoostBuff : Buff
     {
         _playerRigid = buffSystem.GetComponent<Rigidbody>();
         _player = buffSystem.GetComponent<Player>();
-        _player.MoveSpeed += _boostSpeed;
+        _player.AddMoveSpeed(_boostSpeed);
     }
 
     public override void UpdateBuff(BuffSystem buffSystem)
@@ -32,6 +32,6 @@ public class BoostBuff : Buff
 
     public override void EndBuff(BuffSystem buffSystem)
     {
-        _player.MoveSpeed -= _boostSpeed;
+        _player.AddMoveSpeed(_boostSpeed);
     }
 }
