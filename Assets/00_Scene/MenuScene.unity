@@ -1774,7 +1774,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 52f969fb493f02248ba2e0ab07d6d81f, type: 3}
   - {fileID: 100000, guid: 00b78b03851cb0748b61d9005fb73b49, type: 3}
   - {fileID: 100000, guid: c3e95e72d6dba334594c3c5c37fcf18a, type: 3}
-  _groundPrefab: {fileID: 100000, guid: b74c48c2e73e17c418c9394124b75daf, type: 3}
+  _groundPrefab: {fileID: 6519584285041484772, guid: ddb632f5ef33df849b08eeae78dd7b20, type: 3}
   _buildingSpacingZ: 1
   _groundX: 6
   _buildingX: 9
@@ -4056,6 +4056,7 @@ MonoBehaviour:
   - {fileID: 1059686039}
   _activeOnTutorial:
   - {fileID: 780744526}
+  _playerSetting: {fileID: 0}
 --- !u!1 &1154069807
 GameObject:
   m_ObjectHideFlags: 0
