@@ -60,7 +60,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void OnPlayerSpawned(Player player)
     {
-        player.OnDamaged += UpdatePlayerHpUI;
+        player.OnChangedHealth += UpdatePlayerHpUI;
         player.OnDamaged += ShowDamagedEffect;
         player.OnDie += ActiveGameResultUI;
         player.OnChangedBoostGazy += UpdatePlayerBoostGazyUI;
@@ -97,7 +97,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void UpdateScoreUI()
     {
-        _currentScoreText.text = GameManager.Instance.Score + "m";
+        _currentScoreText.text = "점수 : " + GameManager.Instance.Score;
 
         if (GameManager.Instance.Score > GameManager.Instance.BestScore)
         {

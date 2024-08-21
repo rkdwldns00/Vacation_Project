@@ -10,8 +10,16 @@ public class PlayerSetting : ScriptableObject
     public float minX;
     public float maxX;
     public float fallingSensorY;
+    [Header("기본 스탯")]
+    public float _moveSpeed;
+    public float _jumpPower;
+    public int _maxHealth;
+    public float _maxBoostGazy;
     [Header("에셋 관리")]
     public GameObject[] playerPrefabs;
+    public GameObject playerDamagedEffect;
+    public GameObject playerJumpEffect;
+    public GameObject playerDeadObject;
 
     private static GameObject[] _playerModels = null;
     public GameObject[] PlayerModels

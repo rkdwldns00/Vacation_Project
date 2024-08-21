@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2867260696588579290}
   - component: {fileID: 2867260696588579291}
+  - component: {fileID: 3765544073468088226}
   m_Layer: 0
   m_Name: Falling Obstacle
   m_TagString: Untagged
@@ -47,4 +48,18 @@ MonoBehaviour:
   _warringObjectPrefab: {fileID: 7617954487986883371, guid: 6393ee6694293fe4c9b6fa0c10cfa9c6, type: 3}
   _warringTime: 3
   _fallingObjectPrefab: {fileID: 7390078363034589881, guid: 3ec516c7d7c04084aa084753d1bd9d2c, type: 3}
+  _fallingObjectEffectPrefab: {fileID: 3125736332446637519, guid: 9cb25a2829e04d841b92bc15f96aa390, type: 3}
   _hitBoxRadius: 1
+--- !u!135 &3765544073468088226
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867260696588579288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
