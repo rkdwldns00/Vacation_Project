@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         SetBestScoreText(GameManager.Instance.BestScore);
+        Application.targetFrameRate = 120;
 
         if (PlayerPrefs.GetInt("PlayedTutorial") == 0)
         {
