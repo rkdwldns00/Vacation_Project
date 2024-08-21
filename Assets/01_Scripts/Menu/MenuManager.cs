@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _bestScoreText;
     [SerializeField] private GameObject[] _deleteOnTutorial;
     [SerializeField] private GameObject[] _activeOnTutorial;
+    [SerializeField] private PlayerSetting _playerSetting;
 
     private void Start()
     {
@@ -31,6 +32,29 @@ public class MenuManager : MonoBehaviour
     public void SetActiveTutorial()
     {
         PlayerPrefs.SetInt("PlayedTutorial", 0);
+    }
+
+    [ContextMenu("재화 무한")]
+    public void SetCurrencyInfinity()
+    {
+        Currency.Crystal = 1000;
+        Currency.Gold = 100000;
+    }
+
+    [ContextMenu("재화 초기화")]
+    public void ClearCurrency()
+    {
+        Currency.Crystal = 0;
+        Currency.Gold = 0;
+    }
+
+    [ContextMenu("차량 레벨 초기화")]
+    public void ClearCarLevel()
+    {
+        for (int i = 1; i < _playerSetting.playerPrefabs.Length; i++)
+        {
+            _playerSetting.playerPrefabs[i].GetComponent<Player>().PlayerLevel = 0;
+        }
     }
 
     public void StartGame()

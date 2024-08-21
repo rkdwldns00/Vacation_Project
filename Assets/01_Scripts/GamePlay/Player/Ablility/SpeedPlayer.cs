@@ -22,6 +22,10 @@ public class SpeedPlayer : Player
         }
     }
 
+    public override float MoveSpeed {
+        get => base.MoveSpeed * GetSpeedRate(PlayerLevel); 
+    }
+
     private float GetSpeedRate(int playerLevel)
     {
         return 1f + playerLevel / 10f;
@@ -29,7 +33,6 @@ public class SpeedPlayer : Player
 
     protected override void Awake()
     {
-        MoveSpeed *= GetSpeedRate(PlayerLevel);
         base.Awake();
     }
 }

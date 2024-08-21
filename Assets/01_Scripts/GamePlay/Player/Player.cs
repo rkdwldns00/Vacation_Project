@@ -21,10 +21,9 @@ public class Player : MonoBehaviour
     public int CurruntHealth { get; set; }
 
     private float _moveSpeed;
-    public float MoveSpeed
+    public virtual float MoveSpeed
     {
         get => _moveSpeed;
-        set => _moveSpeed = value;
     }
 
     public float OriginMoveSpeed => _playerSetting._moveSpeed;
@@ -199,6 +198,11 @@ public class Player : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void AddMoveSpeed(float speed)
+    {
+        _moveSpeed = speed;
     }
 
     [ContextMenu("StartDebuggingMode")]
