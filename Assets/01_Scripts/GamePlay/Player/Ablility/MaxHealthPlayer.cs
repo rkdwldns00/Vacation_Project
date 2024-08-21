@@ -22,9 +22,5 @@ public class MaxHealthPlayer : Player
         }
     }
 
-    protected override void Awake()
-    {
-        MaxHealth += 1;
-        base.Awake();
-    }
+    public override int MaxHealth => base.MaxHealth + 1;
 }
