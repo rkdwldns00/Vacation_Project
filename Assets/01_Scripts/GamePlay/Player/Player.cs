@@ -202,7 +202,7 @@ public class Player : MonoBehaviour
 
     public void AddMoveSpeed(float speed)
     {
-        _moveSpeed = speed;
+        _moveSpeed += speed;
     }
 
     [ContextMenu("StartDebuggingMode")]

@@ -32,7 +32,14 @@ public class HealPlayer : Player
     public override void ChargeBoost(float value)
     {
         base.ChargeBoost(value);
-        _chargeValue = Mathf.Min(_chargeValue + value / GetChargeValue(PlayerLevel), 1);
+
+        if(CurruntHealth == MaxHealth)
+        {
+            _chargeValue = 0;
+            return;
+        }
+
+        _chargeValue = Mathf.Min(_chargeValue + GetChargeValue(PlayerLevel), 1);
 
         if (_chargeValue == 1 && CurruntHealth < MaxHealth)
         {

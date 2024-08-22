@@ -4028,7 +4028,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149402146}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 342.6144, y: 867.9543, z: -1.3277848}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4056,7 +4056,7 @@ MonoBehaviour:
   - {fileID: 1059686039}
   _activeOnTutorial:
   - {fileID: 780744526}
-  _playerSetting: {fileID: 0}
+  _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
 --- !u!1 &1154069807
 GameObject:
   m_ObjectHideFlags: 0

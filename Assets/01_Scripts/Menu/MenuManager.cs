@@ -14,8 +14,9 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         SetBestScoreText(GameManager.Instance.BestScore);
+        Application.targetFrameRate = 120;
 
-        if (PlayerPrefs.GetInt("PlayedTutorial") == 0)
+        if (_playerSetting.playerPrefabs[0].GetComponent<Player>().PlayerLevel == 0)
         {
             foreach (GameObject go in _deleteOnTutorial)
             {
@@ -31,7 +32,7 @@ public class MenuManager : MonoBehaviour
     [ContextMenu("튜토리얼 활성화")]
     public void SetActiveTutorial()
     {
-        PlayerPrefs.SetInt("PlayedTutorial", 0);
+        _playerSetting.playerPrefabs[0].GetComponent<Player>().PlayerLevel = 0;
     }
 
     [ContextMenu("재화 무한")]

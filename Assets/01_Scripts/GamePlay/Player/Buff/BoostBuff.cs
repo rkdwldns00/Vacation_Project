@@ -32,6 +32,6 @@ public class BoostBuff : Buff
 
     public override void EndBuff(BuffSystem buffSystem)
     {
-        _player.AddMoveSpeed(_boostSpeed);
+        _player.AddMoveSpeed(-_boostSpeed);
     }
 }
