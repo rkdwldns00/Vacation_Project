@@ -152,7 +152,6 @@ public class TutorialManager : MonoBehaviour
         Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 63), Quaternion.identity);
         Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 66), Quaternion.identity);
 
-        PlayerPrefs.SetInt("PlayedTutorial", 1);
         playerSetting.playerPrefabs[0].GetComponent<Player>().PlayerLevel = 1;
 
         yield return null;
