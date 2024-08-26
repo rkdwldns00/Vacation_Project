@@ -32,7 +32,10 @@ public class CustomizingUI : MonoBehaviour
         _selectButton.onClick.AddListener(SelectCar);
         _upgradeButton.onClick.AddListener(TryUpgradeCar);
         _unlockButton.onClick.AddListener(TryUnlockCar);
+    }
 
+    private void Start()
+    {
         _menuPlayerModels = new GameObject[_playerSetting.PlayerModels.Length];
         for (int i = 0; i < _playerSetting.PlayerModels.Length; i++)
         {
