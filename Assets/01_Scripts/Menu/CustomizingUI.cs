@@ -11,6 +11,7 @@ public class CustomizingUI : MonoBehaviour
     [SerializeField] private GameObject _layer;
     [SerializeField] private Button _upgradeButton;
     [SerializeField] private TextMeshProUGUI _upgradeCostText;
+    [SerializeField] private TextMeshProUGUI _upgradeLevelText;
     [SerializeField] private TextMeshProUGUI _carInfoText;
     [SerializeField] private Button _beforeButton;
     [SerializeField] private Button _afterButton;
@@ -118,6 +119,7 @@ public class CustomizingUI : MonoBehaviour
         _carInfoText.text = p.CarInfo;
         _unlockCostText.text = p.UnlockCost.ToString();
         _upgradeCostText.text = p.UpgradeCost.ToString();
+        _upgradeLevelText.text = p.PlayerLevel.ToString();
     }
 
     private void SelectCar()
