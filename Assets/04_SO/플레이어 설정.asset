@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d8d61f0d4685946991758c9ff36adf, type: 3}
   m_Name: "\uD50C\uB808\uC774\uC5B4 \uC124\uC815"
   m_EditorClassIdentifier: 
-  minX: -5
-  maxX: 5
+  minX: -4.75
+  maxX: 4.75
   fallingSensorY: -0.5
   _moveSpeed: 15
   _jumpPower: 5
