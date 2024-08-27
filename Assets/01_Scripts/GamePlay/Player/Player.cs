@@ -97,6 +97,18 @@ public class Player : MonoBehaviour
     {
         UpdaateDistanceScore();
         MoveHandler();
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            _isDebuggingMode = true;
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            _isDebuggingMode = false;
+            Kill();
+        }
+#endif
     }
 
     protected virtual void FixedUpdate()
