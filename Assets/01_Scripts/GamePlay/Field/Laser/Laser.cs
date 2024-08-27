@@ -23,15 +23,16 @@ public class Laser : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _startTime * Player.Instance.MoveSpeed)
+        if (!_isLaserActivated && Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _startTime * Player.Instance.OriginMoveSpeed)
         {
-            transform.Translate(Vector3.forward * _moveSpeed * Time.fixedDeltaTime);
+            StartCoroutine(LaserActiveCoroutine());
+            _isLaserActivated = true;
+        }
 
-            if (!_isLaserActivated)
-            {
-                StartCoroutine(LaserActiveCoroutine());
-                _isLaserActivated = true;
-            }
+        if (_isLaserActivated)
+        {
+            float targetZPos = Player.Instance ? Player.Instance.transform.position.z + _startTime * Player.Instance.OriginMoveSpeed : 0;
+            transform.position = new Vector3(transform.position.x, transform.position.y, targetZPos);
         }
     }
 
@@ -43,7 +44,7 @@ public class Laser : MonoBehaviour
 
         float targetXPos = _isLaserStartLeft ? _startXPos : -_startXPos;
 
-        while (transform.position.x !=  targetXPos)
+        while (transform.position.x != targetXPos)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetXPos, 0, transform.position.z), _laserMoveSpeed * Time.deltaTime);
             yield return null;
