@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minX: -5
   maxX: 5
-  fallingSensorY: -0.5
+  fallingSensorY: -0.2
   _moveSpeed: 15
   _jumpPower: 5
   _maxHealth: 3
