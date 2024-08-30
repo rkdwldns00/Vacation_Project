@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
+
         SetBestScoreText(GameManager.Instance.BestScore);
         Application.targetFrameRate = 120;
 
