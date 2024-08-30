@@ -90,13 +90,24 @@ public class Player : MonoBehaviour
     {
         SetGoldRate();
         OnChangedBoostGazy?.Invoke(0);
-        GameManager.Instance.GemScore = 0;
     }
 
     protected virtual void Update()
     {
         UpdaateDistanceScore();
         MoveHandler();
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            _isDebuggingMode = true;
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            _isDebuggingMode = false;
+            Kill();
+        }
+#endif
     }
 
     protected virtual void FixedUpdate()
@@ -121,12 +132,13 @@ public class Player : MonoBehaviour
         {
             DieHandler();
         }
-        else if (position.y < _playerSetting.fallingSensorY)
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
         {
-            if (_rigid.SweepTest(Vector3.forward, out _, 0.1f) || _rigid.SweepTest(Vector3.right, out _, 0.1f) || _rigid.SweepTest(Vector3.left, out _, 0.1f))
-            {
-                DieHandler();
-            }
+            DieHandler();
         }
     }
 

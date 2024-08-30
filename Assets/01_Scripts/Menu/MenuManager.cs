@@ -11,8 +11,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] _activeOnTutorial;
     [SerializeField] private PlayerSetting _playerSetting;
 
+    private void Awake()
+    {
+        if (_playerSetting.playerPrefabs[0].GetComponent<Player>().PlayerLevel == 0)
+        {
+            GameManager.Instance.PlayerModelId = 0;
+        }
+    }
+
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
+
         SetBestScoreText(GameManager.Instance.BestScore);
         Application.targetFrameRate = 120;
 
@@ -26,6 +36,8 @@ public class MenuManager : MonoBehaviour
             {
                 go.SetActive(true);
             }
+
+            GameManager.Instance.PlayerModelId = 0;
         }
     }
 
