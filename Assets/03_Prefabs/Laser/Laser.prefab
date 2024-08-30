@@ -244,7 +244,7 @@ MonoBehaviour:
   _laserObject: {fileID: 1368248454396416094}
   _warningObject: {fileID: 6362770776289316544}
   _laserMoveSpeed: 5
-  _startTime: 2
+  _startTime: 0.75
   _startXPos: 6
 --- !u!1 &3152826900361276478
 GameObject:
