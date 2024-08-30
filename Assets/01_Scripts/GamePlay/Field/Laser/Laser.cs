@@ -10,7 +10,6 @@ public class Laser : MonoBehaviour
     [SerializeField] private float _startTime;
     [SerializeField] private float _startXPos;
 
-    private float _moveSpeed = Player.Instance ? Player.Instance.MoveSpeed : 0;
     private bool _isLaserStartLeft;
     private bool _isLaserActivated = false;
 
