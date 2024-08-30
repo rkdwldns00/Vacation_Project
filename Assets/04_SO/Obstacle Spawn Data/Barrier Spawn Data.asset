@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Barrier Spawn Data
   m_EditorClassIdentifier: 
   NextSpawnCoolTime: 5
-  SpawnProbability: 1
+  SpawnProbability: 100
   SpawnScore: 2000
   _spawnDistance: 100
   _barrierObjectPrefab: {fileID: 2539390695419427592, guid: c26863312c05f0741ad9eeed39174d6a, type: 3}
   _minSpawnCount: 1
   _maxSpawnCount: 3
-  _spawnZDistance: 15
+  _spawnZDistance: 20
