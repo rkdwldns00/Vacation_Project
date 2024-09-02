@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     }
 
     public float OriginMoveSpeed => _playerSetting._moveSpeed;
+    public float MoveSpeedRate => MoveSpeed / OriginMoveSpeed;
 
     private float _boostGazy;
     public float BoostGazy
@@ -128,6 +129,8 @@ public class Player : MonoBehaviour
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
 
+        _rigid.AddForce(new Vector3(0, Physics.gravity.y * MoveSpeedRate * MoveSpeedRate - Physics.gravity.y, 0));
+
         if (position.y < -10)
         {
             DieHandler();
@@ -189,7 +192,7 @@ public class Player : MonoBehaviour
             _rigid.position.z);
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
-            _rigid.velocity = (Vector3.up * _playerSetting._jumpPower);
+            _rigid.velocity = (Vector3.up * _playerSetting._jumpPower * MoveSpeedRate);
             Instantiate(_playerSetting.playerJumpEffect, transform.position, Quaternion.identity);
         }
     }
