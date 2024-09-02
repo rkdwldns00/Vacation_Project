@@ -14,6 +14,16 @@ public class MagnetBuff : Buff
         _durationTime = durationTime;
     }
 
+    public override void MergeBuff<T>(T otherBuff)
+    {
+        MagnetBuff mergedBuff = otherBuff as MagnetBuff;
+
+        if (mergedBuff._durationTime > _durationTime)
+        {
+            _durationTime = mergedBuff._durationTime;
+        }
+    }
+
     public override void StartBuff(BuffSystem buffSystem)
     {
         player = buffSystem.GetComponent<Player>();
