@@ -8,16 +8,12 @@ public class Chaser : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _hitSpacingToPlayer;
 
-    private float _timer;
-
-    public float Timer
-    {
-        set => _timer = value;
-    }
+    public float HitToPlayerTimer => _hitToPlayerTimer;
+    public float Timer { get; set; }
 
     private void Start()
     {
-        _timer = _hitToPlayerTimer;
+        Timer = _hitToPlayerTimer;
 
         transform.position = new Vector3(0, 0, -_hitToPlayerTimer * (_moveSpeed) - _hitSpacingToPlayer);
     }
@@ -26,14 +22,14 @@ public class Chaser : MonoBehaviour
     {
         if (Player.Instance != null)
         {
-            if (_timer > 0)
+            if (Timer > 0)
             {
                 Vector3 p = Vector3.zero;
 
-                p.z = Player.Instance.transform.position.z - _timer * (_moveSpeed - Player.Instance.OriginMoveSpeed) - _hitSpacingToPlayer;
+                p.z = Player.Instance.transform.position.z - Timer * (_moveSpeed - Player.Instance.OriginMoveSpeed) - _hitSpacingToPlayer;
                 p.z = Mathf.Max(transform.position.z, p.z);
 
-                if (_timer < _hitToPlayerTimer / 2)
+                if (Timer < _hitToPlayerTimer / 2)
                 {
                     p.x = Mathf.Lerp(transform.position.x, Player.Instance.transform.position.x, Time.deltaTime * 5);
                 }
@@ -44,9 +40,9 @@ public class Chaser : MonoBehaviour
 
                 transform.position = p;
 
-                _timer = Mathf.Max(0, _timer - Time.deltaTime);
+                Timer = Mathf.Max(0, Timer - Time.deltaTime);
             }
-            else if (_timer == 0)
+            else if (Timer == 0)
             {
                 HitToPlayer();
             }
@@ -61,7 +57,7 @@ public class Chaser : MonoBehaviour
     {
         if (Player.Instance.UseBoost())
         {
-            _timer = _hitToPlayerTimer;
+            Timer = _hitToPlayerTimer;
         }
         else
         {
@@ -71,6 +67,6 @@ public class Chaser : MonoBehaviour
 
     private void ResetTimer()
     {
-        _timer = _hitToPlayerTimer;
+        Timer = _hitToPlayerTimer;
     }
 }
