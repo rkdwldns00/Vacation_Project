@@ -42,6 +42,10 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private Transform _playerBoostGazyParent;
     [SerializeField] private List<Image> _playerBoostGazys = new List<Image>();
 
+    [Header("Chaser UI")]
+    [SerializeField] private Slider _chaserPositionSlider;
+    [SerializeField] private Chaser _chaser;
+
 
     [Header("Result UI")]
     [SerializeField] private GameResultUI _gameResultUI;
@@ -56,6 +60,7 @@ public class InGameUIManager : MonoBehaviour
     private void Update()
     {
         UpdateScoreUI();
+        UpdateChaserUI();
     }
 
     private void OnPlayerSpawned(Player player)
@@ -119,6 +124,11 @@ public class InGameUIManager : MonoBehaviour
         {
             _playerHps[i].SetActive(i < Player.Instance.CurruntHealth);
         }
+    }
+
+    private void UpdateChaserUI()
+    {
+        _chaserPositionSlider.value = 1 - _chaser.Timer / _chaser.HitToPlayerTimer;
     }
 
     private void ShowDamagedEffect()
