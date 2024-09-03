@@ -4958,8 +4958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgmAudioSource: {fileID: 2008397509}
   _sfxAudioSource: {fileID: 936642823}
-  MenuBgm: {fileID: 0}
-  GameBgm: {fileID: 0}
+  SoundData: {fileID: 11400000, guid: e7d3c38d13d94d44084bffd9777c53b2, type: 2}
 --- !u!1 &1541040016
 GameObject:
   m_ObjectHideFlags: 0

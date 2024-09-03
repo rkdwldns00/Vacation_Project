@@ -24,9 +24,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _bgmAudioSource;
     [SerializeField] private AudioSource _sfxAudioSource;
 
-    [Header("Audio Clip")]
-    public AudioClip MenuBgm;
-    public AudioClip GameBgm;
+    [Header("Sound Data")]
+    public SoundData SoundData;
 
     private void Awake()
     {
