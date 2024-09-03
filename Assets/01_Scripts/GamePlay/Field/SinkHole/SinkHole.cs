@@ -70,7 +70,32 @@ public class SinkHole : MonoBehaviour
             (temp, _) = MeshUtil.Cut(middle, leftPoint, leftNormal, true, cuttedSliceUV);
             (temp, _) = MeshUtil.Cut(temp, rightPoint, rightNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp);
+
+            Mesh wallMesh = new Mesh();
+            wallMesh.vertices = new Vector3[] {
+                new Vector3(mesh.bounds.min.x,mesh.bounds.max.y,startZ),                //왼쪽 벽
+                new Vector3(mesh.bounds.min.x,mesh.bounds.max.y,startZ+HoleDistance),
+                new Vector3(mesh.bounds.min.x,-10,startZ),
+                new Vector3(mesh.bounds.min.x,-10,startZ+HoleDistance)
+                };
+            wallMesh.triangles = new int[] { 0, 1, 2, 1, 3, 2 };
+            wallMesh.normals = new Vector3[] { Vector3.right, Vector3.right, Vector3.right, Vector3.right };
+            wallMesh.uv = new Vector2[] { cuttedSliceUV, cuttedSliceUV, cuttedSliceUV, cuttedSliceUV };
+            result = MeshUtil.Merge(result, wallMesh);
         }
+
+        Mesh floorMesh = new Mesh();
+        floorMesh.vertices = new Vector3[] {
+                new Vector3(mesh.bounds.min.x, -10, startZ),
+                new Vector3(mesh.bounds.min.x, -10, startZ+HoleDistance),
+                new Vector3(mesh.bounds.max.x, -10, startZ),
+                new Vector3(mesh.bounds.max.x, -10, startZ+HoleDistance),
+                };
+        floorMesh.triangles = new int[] { 0, 1, 2, 1, 3, 2 };
+        floorMesh.normals = new Vector3[] { Vector3.up, Vector3.up, Vector3.up, Vector3.up };
+        floorMesh.uv = new Vector2[] { cuttedSliceUV, cuttedSliceUV, cuttedSliceUV, cuttedSliceUV };
+        result = MeshUtil.Merge(result, floorMesh);
+
 
         return result;
     }

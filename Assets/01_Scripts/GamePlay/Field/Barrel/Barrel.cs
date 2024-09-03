@@ -27,13 +27,13 @@ public class Barrel : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _startTime * Player.Instance.MoveSpeed)
+        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _startTime * Player.Instance.OriginMoveSpeed)
         {
             Vector3 moveDir = _isBarrelStartLeft ? Vector3.right : Vector3.left;
             _barrelObject.Translate(moveDir * _barrelSpeed * Time.fixedDeltaTime);
         }
 
-        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _warningTime * Player.Instance.MoveSpeed)
+        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _warningTime * Player.Instance.OriginMoveSpeed)
         {
             if (!_warningObject.gameObject.activeSelf)
             {

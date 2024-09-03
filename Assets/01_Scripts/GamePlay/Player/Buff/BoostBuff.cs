@@ -16,6 +16,16 @@ public class BoostBuff : Buff
         _durationTime = durationTime;
     }
 
+    public override void MergeBuff<T>(T otherBuff)
+    {
+        BoostBuff mergedBuff = otherBuff as BoostBuff;
+
+        if (mergedBuff._durationTime > _durationTime)
+        {
+            _durationTime = mergedBuff._durationTime;
+        }
+    }
+
     public override void StartBuff(BuffSystem buffSystem)
     {
         _playerRigid = buffSystem.GetComponent<Rigidbody>();

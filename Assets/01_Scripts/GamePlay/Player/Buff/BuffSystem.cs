@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BuffSystem : MonoBehaviour
@@ -8,8 +9,27 @@ public class BuffSystem : MonoBehaviour
 
     public void AddBuff(Buff buff)
     {
-        _buffs.Add(buff);
-        buff.StartBuff(this);
+        if (ContainBuff(buff))
+        {
+            MergeBuff(buff);
+        }
+        else
+        {
+            _buffs.Add(buff);
+            buff.StartBuff(this);
+        }
+    }
+
+    public void MergeBuff(Buff buff)
+    {
+        foreach (Buff hasBuff in _buffs)
+        {
+            if (buff.GetType() == hasBuff.GetType())
+            {
+                hasBuff.MergeBuff(buff);
+                break;
+            }
+        }
     }
 
     public void RemoveBuff(Buff buff)
@@ -25,6 +45,16 @@ public class BuffSystem : MonoBehaviour
             if (buff.GetType() == typeof(T)) return true;
         }
 
+        return false;
+    }
+
+    public bool ContainBuff(Buff buff)
+    {
+        foreach (Buff containBuff in _buffs)
+        {
+            if (buff.GetType() == containBuff.GetType()) return true;
+        }
+        
         return false;
     }
 

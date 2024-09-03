@@ -20,6 +20,7 @@ public class PlayerSetting : ScriptableObject
     public GameObject playerDamagedEffect;
     public GameObject playerJumpEffect;
     public GameObject playerDeadObject;
+    public GameObject playerInvincibleShield;
 
     private static GameObject[] _playerModels = null;
     public GameObject[] PlayerModels

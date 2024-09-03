@@ -31,6 +31,25 @@ public class Road : MonoBehaviour
             return;
         }
 
+        Mesh copiedOriginRoadMesh = new Mesh();
+        copiedOriginRoadMesh.name = "Copyied originRoadMesh";
+        copiedOriginRoadMesh.vertices = originRoadMesh.vertices;
+        copiedOriginRoadMesh.triangles = originRoadMesh.triangles;
+        copiedOriginRoadMesh.normals = originRoadMesh.normals;
+        copiedOriginRoadMesh.uv = originRoadMesh.uv;
+        originRoadMesh = copiedOriginRoadMesh;
+
+        Vector3[] vertices = originRoadMesh.vertices;
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            if (vertices[i].y > 0)
+            {
+                vertices[i].y = 0;
+            }
+        }
+        originRoadMesh.vertices = vertices;
+
+
         transform.position = new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, 0);
 
         originRoadMeshMinZ = originRoadMesh.vertices[0].z;
@@ -69,11 +88,11 @@ public class Road : MonoBehaviour
     {
         curruntRoadMesh = MeshUtil.Merge(curruntRoadMesh, originRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ));
         lastSummonedMeshMinZ += originRoadMeshLength;
+
         (curruntRoadMesh, _) = MeshUtil.Cut(curruntRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount), Vector3.back);
 
         meshFilter.sharedMesh = curruntRoadMesh;
         meshCollider.sharedMesh = curruntRoadMesh;
-
     }
 
     public void SetMesh(Mesh mesh)

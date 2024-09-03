@@ -25,6 +25,9 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.GemScore = 0;
+        GameManager.Instance.DistanceScore = 0;
+
         SpawnHandler();
     }
 
