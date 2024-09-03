@@ -88,6 +88,11 @@ public class Player : MonoBehaviour
         _moveSpeed = _playerSetting._moveSpeed;
 
         curSpeedIncreaseScore = _playerSetting.speedIncreaseScore;
+        OnDamaged += () => 
+        {
+            ObstacleShieldBuff obstacleShieldBuff = new ObstacleShieldBuff(_playerSetting.playerInvincibleShield, 1);
+            GetComponent<BuffSystem>().AddBuff(obstacleShieldBuff);
+        };
     }
 
     protected virtual void Start()

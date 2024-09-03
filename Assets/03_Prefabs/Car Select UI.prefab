@@ -241,13 +241,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1515026554860438708}
-  m_RootOrder: 1
+  m_Father: {fileID: 2094399359468326643}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.9}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 70.30994}
+  m_SizeDelta: {x: 30, y: 8.97998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7869994156258002500
 CanvasRenderer:
@@ -988,7 +988,7 @@ RectTransform:
   - {fileID: 843304069829073065}
   - {fileID: 1515026553132396345}
   m_Father: {fileID: 1515026554860438708}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1190,12 +1190,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1515026554860438708}
-  m_RootOrder: 2
+  m_Father: {fileID: 2094399359468326643}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 29.900024}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1515026554776646362
@@ -1264,8 +1264,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2094399359468326643}
-  - {fileID: 3605671394546276394}
-  - {fileID: 1515026554776646364}
   - {fileID: 1515026554425332208}
   m_Father: {fileID: 1515026554523216275}
   m_RootOrder: 0
@@ -1800,7 +1798,7 @@ RectTransform:
   - {fileID: 5216822488366978823}
   - {fileID: 3280706814260113195}
   m_Father: {fileID: 2094399359468326643}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2901,6 +2899,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3605671394546276394}
+  - {fileID: 1515026554776646364}
   - {fileID: 4046883798872122573}
   m_Father: {fileID: 1515026554860438708}
   m_RootOrder: 0

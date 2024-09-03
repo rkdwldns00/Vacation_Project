@@ -22,6 +22,7 @@ public class PlayerSetting : ScriptableObject
     public GameObject playerDamagedEffect;
     public GameObject playerJumpEffect;
     public GameObject playerDeadObject;
+    public GameObject playerInvincibleShield;
 
     [Header("스피드 레벨스케일링")]
     public float maxSpeedMagnification;

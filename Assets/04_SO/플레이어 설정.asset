@@ -34,3 +34,4 @@ MonoBehaviour:
   maxSpeedMagnification: 1.5
   speedIncreaseScore: 250
   maxSpeedIncreaseCount: 2500
+  playerInvincibleShield: {fileID: 7745192753267332765, guid: f174ba3960a92cf4e91b869b097bbb9d, type: 3}
