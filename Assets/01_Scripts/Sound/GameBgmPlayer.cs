@@ -8,4 +8,9 @@ public class GameBgmPlayer : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.GameBgm, SoundType.BGM);
     }
+
+    private void OnDestroy()
+    {
+        SoundManager.Instance.StopBgm();
+    }
 }

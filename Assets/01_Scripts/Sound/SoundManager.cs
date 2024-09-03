@@ -53,6 +53,11 @@ public class SoundManager : MonoBehaviour
             _bgmAudioSource.Play();
         }
     }
+
+    public void StopBgm()
+    {
+        _bgmAudioSource.Stop();
+    }
 }
 
 public enum SoundType
