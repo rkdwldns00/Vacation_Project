@@ -9,8 +9,7 @@ public class Road : MonoBehaviour
     public float playerBackSpaceLength;
 
     private MeshFilter meshFilter;
-    //private MeshCollider meshCollider;
-    private BoxCollider boxCollider;
+    private MeshCollider meshCollider;
     public Mesh curruntRoadMesh { get; private set; }
     private float originRoadMeshMinZ;
     private float originRoadMeshLength;
@@ -20,8 +19,7 @@ public class Road : MonoBehaviour
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
-        //meshCollider = GetComponent<MeshCollider>();
-        boxCollider = GetComponent<BoxCollider>();
+        meshCollider = GetComponent<MeshCollider>();
     }
 
     private void Start()
@@ -32,6 +30,25 @@ public class Road : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        Mesh copiedOriginRoadMesh = new Mesh();
+        copiedOriginRoadMesh.name = "Copyied originRoadMesh";
+        copiedOriginRoadMesh.vertices = originRoadMesh.vertices;
+        copiedOriginRoadMesh.triangles = originRoadMesh.triangles;
+        copiedOriginRoadMesh.normals = originRoadMesh.normals;
+        copiedOriginRoadMesh.uv = originRoadMesh.uv;
+        originRoadMesh = copiedOriginRoadMesh;
+
+        Vector3[] vertices = originRoadMesh.vertices;
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            if (vertices[i].y > 0)
+            {
+                vertices[i].y = 0;
+            }
+        }
+        originRoadMesh.vertices = vertices;
+
 
         transform.position = new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, 0);
 
@@ -53,11 +70,6 @@ public class Road : MonoBehaviour
         lastSummonedMeshMinZ = -playerBackSpaceLength;
         curruntRoadMesh = new Mesh() { name = "Road" };
 
-        Vector3 size = originRoadMesh.bounds.size;
-        size.z *= roadMeshCount;
-        boxCollider.size = size;
-        boxCollider.center = new Vector3(-originRoadMesh.bounds.size.x / 2, -originRoadMesh.bounds.size.y / 2, 0);
-
         for (int i = 0; i < roadMeshCount; i++)
         {
             MoveMesh();
@@ -76,21 +88,18 @@ public class Road : MonoBehaviour
     {
         curruntRoadMesh = MeshUtil.Merge(curruntRoadMesh, originRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ));
         lastSummonedMeshMinZ += originRoadMeshLength;
+
         (curruntRoadMesh, _) = MeshUtil.Cut(curruntRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount), Vector3.back);
 
         meshFilter.sharedMesh = curruntRoadMesh;
-        //meshCollider.sharedMesh = curruntRoadMesh;
-
-        Vector3 centor = boxCollider.center;
-        centor.z = lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount / 2;
-        boxCollider.center = centor;
+        meshCollider.sharedMesh = curruntRoadMesh;
     }
 
     public void SetMesh(Mesh mesh)
     {
         curruntRoadMesh = mesh;
         meshFilter.sharedMesh = curruntRoadMesh;
-        //meshCollider.sharedMesh = curruntRoadMesh;
+        meshCollider.sharedMesh = curruntRoadMesh;
     }
 
 #if UNITY_EDITOR

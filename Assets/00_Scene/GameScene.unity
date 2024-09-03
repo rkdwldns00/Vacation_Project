@@ -1651,7 +1651,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: c3e95e72d6dba334594c3c5c37fcf18a, type: 3}
   _groundPrefab: {fileID: 6519584285041484772, guid: ddb632f5ef33df849b08eeae78dd7b20, type: 3}
   _buildingSpacingZ: 1
-  _groundX: 6
+  _groundX: 6.25
   _buildingX: 9
   _backGroundStartZ: -20
   _backGroundSpawnZ: 70
