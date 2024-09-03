@@ -85,6 +85,12 @@ public class Player : MonoBehaviour
 
         _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
         _moveSpeed = _playerSetting._moveSpeed;
+
+        OnDamaged += () => 
+        {
+            ObstacleShieldBuff obstacleShieldBuff = new ObstacleShieldBuff(_playerSetting.playerInvincibleShield, 1);
+            GetComponent<BuffSystem>().AddBuff(obstacleShieldBuff);
+        };
     }
 
     protected virtual void Start()

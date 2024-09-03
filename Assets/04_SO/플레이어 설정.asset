@@ -31,3 +31,4 @@ MonoBehaviour:
   playerDamagedEffect: {fileID: 8604753374929458426, guid: 94296261c15f4fb40ace257da623508e, type: 3}
   playerJumpEffect: {fileID: 3125736332446637519, guid: 156b80cc8c1f3334688d8e4a1701684b, type: 3}
   playerDeadObject: {fileID: 8027616556709649771, guid: 473bde61fa8f8884fa7f9795d62d3ffe, type: 3}
+  playerInvincibleShield: {fileID: 7745192753267332765, guid: f174ba3960a92cf4e91b869b097bbb9d, type: 3}
