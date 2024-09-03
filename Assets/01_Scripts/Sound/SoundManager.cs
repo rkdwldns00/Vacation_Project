@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    private static SoundManager Instance;
+    public static SoundManager Instance;
 
     //public static SoundManager Instance
     //{
@@ -40,7 +40,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySount(AudioClip audioClip, SoundType soundType = SoundType.SFX)
+    public void PlaySound(AudioClip audioClip, SoundType soundType = SoundType.SFX)
     {
         if (soundType == SoundType.SFX)
         {

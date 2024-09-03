@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Sound Data
   m_EditorClassIdentifier: 
   MenuBgm: {fileID: 0}
-  GameBgm: {fileID: 0}
+  GameBgm: {fileID: 8300000, guid: 27a36dc82ff32054d88d76929bcd1079, type: 3}
