@@ -171,11 +171,9 @@ public class Player : MonoBehaviour
 
     private void IncreaseSpeedWithScore()
     {
-        Debug.Log(_moveSpeed);
-
         if (GameManager.Instance.Score >= curSpeedIncreaseScore && curSpeedIncreaseScore <= _playerSetting.speedIncreaseScore * _playerSetting.maxSpeedIncreaseCount)
         {
-            AddMoveSpeed(_playerSetting._moveSpeed * (1 - _playerSetting.maxSpeedMagnification) / _playerSetting.maxSpeedIncreaseCount);
+            AddMoveSpeed(_playerSetting._moveSpeed * (_playerSetting.maxSpeedMagnification - 1f) / _playerSetting.maxSpeedIncreaseCount);
             curSpeedIncreaseScore += _playerSetting.speedIncreaseScore;
         }
     }
