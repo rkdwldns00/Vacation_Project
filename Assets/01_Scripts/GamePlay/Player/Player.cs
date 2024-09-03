@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
     private bool _isDead;
     private bool _isDebuggingMode;
     private float _beforeX;
+    private int curSpeedIncreaseScore;
 
     protected virtual void Awake()
     {
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour
 
         _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
         _moveSpeed = _playerSetting._moveSpeed;
+
+        curSpeedIncreaseScore = _playerSetting.speedIncreaseScore;
     }
 
     protected virtual void Start()
@@ -97,6 +100,7 @@ public class Player : MonoBehaviour
     {
         UpdaateDistanceScore();
         MoveHandler();
+        IncreaseSpeedWithScore();
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Q))
@@ -158,6 +162,17 @@ public class Player : MonoBehaviour
     protected virtual void SetGoldRate()
     {
         GameManager.Instance.RewardGoldRate = 0.1f;
+    }
+
+    private void IncreaseSpeedWithScore()
+    {
+        Debug.Log(_moveSpeed);
+
+        if (GameManager.Instance.Score >= curSpeedIncreaseScore && curSpeedIncreaseScore <= _playerSetting.speedIncreaseScore * _playerSetting.maxSpeedIncreaseCount)
+        {
+            AddMoveSpeed(_playerSetting._moveSpeed * (1 - _playerSetting.maxSpeedMagnification) / _playerSetting.maxSpeedIncreaseCount);
+            curSpeedIncreaseScore += _playerSetting.speedIncreaseScore;
+        }
     }
 
     protected virtual void UpdaateDistanceScore()
