@@ -37,6 +37,11 @@ public class SinkHole : MonoBehaviour
                 }
             }
         }
+
+        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2)

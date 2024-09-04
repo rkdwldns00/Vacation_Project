@@ -19,6 +19,14 @@ public class ReverseDriveCar : MonoBehaviour
         _moveSpeed = Random.Range(_minMoveSpeed, _maxMoveSpeed);
     }
 
+    private void Update()
+    {
+        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _startTime * Player.Instance.MoveSpeed)

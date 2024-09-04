@@ -15,7 +15,16 @@ public class Barrier : MonoBehaviour
         {
             int randBarrierIndex = Random.Range(0, _barrierModelPrefabs.Length);
             Vector3 spawnPos = new Vector3(_barrierModelSpawnStartXPos + _barrierModelNextSpawnXDistance * i, 0, transform.position.z);
-            Instantiate(_barrierModelPrefabs[randBarrierIndex], spawnPos, Quaternion.identity);
+            Transform t = Instantiate(_barrierModelPrefabs[randBarrierIndex], spawnPos, Quaternion.identity).transform;
+            t.SetParent(transform);
+        }
+    }
+
+    private void Update()
+    {
+        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
+        {
+            Destroy(gameObject);
         }
     }
 }

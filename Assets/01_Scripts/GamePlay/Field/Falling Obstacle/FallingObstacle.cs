@@ -13,6 +13,14 @@ public class FallingObstacle : MonoBehaviour
 
     bool isStarted = false;
 
+    private void Update()
+    {
+        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!isStarted && Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _warringTime * Player.Instance.MoveSpeed)
@@ -26,7 +34,10 @@ public class FallingObstacle : MonoBehaviour
     {
         float fallingObjectHeight = -Physics.gravity.y * _warringTime / 2 * _warringTime;
 
-        Instantiate(_warringObjectPrefab, transform.position, Quaternion.identity).GetComponent<Warring>().SetTime(_warringTime);
+        GameObject warningObject = Instantiate(_warringObjectPrefab, transform.position, Quaternion.identity);
+        warningObject.GetComponent<Warring>().SetTime(_warringTime);
+        Destroy(warningObject, 5);
+
         Destroy(Instantiate(_fallingObjectPrefab, transform.position + Vector3.up * fallingObjectHeight, Quaternion.identity),_warringTime + 3);
 
         StartCoroutine(HitDelay());

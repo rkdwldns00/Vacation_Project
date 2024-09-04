@@ -25,6 +25,14 @@ public class Barrel : MonoBehaviour
         _barrelSpeed = Random.Range(_minBarrelSpeed, _maxBarrelSpeed);
     }
 
+    private void Update()
+    {
+        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _startTime * Player.Instance.OriginMoveSpeed)

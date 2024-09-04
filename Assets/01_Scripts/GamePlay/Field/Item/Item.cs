@@ -12,7 +12,7 @@ public abstract class Item : ObjectPoolable
     {
         transform.Rotate(Vector3.up * _itemRotateSpeed * Time.deltaTime);
 
-        if (transform.position.z + 12 < Player.Instance.transform.position.z)
+        if (Player.Instance != null && transform.position.z + 12 < Player.Instance.transform.position.z)
         {
             ReleaseObject();
         }

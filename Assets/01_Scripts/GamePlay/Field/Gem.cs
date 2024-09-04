@@ -9,7 +9,7 @@ public class Gem : ObjectPoolable
 
     private void Update()
     {
-        if (transform.position.z + 12 < Player.Instance.transform.position.z)
+        if (Player.Instance != null && transform.position.z + 12 < Player.Instance.transform.position.z)
         {
             ReleaseObject();
         }
