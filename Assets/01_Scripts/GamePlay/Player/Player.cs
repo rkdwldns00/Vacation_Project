@@ -253,7 +253,7 @@ public class Player : MonoBehaviour
         OnDamaged?.Invoke();
         OnChangedHealth?.Invoke();
 
-        Instantiate(_playerSetting.playerDamagedEffect, transform.position, Quaternion.identity);
+        Destroy(Instantiate(_playerSetting.playerDamagedEffect, transform.position, Quaternion.identity), 1);
 
         if (CurruntHealth <= 0)
         {
