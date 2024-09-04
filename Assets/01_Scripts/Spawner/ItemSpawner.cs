@@ -110,9 +110,9 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnItemPrefab(Vector3 position)
     {
-        int index = Random.Range(0, _itemPrefabs.Length);
-
-        Instantiate(_itemPrefabs[index], position, Quaternion.identity);
+        int randIndex = Random.Range(0, _itemPrefabs.Length);
+        GameObject spawnItem = ObjectPoolManager.Instance.GetPooledGameObject(_itemPrefabs[randIndex]);
+        spawnItem.transform.position = position;
     }
 
     private enum ScanDataType
