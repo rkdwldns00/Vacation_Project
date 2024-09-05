@@ -14,7 +14,7 @@ public class ObjectPoolable : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Player.Instance != null && transform.position.z + 15 < Player.Instance.transform.position.z)
+        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
         {
             ReleaseObject();
         }

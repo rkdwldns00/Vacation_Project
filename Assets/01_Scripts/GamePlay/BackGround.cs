@@ -20,6 +20,8 @@ public class BackGround : MonoBehaviour
 
     private Mesh _groundMesh;
 
+    [SerializeField] private List<GameObject> _instantiatedBuildings = new List<GameObject>();
+
     private void Start()
     {
         _groundMesh = _groundPrefab.GetComponent<MeshFilter>().sharedMesh;
@@ -32,6 +34,21 @@ public class BackGround : MonoBehaviour
     private void Update()
     {
         GenerateHandler();
+        DestroyBuildingHandler();
+    }
+
+    private void DestroyBuildingHandler()
+    {
+        for (int i=0; i<_instantiatedBuildings.Count; i++)
+        {
+            if (Player.Instance != null && _instantiatedBuildings[i].transform.position.z + 15 < Player.Instance.transform.position.z)
+            {
+                GameObject destroyBuilding = _instantiatedBuildings[i];
+                _instantiatedBuildings.RemoveAt(i);
+                Destroy(destroyBuilding);
+                break;
+            }
+        }
     }
 
     private void GenerateHandler()
@@ -80,11 +97,11 @@ public class BackGround : MonoBehaviour
 
         if (isLeft)
         {
-            Instantiate(prefab, new Vector3(-_buildingX - meshXSize / 2f, 0f, z + meshZSize / 2f), Quaternion.identity);
+            _instantiatedBuildings.Add(Instantiate(prefab, new Vector3(-_buildingX - meshXSize / 2f, 0f, z + meshZSize / 2f), Quaternion.identity));
         }
         else
         {
-            Instantiate(prefab, new Vector3(_buildingX + meshXSize / 2f, 0f, z + meshZSize / 2f), Quaternion.identity);
+            _instantiatedBuildings.Add(Instantiate(prefab, new Vector3(_buildingX + meshXSize / 2f, 0f, z + meshZSize / 2f), Quaternion.identity));
         }
 
         return z + meshZSize;
