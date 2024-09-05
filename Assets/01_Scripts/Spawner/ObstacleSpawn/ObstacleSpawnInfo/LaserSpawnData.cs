@@ -12,6 +12,8 @@ public class LaserSpawnData : ObstacleSpawnData
     public override void SpawnObstacle(Vector3 playerPos)
     {
         Vector3 spawnPos = new Vector3(0, 0, playerPos.z + _spawnDistance);
-        Instantiate(_laserObjectPrefab, spawnPos, Quaternion.identity);
+        GameObject laser = ObjectPoolManager.Instance.GetPooledGameObject(_laserObjectPrefab);
+        laser.transform.position = spawnPos;
+        laser.GetComponent<IObstacleResetable>().ResetObstacle();
     }
 }

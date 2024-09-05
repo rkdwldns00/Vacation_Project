@@ -14,8 +14,7 @@ public class SinkHoleSpawnData : ObstacleSpawnData
     public override void SpawnObstacle(Vector3 playerPos)
     {
         Vector3 spawnPos = new Vector3(0, 0, playerPos.z + _spawnDistance);
-
-        Instantiate(_sinkHoleObjectPrefab, spawnPos, Quaternion.identity);
-
+        GameObject sinkHole = ObjectPoolManager.Instance.GetPooledGameObject(_sinkHoleObjectPrefab);
+        sinkHole.transform.position = spawnPos;
     }
 }

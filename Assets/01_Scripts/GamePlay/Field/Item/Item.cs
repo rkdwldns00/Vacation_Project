@@ -8,14 +8,11 @@ public abstract class Item : ObjectPoolable
 
     protected abstract void UseItem(BuffSystem buffSystem);
 
-    private void Update()
+    protected override void Update()
     {
-        transform.Rotate(Vector3.up * _itemRotateSpeed * Time.deltaTime);
+        base.Update();
 
-        if (Player.Instance != null && transform.position.z + 12 < Player.Instance.transform.position.z)
-        {
-            ReleaseObject();
-        }
+        transform.Rotate(Vector3.up * _itemRotateSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

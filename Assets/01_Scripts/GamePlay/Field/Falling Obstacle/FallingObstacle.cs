@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingObstacle : MonoBehaviour
+public class FallingObstacle : ObjectPoolable, IObstacleResetable
 {
     [SerializeField] private GameObject _warringObjectPrefab;
     [SerializeField] private float _warringTime;
@@ -13,12 +13,9 @@ public class FallingObstacle : MonoBehaviour
 
     bool isStarted = false;
 
-    private void Update()
+    public void ResetObstacle()
     {
-        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
-        {
-            Destroy(gameObject);
-        }
+        isStarted = false;
     }
 
     private void FixedUpdate()
@@ -47,7 +44,7 @@ public class FallingObstacle : MonoBehaviour
     {
         yield return new WaitForSeconds(_warringTime);
 
-        Instantiate(_fallingObjectEffectPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        Destroy(Instantiate(_fallingObjectEffectPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), 2);
 
         if (CheckPlayerInHitBox())
         {

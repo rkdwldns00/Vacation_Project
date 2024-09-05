@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrel : MonoBehaviour
+public class Barrel : ObjectPoolable, IObstacleResetable
 {
     [SerializeField] private Transform _barrelObject;
     [SerializeField] private Transform _warningObject;
@@ -14,8 +14,9 @@ public class Barrel : MonoBehaviour
 
     private float _barrelSpeed;
     private bool _isBarrelStartLeft;
+    private bool _isPlayedWarningObject;
 
-    private void Awake()
+    public void ResetObstacle()
     {
         _isBarrelStartLeft = Random.Range(0, 2) == 0;
         float startXPos = _startXPos * (_isBarrelStartLeft ? -1 : 1);
@@ -23,14 +24,8 @@ public class Barrel : MonoBehaviour
         _warningObject.localPosition = new Vector3(startXPos, 0, 0);
 
         _barrelSpeed = Random.Range(_minBarrelSpeed, _maxBarrelSpeed);
-    }
 
-    private void Update()
-    {
-        if (Player.Instance != null && transform.position.z + 20 < Player.Instance.transform.position.z)
-        {
-            Destroy(gameObject);
-        }
+        _isPlayedWarningObject = false;
     }
 
     private void FixedUpdate()
@@ -41,12 +36,10 @@ public class Barrel : MonoBehaviour
             _barrelObject.Translate(moveDir * _barrelSpeed * Time.fixedDeltaTime);
         }
 
-        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _warningTime * Player.Instance.OriginMoveSpeed)
+        if (Player.Instance != null && transform.position.z <= Player.Instance.transform.position.z + _warningTime * Player.Instance.OriginMoveSpeed && !_isPlayedWarningObject)
         {
-            if (!_warningObject.gameObject.activeSelf)
-            {
-                _warningObject.gameObject.SetActive(true);
-            }
+            _warningObject.GetComponentInChildren<ParticleSystem>().Play();
+            _isPlayedWarningObject = true;
         }
     }
 }

@@ -11,4 +11,12 @@ public class ObjectPoolable : MonoBehaviour
     {
         Pool.Release(gameObject);
     }
+
+    protected virtual void Update()
+    {
+        if (Player.Instance != null && transform.position.z + 15 < Player.Instance.transform.position.z)
+        {
+            ReleaseObject();
+        }
+    }
 }

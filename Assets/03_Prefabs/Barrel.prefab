@@ -203,6 +203,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7092548174093946032}
     m_Modifications:
+    - target: {fileID: 1360575149505671690, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3419828065381090025, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382334779239119927, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382334780354746713, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382334780437122144, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5382334780474461218, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -247,12 +267,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5382334780474461219, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5382334780474461245, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
       propertyPath: m_Name
       value: VFX_Danger
       objectReference: {fileID: 0}
     - target: {fileID: 5382334780474461245, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382334780876071898, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5382334781245046499, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649019595049042338, guid: f29268cd8a6495a4f819fa233f79a973, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -17,7 +17,9 @@ public class ReverseDriveCarSpawnData : ObstacleSpawnData
         for (int i=0; i< _spawnCount; i++)
         {
             Vector3 spawnPos = new Vector3(_spawnStartXPos + _nextSpawnXDistance * i, 0, playerPos.z + _spawnDistance);
-            Instantiate(_reverseDriveCarObjectPrefab, spawnPos, Quaternion.identity);
+            GameObject reverseCar = ObjectPoolManager.Instance.GetPooledGameObject(_reverseDriveCarObjectPrefab);
+            reverseCar.transform.position = spawnPos;
+            reverseCar.GetComponent<IObstacleResetable>().ResetObstacle();
         }
     }
 }
