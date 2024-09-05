@@ -61,9 +61,11 @@ public class BackGround : MonoBehaviour
             Vector3 pos = new Vector3(_groundX + _groundMesh.bounds.size.x / 2f, 0,
                 _lastGroundSpawnedZ + _groundMesh.bounds.size.z / 2f + _buildingSpacingZ);
 
-            Instantiate(_groundPrefab, pos, Quaternion.identity);
+            GameObject ground1 = ObjectPoolManager.Instance.GetPooledGameObject(_groundPrefab);
+            ground1.transform.position = pos;
             pos.x = -pos.x;
-            Instantiate(_groundPrefab, pos, Quaternion.identity);
+            GameObject ground2 = ObjectPoolManager.Instance.GetPooledGameObject(_groundPrefab);
+            ground2.transform.position = pos;
 
             _lastGroundSpawnedZ += _groundMesh.bounds.size.z;
         }
