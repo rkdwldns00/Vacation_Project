@@ -13,7 +13,7 @@ public class Gem : ObjectPoolable
         if (p != null)
         {
             p.ChargeBoost(_chargeValue);
-            Destroy(Instantiate(_getGemEffect, transform.position, Quaternion.identity),1);
+            Instantiate(_getGemEffect, transform.position, Quaternion.identity);
             ReleaseObject();
         }
     }
