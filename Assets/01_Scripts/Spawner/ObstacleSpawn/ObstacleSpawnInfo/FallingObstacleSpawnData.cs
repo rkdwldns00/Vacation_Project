@@ -22,7 +22,9 @@ public class FallingObstacleSpawnData : ObstacleSpawnData
             float randomZRange = Random.Range(-_spawnZRange / 2, _spawnZRange / 2);
             Vector3 randomPos = new Vector3(randomXRange, 0, randomZRange);
 
-            Instantiate(_fallingObstaclePrefab, spawnPos + randomPos, Quaternion.identity);
+            GameObject obstacle = ObjectPoolManager.Instance.GetPooledGameObject(_fallingObstaclePrefab);
+            obstacle.transform.position = spawnPos + randomPos;
+            obstacle.GetComponent<IObstacleResetable>().ResetObstacle();
         }
     }
 }

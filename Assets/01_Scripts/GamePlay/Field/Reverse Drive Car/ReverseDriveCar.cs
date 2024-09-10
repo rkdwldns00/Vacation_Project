@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReverseDriveCar : MonoBehaviour
+public class ReverseDriveCar : ObjectPoolable, IObstacleResetable
 {
     [SerializeField] private GameObject[] _carModels;
     [SerializeField] private float _minMoveSpeed;
@@ -11,8 +11,13 @@ public class ReverseDriveCar : MonoBehaviour
 
     private float _moveSpeed;
 
-    private void Awake()
+    public void ResetObstacle()
     {
+        for (int i = 0; i < _carModels.Length; i++)
+        {
+            _carModels[i].SetActive(false);
+        }
+
         int randCarIndex = Random.Range(0, _carModels.Length);
         _carModels[randCarIndex].SetActive(true);
 

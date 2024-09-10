@@ -33,7 +33,8 @@ public class SpikeSpawnData : ObstacleSpawnData
 
                 if (spawnNumer >= rand)
                 {
-                    Instantiate(_spikeObjectPrefab, new Vector3(spawnX, 0, spawnPos.z), Quaternion.identity);
+                    GameObject spike = ObjectPoolManager.Instance.GetPooledGameObject(_spikeObjectPrefab);
+                    spike.transform.position = new Vector3(spawnX, 0, spawnPos.z);
                     spawnNumer--;
                 }
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingObstacle : MonoBehaviour
+public class FallingObstacle : ObjectPoolable, IObstacleResetable
 {
     [SerializeField] private GameObject _warringObjectPrefab;
     [SerializeField] private float _warringTime;
@@ -12,6 +12,11 @@ public class FallingObstacle : MonoBehaviour
     [SerializeField] private float _hitBoxRadius;
 
     bool isStarted = false;
+
+    public void ResetObstacle()
+    {
+        isStarted = false;
+    }
 
     private void FixedUpdate()
     {
@@ -26,7 +31,10 @@ public class FallingObstacle : MonoBehaviour
     {
         float fallingObjectHeight = -Physics.gravity.y * _warringTime / 2 * _warringTime;
 
-        Instantiate(_warringObjectPrefab, transform.position, Quaternion.identity).GetComponent<Warring>().SetTime(_warringTime);
+        GameObject warningObject = Instantiate(_warringObjectPrefab, transform.position, Quaternion.identity);
+        warningObject.GetComponent<Warring>().SetTime(_warringTime);
+        Destroy(warningObject, 5);
+
         Destroy(Instantiate(_fallingObjectPrefab, transform.position + Vector3.up * fallingObjectHeight, Quaternion.identity),_warringTime + 3);
 
         StartCoroutine(HitDelay());
@@ -36,7 +44,7 @@ public class FallingObstacle : MonoBehaviour
     {
         yield return new WaitForSeconds(_warringTime);
 
-        Instantiate(_fallingObjectEffectPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        Destroy(Instantiate(_fallingObjectEffectPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), 2);
 
         if (CheckPlayerInHitBox())
         {
