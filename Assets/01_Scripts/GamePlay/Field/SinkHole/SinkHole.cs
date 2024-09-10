@@ -8,6 +8,8 @@ public class SinkHole : MonoBehaviour
     public float maxSize;
     public float minDistance;
     public float maxDistance;
+    public int minCount;
+    public int maxCount;
 
     public Vector2 cuttedSliceUV;
 
@@ -25,12 +27,24 @@ public class SinkHole : MonoBehaviour
                 Road road = col.GetComponent<Road>();
                 if (road is not null)
                 {
-                    road.SetMesh(CutRoad(road.curruntRoadMesh,
-                        Random.Range(0, 2) == 0,
-                        transform.position.z - road.transform.position.z,
-                        Random.Range(minDistance, maxDistance),
-                        startX1, startX1 + size,
-                        startX2, startX2 + size));
+                    float totalDistance = 0;
+                    bool isHole = Random.Range(0, 2) == 0;
+                    int count = Random.Range(minCount, maxCount + 1);
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        float distance = Random.Range(minDistance, maxDistance);
+                        road.SetMesh(CutRoad(road.curruntRoadMesh,
+                            isHole,
+                            transform.position.z - road.transform.position.z + totalDistance,
+                            distance,
+                            startX1, startX1 + size,
+                            startX2, startX2 + size, i == 2));
+
+                        startX1 = startX2;
+                        startX2 = Random.Range(minX, maxX - size);
+                        totalDistance += distance;
+                    }
 
                     Destroy(gameObject);
                     break;
@@ -39,7 +53,7 @@ public class SinkHole : MonoBehaviour
         }
     }
 
-    public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2)
+    public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2, bool generateFrontWall)
     {
         Vector3 centor = new Vector3(mesh.bounds.center.x, 0, 0);
 
@@ -48,7 +62,7 @@ public class SinkHole : MonoBehaviour
         Mesh after;
 
         (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
-        (middle, after) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward, true, cuttedSliceUV);
+        (middle, after) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward, generateFrontWall, cuttedSliceUV);
 
         Mesh result = MeshUtil.Merge(before, after);
         Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
