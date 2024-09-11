@@ -39,7 +39,7 @@ public class SinkHole : ObjectPoolable
                             transform.position.z - road.transform.position.z + totalDistance,
                             distance,
                             startX1, startX1 + size,
-                            startX2, startX2 + size, i == 2));
+                            startX2, startX2 + size, count - 1 == i));
 
                         startX1 = startX2;
                         startX2 = Random.Range(minX, maxX - size);

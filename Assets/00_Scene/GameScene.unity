@@ -615,7 +615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2408760895863150969, guid: 0221c70955e87f245a57160bd0e8965f, type: 3}
       propertyPath: roadMeshCount
-      value: 60
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0221c70955e87f245a57160bd0e8965f, type: 3}
@@ -1655,6 +1655,7 @@ MonoBehaviour:
   _buildingX: 9
   _backGroundStartZ: -20
   _backGroundSpawnZ: 70
+  _instantiatedBuildings: []
 --- !u!4 &1254890633
 Transform:
   m_ObjectHideFlags: 0
