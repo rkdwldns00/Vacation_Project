@@ -134,7 +134,8 @@ public class GemSpawner : MonoBehaviour
 
     private void SpawnGemPrefab(Vector3 position)
     {
-        Instantiate(_gemPrefab, position, Quaternion.identity);
+        GameObject gem = ObjectPoolManager.Instance.GetPooledGameObject(_gemPrefab);
+        gem.transform.position = position;
     }
 
     private enum ScanDataType

@@ -19,7 +19,9 @@ public class BarrierSpawnData : ObstacleSpawnData
         for (int i=0; i< spawnCount; i++)
         {
             Vector3 spawnPos = new Vector3(0, 0, playerPos.z + _spawnDistance + _spawnZDistance * i);
-            Instantiate(_barrierObjectPrefab, spawnPos, Quaternion.identity);
+            GameObject barrier = ObjectPoolManager.Instance.GetPooledGameObject(_barrierObjectPrefab);
+            barrier.transform.position = spawnPos;
+            barrier.GetComponent<IObstacleResetable>().ResetObstacle();
         }
     }
 }

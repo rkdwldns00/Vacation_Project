@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SinkHole : MonoBehaviour
+public class SinkHole : ObjectPoolable
 {
     public float minX;
     public float maxX;
@@ -13,7 +13,7 @@ public class SinkHole : MonoBehaviour
 
     public Vector2 cuttedSliceUV;
 
-    private void Update()
+    protected override void Update()
     {
         Collider[] cols = Physics.OverlapBox(transform.position + Vector3.forward * (maxDistance + 1f), Vector3.one);
         foreach (Collider col in cols)
@@ -46,7 +46,7 @@ public class SinkHole : MonoBehaviour
                         totalDistance += distance;
                     }
 
-                    Destroy(gameObject);
+                    ReleaseObject();
                     break;
                 }
             }

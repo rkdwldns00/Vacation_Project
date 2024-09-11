@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : ObjectPoolable, IObstacleResetable
 {
     [SerializeField] private GameObject _laserObject;
-    [SerializeField] private GameObject _warningObject;
+    [SerializeField] private ParticleSystem _warningObject;
     [SerializeField] private float _laserMoveSpeed;
     [SerializeField] private float _startTime;
     [SerializeField] private float _startXPos;
@@ -13,8 +13,9 @@ public class Laser : MonoBehaviour
     private bool _isLaserStartLeft;
     private bool _isLaserActivated = false;
 
-    private void Awake()
+    public void ResetObstacle()
     {
+        _isLaserActivated = false;
         _isLaserStartLeft = Random.Range(0, 2) == 0;
         float startXPos = _startXPos * (_isLaserStartLeft ? -1 : 1);
         transform.position = new Vector3(startXPos, 0, transform.position.z);
@@ -37,7 +38,7 @@ public class Laser : MonoBehaviour
 
     private IEnumerator LaserActiveCoroutine()
     {
-        _warningObject.SetActive(true);
+        _warningObject.Play();
         yield return new WaitForSeconds(1);
         _laserObject.SetActive(true);
 
@@ -51,7 +52,9 @@ public class Laser : MonoBehaviour
 
         yield return new WaitForSeconds(0.25f);
 
-        Destroy(gameObject);
+        _laserObject.SetActive(false);
+
+        ReleaseObject();
 
         yield break;
     }
