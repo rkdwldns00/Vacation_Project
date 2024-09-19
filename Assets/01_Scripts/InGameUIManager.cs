@@ -70,6 +70,15 @@ public class InGameUIManager : MonoBehaviour
         player.OnDie += ActiveGameResultUI;
         player.OnChangedBoostGazy += UpdatePlayerBoostGazyUI;
 
+        for (int i = 0; i < _playerLossHpParent.childCount; i++)
+        {
+            Destroy(_playerLossHpParent.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < _playerLossBoostGazyParent.childCount; i++)
+        {
+            Destroy(_playerLossBoostGazyParent.GetChild(i).gameObject);
+        }
+
         for (int i = 0; i < Player.Instance.MaxHealth; i++)
         {
             GameObject lossHp = Instantiate(_playerLossHpPrefab, _playerLossHpParent);

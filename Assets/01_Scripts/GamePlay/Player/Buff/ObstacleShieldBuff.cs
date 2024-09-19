@@ -29,7 +29,7 @@ public class ObstacleShieldBuff : Buff
 
     public override void StartBuff(BuffSystem buffSystem)
     {
-        _instantiatedShieldEffect = GameObject.Instantiate(_shieldEffectPrefab, buffSystem.transform);
+        if (_shieldEffectPrefab != null) _instantiatedShieldEffect = GameObject.Instantiate(_shieldEffectPrefab, buffSystem.transform);
         _instantiatedShieldEffect.transform.localPosition = Vector3.zero;
         _instantiatedShieldMaterial = _instantiatedShieldEffect.GetComponent<MeshRenderer>().material;
         _originShieldColor = _instantiatedShieldMaterial.color;
@@ -41,7 +41,7 @@ public class ObstacleShieldBuff : Buff
 
         if (_durationTime <= 0)
         {
-            GameObject.Destroy(_instantiatedShieldEffect);
+            if (_instantiatedShieldEffect != null) GameObject.Destroy(_instantiatedShieldEffect);
             buffSystem.RemoveBuff(this);
         }
         else if (_durationTime < 2f)

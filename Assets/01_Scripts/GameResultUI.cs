@@ -17,7 +17,7 @@ public class GameResultUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _goldText;
     [SerializeField] private TextMeshProUGUI _crystalText;
-    [SerializeField] private Button _closeButton; 
+    [SerializeField] private Button _closeButton;
     [SerializeField] private Button _crystalResurrectionButton;
     [SerializeField] private Button _adResurrectionButton;
 
@@ -78,6 +78,7 @@ public class GameResultUI : MonoBehaviour
         DisableResurrection();
 
         _layer.SetActive(false);
+        PlayerSpawner.Instance.OnSpawned += (player) => player.GetComponent<BuffSystem>().AddBuff(new ObstacleShieldBuff(null, 1));
         PlayerSpawner.Instance.SpawnPlayer();
     }
 
