@@ -11,10 +11,13 @@ public class Chaser : MonoBehaviour
     public float HitToPlayerTimer => _hitToPlayerTimer;
     public float Timer { get; set; }
 
+    private void Awake()
+    {
+        PlayerSpawner.Instance.OnSpawned += (_) => Timer = _hitToPlayerTimer;
+    }
+
     private void Start()
     {
-        Timer = _hitToPlayerTimer;
-
         transform.position = new Vector3(0, 0, -_hitToPlayerTimer * (_moveSpeed) - _hitSpacingToPlayer);
     }
 
