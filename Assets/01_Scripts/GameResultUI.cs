@@ -57,7 +57,7 @@ public class GameResultUI : MonoBehaviour
 
     public void TryAdResurrection()
     {
-
+        AdManager.Instance.ShowAds(Resurrection, ResurrectionFailed);
     }
 
     public void TryCrystalResurrection()
