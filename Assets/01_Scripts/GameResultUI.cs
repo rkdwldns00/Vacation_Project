@@ -22,6 +22,8 @@ public class GameResultUI : MonoBehaviour
     private void Awake()
     {
         _closeButton.onClick.AddListener(CloseUI);
+
+        OnClose += () => { SoundManager.Instance.StopBgm(); };
     }
 
     public void OpenUI()
