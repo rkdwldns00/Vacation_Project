@@ -13,7 +13,6 @@ public class ObjectPoolManager : MonoBehaviour
             if (_instance == null)
             {
                 GameObject g = new GameObject("ObjectPool Manager");
-                DontDestroyOnLoad(g);
                 _instance = g.AddComponent<ObjectPoolManager>();
             }
             return _instance;
