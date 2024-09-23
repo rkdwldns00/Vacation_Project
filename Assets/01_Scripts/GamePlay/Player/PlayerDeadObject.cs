@@ -15,6 +15,8 @@ public class PlayerDeadObject : MonoBehaviour
         _meshFilter = GetComponent<MeshFilter>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _rigidBody = GetComponent<Rigidbody>();
+
+        PlayerSpawner.Instance.OnSpawned += DestroyHandler;
     }
 
     public void SetDeadObjectData(Mesh mesh, Material[] materials, float moveSpeed, Vector3 scale, float yPos, Vector3 velocity)
@@ -45,5 +47,15 @@ public class PlayerDeadObject : MonoBehaviour
         _playerDeadEffect.SetActive(true);
 
         yield break;
+    }
+
+    private void DestroyHandler(Player player)
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerSpawner.Instance.OnSpawned -= DestroyHandler;
     }
 }
