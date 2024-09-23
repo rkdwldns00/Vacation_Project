@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            float xRate = (Input.mousePosition.x / Screen.width - 0.5f) / 0.8f + 0.5f;
+            float xRate = (Input.mousePosition.x / Screen.width - 0.5f) / Mathf.Lerp(0.8f, 0.5f, SettingUI.moveSensitivity) + 0.5f;
             Move(xRate);
         }
         else if (Input.GetMouseButtonUp(0))
