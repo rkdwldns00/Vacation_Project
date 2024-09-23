@@ -19,7 +19,7 @@ public class AdManager : MonoBehaviour
     private static AdManager instance;
 
     private RewardedAd rewardedAd;
-    private Action<Reward> adSucceedCallBack;
+    private Action adSucceedCallBack;
 
     private void InitAds()
     {
@@ -50,7 +50,7 @@ public class AdManager : MonoBehaviour
 
     }
 
-    public void ShowAds(Action<Reward> succeedCallBack,Action failedCallBack)
+    public void ShowAds(Action succeedCallBack,Action failedCallBack)
     {
         if (rewardedAd.CanShowAd())
         {
@@ -65,7 +65,7 @@ public class AdManager : MonoBehaviour
 
     private void GetReward(Reward reward)
     {
-        adSucceedCallBack?.Invoke(reward);
+        adSucceedCallBack?.Invoke();
         adSucceedCallBack = null;
         InitAds();
     }
