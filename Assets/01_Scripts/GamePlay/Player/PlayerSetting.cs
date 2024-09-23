@@ -12,10 +12,10 @@ public class PlayerSetting : ScriptableObject
     public float fallingSensorY;
 
     [Header("기본 스탯")]
-    public float _moveSpeed;
-    public float _jumpPower;
-    public int _maxHealth;
-    public float _maxBoostGazy;
+    public float moveSpeed;
+    public float jumpPower;
+    public int maxHealth;
+    public float maxBoostGazy;
 
     [Header("에셋 관리")]
     public GameObject[] playerPrefabs;
@@ -29,20 +29,20 @@ public class PlayerSetting : ScriptableObject
     public int speedIncreaseScore;
     public int maxSpeedIncreaseCount;
 
-    private static GameObject[] _playerModels = null;
+    private static GameObject[] playerModels = null;
     public GameObject[] PlayerModels
     {
         get
         {
-            if (_playerModels == null)
+            if (playerModels == null)
             {
-                _playerModels = new GameObject[playerPrefabs.Length];
-                for (int i = 0; i < _playerModels.Length; i++)
+                playerModels = new GameObject[playerPrefabs.Length];
+                for (int i = 0; i < playerModels.Length; i++)
                 {
-                    _playerModels[i] = playerPrefabs[i].GetComponentInChildren<Player>().playerMesh;
+                    playerModels[i] = playerPrefabs[i].GetComponentInChildren<Player>().playerMesh;
                 }
             }
-            return _playerModels;
+            return playerModels;
         }
     }
 }
