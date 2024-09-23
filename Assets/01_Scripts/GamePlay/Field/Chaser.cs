@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Chaser : MonoBehaviour
 {
+    [SerializeField] private ChaserData _chaserData;
     [SerializeField] private float _hitToPlayerTimer;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _hitSpacingToPlayer;
+    private float _curHitTimeDecreaseScore;
 
     public float HitToPlayerTimer => _hitToPlayerTimer;
     public float Timer { get; set; }
 
     private void Start()
     {
+        _curHitTimeDecreaseScore = _chaserData.hitTimeDecreaseScore;
+
         Timer = _hitToPlayerTimer;
 
         transform.position = new Vector3(0, 0, -_hitToPlayerTimer * (_moveSpeed) - _hitSpacingToPlayer);
@@ -51,6 +55,8 @@ public class Chaser : MonoBehaviour
         {
             transform.Translate(Vector3.forward * _moveSpeed * Time.deltaTime);
         }
+
+        DecreaseHitToPlayerTime();
     }
 
     public void HitToPlayer()
@@ -62,6 +68,15 @@ public class Chaser : MonoBehaviour
         else
         {
             Player.Instance.Kill();
+        }
+    }
+
+    private void DecreaseHitToPlayerTime()
+    {
+        if (GameManager.Instance.Score >= _curHitTimeDecreaseScore && _curHitTimeDecreaseScore <= _chaserData.hitTimeDecreaseScore * _chaserData.hitTimeDecreaseCount)
+        {
+            _hitToPlayerTimer = Mathf.Max(0, _hitToPlayerTimer - _chaserData.hitTimeDecreaseValue);
+            _curHitTimeDecreaseScore += _chaserData.hitTimeDecreaseScore;
         }
     }
 

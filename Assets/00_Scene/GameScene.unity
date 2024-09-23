@@ -642,6 +642,10 @@ PrefabInstance:
       value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 1372619358515692779, guid: c82d65033f6010941ae4318146006449, type: 3}
+      propertyPath: _chaserData
+      value: 
+      objectReference: {fileID: 11400000, guid: f72a94b082a03364fbda81fca931566d, type: 2}
+    - target: {fileID: 1372619358515692779, guid: c82d65033f6010941ae4318146006449, type: 3}
       propertyPath: _hitToPlayerTimer
       value: 20
       objectReference: {fileID: 0}
