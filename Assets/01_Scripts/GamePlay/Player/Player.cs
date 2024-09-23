@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
     public bool CanControl { get; set; } = true;
     public GameObject playerMesh;
     private Mesh _mesh;
+    private BuffSystem _buffSystem;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
+        _buffSystem = GetComponent<BuffSystem>();
 
         CurruntHealth = _playerSetting.maxHealth;
         OnChangedHealth?.Invoke();
@@ -205,6 +207,11 @@ public class Player : MonoBehaviour
 
     public virtual void Jump()
     {
+        if (_buffSystem.ContainBuff<BoostBuff>())
+        {
+            return;
+        }
+
         Vector3 rayOrigin = new Vector3(_rigid.position.x,
             _rigid.position.y + _colliderBoundMinY + 0.05f,
             _rigid.position.z);
