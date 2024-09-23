@@ -30,9 +30,12 @@ public class ObstacleShieldBuff : Buff
     public override void StartBuff(BuffSystem buffSystem)
     {
         if (_shieldEffectPrefab != null) _instantiatedShieldEffect = GameObject.Instantiate(_shieldEffectPrefab, buffSystem.transform);
-        _instantiatedShieldEffect.transform.localPosition = Vector3.zero;
-        _instantiatedShieldMaterial = _instantiatedShieldEffect.GetComponent<MeshRenderer>().material;
-        _originShieldColor = _instantiatedShieldMaterial.color;
+        if (_instantiatedShieldEffect != null)
+        {
+            _instantiatedShieldEffect.transform.localPosition = Vector3.zero;
+            _instantiatedShieldMaterial = _instantiatedShieldEffect.GetComponent<MeshRenderer>().material;
+            _originShieldColor = _instantiatedShieldMaterial.color;
+        }
     }
 
     public override void UpdateBuff(BuffSystem buffSystem)
@@ -46,18 +49,21 @@ public class ObstacleShieldBuff : Buff
         }
         else if (_durationTime < 2f)
         {
-            if (_isFadeInColor)
+            if (_instantiatedShieldEffect != null)
             {
-                _instantiatedShieldMaterial.color = _instantiatedShieldMaterial.color - new Color(0, 0, 0, Time.deltaTime * (5 - _durationTime));
-                if (_instantiatedShieldMaterial.color.a <= 0.1f) _isFadeInColor = false;
-            }
-            else
-            {
-                _instantiatedShieldMaterial.color = _instantiatedShieldMaterial.color + new Color(0, 0, 0, Time.deltaTime * (5f - _durationTime));
-                if (_instantiatedShieldMaterial.color.a >= _originShieldColor.a) _isFadeInColor = true;
+                if (_isFadeInColor)
+                {
+                    _instantiatedShieldMaterial.color = _instantiatedShieldMaterial.color - new Color(0, 0, 0, Time.deltaTime * (5 - _durationTime));
+                    if (_instantiatedShieldMaterial.color.a <= 0.1f) _isFadeInColor = false;
+                }
+                else
+                {
+                    _instantiatedShieldMaterial.color = _instantiatedShieldMaterial.color + new Color(0, 0, 0, Time.deltaTime * (5f - _durationTime));
+                    if (_instantiatedShieldMaterial.color.a >= _originShieldColor.a) _isFadeInColor = true;
+                }
             }
         }
-        else
+        else if (_instantiatedShieldEffect != null)
         {
             _instantiatedShieldMaterial.color = _originShieldColor;
         }
