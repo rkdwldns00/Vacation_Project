@@ -14,7 +14,7 @@ public class SettingUI : MonoBehaviour
     
     private void Awake()
     {
-        moveSensitivity = _moveSensitivitySlider.value;
+        _moveSensitivitySlider.value = moveSensitivity;
 
         _settingUIActivateButton.onClick.AddListener(() => _settingUILayer.SetActive(true));
         _settingUICloseButton.onClick.AddListener(() => _settingUILayer.SetActive(false));
