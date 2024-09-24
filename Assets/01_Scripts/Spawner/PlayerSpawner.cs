@@ -10,7 +10,7 @@ public class PlayerSpawner : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = FindObjectOfType<PlayerSpawner>();
             }
@@ -21,6 +21,7 @@ public class PlayerSpawner : MonoBehaviour
     public event Action<Player> OnSpawned;
 
     [SerializeField] private PlayerSetting _playerSetting;
+    private float _playerDieZ;
 
 
     private void Start()
@@ -28,13 +29,14 @@ public class PlayerSpawner : MonoBehaviour
         GameManager.Instance.GemScore = 0;
         GameManager.Instance.DistanceScore = 0;
 
-        SpawnHandler();
+        SpawnPlayer();
     }
 
-    private void SpawnHandler()
+    public void SpawnPlayer()
     {
-        GameObject g = Instantiate(_playerSetting.playerPrefabs[GameManager.Instance.PlayerModelId], transform.position, transform.rotation);
+        GameObject g = Instantiate(_playerSetting.playerPrefabs[GameManager.Instance.PlayerModelId], transform.position + transform.forward * _playerDieZ, transform.rotation);
         Player player = g.GetComponent<Player>();
+        player.OnDie += () => _playerDieZ = player.transform.position.z;
 
         OnSpawned?.Invoke(player);
     }

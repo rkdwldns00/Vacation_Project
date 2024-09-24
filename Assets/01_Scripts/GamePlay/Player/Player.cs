@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         get => _moveSpeed;
     }
 
-    public float OriginMoveSpeed => _playerSetting._moveSpeed;
+    public float OriginMoveSpeed => _playerSetting.moveSpeed;
     public float MoveSpeedRate => MoveSpeed / OriginMoveSpeed;
 
     private float _boostGazy;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         }
         protected set
         {
-            _boostGazy = Mathf.Clamp(value, 0, _playerSetting._maxBoostGazy);
+            _boostGazy = Mathf.Clamp(value, 0, _playerSetting.maxBoostGazy);
         }
     }
 
@@ -51,17 +51,18 @@ public class Player : MonoBehaviour
     public bool CanControl { get; set; } = true;
     public GameObject playerMesh;
     private Mesh _mesh;
+    private BuffSystem _buffSystem;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 
     public virtual int MaxHealth
     {
-        get => _playerSetting._maxHealth;
+        get => _playerSetting.maxHealth;
     }
 
     public virtual float MaxBoostGazy
     {
-        get => _playerSetting._maxBoostGazy;
+        get => _playerSetting.maxBoostGazy;
     }
 
     protected Rigidbody _rigid;
@@ -76,8 +77,9 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
+        _buffSystem = GetComponent<BuffSystem>();
 
-        CurruntHealth = _playerSetting._maxHealth;
+        CurruntHealth = _playerSetting.maxHealth;
         OnChangedHealth?.Invoke();
 
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
@@ -85,7 +87,7 @@ public class Player : MonoBehaviour
         _colliderBoundMinY = meshMinY;
 
         _mesh = playerMesh.GetComponentInChildren<MeshFilter>().sharedMesh;
-        _moveSpeed = _playerSetting._moveSpeed;
+        _moveSpeed = _playerSetting.moveSpeed;
 
         curSpeedIncreaseScore = _playerSetting.speedIncreaseScore;
         OnDamaged += () => 
@@ -173,7 +175,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager.Instance.Score >= curSpeedIncreaseScore && curSpeedIncreaseScore <= _playerSetting.speedIncreaseScore * _playerSetting.maxSpeedIncreaseCount)
         {
-            AddMoveSpeed(_playerSetting._moveSpeed * (_playerSetting.maxSpeedMagnification - 1f) / _playerSetting.maxSpeedIncreaseCount);
+            AddMoveSpeed(_playerSetting.moveSpeed * (_playerSetting.maxSpeedMagnification - 1f) / _playerSetting.maxSpeedIncreaseCount);
             curSpeedIncreaseScore += _playerSetting.speedIncreaseScore;
         }
     }
@@ -189,7 +191,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            float xRate = (Input.mousePosition.x / Screen.width - 0.5f) / 0.8f + 0.5f;
+            float xRate = (Input.mousePosition.x / Screen.width - 0.5f) / Mathf.Lerp(0.8f, 0.3f, SettingUI.moveSensitivity) + 0.5f;
             Move(xRate);
         }
         else if (Input.GetMouseButtonUp(0))
@@ -205,12 +207,17 @@ public class Player : MonoBehaviour
 
     public virtual void Jump()
     {
+        if (_buffSystem.ContainBuff<BoostBuff>())
+        {
+            return;
+        }
+
         Vector3 rayOrigin = new Vector3(_rigid.position.x,
             _rigid.position.y + _colliderBoundMinY + 0.05f,
             _rigid.position.z);
         if (Physics.Raycast(rayOrigin, Vector3.down, 0.1f, 1 << LayerMask.NameToLayer("Road")))
         {
-            _rigid.velocity = (Vector3.up * _playerSetting._jumpPower * MoveSpeedRate);
+            _rigid.velocity = (Vector3.up * _playerSetting.jumpPower * MoveSpeedRate);
             Instantiate(_playerSetting.playerJumpEffect, transform.position, Quaternion.identity);
         }
     }
@@ -296,24 +303,6 @@ public class Player : MonoBehaviour
 #endif
         _isDead = true;
 
-        GameManager.Instance.isBestScore = GameManager.Instance.Score > GameManager.Instance.BestScore;
-        if (GameManager.Instance.isBestScore)
-        {
-            GameManager.Instance.BestScore = GameManager.Instance.Score;
-        }
-        if (Currency.Ticket > 0)
-        {
-            Currency.Ticket--;
-            GameManager.Instance.RewardGoldAdded = (int)(GameManager.Instance.RewardGold * 0.5f);
-            GameManager.Instance.RewardCrystalAdded = 1;
-        }
-        else
-        {
-            GameManager.Instance.RewardGoldAdded = 0;
-            GameManager.Instance.RewardCrystalAdded = 0;
-        }
-        Currency.Gold += GameManager.Instance.RewardGold;
-        Currency.Crystal += GameManager.Instance.RewardCrystal;
         InGameUIManager.Instance.ActiveGameResultUI();
 
         OnDie?.Invoke();

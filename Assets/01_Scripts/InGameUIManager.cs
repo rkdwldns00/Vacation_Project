@@ -41,6 +41,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private GameObject _playerBoostGazyPrefab;
     [SerializeField] private Transform _playerBoostGazyParent;
     [SerializeField] private List<Image> _playerBoostGazys = new List<Image>();
+    [SerializeField] private GameObject _playerBoostImagePrefab;
+    [SerializeField] private Transform _playerBoostImageParent;
+    [SerializeField] private List<GameObject> _playerBoostImages = new List<GameObject>();
 
     [Header("Chaser UI")]
     [SerializeField] private Slider _chaserPositionSlider;
@@ -70,6 +73,15 @@ public class InGameUIManager : MonoBehaviour
         player.OnDie += ActiveGameResultUI;
         player.OnChangedBoostGazy += UpdatePlayerBoostGazyUI;
 
+        for (int i = 0; i < _playerLossHpParent.childCount; i++)
+        {
+            Destroy(_playerLossHpParent.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < _playerLossBoostGazyParent.childCount; i++)
+        {
+            Destroy(_playerLossBoostGazyParent.GetChild(i).gameObject);
+        }
+
         for (int i = 0; i < Player.Instance.MaxHealth; i++)
         {
             GameObject lossHp = Instantiate(_playerLossHpPrefab, _playerLossHpParent);
@@ -81,6 +93,9 @@ public class InGameUIManager : MonoBehaviour
             GameObject lossBoost = Instantiate(_playerLossBoostGazyPrefab, _playerLossBoostGazyParent);
             GameObject Boost = Instantiate(_playerBoostGazyPrefab, _playerBoostGazyParent);
             _playerBoostGazys.Add(Boost.GetComponent<Image>());
+
+            GameObject boostImage = Instantiate(_playerBoostImagePrefab, _playerBoostImageParent);
+            _playerBoostImages.Add(boostImage);
         }
 
         player.OnDie += OnPlayerDied;
@@ -115,6 +130,8 @@ public class InGameUIManager : MonoBehaviour
         for (int i = 0; i < _playerBoostGazys.Count; i++)
         {
             _playerBoostGazys[i].fillAmount = Player.Instance.BoostGazy - i;
+
+            _playerBoostImages[i].SetActive(Player.Instance.BoostGazy - i >= 1);
         }
     }
 
