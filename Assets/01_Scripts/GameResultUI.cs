@@ -26,6 +26,8 @@ public class GameResultUI : MonoBehaviour
         _closeButton.onClick.AddListener(CloseUI);
         _crystalResurrectionButton.onClick.AddListener(TryCrystalResurrection);
         _adResurrectionButton.onClick.AddListener(TryAdResurrection);
+
+        OnClose += () => { SoundManager.Instance.StopBgm(); };
     }
 
     public void OpenUI()

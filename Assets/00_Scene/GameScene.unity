@@ -642,6 +642,10 @@ PrefabInstance:
       value: Chaser
       objectReference: {fileID: 0}
     - target: {fileID: 1372619358515692779, guid: c82d65033f6010941ae4318146006449, type: 3}
+      propertyPath: _chaserData
+      value: 
+      objectReference: {fileID: 11400000, guid: f72a94b082a03364fbda81fca931566d, type: 2}
+    - target: {fileID: 1372619358515692779, guid: c82d65033f6010941ae4318146006449, type: 3}
       propertyPath: _hitToPlayerTimer
       value: 20
       objectReference: {fileID: 0}
@@ -1011,6 +1015,69 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &922326891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 922326892}
+  - component: {fileID: 922326893}
+  m_Layer: 5
+  m_Name: Player Boost Image Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &922326892
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922326891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1023311392}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -450, y: 680}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &922326893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922326891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 20
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1257,7 @@ RectTransform:
   - {fileID: 145583172}
   - {fileID: 1341007601}
   - {fileID: 154973673}
+  - {fileID: 922326892}
   - {fileID: 1048894369}
   m_Father: {fileID: 1423521492}
   m_RootOrder: 1
@@ -1230,7 +1298,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1023311392}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1655,6 +1723,7 @@ MonoBehaviour:
   _buildingX: 9
   _backGroundStartZ: -20
   _backGroundSpawnZ: 70
+  _instantiatedBuildings: []
 --- !u!4 &1254890633
 Transform:
   m_ObjectHideFlags: 0
@@ -2428,6 +2497,9 @@ MonoBehaviour:
   _playerBoostGazyPrefab: {fileID: 7795302500553491364, guid: a800d01a2011add4c91cb95179c00713, type: 3}
   _playerBoostGazyParent: {fileID: 154973673}
   _playerBoostGazys: []
+  _playerBoostImagePrefab: {fileID: 7795302500553491364, guid: d0b08413cc1a389489e3b5e0f582c784, type: 3}
+  _playerBoostImageParent: {fileID: 922326892}
+  _playerBoostImages: []
   _chaserPositionSlider: {fileID: 725192263}
   _chaser: {fileID: 530655173}
   _gameResultUI: {fileID: 1689438300}
