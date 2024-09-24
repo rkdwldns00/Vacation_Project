@@ -18,6 +18,8 @@ public class FallingObstacle : ObjectPoolable, IObstacleResetable
     public void ResetObstacle()
     {
         isStarted = false;
+        isHitted = false;
+        _fallingObject = null;
     }
 
     private void FixedUpdate()
@@ -69,7 +71,7 @@ public class FallingObstacle : ObjectPoolable, IObstacleResetable
         playerPos.y = 0;
         Vector3 hitBoxPos = transform.position;
         hitBoxPos.y = 0;
-        return Vector3.Distance(hitBoxPos, playerPos) < _hitBoxRadius;
+        return Mathf.Abs(playerPos.x - hitBoxPos.x) < _hitBoxRadius;
     }
 
     private void OnDrawGizmosSelected()

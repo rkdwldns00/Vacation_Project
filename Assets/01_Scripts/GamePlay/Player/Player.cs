@@ -117,6 +117,22 @@ public class Player : MonoBehaviour
             _isDebuggingMode = false;
             Kill();
         }
+        if (Input.GetKey(KeyCode.E))
+        {
+            Time.timeScale = 0.2f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+            Time.timeScale = 3f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
 #endif
     }
 
