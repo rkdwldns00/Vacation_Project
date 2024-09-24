@@ -48,6 +48,8 @@ MonoBehaviour:
   maxX: 5
   minSize: 5
   maxSize: 5
-  minDistance: 10
-  maxDistance: 10
+  minDistance: 4
+  maxDistance: 7
+  minCount: 10
+  maxCount: 10
   cuttedSliceUV: {x: 0.375, y: 1}
