@@ -64,9 +64,9 @@ public class GameResultUI : MonoBehaviour
 
     public void TryCrystalResurrection()
     {
-        if (Currency.Crystal >= 5)
+        if (Currency.Crystal >= 30)
         {
-            Currency.Crystal -= 5;
+            Currency.Crystal -= 30;
             Resurrection();
         }
         else
@@ -106,7 +106,7 @@ public class GameResultUI : MonoBehaviour
         {
             Currency.Ticket--;
             GameManager.Instance.RewardGoldAdded = (int)(GameManager.Instance.RewardGold * 0.5f);
-            GameManager.Instance.RewardCrystalAdded = 1;
+            GameManager.Instance.RewardCrystalAdded = (int)(GameManager.Instance.RewardCrystal * 0.2f);
         }
         else
         {
