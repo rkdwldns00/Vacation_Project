@@ -22,5 +22,5 @@ public class MaxHealthPlayer : Player
         }
     }
 
-    public override int MaxHealth => base.MaxHealth + 1;
+    public override int MaxHealth => base.MaxHealth + PlayerLevel;
 }
