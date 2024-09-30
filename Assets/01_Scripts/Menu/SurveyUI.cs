@@ -30,6 +30,7 @@ public class SurveyUI : MonoBehaviour
             _surveyRewardUILayer.SetActive(true);
             Currency.Crystal += _surveyRewardCrystal;
             PlayerPrefs.SetInt("DidSurvey", 1);
+            PlayerPrefs.Save();
             Application.OpenURL(_surveyURL);
         });
     }
