@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public float RewardGoldAdded { set; private get; }
     public float RewardCrystalAdded { set; private get; }
     public int RewardGold => (int)(Score * RewardGoldRate + RewardGoldAdded);
-    public int RewardCrystal => (int)(Score * 0.001f + RewardCrystalAdded);
+    public int RewardCrystal => (int)(Score * 0.01f + RewardCrystalAdded);
     public bool isBestScore { get; set; }
 
     public int BestScore

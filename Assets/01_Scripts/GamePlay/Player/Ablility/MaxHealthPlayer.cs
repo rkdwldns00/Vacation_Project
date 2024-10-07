@@ -6,7 +6,7 @@ public class MaxHealthPlayer : Player
 {
     public override int MaxLevel => 2;
     public override int UpgradeCost => 500;
-    public override int UnlockCost => 10;
+    public override int UnlockCost => 100;
     public override string CarInfo
     {
         get

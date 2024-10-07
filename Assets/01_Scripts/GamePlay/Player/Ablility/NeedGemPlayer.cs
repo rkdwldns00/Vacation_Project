@@ -6,7 +6,7 @@ public class NeedGemPlayer : Player
 {
     public override int MaxLevel => 10;
     public override int UpgradeCost => base.UpgradeCost;
-    public override int UnlockCost => 5;
+    public override int UnlockCost => 50;
     public override string CarInfo
     {
         get
