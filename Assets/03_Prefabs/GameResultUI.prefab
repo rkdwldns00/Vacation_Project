@@ -1769,6 +1769,7 @@ MonoBehaviour:
   _closeButton: {fileID: 5908888653552551992}
   _crystalResurrectionButton: {fileID: 3199405656863176662}
   _adResurrectionButton: {fileID: 5407330076290375475}
+  _shareButton: {fileID: 148697836720730305}
 --- !u!1 &5908888652933049427
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,7 +2015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5908888653591308032
 RectTransform:
   m_ObjectHideFlags: 0
