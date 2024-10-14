@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PluginManager : MonoBehaviour
+public class AndroidFeatureManager : MonoBehaviour
 {
-    private static PluginManager _instance;
+    private static AndroidFeatureManager _instance;
 
-    public static PluginManager Instance
+    public static AndroidFeatureManager Instance
     {
         get
         {
             if (_instance is null)
             {
-                GameObject g = new GameObject("PluginManager");
-                _instance = g.AddComponent<PluginManager>();
+                GameObject g = new GameObject("AndroidFeatureManager");
+                _instance = g.AddComponent<AndroidFeatureManager>();
                 DontDestroyOnLoad(g);
             }
             return _instance;
