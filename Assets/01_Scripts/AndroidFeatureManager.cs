@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Notifications.Android;
 using UnityEngine;
 
 public class AndroidFeatureManager : MonoBehaviour
 {
+    private const string PUSH_DEFAULT_CHANNEL_ID = "default_channel";
+
     private static AndroidFeatureManager _instance;
 
     public static AndroidFeatureManager Instance
@@ -31,6 +34,8 @@ public class AndroidFeatureManager : MonoBehaviour
         {
             _javaClassInstance = _javaClass.CallStatic<AndroidJavaObject>("GetInstance");
         }
+
+        RegisterNotificationChannel(PUSH_DEFAULT_CHANNEL_ID, "Default Channel");
     }
 
     public void ShowToast(string massage)
@@ -41,5 +46,32 @@ public class AndroidFeatureManager : MonoBehaviour
     public void Share(string text)
     {
         _javaClassInstance.Call("Share", text, "");
+    }
+
+    public void RegisterNotificationChannel(string channelId, string channelName = "Channel Name", string channelDescription = "channel description")
+    {
+        var c = new AndroidNotificationChannel()
+        {
+            Id = channelId,
+            Name = channelName,
+            Importance = Importance.High,
+            Description = channelDescription,
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(c);
+    }
+
+    public void SendNotifycation(string title, string explain, string iconId, DateTime time, string channelId = PUSH_DEFAULT_CHANNEL_ID)
+    {
+        var notification = new AndroidNotification();
+        notification.Title = title;
+        notification.Text = explain;
+        notification.FireTime = time;
+
+        notification.SmallIcon = iconId;
+        notification.LargeIcon = "main_icon";
+
+        //notification.IntentData = "{\"title\": \"Notification 1\", \"data\": \"200\"}";
+
+        AndroidNotificationCenter.SendNotification(notification, channelId);
     }
 }
