@@ -238,6 +238,10 @@ public static class MeshUtil
                     middle2.uv = cuttedSliceUV;
                     Vertex bottom1 = GetBottomVertex(middle1);
                     Vertex bottom2 = GetBottomVertex(middle2);
+                    bottom1.normal = cutterNormal;
+                    bottom2.normal = cutterNormal;
+                    middle1.normal = cutterNormal;
+                    middle2.normal = cutterNormal;
 
                     middle1Index = doublesList.Count;
                     doublesList.Add(middle1);

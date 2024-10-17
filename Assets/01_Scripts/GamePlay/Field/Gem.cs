@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gem : MonoBehaviour
+public class Gem : ObjectPoolable
 {
     [SerializeField] private float _chargeValue;
     [SerializeField] private GameObject _getGemEffect;
@@ -14,7 +14,7 @@ public class Gem : MonoBehaviour
         {
             p.ChargeBoost(_chargeValue);
             Instantiate(_getGemEffect, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            ReleaseObject();
         }
     }
 }

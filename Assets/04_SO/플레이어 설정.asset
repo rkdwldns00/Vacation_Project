@@ -15,10 +15,10 @@ MonoBehaviour:
   minX: -4.75
   maxX: 4.75
   fallingSensorY: -0.2
-  _moveSpeed: 15
-  _jumpPower: 5
-  _maxHealth: 3
-  _maxBoostGazy: 3
+  moveSpeed: 15
+  jumpPower: 5
+  maxHealth: 3
+  maxBoostGazy: 3
   playerPrefabs:
   - {fileID: 7915677668266142339, guid: 4f34ff5b6453e9f4cbca856c4674bf5d, type: 3}
   - {fileID: 7915677668266142339, guid: 350b58892bc90e04993b774718b9de7a, type: 3}
@@ -32,3 +32,6 @@ MonoBehaviour:
   playerJumpEffect: {fileID: 3125736332446637519, guid: 156b80cc8c1f3334688d8e4a1701684b, type: 3}
   playerDeadObject: {fileID: 8027616556709649771, guid: 473bde61fa8f8884fa7f9795d62d3ffe, type: 3}
   playerInvincibleShield: {fileID: 7745192753267332765, guid: f174ba3960a92cf4e91b869b097bbb9d, type: 3}
+  maxSpeedMagnification: 2
+  speedIncreaseScore: 1000
+  maxSpeedIncreaseCount: 10

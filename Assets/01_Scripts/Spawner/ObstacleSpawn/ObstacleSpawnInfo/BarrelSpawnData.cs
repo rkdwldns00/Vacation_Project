@@ -19,7 +19,9 @@ public class BarrelSpawnData : ObstacleSpawnData
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 spawnPos = new Vector3(0, 0, playerPos.z + _spawnDistance + _nextSpawnDistance * i);
-            Instantiate(_barrelObjectPrefab, spawnPos, Quaternion.identity);
+            GameObject barrel = ObjectPoolManager.Instance.GetPooledGameObject(_barrelObjectPrefab);
+            barrel.transform.position = spawnPos;
+            barrel.GetComponent<IObstacleResetable>().ResetObstacle();
         }
     }
 }
