@@ -20,12 +20,14 @@ public class GameResultUI : MonoBehaviour
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _crystalResurrectionButton;
     [SerializeField] private Button _adResurrectionButton;
+    [SerializeField] private Button _shareButton;
 
     private void Awake()
     {
         _closeButton.onClick.AddListener(CloseUI);
         _crystalResurrectionButton.onClick.AddListener(TryCrystalResurrection);
         _adResurrectionButton.onClick.AddListener(TryAdResurrection);
+        _shareButton.onClick.AddListener(Share);
 
         OnClose += () => { SoundManager.Instance.StopBgm(); };
     }
@@ -93,6 +95,11 @@ public class GameResultUI : MonoBehaviour
     {
         _adResurrectionButton.gameObject.SetActive(false);
         _crystalResurrectionButton.gameObject.SetActive(false);
+    }
+
+    private void Share()
+    {
+        PluginManager.Instance.Share("친구가 Street Racer 점수 " + GameManager.Instance.Score + "점을 기록했습니다!");
     }
 
     private void AddGameResult()
