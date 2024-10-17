@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         }
         protected set
         {
-            _boostGazy = Mathf.Clamp(value, 0, _playerSetting.maxBoostGazy);
+            _boostGazy = Mathf.Clamp(value, 0, MaxBoostGazy);
         }
     }
 
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
         _buffSystem = GetComponent<BuffSystem>();
 
-        CurruntHealth = _playerSetting.maxHealth;
+        CurruntHealth = MaxHealth;
         OnChangedHealth?.Invoke();
 
         BoxCollider meshCollder = GetComponentInChildren<BoxCollider>();
