@@ -4,11 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CustomizingUI : MonoBehaviour
+public class CustomizingUI : ManagedUI
 {
     [SerializeField] private PlayerSetting _playerSetting;
     [SerializeField] private CustomizingCamera _customizingCamera;
     [SerializeField] private GameObject _layer;
+    [SerializeField] private Button _startCustomizingButton;
     [SerializeField] private Button _upgradeButton;
     [SerializeField] private TextMeshProUGUI _upgradeCostText;
     [SerializeField] private TextMeshProUGUI _upgradeLevelText;
@@ -25,8 +26,10 @@ public class CustomizingUI : MonoBehaviour
 
     private int _curruntCarIndex;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+        _startCustomizingButton.onClick.AddListener(() => OpenUI(EUIType.Page));
         _beforeButton.onClick.AddListener(ShowBeforeCar);
         _afterButton.onClick.AddListener(ShowAfterCar);
         _closeButton.onClick.AddListener(CloseUI);
@@ -48,7 +51,7 @@ public class CustomizingUI : MonoBehaviour
         }
     }
 
-    public void OpenUI()
+    protected override void OnOpen()
     {
         _curruntCarIndex = GameManager.Instance.PlayerModelId;
         OnChangeShowedCar();
@@ -58,7 +61,7 @@ public class CustomizingUI : MonoBehaviour
         _layer.SetActive(true);
     }
 
-    public void CloseUI()
+    protected override void OnClose()
     {
         _layer.SetActive(false);
 
