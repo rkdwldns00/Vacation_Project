@@ -648,19 +648,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 307349586}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 760503193}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &151349827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,19 +3724,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 712490348}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 712490350}
-        m_TargetAssemblyTypeName: TicketChargeButton, Assembly-CSharp
-        m_MethodName: OpenTicketChargeUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &712490348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3800,6 +3776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ticketChargeUI: {fileID: 942951221}
+  button: {fileID: 712490347}
 --- !u!1 &760503193
 GameObject:
   m_ObjectHideFlags: 0
@@ -5044,6 +5021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _layer: {fileID: 1596545343}
+  _closeButton: {fileID: 1078513606}
 --- !u!1 &998466335
 GameObject:
   m_ObjectHideFlags: 0
@@ -6036,19 +6014,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 497978137}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 942951221}
-        m_TargetAssemblyTypeName: ChargeTicketUI, Assembly-CSharp
-        m_MethodName: CloseUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1083289984
 GameObject:
   m_ObjectHideFlags: 0
@@ -8444,19 +8410,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 426206478}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1659231448}
-        m_TargetAssemblyTypeName: CustomizingUI, Assembly-CSharp
-        m_MethodName: OpenUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &1428842273
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9667,6 +9621,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 658548800}
     - target: {fileID: 1515026554523216272, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
+      propertyPath: _startCustomizingButton
+      value: 
+      objectReference: {fileID: 1428842271}
+    - target: {fileID: 1515026554523216272, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
       propertyPath: _menuPlayerModelTransform
       value: 
       objectReference: {fileID: 1333194132}
@@ -9773,17 +9731,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1515026554523216275, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
   m_PrefabInstance: {fileID: 1659231446}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1659231448 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1515026554523216272, guid: b48514b2c41fa834f8d2655b3f6ef131, type: 3}
-  m_PrefabInstance: {fileID: 1659231446}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 117cb72c4aad1a1479c51143e876913a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1689736293
 GameObject:
   m_ObjectHideFlags: 0
@@ -9943,19 +9890,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1317416934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1045280995}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1724835957
 GameObject:
   m_ObjectHideFlags: 0
@@ -11827,5 +11762,7 @@ MonoBehaviour:
   _surveyUIActivateButton: {fileID: 242908781}
   _surveyUICloseButton: {fileID: 1572903784}
   _surveyURLOpenButton: {fileID: 1488502428}
+  _surveyURLCloseButton: {fileID: 135057784}
+  _surveyAlreadyDidCloseButton: {fileID: 1697343253}
   _surveyURL: https://docs.google.com/forms/d/e/1FAIpQLScnL738lUNzraDcU4N8DQEA5gCXqqAuXKz67S0a1PaUvCOHLQ/viewform?usp=sf_link
   _surveyRewardCrystal: 15

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OpenChargeTicketUIButton : MonoBehaviour
 {
     [SerializeField] private ChargeTicketUI _ticketChargeUI;
+    [SerializeField] private Button button;
 
-    public void OpenTicketChargeUI()
+    private void Awake()
     {
-        _ticketChargeUI.OpenUI();
+        button.onClick.AddListener(() => { _ticketChargeUI.OpenUI(EUIType.Page); });
     }
 }
