@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "크리스탈보상", menuName = "가챠/가챠 보상/크리스탈", order = int.MinValue)]
 public class CrystalReward : GachaReward
 {
-    public override string GetName(int rate) => rate + " 별";
+    public override string GetName(int rate) => "별 " + rate.ToString() + "개";
 
     public override void GetReward(int rate)
     {
