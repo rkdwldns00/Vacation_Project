@@ -8,7 +8,7 @@ public class GachaRewardTable : ScriptableObject
 {
     public List<RewardData> rewards;
 
-    public GachaReward GetRandomReward()
+    public RewardData GetRandomReward()
     {
         int sum = 0;
         foreach (var reward in rewards)
@@ -24,12 +24,11 @@ public class GachaRewardTable : ScriptableObject
             sum += rewardData.probability;
             if (sum > random)
             {
-                rewardData.reward.GetReward(rewardData.rewardRate);
-                return rewardData.reward;
+                return rewardData;
             }
         }
 
-        return null;
+        return new RewardData();
     }
 }
 
