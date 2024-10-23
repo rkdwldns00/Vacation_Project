@@ -16,46 +16,60 @@ public class LoginRewardUI : ManagedUI
     [Header("외부 UI 연결")]
     [SerializeField] private GachaUI _gachaUI;
 
-    private bool isGetReward = false;
-
     private int RewardIndex
     {
         get => PlayerPrefs.GetInt("RewardIndex");
         set => PlayerPrefs.SetInt("RewardIndex", value);
     }
 
+    private bool GetRewardToday
+    {
+        get => PlayerPrefs.GetInt("GetRewardToday") == 1;
+        set => PlayerPrefs.SetInt("GetRewardToday", value ? 1 : 0);
+    }
+
+
     public override void Awake()
     {
         base.Awake();
 
-        RealtimeEventHandler.Instance.OnChangeDay += () => OpenUI(EUIType.Page);
+        RealtimeEventHandler.Instance.OnChangeDay += OnChangeDay;
         _openUIButton.onClick.AddListener(() => OpenUI(EUIType.Page));
         _closeUIButton.onClick.AddListener(CloseUI);
+    }
+
+    private void Start()
+    {
+        if (!GetRewardToday)
+        {
+            OpenUI(EUIType.Page);
+        }
+    }
+
+    private void OnChangeDay()
+    {
+        GetRewardToday = false;
     }
 
     protected override void OnOpen()
     {
         for (int i = 0; i < _rewardButtons.Count; i++)
         {
-            if (i == RewardIndex)
+            if (i == RewardIndex && !GetRewardToday)
             {
+                _rewardButtons[i].Button.onClick.RemoveAllListeners();
                 _rewardButtons[i].Button.onClick.AddListener(OnClickReward);
             }
-            _rewardButtons[i].Button.interactable = i <= RewardIndex;
+            _rewardButtons[i].Button.interactable = i <= RewardIndex - (GetRewardToday ? 1 : 0);
             _rewardButtons[i].Image.enabled = i >= RewardIndex;
         }
 
-        isGetReward = false;
-
         _layer.SetActive(true);
-        _openUIButton.gameObject.SetActive(true);
     }
 
     protected override void OnClose()
     {
         _layer.SetActive(false);
-
-        _openUIButton.gameObject.SetActive(!isGetReward);
     }
 
     private void OnClickReward()
@@ -66,6 +80,7 @@ public class LoginRewardUI : ManagedUI
         {
             _gachaUI.SetReward(weeklyReward.GetRandomReward());
             _gachaUI.OpenUI(EUIType.Popup);
+            CloseUI();
 
             RewardIndex = 0;
         }
@@ -73,10 +88,11 @@ public class LoginRewardUI : ManagedUI
         {
             _gachaUI.SetReward(dailyReward.GetRandomReward());
             _gachaUI.OpenUI(EUIType.Popup);
+            CloseUI();
 
             RewardIndex++;
         }
 
-        isGetReward = true;
+        GetRewardToday = true;
     }
 }
