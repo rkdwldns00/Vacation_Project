@@ -11,7 +11,7 @@ public class GachaUI : ManagedUI
     [SerializeField] TextMeshProUGUI _rewardText;
     [SerializeField] Button _closeButton;
 
-    private GachaReward _reward = null;
+    private RewardData _reward;
 
     public override void Awake()
     {
@@ -19,17 +19,17 @@ public class GachaUI : ManagedUI
         _closeButton.onClick.AddListener(CloseUI);
     }
 
-    public void SetReward(GachaReward reward)
+    public void SetReward(RewardData reward)
     {
         _reward = reward;
     }
 
     protected override void OnOpen()
     {
-        if (_reward != null)
+        if (_reward.reward != null)
         {
-            _rewardImage.sprite = _reward.sprite;
-            _rewardText.text = _reward.name + " 획득!";
+            _rewardImage.sprite = _reward.reward.sprite;
+            _rewardText.text = _reward.reward.GetName(_reward.rewardRate) + " 획득!";
 
             _layer.SetActive(true);
         }
@@ -37,7 +37,7 @@ public class GachaUI : ManagedUI
 
     protected override void OnClose()
     {
-        _reward = null;
+        _reward.reward = null;
         _layer.SetActive(false);
     }
 }
