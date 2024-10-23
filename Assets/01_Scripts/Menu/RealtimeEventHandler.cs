@@ -58,4 +58,10 @@ public class RealtimeEventHandler : MonoBehaviour
     {
         return (int)(tick / 10000000 / 60 / 60 / 24);
     }
+
+    [ContextMenu("날짜 변경")]
+    public void RunChangeDayEvent()
+    {
+        PlayerPrefs.SetInt("lastLoginDay", today - 1);
+    }
 }
