@@ -5,10 +5,16 @@ using UnityEngine.UI;
 
 public class LoginRewardUI : ManagedUI
 {
+    [Header("보상")]
+    [SerializeField] private GachaRewardTable dailyReward;
+    [SerializeField] private GachaRewardTable weeklyReward;
+    [Header("내부 UI")]
     [SerializeField] private GameObject _layer;
     [SerializeField] private List<LoginRewardBoxButton> _rewardButtons;
     [SerializeField] private Button _openUIButton;
     [SerializeField] private Button _closeUIButton;
+    [Header("외부 UI 연결")]
+    [SerializeField] private GachaUI _gachaUI;
 
     private bool isGetReward = false;
 
@@ -42,6 +48,7 @@ public class LoginRewardUI : ManagedUI
         isGetReward = false;
 
         _layer.SetActive(true);
+        _openUIButton.gameObject.SetActive(true);
     }
 
     protected override void OnClose()
@@ -57,13 +64,15 @@ public class LoginRewardUI : ManagedUI
 
         if (RewardIndex == _rewardButtons.Count - 1)
         {
-            Debug.Log("주간보상");
+            _gachaUI.SetReward(weeklyReward.GetRandomReward());
+            _gachaUI.OpenUI(EUIType.Popup);
 
             RewardIndex = 0;
         }
         else
         {
-            Debug.Log("일간보상");
+            _gachaUI.SetReward(dailyReward.GetRandomReward());
+            _gachaUI.OpenUI(EUIType.Popup);
 
             RewardIndex++;
         }
