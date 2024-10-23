@@ -17,8 +17,8 @@ MonoBehaviour:
     probability: 3
     rewardRate: 1000
   - reward: {fileID: 11400000, guid: 1ee731e5dc380394cafd15b95f18db19, type: 2}
-    probability: 15
-    rewardRate: 2
+    probability: 2
+    rewardRate: 15
   - reward: {fileID: 11400000, guid: c96297042fdf13842a9f20917c50c58c, type: 2}
     probability: 1
     rewardRate: 2
