@@ -21,6 +21,7 @@ public class CarColorCustomizingUI : MonoBehaviour
     [SerializeField] private Transform _carColorElementParent;
 
     [Header("Button")]
+    [SerializeField] private Button _openUIButton;
     [SerializeField] private Button _equipColorButton;
     [SerializeField] private Button _unequipColorButton;
     [SerializeField] private Button _unlockColorButton;
@@ -43,6 +44,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         _customizingCamera.ShowModels(_playerSetting.PlayerModels);
 
+        _openUIButton.onClick.AddListener(OpenUI);
         _equipColorButton.onClick.AddListener(EquipColor);
         _unequipColorButton.onClick.AddListener(UnequipColor);
         _unlockColorButton.onClick.AddListener(UnlockColor);
@@ -175,6 +177,26 @@ public class CarColorCustomizingUI : MonoBehaviour
                 }
             }
         }
+
+        foreach (GameObject model in _playerSetting.PlayerModels)
+        {
+            MeshRenderer[] meshRenderers = model.GetComponentsInChildren<MeshRenderer>();
+
+            foreach (MeshRenderer meshRenderer in meshRenderers)
+            {
+                if (!meshRenderer.gameObject.name.Contains("Glass"))
+                {
+                    meshRenderer.material = colorMaterial;
+                }
+            }
+        }
+    }
+
+    private void OpenUI()
+    {
+        _layer.SetActive(true);
+
+        _customizingCamera.ShowModels(_playerSetting.PlayerModels);
     }
 
     private void CloseUI()

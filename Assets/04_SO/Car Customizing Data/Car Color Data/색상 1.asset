@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: "\uC0C9\uC0C1 1"
   ColorMaterial: {fileID: 2100000, guid: 25c3afc7c0bf48841b34760a857d7add, type: 2}
-  UnlockGoldCost: 2000
+  UnlockGoldCost: 5000
   UnlockCrystalCost: 0
