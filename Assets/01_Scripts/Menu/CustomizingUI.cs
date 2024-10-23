@@ -21,6 +21,7 @@ public class CustomizingUI : MonoBehaviour
     [SerializeField] private Button _closeButton;
     [SerializeField] private Transform _menuPlayerModelTransform;
 
+    public GameObject[] MenuPlayerModels { get => _menuPlayerModels; }
     private GameObject[] _menuPlayerModels;
 
     private int _curruntCarIndex;
@@ -46,6 +47,8 @@ public class CustomizingUI : MonoBehaviour
                 _menuPlayerModels[i].SetActive(false);
             }
         }
+
+        CarColorCustomizingUI.Instance.InstantiateCarColorElements();
     }
 
     public void OpenUI()

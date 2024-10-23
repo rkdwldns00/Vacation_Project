@@ -11,6 +11,4 @@ public class CarColorData : ScriptableObject
     [Header("Price")]
     public int UnlockGoldCost;
     public int UnlockCrystalCost;
-
-    
 }
