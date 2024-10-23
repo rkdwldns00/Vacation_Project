@@ -19,7 +19,7 @@ public abstract class ManagedUI : MonoBehaviour
         UIManager.ManagerInstance.RegistUI(this);
     }
 
-    public void OpenUI(EUIType uiOpenType)
+    public void OpenUI(EUIType uiOpenType = EUIType.Page)
     {
         UIManager.ManagerInstance.OpenUI(this, uiOpenType);
     }
