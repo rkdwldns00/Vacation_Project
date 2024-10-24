@@ -44,7 +44,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         _customizingCamera.ShowModels(_playerSetting.PlayerModels);
 
-        _openUIButton.onClick.AddListener(OpenUI);
+        _openUIButton.onClick.AddListener(() => _customizingCamera.ShowModels(_playerSetting.PlayerModels));
         _equipColorButton.onClick.AddListener(EquipColor);
         _unequipColorButton.onClick.AddListener(UnequipColor);
         _unlockColorButton.onClick.AddListener(UnlockColor);
@@ -190,13 +190,6 @@ public class CarColorCustomizingUI : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void OpenUI()
-    {
-        _layer.SetActive(true);
-
-        _customizingCamera.ShowModels(_playerSetting.PlayerModels);
     }
 
     private void CloseUI()

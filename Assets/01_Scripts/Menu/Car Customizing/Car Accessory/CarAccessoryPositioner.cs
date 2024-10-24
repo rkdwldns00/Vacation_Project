@@ -6,23 +6,30 @@ using UnityEngine;
 public class CarAccessoryPositioner : MonoBehaviour
 {
     [SerializeField] private GameObject _instantiatedAccessoryObject;
-    private Transform _topAccessoryPosition;
-    private Transform _backAccessoryPosition;
+    [SerializeField] private Transform _topAccessoryPosition;
+    [SerializeField] private Transform _backAccessoryPosition;
 
     public void InstantiateCarAccessory(GameObject accessoryObjectPrefab, CarAccessoryPositionType carAccessoryPositionType)
     {
-        Transform carAccessoryPosition = null;
-
-        switch (carAccessoryPositionType)
+        if (accessoryObjectPrefab != null)
         {
-            case CarAccessoryPositionType.Top:
-                carAccessoryPosition = _topAccessoryPosition;
-                break;
-            case CarAccessoryPositionType.Back:
-                carAccessoryPosition = _backAccessoryPosition;
-                break;
-        }
+            Transform carAccessoryPosition = null;
 
-        _instantiatedAccessoryObject = Instantiate(accessoryObjectPrefab, carAccessoryPosition);
+            switch (carAccessoryPositionType)
+            {
+                case CarAccessoryPositionType.Top:
+                    carAccessoryPosition = _topAccessoryPosition;
+                    break;
+                case CarAccessoryPositionType.Back:
+                    carAccessoryPosition = _backAccessoryPosition;
+                    break;
+            }
+
+            _instantiatedAccessoryObject = Instantiate(accessoryObjectPrefab, carAccessoryPosition);
+        }
+        else if (_instantiatedAccessoryObject != null)
+        {
+            Destroy(_instantiatedAccessoryObject);
+        }
     }
 }

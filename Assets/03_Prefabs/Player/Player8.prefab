@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1917431975897648664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172491794432080915}
+  m_Layer: 0
+  m_Name: Back Accessory Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172491794432080915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917431975897648664}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.225, z: -0.985}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9001555363535262136}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3697216461458619359
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9001555363535262136}
+  - component: {fileID: 2205446525197210668}
   m_Layer: 0
   m_Name: Model Transform
   m_TagString: Untagged
@@ -29,8 +61,56 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3139230625645919926}
+  - {fileID: 4906972345557896822}
+  - {fileID: 1172491794432080915}
   m_Father: {fileID: 7915677668266142343}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2205446525197210668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3697216461458619359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7544ed6e0674c224e8fde5066ea9eae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _instantiatedAccessoryObject: {fileID: 0}
+  _topAccessoryPosition: {fileID: 4906972345557896822}
+  _backAccessoryPosition: {fileID: 1172491794432080915}
+--- !u!1 &6371250186749694825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4906972345557896822}
+  m_Layer: 0
+  m_Name: Top Accessory Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4906972345557896822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6371250186749694825}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9001555363535262136}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7915677668266142339
 GameObject:
@@ -132,9 +212,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9001555363535262136}
     m_Modifications:
+    - target: {fileID: 3482951187494149221, guid: cd20e9e2008d3404bacfed5091bfe5e2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4275036325083437639, guid: cd20e9e2008d3404bacfed5091bfe5e2, type: 3}
       propertyPath: m_Name
       value: SM_Vehicle_Land_Van_News
+      objectReference: {fileID: 0}
+    - target: {fileID: 6437565353950567650, guid: cd20e9e2008d3404bacfed5091bfe5e2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7500364505831148981, guid: cd20e9e2008d3404bacfed5091bfe5e2, type: 3}
       propertyPath: m_RootOrder

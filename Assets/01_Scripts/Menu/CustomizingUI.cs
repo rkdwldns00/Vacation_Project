@@ -49,6 +49,7 @@ public class CustomizingUI : MonoBehaviour
         }
 
         CarColorCustomizingUI.Instance.InstantiateCarColorElements();
+        CarAccessoryCustomizingUI.Instance.InstantiateCarAccessoryElements();
     }
 
     public void OpenUI()

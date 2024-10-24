@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CarAccessoryCustomizingUI : MonoBehaviour
 {
+    public static CarAccessoryCustomizingUI Instance;
+
     [SerializeField] private GameObject _layer;
     [SerializeField] private CarAccessoryData[] _carAccessoryDatas;
     [SerializeField] private CustomizingCamera _customizingCamera;
@@ -36,9 +38,11 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         _customizingCamera.ShowModels(_playerSetting.PlayerModels);
 
-        _openUIButton.onClick.AddListener(OpenUI);
+        _openUIButton.onClick.AddListener(() => _customizingCamera.ShowModels(_playerSetting.PlayerModels));
         _equipAccessoryButton.onClick.AddListener(EquipAccessory);
         _unequipAccessoryButton.onClick.AddListener(UnequipAccessory);
         _unlockAccessoryButton.onClick.AddListener(UnlockAccessory);
@@ -152,15 +156,6 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
             model.GetComponentInChildren<CarAccessoryPositioner>().
                 InstantiateCarAccessory(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
         }
-
-
-    }
-
-    private void OpenUI()
-    {
-        _layer.SetActive(true);
-
-        _customizingCamera.ShowModels(_playerSetting.PlayerModels);
     }
 
     private void CloseUI()
