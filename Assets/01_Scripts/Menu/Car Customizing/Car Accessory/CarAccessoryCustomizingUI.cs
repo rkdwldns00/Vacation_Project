@@ -135,7 +135,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
         _unequipAccessoryButton.gameObject.SetActive(false);
         _equipAccessoryButton.gameObject.SetActive(true);
 
-        ChangeCarAccessory(_equippedAccessoryElement.CarAccessoryData);
+        DestroyCarAccessory();
 
         PlayerPrefs.SetString(_lastEquippedCarAccessory, "");
         PlayerPrefs.Save();
@@ -148,13 +148,32 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
         foreach (GameObject model in _customizingCamera.Models)
         {
             model.GetComponentInChildren<CarAccessoryPositioner>().
-                InstantiateCarAccessory(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
+                SetCarAccessoryObject(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
         }
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
         {
             model.GetComponentInChildren<CarAccessoryPositioner>().
-                InstantiateCarAccessory(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
+                SetCarAccessoryObject(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
+        }
+
+        foreach (GameObject model in _playerSetting.PlayerModels)
+        {
+            model.GetComponentInChildren<CarAccessoryPositioner>().
+                SetCarAccessoryObject(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
+        }
+    }
+
+    private void DestroyCarAccessory()
+    {
+        foreach (GameObject model in _customizingCamera.Models)
+        {
+            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(null);
+        }
+
+        foreach (GameObject model in _customizingUI.MenuPlayerModels)
+        {
+            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(null);
         }
     }
 
@@ -162,6 +181,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
     {
         _layer.SetActive(false);
 
-        ChangeCarAccessory(_equippedAccessoryElement ? _equippedAccessoryElement.CarAccessoryData : null);
+        if (_equippedAccessoryElement != null) ChangeCarAccessory(_equippedAccessoryElement.CarAccessoryData);
+        else DestroyCarAccessory();
     }
 }

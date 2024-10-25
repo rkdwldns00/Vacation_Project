@@ -154,7 +154,7 @@ public class CarColorCustomizingUI : MonoBehaviour
     {
         foreach(GameObject model in _customizingCamera.Models)
         {
-            MeshRenderer[] cameraRenderers = model.GetComponentsInChildren<MeshRenderer>();
+            MeshRenderer[] cameraRenderers = model.transform.GetChild(0).GetComponentsInChildren<MeshRenderer>();
 
             foreach (MeshRenderer cameraRenderer in cameraRenderers)
             {
@@ -167,7 +167,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
         {
-            MeshRenderer[] cameraRenderers = model.GetComponentsInChildren<MeshRenderer>();
+            MeshRenderer[] cameraRenderers = model.transform.GetChild(0).GetComponentsInChildren<MeshRenderer>();
 
             foreach (MeshRenderer cameraRenderer in cameraRenderers)
             {
@@ -180,7 +180,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         foreach (GameObject model in _playerSetting.PlayerModels)
         {
-            MeshRenderer[] meshRenderers = model.GetComponentsInChildren<MeshRenderer>();
+            MeshRenderer[] meshRenderers = model.transform.GetChild(0).GetComponentsInChildren<MeshRenderer>();
 
             foreach (MeshRenderer meshRenderer in meshRenderers)
             {
