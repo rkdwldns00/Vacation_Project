@@ -154,41 +154,17 @@ public class CarColorCustomizingUI : MonoBehaviour
     {
         foreach(GameObject model in _customizingCamera.Models)
         {
-            MeshRenderer[] cameraRenderers = model.transform.GetChild(0).GetComponentsInChildren<MeshRenderer>();
-
-            foreach (MeshRenderer cameraRenderer in cameraRenderers)
-            {
-                if (!cameraRenderer.gameObject.name.Contains("Glass"))
-                {
-                    cameraRenderer.material = colorMaterial;
-                }
-            }
+            model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
         }
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
         {
-            MeshRenderer[] cameraRenderers = model.transform.GetChild(0).GetComponentsInChildren<MeshRenderer>();
-
-            foreach (MeshRenderer cameraRenderer in cameraRenderers)
-            {
-                if (!cameraRenderer.gameObject.name.Contains("Glass"))
-                {
-                    cameraRenderer.material = colorMaterial;
-                }
-            }
+            model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
         }
 
         foreach (GameObject model in _playerSetting.PlayerModels)
         {
-            MeshRenderer[] meshRenderers = model.transform.GetChild(0).GetComponentsInChildren<MeshRenderer>();
-
-            foreach (MeshRenderer meshRenderer in meshRenderers)
-            {
-                if (!meshRenderer.gameObject.name.Contains("Glass"))
-                {
-                    meshRenderer.material = colorMaterial;
-                }
-            }
+            model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
         }
     }
 
