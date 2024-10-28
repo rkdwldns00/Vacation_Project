@@ -135,7 +135,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
         _unequipAccessoryButton.gameObject.SetActive(false);
         _equipAccessoryButton.gameObject.SetActive(true);
 
-        DestroyCarAccessory();
+        UnequipCarAccessory();
 
         PlayerPrefs.SetString(_lastEquippedCarAccessory, "");
         PlayerPrefs.Save();
@@ -164,7 +164,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
         }
     }
 
-    private void DestroyCarAccessory()
+    private void UnequipCarAccessory()
     {
         foreach (GameObject model in _customizingCamera.Models)
         {
@@ -175,6 +175,11 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
         {
             model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(null);
         }
+
+        foreach (GameObject model in _playerSetting.PlayerModels)
+        {
+            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(null);
+        }
     }
 
     private void CloseUI()
@@ -182,6 +187,6 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
         _layer.SetActive(false);
 
         if (_equippedAccessoryElement != null) ChangeCarAccessory(_equippedAccessoryElement.CarAccessoryData);
-        else DestroyCarAccessory();
+        else UnequipCarAccessory();
     }
 }
