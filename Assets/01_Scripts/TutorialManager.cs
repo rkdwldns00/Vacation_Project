@@ -149,8 +149,8 @@ public class TutorialManager : MonoBehaviour
 
 
         Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 60), Quaternion.identity);
-        Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 63), Quaternion.identity);
-        Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 66), Quaternion.identity);
+        Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 80), Quaternion.identity);
+        Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 100), Quaternion.identity);
 
         playerSetting.playerPrefabs[0].GetComponent<Player>().PlayerLevel = 1;
 
