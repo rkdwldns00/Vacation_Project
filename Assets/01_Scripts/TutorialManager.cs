@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -113,7 +114,10 @@ public class TutorialManager : MonoBehaviour
         _player.CanControl = false;
         Action hitEvent = () => playerHitted = true;
         _player.OnDamaged += hitEvent;
-        Instantiate(spikePrefab, new Vector3(0, 0, _player.transform.position.z + 60), Quaternion.identity);
+
+        GameObject spike = ObjectPoolManager.Instance.GetPooledGameObject(spikePrefab);
+        spike.transform.position = new Vector3(0, 0, _player.transform.position.z + 60);
+
         yield return new WaitUntil(() => playerHitted);
         _player.OnDamaged -= hitEvent;
 
@@ -125,7 +129,8 @@ public class TutorialManager : MonoBehaviour
         hpUI.SetActive(false);
         for (int i = 0; i < 45; i++)
         {
-            Instantiate(gemPrefab, _player.transform.position + new Vector3(0, 0, 60 + i), Quaternion.identity);
+            GameObject gem = ObjectPoolManager.Instance.GetPooledGameObject(gemPrefab);
+            gem.transform.position = _player.transform.position + new Vector3(0, 0, 60 + i);
         }
         yield return new WaitForSeconds(8f);
 
