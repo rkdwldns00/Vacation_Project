@@ -35,7 +35,7 @@ public class SinkHole : ObjectPoolable
                     {
                         float distance = Random.Range(minDistance, maxDistance);
                         road.SetMesh(CutRoad(road.curruntRoadMesh,
-                            isHole,
+                            true,//isHole,
                             transform.position.z - road.transform.position.z + totalDistance,
                             distance,
                             startX1, startX1 + size,
@@ -62,7 +62,7 @@ public class SinkHole : ObjectPoolable
         Mesh after;
 
         (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
-        (middle, after) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward, generateFrontWall, cuttedSliceUV);
+        (after, middle) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.back, generateFrontWall, cuttedSliceUV);
 
         Mesh result = MeshUtil.Merge(before, after);
         Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
