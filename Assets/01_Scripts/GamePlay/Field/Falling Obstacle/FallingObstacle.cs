@@ -10,12 +10,16 @@ public class FallingObstacle : ObjectPoolable, IObstacleResetable
     [SerializeField] private GameObject _fallingObjectPrefab;
     [SerializeField] private GameObject _fallingObjectEffectPrefab;
     [SerializeField] private float _hitBoxRadius;
+    private GameObject _fallingObject;
 
     bool isStarted = false;
+    bool isHitted = false;
 
     public void ResetObstacle()
     {
         isStarted = false;
+        isHitted = false;
+        _fallingObject = null;
     }
 
     private void FixedUpdate()
@@ -25,32 +29,38 @@ public class FallingObstacle : ObjectPoolable, IObstacleResetable
             isStarted = true;
             StartWarring();
         }
+
+        if (_fallingObject != null && Player.Instance != null)
+        {
+            _fallingObject.transform.position = new Vector3(_fallingObject.transform.position.x,
+                (_fallingObject.transform.position.z - Player.Instance.transform.position.z),
+                _fallingObject.transform.position.z);
+
+            if (!isHitted && _fallingObject.transform.position.z < Player.Instance.transform.position.z)
+            {
+                isHitted = true;
+
+                Destroy(Instantiate(_fallingObjectEffectPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), 2);
+                if (CheckPlayerInHitBox())
+                {
+                    Player.Instance.TakeDamage();
+                }
+            }
+        }
+        else if (_fallingObject != null && Player.Instance == null)
+        {
+            Destroy(_fallingObject);
+        }
     }
 
     public void StartWarring()
     {
-        float fallingObjectHeight = -Physics.gravity.y * _warringTime / 2 * _warringTime;
-
         GameObject warningObject = Instantiate(_warringObjectPrefab, transform.position, Quaternion.identity);
         warningObject.GetComponent<Warring>().SetTime(_warringTime);
         Destroy(warningObject, 5);
 
-        Destroy(Instantiate(_fallingObjectPrefab, transform.position + Vector3.up * fallingObjectHeight, Quaternion.identity),_warringTime + 3);
-
-        StartCoroutine(HitDelay());
-    }
-
-    private IEnumerator HitDelay()
-    {
-        yield return new WaitForSeconds(_warringTime);
-
-        Destroy(Instantiate(_fallingObjectEffectPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity), 2);
-
-        if (CheckPlayerInHitBox())
-        {
-            Debug.Log("Damaged");
-            Player.Instance.TakeDamage();
-        }
+        _fallingObject = Instantiate(_fallingObjectPrefab, transform.position + Vector3.up * (_fallingObjectPrefab.transform.position.z - Player.Instance.transform.position.z), Quaternion.identity);
+        Destroy(_fallingObject, _warringTime + 3);
     }
 
     private bool CheckPlayerInHitBox()
@@ -61,7 +71,7 @@ public class FallingObstacle : ObjectPoolable, IObstacleResetable
         playerPos.y = 0;
         Vector3 hitBoxPos = transform.position;
         hitBoxPos.y = 0;
-        return Vector3.Distance(hitBoxPos, playerPos) < _hitBoxRadius;
+        return Mathf.Abs(playerPos.x - hitBoxPos.x) < _hitBoxRadius;
     }
 
     private void OnDrawGizmosSelected()

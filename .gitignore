@@ -12,6 +12,12 @@
 
 /[Aa]ssets/[Ee]xternalAssets/
 /[Aa]ssets/Plugins/
+/[Aa]ssets/ExternalDependencyManager/
+/[Aa]ssets/ExternalDependencyManager.meta
+/[Aa]ssets/Firebase/
+/[Aa]ssets/Firebase.meta
+/[Aa]ssets/Editor Default Resources/
+/[Aa]ssets/Editor Default Resources.meta
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
