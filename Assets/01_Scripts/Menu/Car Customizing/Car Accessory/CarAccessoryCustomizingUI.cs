@@ -136,7 +136,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
         _unequipAccessoryButton.gameObject.SetActive(false);
         _equipAccessoryButton.gameObject.SetActive(true);
 
-        UnequipCarAccessory();
+        ChangeCarAccessory(null);
 
         PlayerPrefs.SetString(_lastEquippedCarAccessory, "");
         PlayerPrefs.Save();
@@ -148,38 +148,17 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
     {
         foreach (GameObject model in _customizingCamera.Models)
         {
-            model.GetComponentInChildren<CarAccessoryPositioner>().
-                SetCarAccessoryObject(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
+            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
         }
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
         {
-            model.GetComponentInChildren<CarAccessoryPositioner>().
-                SetCarAccessoryObject(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
+            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
         }
 
         foreach (GameObject model in _playerSetting.PlayerModels)
         {
-            model.GetComponentInChildren<CarAccessoryPositioner>().
-                SetCarAccessoryObject(carAccessoryData.AccessoryObjectPrefab, carAccessoryData.AccessoryPositionType);
-        }
-    }
-
-    private void UnequipCarAccessory()
-    {
-        foreach (GameObject model in _customizingCamera.Models)
-        {
-            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(null);
-        }
-
-        foreach (GameObject model in _customizingUI.MenuPlayerModels)
-        {
-            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(null);
-        }
-
-        foreach (GameObject model in _playerSetting.PlayerModels)
-        {
-            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(null);
+            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
         }
     }
 
@@ -187,8 +166,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
     {
         _layer.SetActive(false);
 
-        if (_equippedAccessoryElement != null) ChangeCarAccessory(_equippedAccessoryElement.CarAccessoryData);
-        else UnequipCarAccessory();
+        ChangeCarAccessory(_equippedAccessoryElement != null ? _equippedAccessoryElement.CarAccessoryData : null);
     }
 
     public void GenerateCarAccessoryImage(IEnumerator generateCoroutine)

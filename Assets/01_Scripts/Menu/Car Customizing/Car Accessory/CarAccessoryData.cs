@@ -9,6 +9,7 @@ public class CarAccessoryData : ScriptableObject
     public GameObject AccessoryObjectPrefab;
     public CarAccessoryPositionType AccessoryPositionType;
     public Sprite AccessoryImage;
+    public Vector3 AccessorySize = Vector3.one;
 
     [Header("Cost")]
     public int UnlockGoldCost;

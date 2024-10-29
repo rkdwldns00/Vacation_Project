@@ -9,32 +9,32 @@ public class CarAccessoryPositioner : MonoBehaviour
     [SerializeField] private Transform _topAccessoryPosition;
     [SerializeField] private Transform _backAccessoryPosition;
 
-    public void SetCarAccessoryObject(GameObject carAccessoryObject, CarAccessoryPositionType carAccessoryPositionType = CarAccessoryPositionType.Top)
+    public void SetCarAccessoryObject(CarAccessoryData carAccessoryData)
     {
-        Transform carAccessoryPosition = null;
-
-        switch (carAccessoryPositionType)
-        {
-            case CarAccessoryPositionType.Top:
-                carAccessoryPosition = _topAccessoryPosition;
-                break;
-            case CarAccessoryPositionType.Back:
-                carAccessoryPosition = _backAccessoryPosition;
-                break;
-        }
-
+        Vector3 carAccessoryPosition = _topAccessoryPosition.position;
+        Vector3 carAccessoryScale = carAccessoryData ? carAccessoryData.AccessorySize : Vector3.one;
         Mesh mesh = null;
         Material[] materials = new Material[1];
 
-        if (carAccessoryObject != null)
+        switch (carAccessoryData?.AccessoryPositionType)
         {
-            mesh = carAccessoryObject.GetComponent<MeshFilter>().sharedMesh;
-            materials = carAccessoryObject.GetComponent<MeshRenderer>().sharedMaterials;
+            case CarAccessoryPositionType.Top:
+                carAccessoryPosition = _topAccessoryPosition.position;
+                break;
+            case CarAccessoryPositionType.Back:
+                carAccessoryPosition = _backAccessoryPosition.position;
+                break;
         }
 
+        if (carAccessoryData != null)
+        {
+            mesh = carAccessoryData.AccessoryObjectPrefab.GetComponent<MeshFilter>().sharedMesh;
+            materials = carAccessoryData.AccessoryObjectPrefab.GetComponent<MeshRenderer>().sharedMaterials;
+        }
+
+        _accessoryObject.transform.position = carAccessoryPosition;
+        _accessoryObject.transform.localScale = carAccessoryScale;
         _accessoryObject.GetComponent<MeshFilter>().sharedMesh = mesh;
         _accessoryObject.GetComponent<MeshRenderer>().sharedMaterials = materials;
-        _accessoryObject.transform.position = carAccessoryPosition.position;
-
     }
 }

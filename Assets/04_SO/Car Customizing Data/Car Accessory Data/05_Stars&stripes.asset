@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: 05_Stars&stripes
   m_EditorClassIdentifier: 
   Name: "\uC131\uC870\uAE30"
-  AccessoryObjectPrefab: {fileID: 7165961882983840789, guid: 454a89e31bc836b47a79dfef40909529, type: 3}
+  AccessoryObjectPrefab: {fileID: 1527472230988855907, guid: a60366ee270b80041adb98d52013252a, type: 3}
   AccessoryPositionType: 1
   AccessoryImage: {fileID: 21300000, guid: 1bded7f4ac3d1db4b901d47a07f64716, type: 3}
+  AccessorySize: {x: 0.65, y: 0.65, z: 0.65}
   UnlockGoldCost: 1000
   UnlockCrystalCost: 0
