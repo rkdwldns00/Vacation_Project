@@ -6,7 +6,7 @@ public class SpeedPlayer : Player
 {
     public override int MaxLevel => 10;
     public override int UpgradeCost => base.UpgradeCost;
-    public override int UnlockCost => 15;
+    public override int UnlockCost => 150;
     public override string CarInfo
     {
         get

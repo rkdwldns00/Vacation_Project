@@ -29,6 +29,10 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentScoreText;
     [SerializeField] private GameObject _bestScoreRecord;
 
+    [Header("Pause UI")]
+    [SerializeField] private GameObject _pauseLayer;
+    [SerializeField] private Button _cancelPauseButton;
+
     [Header("Player UI")]
     [SerializeField] private GameObject _playerLossHpPrefab;
     [SerializeField] private Transform _playerLossHpParent;
@@ -58,12 +62,14 @@ public class InGameUIManager : MonoBehaviour
         PlayerSpawner.Instance.OnSpawned += OnPlayerSpawned;
 
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
+        _cancelPauseButton.onClick.AddListener(() => { SetPause(false); });
     }
 
     private void Update()
     {
         UpdateScoreUI();
         UpdateChaserUI();
+        PauseHandler();
     }
 
     private void OnPlayerSpawned(Player player)
@@ -164,5 +170,26 @@ public class InGameUIManager : MonoBehaviour
         }
 
         yield break;
+    }
+
+    private void PauseHandler()
+    {
+        if (Input.GetKey(KeyCode.Escape) && Player.Instance != null && !TutorialManager.isActive)
+        {
+            SetPause(true);
+        }
+    }
+
+    public void SetPause(bool isPause)
+    {
+        _pauseLayer.SetActive(isPause);
+        if(isPause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }
