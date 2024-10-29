@@ -6044,6 +6044,11 @@ MonoBehaviour:
   _layer: {fileID: 1149193824}
   _carAccessoryDatas:
   - {fileID: 11400000, guid: 66ea704cf21460544894e9b3845f308e, type: 2}
+  - {fileID: 11400000, guid: f7d065e9c9b31f444b9dba16de283ef8, type: 2}
+  - {fileID: 11400000, guid: fe040fb8625b3294895088b886b946ef, type: 2}
+  - {fileID: 11400000, guid: 2fc1386bc92f9a44da165d65c0ef7fc3, type: 2}
+  - {fileID: 11400000, guid: 9354e21912b926a47a1d1a39bf9497a9, type: 2}
+  - {fileID: 11400000, guid: ee71a7972c9c64344a4068e0901f4928, type: 2}
   _customizingCamera: {fileID: 658548800}
   _customizingUI: {fileID: 1659231448}
   _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
