@@ -9,6 +9,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
     public static CarAccessoryCustomizingUI Instance;
 
     [SerializeField] private GameObject _layer;
+    public CarAccessoryData[] CarAccessoryDatas { get => _carAccessoryDatas; }
     [SerializeField] private CarAccessoryData[] _carAccessoryDatas;
     [SerializeField] private CustomizingCamera _customizingCamera;
     [SerializeField] private CustomizingUI _customizingUI;
@@ -188,5 +189,10 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
 
         if (_equippedAccessoryElement != null) ChangeCarAccessory(_equippedAccessoryElement.CarAccessoryData);
         else UnequipCarAccessory();
+    }
+
+    public void GenerateCarAccessoryImage(IEnumerator generateCoroutine)
+    {
+        StartCoroutine(generateCoroutine);
     }
 }

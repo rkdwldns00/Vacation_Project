@@ -8,6 +8,7 @@ public class CarAccessoryData : ScriptableObject
     public string Name;
     public GameObject AccessoryObjectPrefab;
     public CarAccessoryPositionType AccessoryPositionType;
+    public Sprite AccessoryImage;
 
     [Header("Cost")]
     public int UnlockGoldCost;
