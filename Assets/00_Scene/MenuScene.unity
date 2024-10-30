@@ -9717,6 +9717,7 @@ MonoBehaviour:
   - {fileID: 1435263301}
   - {fileID: 1130601775}
   - {fileID: 1059686039}
+  - {fileID: 1142328828}
   _activeOnTutorial:
   - {fileID: 780744526}
   _playerSetting: {fileID: 11400000, guid: a84412a0b600cee478084407cbfd93df, type: 2}
