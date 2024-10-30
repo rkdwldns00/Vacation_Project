@@ -41,7 +41,7 @@ public class SinkHole : ObjectPoolable
                         }
 
                         road.SetMesh(CutRoad(road.curruntRoadMesh,
-                            true,//isHole,
+                            isHole,
                             transform.position.z - road.transform.position.z + totalDistance,
                             distance,
                             startX1, startX1 + size,
@@ -82,9 +82,9 @@ public class SinkHole : ObjectPoolable
         if (isHole)
         {
             Mesh temp1, temp2;
-            (_, temp1) = MeshUtil.Cut(middle, leftPoint, leftNormal, true, cuttedSliceUV);
+            (temp1, _) = MeshUtil.Cut(middle, leftPoint, -leftNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp1);
-            (_, temp2) = MeshUtil.Cut(middle, rightPoint, rightNormal, true, cuttedSliceUV);
+            (temp2, _) = MeshUtil.Cut(middle, rightPoint, -rightNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp2);
         }
         else
