@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 06_Weathervane
+  m_Name: 15_Cake
   m_EditorClassIdentifier: 
-  Name: "\uD48D\uD5A5\uACC4"
-  AccessoryObjectPrefab: {fileID: 2362350076448727546, guid: 94136cab8eb5470439494f53299c18b5, type: 3}
-  AccessoryPositionType: 1
-  AccessoryImage: {fileID: 21300000, guid: 370fd73d642355a4c8b3d035a56c0a13, type: 3}
-  UnlockGoldCost: 1000
+  Name: "\uCF00\uC774\uD06C"
+  AccessoryObjectPrefab: {fileID: 7091054357527589187, guid: 9ea71ef8dab304f4cae2ddcdd050153c, type: 3}
+  AccessoryPositionType: 0
+  AccessoryImage: {fileID: 21300000, guid: 952f015857b394f40be578abe134db8a, type: 3}
+  AccessorySize: {x: 2.75, y: 2.75, z: 2.75}
+  UnlockGoldCost: 2000
   UnlockCrystalCost: 0

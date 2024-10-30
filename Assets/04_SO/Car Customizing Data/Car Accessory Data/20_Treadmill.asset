@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 01_TrafficCone
+  m_Name: 20_Treadmill
   m_EditorClassIdentifier: 
-  Name: "\uB77C\uBC14\uCF58"
-  AccessoryObjectPrefab: {fileID: 100000, guid: 52f3bf47c9c62af4588469ff668b805c, type: 3}
+  Name: "\uB7F0\uB2DD\uBA38\uC2E0"
+  AccessoryObjectPrefab: {fileID: 6029608452662901966, guid: 604256f1116a0e74d93529f2c8cb24c6, type: 3}
   AccessoryPositionType: 0
-  AccessoryImage: {fileID: 21300000, guid: 3e4166335a956b24bb71e7368b918d73, type: 3}
-  AccessorySize: {x: 0.8, y: 0.8, z: 0.8}
-  UnlockGoldCost: 500
-  UnlockCrystalCost: 0
+  AccessoryImage: {fileID: 21300000, guid: 24e6a86f7c0547743b74717d61d928c2, type: 3}
+  AccessorySize: {x: 0.75, y: 0.75, z: 0.75}
+  UnlockGoldCost: 0
+  UnlockCrystalCost: 100

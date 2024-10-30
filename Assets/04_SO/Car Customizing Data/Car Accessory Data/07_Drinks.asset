@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 01_TrafficCone
+  m_Name: 07_Drinks
   m_EditorClassIdentifier: 
-  Name: "\uB77C\uBC14\uCF58"
-  AccessoryObjectPrefab: {fileID: 100000, guid: 52f3bf47c9c62af4588469ff668b805c, type: 3}
+  Name: "\uCF5C\uB77C"
+  AccessoryObjectPrefab: {fileID: 2960249639506276643, guid: 137cbee0e5a3d404aa0aa7ebc5265fe1, type: 3}
   AccessoryPositionType: 0
-  AccessoryImage: {fileID: 21300000, guid: 3e4166335a956b24bb71e7368b918d73, type: 3}
-  AccessorySize: {x: 0.8, y: 0.8, z: 0.8}
+  AccessoryImage: {fileID: 21300000, guid: 9be310603d3df32429136b8c9821fa38, type: 3}
+  AccessorySize: {x: 2.5, y: 2.5, z: 2.5}
   UnlockGoldCost: 500
   UnlockCrystalCost: 0

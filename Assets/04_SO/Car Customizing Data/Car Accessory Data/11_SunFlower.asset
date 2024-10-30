@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 01_TrafficCone
+  m_Name: 11_SunFlower
   m_EditorClassIdentifier: 
-  Name: "\uB77C\uBC14\uCF58"
-  AccessoryObjectPrefab: {fileID: 100000, guid: 52f3bf47c9c62af4588469ff668b805c, type: 3}
-  AccessoryPositionType: 0
-  AccessoryImage: {fileID: 21300000, guid: 3e4166335a956b24bb71e7368b918d73, type: 3}
+  Name: "\uD574\uBC14\uB77C\uAE30"
+  AccessoryObjectPrefab: {fileID: 5355864402691558571, guid: de80916c04ce68049bb9487152198a1a, type: 3}
+  AccessoryPositionType: 1
+  AccessoryImage: {fileID: 21300000, guid: 2292eb964e3982444a7d4d27fd60d13f, type: 3}
   AccessorySize: {x: 0.8, y: 0.8, z: 0.8}
-  UnlockGoldCost: 500
+  UnlockGoldCost: 1000
   UnlockCrystalCost: 0

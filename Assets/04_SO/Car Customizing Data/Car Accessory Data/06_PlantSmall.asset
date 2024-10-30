@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 01_TrafficCone
+  m_Name: 06_PlantSmall
   m_EditorClassIdentifier: 
-  Name: "\uB77C\uBC14\uCF58"
-  AccessoryObjectPrefab: {fileID: 100000, guid: 52f3bf47c9c62af4588469ff668b805c, type: 3}
+  Name: "\uD654\uBD84"
+  AccessoryObjectPrefab: {fileID: 5273662303301476373, guid: ebe67b40cd498264e8507fa9ef3627e0, type: 3}
   AccessoryPositionType: 0
-  AccessoryImage: {fileID: 21300000, guid: 3e4166335a956b24bb71e7368b918d73, type: 3}
-  AccessorySize: {x: 0.8, y: 0.8, z: 0.8}
+  AccessoryImage: {fileID: 21300000, guid: 4344088658f99514abf9d8ed9e93cc56, type: 3}
+  AccessorySize: {x: 2, y: 2, z: 2}
   UnlockGoldCost: 500
   UnlockCrystalCost: 0

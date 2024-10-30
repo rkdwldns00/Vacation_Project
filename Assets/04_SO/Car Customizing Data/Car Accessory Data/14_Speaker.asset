@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 05_Stars&stripes
+  m_Name: 14_Speaker
   m_EditorClassIdentifier: 
-  Name: "\uC131\uC870\uAE30"
-  AccessoryObjectPrefab: {fileID: 1527472230988855907, guid: a60366ee270b80041adb98d52013252a, type: 3}
-  AccessoryPositionType: 1
-  AccessoryImage: {fileID: 21300000, guid: 1bded7f4ac3d1db4b901d47a07f64716, type: 3}
-  AccessorySize: {x: 0.65, y: 0.65, z: 0.65}
-  UnlockGoldCost: 1000
+  Name: "\uC2A4\uD53C\uCEE4"
+  AccessoryObjectPrefab: {fileID: 5001492521427787724, guid: 4bd6d209ad8e9d04392af3b726c38038, type: 3}
+  AccessoryPositionType: 0
+  AccessoryImage: {fileID: 21300000, guid: 53b93418298d5bc478165ddfd5cc8691, type: 3}
+  AccessorySize: {x: 2, y: 2, z: 2}
+  UnlockGoldCost: 2000
   UnlockCrystalCost: 0

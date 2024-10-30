@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 04_Graveyard02
+  m_Name: 25_Toilet
   m_EditorClassIdentifier: 
-  Name: "\uBB18\uC11D"
-  AccessoryObjectPrefab: {fileID: 4960138347088577438, guid: 76c4d6bb34cfb8f49b38e6becf019aa9, type: 3}
+  Name: "\uBCC0\uAE30"
+  AccessoryObjectPrefab: {fileID: 2852940942439001274, guid: 18ff43ccb9142cb42920665776fb3177, type: 3}
   AccessoryPositionType: 0
-  AccessoryImage: {fileID: 21300000, guid: 999cd9fb9a864024aade57bea91955d8, type: 3}
-  AccessorySize: {x: 0.35, y: 0.35, z: 0.35}
-  UnlockGoldCost: 1000
-  UnlockCrystalCost: 0
+  AccessoryImage: {fileID: 21300000, guid: 8e0004d76eab134439a975c04cc069e6, type: 3}
+  AccessorySize: {x: 1.25, y: 1.25, z: 1.25}
+  UnlockGoldCost: 0
+  UnlockCrystalCost: 500

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
-  m_Name: 01_TrafficCone
+  m_Name: 04_Weathervane
   m_EditorClassIdentifier: 
-  Name: "\uB77C\uBC14\uCF58"
-  AccessoryObjectPrefab: {fileID: 100000, guid: 52f3bf47c9c62af4588469ff668b805c, type: 3}
-  AccessoryPositionType: 0
-  AccessoryImage: {fileID: 21300000, guid: 3e4166335a956b24bb71e7368b918d73, type: 3}
-  AccessorySize: {x: 0.8, y: 0.8, z: 0.8}
+  Name: "\uD48D\uD5A5\uACC4"
+  AccessoryObjectPrefab: {fileID: 2362350076448727546, guid: 94136cab8eb5470439494f53299c18b5, type: 3}
+  AccessoryPositionType: 1
+  AccessoryImage: {fileID: 21300000, guid: 370fd73d642355a4c8b3d035a56c0a13, type: 3}
+  AccessorySize: {x: 1, y: 1, z: 1}
   UnlockGoldCost: 500
   UnlockCrystalCost: 0
