@@ -93,6 +93,8 @@ public class Road : MonoBehaviour
 
         meshFilter.sharedMesh = curruntRoadMesh;
         meshCollider.sharedMesh = curruntRoadMesh;
+
+        curruntRoadMesh.RecalculateBounds();
     }
 
     public void SetMesh(Mesh mesh)

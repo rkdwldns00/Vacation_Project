@@ -34,6 +34,12 @@ public class SinkHole : ObjectPoolable
                     for (int i = 0; i < count; i++)
                     {
                         float distance = Random.Range(minDistance, maxDistance);
+
+                        if (transform.position.z - road.transform.position.z + totalDistance + distance > road.curruntRoadMesh.bounds.max.z - maxDistance)
+                        {
+                            i = count - 1;
+                        }
+
                         road.SetMesh(CutRoad(road.curruntRoadMesh,
                             true,//isHole,
                             transform.position.z - road.transform.position.z + totalDistance,
@@ -41,6 +47,9 @@ public class SinkHole : ObjectPoolable
                             startX1, startX1 + size,
                             startX2, startX2 + size, count - 1 == i));
 
+                        Debug.DrawLine(new Vector3(startX1, 0, totalDistance + transform.position.z), new Vector3(startX1 + size, 0, totalDistance + transform.position.z), Color.red, 1000);
+                        Debug.DrawLine(new Vector3(startX1, 0, totalDistance + transform.position.z), new Vector3(startX2, 0, totalDistance + distance + transform.position.z), Color.red, 1000);
+                        Debug.DrawLine(new Vector3(startX1 + size, 0, totalDistance + transform.position.z), new Vector3(startX2 + size, 0, totalDistance + distance + transform.position.z), Color.red, 1000);
                         startX1 = startX2;
                         startX2 = Random.Range(minX, maxX - size);
                         totalDistance += distance;
