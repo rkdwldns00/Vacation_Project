@@ -41,16 +41,28 @@ public class RealtimeEventHandler : MonoBehaviour
 
     private void Start()
     {
-        if (TutorialManager.isActive) return;
+        if (TutorialManager.isActive)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
 
-        PlayerPrefs.SetInt("lastLoginDay", today);
         if (isFirstLogin)
         {
             OnFirstLogin?.Invoke();
         }
+    }
+
+    private void Update()
+    {
+        today = TicksToDay(DateTime.Now.Ticks);
+        int lastLoginDay = PlayerPrefs.GetInt("lastLoginDay");
+        IntervalWithLastLoginDay = today - lastLoginDay;
+
         if (IntervalWithLastLoginDay > 0)
         {
             OnChangeDay?.Invoke();
+            PlayerPrefs.SetInt("lastLoginDay", today);
         }
     }
 

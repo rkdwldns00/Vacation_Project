@@ -49,6 +49,7 @@ public class LoginRewardUI : ManagedUI
     private void OnChangeDay()
     {
         GetRewardToday = false;
+        OpenUI(EUIType.Page);
     }
 
     protected override void OnOpen()
@@ -75,10 +76,14 @@ public class LoginRewardUI : ManagedUI
     private void OnClickReward()
     {
         _rewardButtons[RewardIndex].Image.enabled = false;
+        _rewardButtons[RewardIndex].Button.onClick.RemoveAllListeners();
+
+        RewardData rewardData;
 
         if (RewardIndex == _rewardButtons.Count - 1)
         {
-            _gachaUI.SetReward(weeklyReward.GetRandomReward());
+            rewardData = weeklyReward.GetRandomReward();
+            _gachaUI.SetReward(rewardData);
             _gachaUI.OpenUI(EUIType.Popup);
             CloseUI();
 
@@ -86,12 +91,15 @@ public class LoginRewardUI : ManagedUI
         }
         else
         {
-            _gachaUI.SetReward(dailyReward.GetRandomReward());
+            rewardData = dailyReward.GetRandomReward();
+            _gachaUI.SetReward(rewardData);
             _gachaUI.OpenUI(EUIType.Popup);
             CloseUI();
 
             RewardIndex++;
         }
+
+        rewardData.reward.GetReward(rewardData.rewardRate);
 
         GetRewardToday = true;
     }
