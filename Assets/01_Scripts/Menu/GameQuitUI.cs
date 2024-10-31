@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameQuitUI : MonoBehaviour
+public class GameQuitUI : ManagedUI
 {
     [SerializeField] private GameObject _gameQuitUILayer;
     [SerializeField] private Button _gameQuitUIActiveButton;
     [SerializeField] private Button _gameQuitButton;
     [SerializeField] private Button _gameQuitCancelButton;
 
-    private void Awake()
+    public override void Awake()
     {
-        _gameQuitUIActiveButton.onClick.AddListener(() => _gameQuitUILayer.SetActive(true));
-        _gameQuitButton.onClick.AddListener(() => Application.Quit());
-        _gameQuitCancelButton.onClick.AddListener(() => _gameQuitUILayer.SetActive(false));
+        base.Awake();
+        _gameQuitUIActiveButton.onClick.AddListener(() => OpenUI(EUIType.Page));
+        _gameQuitButton.onClick.AddListener(QuitGame);
+        _gameQuitCancelButton.onClick.AddListener(CloseUI);
     }
 
     private void Update()
@@ -23,5 +24,20 @@ public class GameQuitUI : MonoBehaviour
         {
             _gameQuitUILayer.SetActive(true);
         }
+    }
+
+    protected override void OnOpen()
+    {
+        _gameQuitUILayer.SetActive(true);
+    }
+
+    protected override void OnClose()
+    {
+        _gameQuitUILayer.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
