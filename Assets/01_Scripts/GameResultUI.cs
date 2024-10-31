@@ -99,7 +99,7 @@ public class GameResultUI : MonoBehaviour
 
     private void Share()
     {
-        PluginManager.Instance.Share("친구가 Street Racer 점수 " + GameManager.Instance.Score + "점을 기록했습니다!");
+        AndroidFeatureManager.Instance.Share("친구가 Street Racer 점수 " + GameManager.Instance.Score + "점을 기록했습니다!");
     }
 
     private void AddGameResult()
