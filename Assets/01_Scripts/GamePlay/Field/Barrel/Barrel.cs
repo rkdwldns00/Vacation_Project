@@ -23,7 +23,7 @@ public class Barrel : ObjectPoolable, IObstacleResetable
         _barrelObject.localPosition = new Vector3(startXPos, 0, 0);
         _warningObject.localPosition = new Vector3(startXPos, 0, 0);
 
-        _barrelSpeed = Random.Range(_minBarrelSpeed, _maxBarrelSpeed);
+        _barrelSpeed = Random.Range(_minBarrelSpeed, _maxBarrelSpeed) * Mathf.Min(Player.Instance.MoveSpeedRate, 1.5f);
 
         _isPlayedWarningObject = false;
     }
