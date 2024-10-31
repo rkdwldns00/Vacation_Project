@@ -8,6 +8,8 @@ public class SinkHole : ObjectPoolable
     public float maxSize;
     public float minDistance;
     public float maxDistance;
+    public int minCount;
+    public int maxCount;
 
     public Vector2 cuttedSliceUV;
 
@@ -25,12 +27,33 @@ public class SinkHole : ObjectPoolable
                 Road road = col.GetComponent<Road>();
                 if (road is not null)
                 {
-                    road.SetMesh(CutRoad(road.curruntRoadMesh,
-                        Random.Range(0, 2) == 0,
-                        transform.position.z - road.transform.position.z,
-                        Random.Range(minDistance, maxDistance),
-                        startX1, startX1 + size,
-                        startX2, startX2 + size));
+                    float totalDistance = 0;
+                    bool isHole = Random.Range(0, 2) == 0;
+                    int count = Random.Range(minCount, maxCount + 1);
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        float distance = Random.Range(minDistance, maxDistance);
+
+                        if (transform.position.z - road.transform.position.z + totalDistance + distance > road.curruntRoadMesh.bounds.max.z - maxDistance)
+                        {
+                            i = count - 1;
+                        }
+
+                        road.SetMesh(CutRoad(road.curruntRoadMesh,
+                            isHole,
+                            transform.position.z - road.transform.position.z + totalDistance,
+                            distance,
+                            startX1, startX1 + size,
+                            startX2, startX2 + size, count - 1 == i));
+
+                        Debug.DrawLine(new Vector3(startX1, 0, totalDistance + transform.position.z), new Vector3(startX1 + size, 0, totalDistance + transform.position.z), Color.red, 1000);
+                        Debug.DrawLine(new Vector3(startX1, 0, totalDistance + transform.position.z), new Vector3(startX2, 0, totalDistance + distance + transform.position.z), Color.red, 1000);
+                        Debug.DrawLine(new Vector3(startX1 + size, 0, totalDistance + transform.position.z), new Vector3(startX2 + size, 0, totalDistance + distance + transform.position.z), Color.red, 1000);
+                        startX1 = startX2;
+                        startX2 = Random.Range(minX, maxX - size);
+                        totalDistance += distance;
+                    }
 
                     ReleaseObject();
                     break;
@@ -39,7 +62,7 @@ public class SinkHole : ObjectPoolable
         }
     }
 
-    public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2)
+    public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2, bool generateFrontWall)
     {
         Vector3 centor = new Vector3(mesh.bounds.center.x, 0, 0);
 
@@ -48,7 +71,7 @@ public class SinkHole : ObjectPoolable
         Mesh after;
 
         (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
-        (middle, after) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.forward, true, cuttedSliceUV);
+        (after, middle) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.back, generateFrontWall, cuttedSliceUV);
 
         Mesh result = MeshUtil.Merge(before, after);
         Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
@@ -59,9 +82,9 @@ public class SinkHole : ObjectPoolable
         if (isHole)
         {
             Mesh temp1, temp2;
-            (_, temp1) = MeshUtil.Cut(middle, leftPoint, leftNormal, true, cuttedSliceUV);
+            (temp1, _) = MeshUtil.Cut(middle, leftPoint, -leftNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp1);
-            (_, temp2) = MeshUtil.Cut(middle, rightPoint, rightNormal, true, cuttedSliceUV);
+            (temp2, _) = MeshUtil.Cut(middle, rightPoint, -rightNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp2);
         }
         else
