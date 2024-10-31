@@ -105,7 +105,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
             PlayerPrefs.Save();
 
             _unlockAccessoryButton.gameObject.SetActive(false);
-            _equipAccessoryButton.gameObject.SetActive(true);
+            EquipAccessory();
 
             _selectedAccessoryElement.UnlockAccessoryElement();
         }

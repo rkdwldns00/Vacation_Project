@@ -111,7 +111,7 @@ public class CarColorCustomizingUI : MonoBehaviour
             PlayerPrefs.Save();
 
             _unlockColorButton.gameObject.SetActive(false);
-            _equipColorButton.gameObject.SetActive(true);
+            EquipColor();
 
             _selectedColorElement.UnlockColorElement();
         }
