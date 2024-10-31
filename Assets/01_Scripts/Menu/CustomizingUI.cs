@@ -22,6 +22,7 @@ public class CustomizingUI : ManagedUI
     [SerializeField] private Button _closeButton;
     [SerializeField] private Transform _menuPlayerModelTransform;
 
+    public GameObject[] MenuPlayerModels { get => _menuPlayerModels; }
     private GameObject[] _menuPlayerModels;
 
     private int _curruntCarIndex;
@@ -49,6 +50,9 @@ public class CustomizingUI : ManagedUI
                 _menuPlayerModels[i].SetActive(false);
             }
         }
+
+        CarColorCustomizingUI.Instance.InstantiateCarColorElements();
+        CarAccessoryCustomizingUI.Instance.InstantiateCarAccessoryElements();
     }
 
     protected override void OnOpen()
