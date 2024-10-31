@@ -20,12 +20,14 @@ public class GameResultUI : MonoBehaviour
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _crystalResurrectionButton;
     [SerializeField] private Button _adResurrectionButton;
+    [SerializeField] private Button _shareButton;
 
     private void Awake()
     {
         _closeButton.onClick.AddListener(CloseUI);
         _crystalResurrectionButton.onClick.AddListener(TryCrystalResurrection);
         _adResurrectionButton.onClick.AddListener(TryAdResurrection);
+        _shareButton.onClick.AddListener(Share);
 
         OnClose += () => { SoundManager.Instance.StopBgm(); };
     }
@@ -64,9 +66,9 @@ public class GameResultUI : MonoBehaviour
 
     public void TryCrystalResurrection()
     {
-        if (Currency.Crystal >= 5)
+        if (Currency.Crystal >= 30)
         {
-            Currency.Crystal -= 5;
+            Currency.Crystal -= 30;
             Resurrection();
         }
         else
@@ -95,6 +97,11 @@ public class GameResultUI : MonoBehaviour
         _crystalResurrectionButton.gameObject.SetActive(false);
     }
 
+    private void Share()
+    {
+        PluginManager.Instance.Share("친구가 Street Racer 점수 " + GameManager.Instance.Score + "점을 기록했습니다!");
+    }
+
     private void AddGameResult()
     {
         GameManager.Instance.isBestScore = GameManager.Instance.Score > GameManager.Instance.BestScore;
@@ -106,7 +113,7 @@ public class GameResultUI : MonoBehaviour
         {
             Currency.Ticket--;
             GameManager.Instance.RewardGoldAdded = (int)(GameManager.Instance.RewardGold * 0.5f);
-            GameManager.Instance.RewardCrystalAdded = 1;
+            GameManager.Instance.RewardCrystalAdded = (int)(GameManager.Instance.RewardCrystal * 0.2f);
         }
         else
         {

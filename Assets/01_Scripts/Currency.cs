@@ -82,7 +82,7 @@ public static class Currency
 
     public static void UpdateTicket()
     {
-        if (_ticket == MaxTicket) return;
+        if (_ticket >= MaxTicket) return;
 
         int origin = _ticket;
         if (_TicketHealingTimer > TicketHealTime * MaxTicket)
