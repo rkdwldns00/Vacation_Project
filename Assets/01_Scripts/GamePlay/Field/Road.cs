@@ -78,7 +78,7 @@ public class Road : MonoBehaviour
 
     private void Update()
     {
-        if (Player.Instance != null && Player.Instance.transform.position.z - playerBackSpaceLength > lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount)
+        while (Player.Instance != null && Player.Instance.transform.position.z - playerBackSpaceLength > lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount)
         {
             MoveMesh();
         }
@@ -93,6 +93,8 @@ public class Road : MonoBehaviour
 
         meshFilter.sharedMesh = curruntRoadMesh;
         meshCollider.sharedMesh = curruntRoadMesh;
+
+        curruntRoadMesh.RecalculateBounds();
     }
 
     public void SetMesh(Mesh mesh)

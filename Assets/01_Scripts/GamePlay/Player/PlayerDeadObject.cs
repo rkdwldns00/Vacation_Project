@@ -51,11 +51,7 @@ public class PlayerDeadObject : MonoBehaviour
 
     private void DestroyHandler(Player player)
     {
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         PlayerSpawner.Instance.OnSpawned -= DestroyHandler;
+        Destroy(gameObject);
     }
 }

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
+  m_Name: 09_Outdoor
+  m_EditorClassIdentifier: 
+  Name: "\uC2E4\uC678\uAE30"
+  AccessoryObjectPrefab: {fileID: 3093387338167657276, guid: e1e4d2bfcd7a40e45935e943ea7c29c7, type: 3}
+  AccessoryPositionType: 1
+  AccessoryImage: {fileID: 21300000, guid: ba090f9b9917e7a4a9ddd82617073ec3, type: 3}
+  AccessorySize: {x: 1, y: 1, z: 1}
+  UnlockGoldCost: 1000
+  UnlockCrystalCost: 0

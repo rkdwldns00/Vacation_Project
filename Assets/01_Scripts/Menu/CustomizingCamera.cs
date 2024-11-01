@@ -10,6 +10,7 @@ public class CustomizingCamera : MonoBehaviour
     [SerializeField] private float _startYRot;
     [SerializeField] private float _rotateSpeed;
 
+    public GameObject[] Models { get => _models; }
     private GameObject[] _models;
     private int _showedCarIndex;
     private bool _isModelSpawned = false;

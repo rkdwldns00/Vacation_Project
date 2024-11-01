@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89eb5f553d2cae4080b02c7ea3088a3, type: 3}
+  m_Name: 25_Toilet
+  m_EditorClassIdentifier: 
+  Name: "\uBCC0\uAE30"
+  AccessoryObjectPrefab: {fileID: 2852940942439001274, guid: 18ff43ccb9142cb42920665776fb3177, type: 3}
+  AccessoryPositionType: 0
+  AccessoryImage: {fileID: 21300000, guid: 8e0004d76eab134439a975c04cc069e6, type: 3}
+  AccessorySize: {x: 1.25, y: 1.25, z: 1.25}
+  UnlockGoldCost: 0
+  UnlockCrystalCost: 500
