@@ -39,6 +39,8 @@ public class MenuManager : MonoBehaviour
 
             GameManager.Instance.PlayerModelId = 0;
         }
+
+        SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.MenuBgm, SoundType.BGM);
     }
 
     [ContextMenu("튜토리얼 활성화")]
