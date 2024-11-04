@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9549e44f6c5fcc48b2b64905d56e7e0, type: 3}
   m_Name: Sound Data
   m_EditorClassIdentifier: 
-  MenuBgm: {fileID: 0}
+  MenuBgm: {fileID: 8300000, guid: 9669960e415ea604d81fb0784634df79, type: 3}
   GameBgm: {fileID: 8300000, guid: 27a36dc82ff32054d88d76929bcd1079, type: 3}
+  PlayerDamagedSfx: {fileID: 8300000, guid: a1f7abf0dd920704dab30efe19ec8631, type: 3}
+  GetGemSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  GetItemSfx: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
+  EngineSfx: {fileID: 8300000, guid: 316224186e8ae6543990a05f4dc13981, type: 3}
