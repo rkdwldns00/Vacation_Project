@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
     {
         SetGoldRate();
         OnChangedBoostGazy?.Invoke(0);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.EngineSfx, SoundType.SFX, true);
     }
 
     protected virtual void Update()
@@ -273,6 +274,7 @@ public class Player : MonoBehaviour
         OnChangedHealth?.Invoke();
 
         Instantiate(_playerSetting.playerDamagedEffect, transform.position, Quaternion.identity);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.PlayerDamagedSfx);
 
         if (CurruntHealth <= 0)
         {

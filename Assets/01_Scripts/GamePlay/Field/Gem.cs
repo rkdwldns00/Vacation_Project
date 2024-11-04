@@ -14,6 +14,7 @@ public class Gem : ObjectPoolable
         {
             p.ChargeBoost(_chargeValue);
             Instantiate(_getGemEffect, transform.position, Quaternion.identity);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.GetGemSfx);
             ReleaseObject();
         }
     }

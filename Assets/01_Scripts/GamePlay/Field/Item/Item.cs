@@ -21,6 +21,7 @@ public abstract class Item : ObjectPoolable
         if (buffSystem != null)
         {
             UseItem(buffSystem);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.GetItemSfx);
             ReleaseObject();
         }
     }

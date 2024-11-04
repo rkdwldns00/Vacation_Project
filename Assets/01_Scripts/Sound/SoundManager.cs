@@ -40,11 +40,23 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip audioClip, SoundType soundType = SoundType.SFX)
+    public void PlaySound(AudioClip audioClip, SoundType soundType = SoundType.SFX, bool isLoop = false)
     {
         if (soundType == SoundType.SFX)
         {
-            _sfxAudioSource.PlayOneShot(audioClip);
+            if (isLoop)
+            {
+                GameObject go = new GameObject("loopAudioSource");
+                AudioSource source = go.AddComponent<AudioSource>();
+                source.loop = true;
+                source.clip = audioClip;
+                source.Play();
+            }
+            else
+            {
+                _sfxAudioSource.PlayOneShot(audioClip);
+            }
+            
         }
         else if (soundType == SoundType.BGM)
         {
