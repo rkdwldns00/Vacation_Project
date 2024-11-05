@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자
+ * 핵심 코드 구현 : 강지운
+ * 점수 프로퍼티 작성 : 이기환
+ */
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;

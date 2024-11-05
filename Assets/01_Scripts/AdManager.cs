@@ -4,6 +4,7 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
 
+/* 코드 작성자 : 강지운 */
 public class AdManager : MonoBehaviour
 {
     public static AdManager Instance

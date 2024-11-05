@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자 : 강지운 */
 public class CustomizingCamera : MonoBehaviour
 {
     private const float MODEL_SPACING = 5f;

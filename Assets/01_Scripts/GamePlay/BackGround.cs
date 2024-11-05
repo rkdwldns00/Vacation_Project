@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using UnityEngine;
 
+/* 코드 작성자 : 강지운 */
 public class BackGround : MonoBehaviour
 {
     [SerializeField] private GameObject[] _buildingPrefabs;

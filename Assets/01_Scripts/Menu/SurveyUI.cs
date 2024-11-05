@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* 코드 작성자
+ * ManagedUI 상속 적용 : 강지운
+ * 설문조사 기능 구현 : 이기환
+ */
 public class SurveyUI : ManagedUI
 {
     [SerializeField] private GameObject _surveyUILayer;

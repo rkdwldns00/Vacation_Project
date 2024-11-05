@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+/* 코드 작성자 : 강지운 */
 [DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {

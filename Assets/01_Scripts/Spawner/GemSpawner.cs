@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+/* 코드 작성자 : 강지운 */
 public class GemSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _gemPrefab;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/* 코드 작성자 : 강지운 */
 public class CurrencyUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _goldText;

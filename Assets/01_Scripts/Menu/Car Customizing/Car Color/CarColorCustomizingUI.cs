@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* 코드 작성자 : 이기환 */
 public class CarColorCustomizingUI : MonoBehaviour
 {
     public static CarColorCustomizingUI Instance;

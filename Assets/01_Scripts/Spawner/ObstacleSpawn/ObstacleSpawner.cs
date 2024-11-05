@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자 : 이기환 */
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private List<ObstacleSpawnData> _obstacleSpawnDatas;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자 : 강지운 */
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _itemPrefabs;

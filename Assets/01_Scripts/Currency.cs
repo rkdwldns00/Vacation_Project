@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
+/* 코드 작성자 : 강지운 */
 public static class Currency
 {
     private static int _gold = PlayerPrefs.GetInt("gold");

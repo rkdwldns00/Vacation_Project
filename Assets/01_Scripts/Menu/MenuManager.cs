@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+/* 코드 작성자
+ * 튜토리얼, ContextMenu 구현 : 강지운
+ * 스코어 UI, 게임 시작 구현 : 이기환
+ */
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _bestScoreText;
