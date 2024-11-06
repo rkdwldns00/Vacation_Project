@@ -5,6 +5,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* 코드 작성자
+ * 부활, 공유, 보상 재화 구현 : 강지운
+ * 게임 결과 UI 구현 : 이기환
+ */
 public class GameResultUI : MonoBehaviour
 {
     public event Action OnOpen;

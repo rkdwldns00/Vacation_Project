@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자 : 이기환 */
 public class BuffSystem : MonoBehaviour
 {
     private List<Buff> _buffs = new List<Buff>();

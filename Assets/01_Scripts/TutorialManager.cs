@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/* 코드 작성자 : 강지운 */
 public class TutorialManager : MonoBehaviour
 {
     public static bool isActive;

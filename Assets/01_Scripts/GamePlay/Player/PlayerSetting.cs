@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/* 코드 작성자
+ * 이동 설정, 기본 스탯, 모델 구현 : 강지운
+ * 에셋 관리, 스피드 레벨스케일링 구현 : 이기환
+ */
 [CreateAssetMenu(fileName = "플레이어 설정", menuName = "Player Setting", order = int.MinValue)]
 public class PlayerSetting : ScriptableObject
 {

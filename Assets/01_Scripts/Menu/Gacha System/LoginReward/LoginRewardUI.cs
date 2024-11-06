@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* 코드 작성자 : 강지운 */
 public class LoginRewardUI : ManagedUI
 {
     [Header("보상")]

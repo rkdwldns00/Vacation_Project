@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
+/* 코드 작성자 : 이기환 */
 [CustomEditor(typeof(CarAccessoryCustomizingUI))]
 public class CarAccessoryImageGenerator : Editor
 {

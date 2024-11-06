@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/* 코드 작성자 : 강지운 */
 public class SinkHole : ObjectPoolable
 {
     public float minX;

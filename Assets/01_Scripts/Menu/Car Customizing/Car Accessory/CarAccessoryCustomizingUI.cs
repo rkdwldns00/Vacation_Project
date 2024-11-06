@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* 코드 작성자 : 이기환 */
 public class CarAccessoryCustomizingUI : MonoBehaviour
 {
     public static CarAccessoryCustomizingUI Instance;
