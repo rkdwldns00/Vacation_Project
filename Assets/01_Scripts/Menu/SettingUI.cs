@@ -12,15 +12,22 @@ public class SettingUI : ManagedUI
     [SerializeField] private Button _settingUICloseButton;
     [SerializeField] private Slider _moveSensitivitySlider;
 
+    private const string _moveSensitivityKey = "MoveSensitivity";
+
     public override void Awake()
     {
         base.Awake();
-        _moveSensitivitySlider.value = moveSensitivity;
+        _moveSensitivitySlider.value = PlayerPrefs.GetFloat(_moveSensitivityKey);
 
         _settingUIActivateButton.onClick.AddListener(() => OpenUI(EUIType.Page));
         _settingUICloseButton.onClick.AddListener(CloseUI);
 
-        _moveSensitivitySlider.onValueChanged.AddListener((float changedValue) => moveSensitivity = changedValue);
+        _moveSensitivitySlider.onValueChanged.AddListener((changedValue) =>
+        {
+            moveSensitivity = changedValue;
+            PlayerPrefs.SetFloat(_moveSensitivityKey, changedValue);
+            PlayerPrefs.Save();
+        });
     }
 
     protected override void OnOpen()
