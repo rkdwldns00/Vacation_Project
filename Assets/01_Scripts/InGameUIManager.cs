@@ -35,6 +35,7 @@ public class InGameUIManager : MonoBehaviour
 
     [Header("Pause UI")]
     [SerializeField] private GameObject _pauseLayer;
+    [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _cancelPauseButton;
 
     [Header("Player UI")]
@@ -66,6 +67,10 @@ public class InGameUIManager : MonoBehaviour
         PlayerSpawner.Instance.OnSpawned += OnPlayerSpawned;
 
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
+        _pauseButton.onClick.AddListener(() =>
+        {
+            if (Player.Instance != null) SetPause(!_pauseLayer.activeSelf);
+        });
         _cancelPauseButton.onClick.AddListener(() => { SetPause(false); });
     }
 
