@@ -21,14 +21,6 @@ public class MenuManager : MonoBehaviour
         {
             GameManager.Instance.PlayerModelId = 0;
         }
-    }
-
-    private void Start()
-    {
-        Screen.orientation = ScreenOrientation.Portrait;
-
-        SetBestScoreText(GameManager.Instance.BestScore);
-        Application.targetFrameRate = 120;
 
         if (_playerSetting.playerPrefabs[0].GetComponent<Player>().PlayerLevel == 0)
         {
@@ -43,6 +35,15 @@ public class MenuManager : MonoBehaviour
 
             GameManager.Instance.PlayerModelId = 0;
         }
+    }
+
+    private void Start()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+
+        SetBestScoreText(GameManager.Instance.BestScore);
+        Application.targetFrameRate = 120;
+
 
         SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.MenuBgm, SoundType.BGM);
     }
