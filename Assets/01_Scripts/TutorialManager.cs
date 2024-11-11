@@ -19,6 +19,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject jumpPlayerUI;
     public GameObject hpUI;
     public GameObject gemUI;
+    public GameObject chaserHitUI;
 
     private bool playerHitted = false;
     private bool playerHittedByChaser = false;
@@ -67,6 +68,7 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        /*
         Time.timeScale = 0f;
         swipePlayerUI.SetActive(true);
 #if UNITY_EDITOR
@@ -84,6 +86,7 @@ public class TutorialManager : MonoBehaviour
         Time.timeScale = 1f;
 
         yield return new WaitForSeconds(2f);
+        */
 
         Time.timeScale = 0f;
         jumpPlayerUI.SetActive(true);
@@ -147,11 +150,11 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => playerHittedByChaser);
         _player.OnChangedBoostGazy -= chaserEvent;
 
-        gemUI.SetActive(true);
+        chaserHitUI.SetActive(true);
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(2);
         Time.timeScale = 1f;
-        gemUI.SetActive(false);
+        chaserHitUI.SetActive(false);
 
 
         Instantiate(spikePrefab, _player.transform.position + new Vector3(0, 0, 60), Quaternion.identity);
