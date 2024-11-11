@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     public virtual int MaxLevel => 1;
     public virtual bool IsUpgradable => PlayerLevel < MaxLevel;
-    public virtual int UpgradeCost => PlayerLevel * UnlockCost * 10;
+    public virtual int UpgradeCost => PlayerLevel * UnlockCost;
     public virtual int UnlockCost => 0;
     public virtual string CarInfo => "기본 차량";
 
