@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class SettingUI : ManagedUI
 {
-    public static float moveSensitivity;
+    public static float MoveSensitivity
+    {
+        get => PlayerPrefs.GetFloat("MoveSensitivity");
+        private set => PlayerPrefs.SetFloat("MoveSensitivity", value);
+    }
 
     [SerializeField] private GameObject _settingUILayer;
     [SerializeField] private Button _settingUIActivateButton;
@@ -15,12 +19,16 @@ public class SettingUI : ManagedUI
     public override void Awake()
     {
         base.Awake();
-        _moveSensitivitySlider.value = moveSensitivity;
+        _moveSensitivitySlider.value = MoveSensitivity;
 
         _settingUIActivateButton.onClick.AddListener(() => OpenUI(EUIType.Page));
         _settingUICloseButton.onClick.AddListener(CloseUI);
 
-        _moveSensitivitySlider.onValueChanged.AddListener((float changedValue) => moveSensitivity = changedValue);
+        _moveSensitivitySlider.onValueChanged.AddListener((changedValue) =>
+        {
+            MoveSensitivity = changedValue;
+            PlayerPrefs.Save();
+        });
     }
 
     protected override void OnOpen()
