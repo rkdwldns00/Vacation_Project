@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /* 코드 작성자 : 강지운 */
 [DisallowMultipleComponent]
@@ -189,7 +190,7 @@ public class Player : MonoBehaviour
 
     protected virtual void MoveHandler()
     {
-        if (!CanControl) return;
+        if (!CanControl || EventSystem.current.IsPointerOverGameObject()) return;
 
         if (Input.GetMouseButton(0))
         {

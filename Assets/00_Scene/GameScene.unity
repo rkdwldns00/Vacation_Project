@@ -415,7 +415,6 @@ GameObject:
   m_Component:
   - component: {fileID: 325646508}
   - component: {fileID: 325646509}
-  - component: {fileID: 325646510}
   m_Layer: 5
   m_Name: Pause Button
   m_TagString: Untagged
@@ -490,18 +489,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &325646510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325646507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9220ccf885e1b084a9a4ab85f94164e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &357551989
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +805,6 @@ GameObject:
   - component: {fileID: 451666398}
   - component: {fileID: 451666400}
   - component: {fileID: 451666399}
-  - component: {fileID: 451666401}
   m_Layer: 5
   m_Name: "\uD655\uC778"
   m_TagString: Untagged
@@ -901,18 +887,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451666397}
   m_CullTransparentMesh: 1
---- !u!114 &451666401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451666397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac6a37e05a7505d4e93bc7685c0871c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &503148297
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,7 +2226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3720,6 +3694,7 @@ MonoBehaviour:
   _currentScoreText: {fileID: 2002337039}
   _bestScoreRecord: {fileID: 2078819011}
   _pauseLayer: {fileID: 139983923}
+  _pauseButton: {fileID: 325646509}
   _cancelPauseButton: {fileID: 451666399}
   _playerLossHpPrefab: {fileID: 4183890892438067767, guid: aee5d16d4253fc143ad742cfffbfa652, type: 3}
   _playerLossHpParent: {fileID: 1483858739}
