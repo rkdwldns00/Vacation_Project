@@ -26,7 +26,7 @@ public class GameResultUI : MonoBehaviour
     {
         _closeButton.onClick.AddListener(CloseUI);
         _crystalResurrectionButton.onClick.AddListener(TryCrystalResurrection);
-        _adResurrectionButton.onClick.AddListener(TryAdResurrection);
+        //_adResurrectionButton.onClick.AddListener(TryAdResurrection);
         _shareButton.onClick.AddListener(Share);
 
         OnClose += () => { SoundManager.Instance.StopBgm(); };
@@ -93,7 +93,7 @@ public class GameResultUI : MonoBehaviour
 
     private void DisableResurrection()
     {
-        _adResurrectionButton.gameObject.SetActive(false);
+        //_adResurrectionButton.gameObject.SetActive(false);
         _crystalResurrectionButton.gameObject.SetActive(false);
     }
 

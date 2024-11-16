@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GoogleMobileAds.Api;
+//sing GoogleMobileAds.Api;
 using System;
 
 public class AdManager : MonoBehaviour
@@ -18,7 +18,7 @@ public class AdManager : MonoBehaviour
     }
     private static AdManager instance;
 
-    private RewardedAd rewardedAd;
+    //private RewardedAd rewardedAd;
     private Action adSucceedCallBack;
 
     private void InitAds()
@@ -33,10 +33,10 @@ public class AdManager : MonoBehaviour
             adUnitId = "unexpected_platform";
 #endif
 
-        RewardedAd.Load(adUnitId, new AdRequest(), LoadCallback);
+        //RewardedAd.Load(adUnitId, new AdRequest(), LoadCallback);
     }
 
-    private void LoadCallback(RewardedAd rewardedAd, LoadAdError loadAdError)
+    /*private void LoadCallback(RewardedAd rewardedAd, LoadAdError loadAdError)
     {
         if (rewardedAd != null)
         {
@@ -48,25 +48,25 @@ public class AdManager : MonoBehaviour
             Debug.Log(loadAdError.GetMessage());
         }
 
-    }
+    }*/
 
     public void ShowAds(Action succeedCallBack,Action failedCallBack)
     {
-        if (rewardedAd.CanShowAd())
+        /*if (rewardedAd.CanShowAd())
         {
             adSucceedCallBack = succeedCallBack;
             rewardedAd.Show(GetReward);
         }
         else
-        {
+        {*/
             failedCallBack?.Invoke();
-        }
+        //}
     }
 
-    private void GetReward(Reward reward)
+    /*private void GetReward(Reward reward)
     {
         adSucceedCallBack?.Invoke();
         adSucceedCallBack = null;
         InitAds();
-    }
+    }*/
 }
