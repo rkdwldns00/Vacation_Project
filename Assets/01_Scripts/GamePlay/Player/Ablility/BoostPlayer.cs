@@ -21,10 +21,11 @@ public class BoostPlayer : Player
             }
         }
     }
-    
+
     [SerializeField] private float _boostSpeed;
+    [SerializeField] private GameObject _shieldEffect;
     private int _lastBoostGazy;
-    
+
 
     protected override void Reset()
     {
@@ -44,6 +45,7 @@ public class BoostPlayer : Player
         if ((int)BoostGazy > _lastBoostGazy)
         {
             _buffSystem.AddBuff(new BoostBuff(_boostSpeed, GetBoostTime(PlayerLevel)));
+            _buffSystem.AddBuff(new ObstacleShieldBuff(_shieldEffect, 1.2f));
         }
         _lastBoostGazy = (int)BoostGazy;
     }
