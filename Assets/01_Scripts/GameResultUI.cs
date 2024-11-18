@@ -116,15 +116,13 @@ public class GameResultUI : MonoBehaviour
         if (Currency.Ticket > 0)
         {
             Currency.Ticket--;
-            GameManager.Instance.RewardGoldAdded = (int)(GameManager.Instance.RewardGold * 0.5f);
-            GameManager.Instance.RewardCrystalAdded = (int)(GameManager.Instance.RewardCrystal * 0.2f);
-        }
-        else
-        {
-            GameManager.Instance.RewardGoldAdded = 0;
-            GameManager.Instance.RewardCrystalAdded = 0;
+            GameManager.Instance.RewardGoldAdded += (int)(GameManager.Instance.RewardGold * 0.5f);
+            GameManager.Instance.RewardCrystalAdded += (int)(GameManager.Instance.RewardCrystal * 0.2f);
         }
         Currency.Gold += GameManager.Instance.RewardGold;
         Currency.Crystal += GameManager.Instance.RewardCrystal;
+
+        GameManager.Instance.RewardGoldAdded = 0;
+        GameManager.Instance.RewardCrystalAdded = 0;
     }
 }
