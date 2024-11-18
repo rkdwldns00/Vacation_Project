@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     public bool CanControl { get; set; } = true;
     public GameObject playerMesh;
     private Mesh _mesh;
-    private BuffSystem _buffSystem;
+    protected BuffSystem _buffSystem;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 

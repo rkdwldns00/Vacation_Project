@@ -21,8 +21,7 @@ public class BoostPlayer : Player
             }
         }
     }
-
-    [SerializeField] private BuffSystem _buffSystem;
+    
     [SerializeField] private float _boostSpeed;
     private int _lastBoostGazy;
     
