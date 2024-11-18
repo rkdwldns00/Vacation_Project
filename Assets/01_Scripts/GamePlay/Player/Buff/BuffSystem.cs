@@ -7,29 +7,32 @@ public class BuffSystem : MonoBehaviour
 {
     private List<Buff> _buffs = new List<Buff>();
 
-    public void AddBuff(Buff buff)
+    public Buff AddBuff(Buff buff)
     {
         if (ContainBuff(buff))
         {
-            MergeBuff(buff);
+            return MergeBuff(buff);
         }
         else
         {
             _buffs.Add(buff);
             buff.StartBuff(this);
+
+            return buff;
         }
     }
 
-    public void MergeBuff(Buff buff)
+    public Buff MergeBuff(Buff buff)
     {
         foreach (Buff hasBuff in _buffs)
         {
             if (buff.GetType() == hasBuff.GetType())
             {
                 hasBuff.MergeBuff(buff);
-                break;
+                return hasBuff;
             }
         }
+        return null;
     }
 
     public void RemoveBuff(Buff buff)
