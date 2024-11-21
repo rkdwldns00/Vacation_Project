@@ -38,7 +38,11 @@ public class CarColorCustomizingUI : MonoBehaviour
     private CarColorElementUI _equippedColorElement;
     private CarColorElementUI _selectedColorElement;
 
-    private const string _lastEquippedCarColor = "Last Car Color";
+    private string _lastEquippedCarColor
+    {
+        get => PlayerPrefs.GetString("Last Car Color");
+        set => PlayerPrefs.SetString("Last Car Color", value);
+    }
 
     private void Awake()
     {
@@ -69,7 +73,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         foreach (Transform carColorElement in _carColorElementParent.transform)
         {
-            if (carColorElement.GetComponent<CarColorElementUI>()?.CarColorData.Name == PlayerPrefs.GetString(_lastEquippedCarColor))
+            if (carColorElement.GetComponent<CarColorElementUI>()?.CarColorData.Name == _lastEquippedCarColor)
             {
                 _selectedColorElement = carColorElement.GetComponent<CarColorElementUI>();
                 EquipColor();
@@ -131,7 +135,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
             ChangeCarColor(_equippedColorElement.CarColorData.ColorMaterial);
 
-            PlayerPrefs.SetString(_lastEquippedCarColor, _equippedColorElement.CarColorData.Name);
+            _lastEquippedCarColor = _equippedColorElement.CarColorData.Name;
             PlayerPrefs.Save();
 
             _equipColorButton.gameObject.SetActive(false);
@@ -148,7 +152,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         ChangeCarColor(_originMaterial);
 
-        PlayerPrefs.SetString(_lastEquippedCarColor, "");
+        _lastEquippedCarColor = "";
         PlayerPrefs.Save();
 
         _equippedColorElement = null;
