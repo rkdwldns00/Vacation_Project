@@ -61,11 +61,6 @@ public class CarColorCustomizingUI : MonoBehaviour
 
     public void InstantiateCarColorElements()
     {
-        foreach(Transform child in _carColorElementParent.transform)
-        {
-            if (_carColorElementParent.transform != child) Destroy(child.gameObject);
-        }
-
         foreach (CarColorData carColorData in _carColorDatas)
         {
             Instantiate(_carColorElementPrefab, _carColorElementParent).GetComponent<CarColorElementUI>().InitElementUI(carColorData, this);
