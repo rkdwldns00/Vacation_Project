@@ -6,7 +6,7 @@ public class GoldChargeButton : MonoBehaviour
 {
     public void TryShowGoldAd()
     {
-        AdManager.Instance.ShowAds(GiveReward,Fail);
+        //AdManager.Instance.ShowAds(GiveReward,Fail);
     }
 
     private void GiveReward()
