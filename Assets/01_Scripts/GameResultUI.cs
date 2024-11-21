@@ -87,6 +87,7 @@ public class GameResultUI : MonoBehaviour
 
         _layer.SetActive(false);
         PlayerSpawner.Instance.OnSpawned += (player) => player.GetComponent<BuffSystem>().AddBuff(new ObstacleShieldBuff(null, 1));
+        PlayerSpawner.Instance.OnSpawned += (player) => player.ChargeBoost(1);
         PlayerSpawner.Instance.SpawnPlayer();
     }
 
