@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class CarAccessoryCustomizingUI : MonoBehaviour
 {
     public static CarAccessoryCustomizingUI Instance;
+    public static CarAccessoryData EquippedCarAccessoryData;
 
     [SerializeField] private GameObject _layer;
     public CarAccessoryData[] CarAccessoryDatas { get => _carAccessoryDatas; }
@@ -147,17 +148,14 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
 
     private void ChangeCarAccessory(CarAccessoryData carAccessoryData)
     {
+        EquippedCarAccessoryData = carAccessoryData;
+
         foreach (GameObject model in _customizingCamera.Models)
         {
             model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
         }
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
-        {
-            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
-        }
-
-        foreach (GameObject model in _playerSetting.PlayerModels)
         {
             model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
         }

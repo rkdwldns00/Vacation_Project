@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class CarColorCustomizingUI : MonoBehaviour
 {
     public static CarColorCustomizingUI Instance;
+    public static Material EquippedColorMaterial;
 
     [SerializeField] private GameObject _layer;
     [SerializeField] private CarColorData[] _carColorDatas;
@@ -50,6 +51,8 @@ public class CarColorCustomizingUI : MonoBehaviour
         _unequipColorButton.onClick.AddListener(UnequipColor);
         _unlockColorButton.onClick.AddListener(UnlockColor);
         _exitUIButton.onClick.AddListener(CloseUI);
+
+        EquippedColorMaterial = _originMaterial;
     }
 
     public void InstantiateCarColorElements()
@@ -153,17 +156,14 @@ public class CarColorCustomizingUI : MonoBehaviour
 
     private void ChangeCarColor(Material colorMaterial)
     {
-        foreach(GameObject model in _customizingCamera.Models)
+        EquippedColorMaterial = colorMaterial;
+
+        foreach (GameObject model in _customizingCamera.Models)
         {
             model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
         }
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
-        {
-            model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
-        }
-
-        foreach (GameObject model in _playerSetting.PlayerModels)
         {
             model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
         }

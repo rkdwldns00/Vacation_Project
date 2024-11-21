@@ -30,6 +30,12 @@ public class PlayerSpawner : MonoBehaviour
         GameManager.Instance.GemScore = 0;
         GameManager.Instance.DistanceScore = 0;
 
+        OnSpawned += (player) =>
+        {
+            player.GetComponentInChildren<CarColorMeshRenderer>().ChangeCarColor(CarColorCustomizingUI.EquippedColorMaterial);
+            player.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(CarAccessoryCustomizingUI.EquippedCarAccessoryData);
+        };
+
         SpawnPlayer();
     }
 
