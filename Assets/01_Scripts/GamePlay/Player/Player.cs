@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
 
     protected virtual void Update()
     {
-        UpdaateDistanceScore();
+        UpdateDistanceScore();
         MoveHandler();
         IncreaseSpeedWithScore();
 
@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected virtual void UpdaateDistanceScore()
+    protected virtual void UpdateDistanceScore()
     {
         GameManager.Instance.DistanceScore = (int)transform.position.z;
     }
