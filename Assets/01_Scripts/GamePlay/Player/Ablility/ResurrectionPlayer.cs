@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostPlayer : Player
+public class ResurrectionPlayer : Player
 {
     public override int MaxLevel => 10;
     public override int UpgradeCost => 150;

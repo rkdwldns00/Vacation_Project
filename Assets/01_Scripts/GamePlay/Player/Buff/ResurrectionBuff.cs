@@ -41,7 +41,7 @@ public class ResurrectionBuff : Buff
         RemainingTime -= Time.deltaTime;
         if (RemainingTime <= 0)
         {
-            BoostPlayer boostPlayer = _player as BoostPlayer;
+            ResurrectionPlayer boostPlayer = _player as ResurrectionPlayer;
             if (boostPlayer != null)
             {
                 boostPlayer.ResurrectionFail();
