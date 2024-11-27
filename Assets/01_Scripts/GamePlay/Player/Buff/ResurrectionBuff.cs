@@ -6,15 +6,17 @@ public class ResurrectionBuff : Buff
 {
     private Player _player;
     private BuffSystem _buffSystem;
+    private GameObject _effect;
 
     public float ResurrectionGazy { get; private set; }
     public float DurationTime { get; private set; }
     public float RemainingTime { get; private set; }
 
-    public ResurrectionBuff(float durationTime)
+    public ResurrectionBuff(float durationTime, GameObject effect)
     {
         DurationTime = durationTime;
         RemainingTime = durationTime;
+        _effect = effect;
     }
 
     public override void StartBuff(BuffSystem buffSystem)
@@ -25,6 +27,8 @@ public class ResurrectionBuff : Buff
         _player.BoostGazy = 0;
         _player.OnChangedBoostGazy += OnChargeBoost;
         _player.TakeDamage(2);
+
+        _effect.SetActive(true);
     }
 
     public override void MergeBuff<T>(T otherBuff)
@@ -52,6 +56,10 @@ public class ResurrectionBuff : Buff
     public override void EndBuff(BuffSystem buffSystem)
     {
         _player.OnChangedBoostGazy -= OnChargeBoost;
+        if (_effect)
+        {
+            _effect.SetActive(false);
+        }
     }
 
     private void OnChargeBoost(float chargeValue)

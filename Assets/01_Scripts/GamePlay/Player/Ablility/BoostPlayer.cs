@@ -25,6 +25,8 @@ public class BoostPlayer : Player
     public override int MaxHealth => 2;
     public override float MaxBoostGazy => 2;
 
+    [SerializeField] private GameObject _resurrectionEffect;
+
     private float GetResurrectionBuffDurationTime(int playerLevel)
     {
         return playerLevel * 1.5f;
@@ -32,11 +34,11 @@ public class BoostPlayer : Player
 
     protected override void DieHandler()
     {
-        if(transform.position.y < -0.2f)
+        if (transform.position.y < -0.2f)
         {
             base.DieHandler();
         }
-        _buffSystem.AddBuff(new ResurrectionBuff(GetResurrectionBuffDurationTime(PlayerLevel)));
+        _buffSystem.AddBuff(new ResurrectionBuff(GetResurrectionBuffDurationTime(PlayerLevel), _resurrectionEffect));
     }
 
     public void ResurrectionFail()
