@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
 
     protected virtual void Update()
     {
-        UpdaateDistanceScore();
+        UpdateDistanceScore();
         MoveHandler();
         IncreaseSpeedWithScore();
 
@@ -140,6 +140,12 @@ public class Player : MonoBehaviour
 
         rotation.x = -_rigid.velocity.y;
 
+        if (_buffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < 0.1f)
+        {
+            position.y = -0.1f;
+            _rigid.velocity = new Vector3(_rigid.velocity.x, 0, _rigid.velocity.z);
+        }
+
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
 
@@ -153,7 +159,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
+        if (!_buffSystem.ContainBuff<ObstacleShieldBuff>() && transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
         {
             DieHandler();
         }
@@ -183,7 +189,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected virtual void UpdaateDistanceScore()
+    protected virtual void UpdateDistanceScore()
     {
         GameManager.Instance.DistanceScore = (int)transform.position.z;
     }

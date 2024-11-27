@@ -34,7 +34,7 @@ public class ScorePlayer : Player
         RunOnChangedBoostGazy(value);
     }
 
-    protected override void UpdaateDistanceScore()
+    protected override void UpdateDistanceScore()
     {
         GameManager.Instance.DistanceScore = (int)(transform.position.z * GetBonus(PlayerLevel));
     }
