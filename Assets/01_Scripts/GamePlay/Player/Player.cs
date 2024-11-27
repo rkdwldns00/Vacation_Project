@@ -38,9 +38,12 @@ public class Player : MonoBehaviour
         {
             return _boostGazy;
         }
-        protected set
+        set
         {
+            float originBoostGazy = _boostGazy;
             _boostGazy = Mathf.Clamp(value, 0, MaxBoostGazy);
+
+            OnChangedBoostGazy?.Invoke(_boostGazy - originBoostGazy);
         }
     }
 
@@ -229,7 +232,6 @@ public class Player : MonoBehaviour
     {
         BoostGazy += value;
         GameManager.Instance.GemScore += 10;
-        OnChangedBoostGazy?.Invoke(value);
     }
 
     public virtual bool UseBoost()
@@ -237,7 +239,6 @@ public class Player : MonoBehaviour
         if (BoostGazy > 1)
         {
             BoostGazy -= 1;
-            OnChangedBoostGazy?.Invoke(-1);
             return true;
         }
         return false;
@@ -284,7 +285,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeHeal(int heal = 1)
+    public virtual void TakeHeal(int heal = 1)
     {
         if (CurruntHealth == MaxHealth || _isDead) return;
 
@@ -299,7 +300,7 @@ public class Player : MonoBehaviour
         DieHandler();
     }
 
-    private void DieHandler()
+    protected virtual void DieHandler()
     {
         if (_isDead) return;
 #if UNITY_EDITOR
