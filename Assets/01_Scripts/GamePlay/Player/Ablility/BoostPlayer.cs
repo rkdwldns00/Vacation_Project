@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BoostPlayer : Player
 {
-    public override int MaxLevel => 5;
-    public override int UpgradeCost => 500;
+    public override int MaxLevel => 10;
+    public override int UpgradeCost => 150;
     public override int UnlockCost => 150;
     public override string CarInfo
     {
@@ -13,40 +13,34 @@ public class BoostPlayer : Player
         {
             if (PlayerLevel == 0)
             {
-                return string.Format("젬을 한칸 채울 때 마다\n최대 {0}초 부스트를 얻습니다.", GetBoostTime(MaxLevel));
+                return string.Format("죽기전 무적 효과를 얻고,\n최대 {0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(MaxLevel));
             }
             else
             {
-                return string.Format("젬을 한칸 채울 때 마다\n{0}초 부스트를 얻습니다.", GetBoostTime(PlayerLevel));
+                return string.Format("죽기전 무적 효과를 얻고,\n{0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(PlayerLevel));
             }
         }
     }
 
-    [SerializeField] private float _boostSpeed;
-    [SerializeField] private GameObject _shieldEffect;
-    private int _lastBoostGazy;
+    public override int MaxHealth => 2;
+    public override float MaxBoostGazy => 2;
 
-
-    protected override void Reset()
+    private float GetResurrectionBuffDurationTime(int playerLevel)
     {
-        base.Reset();
-        _buffSystem = GetComponent<BuffSystem>();
+        return playerLevel * 1.5f;
     }
 
-    private float GetBoostTime(int playerLevel)
+    protected override void DieHandler()
     {
-        return playerLevel / 5f;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        if ((int)BoostGazy > _lastBoostGazy)
+        if(transform.position.y < -0.2f)
         {
-            _buffSystem.AddBuff(new BoostBuff(_boostSpeed, GetBoostTime(PlayerLevel)));
-            _buffSystem.AddBuff(new ObstacleShieldBuff(_shieldEffect, 1.2f));
+            base.DieHandler();
         }
-        _lastBoostGazy = (int)BoostGazy;
+        _buffSystem.AddBuff(new ResurrectionBuff(GetResurrectionBuffDurationTime(PlayerLevel)));
+    }
+
+    public void ResurrectionFail()
+    {
+        base.DieHandler();
     }
 }
