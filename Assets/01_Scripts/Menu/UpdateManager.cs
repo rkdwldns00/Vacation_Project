@@ -28,17 +28,19 @@ public class UpdateManager : MonoBehaviour
                 (level) => level * unlockCost[3],
                 (level) => level * unlockCost[4],
                 (level) => level * unlockCost[5],
-                (level) => level * unlockCost[6],
                 (level) => 500,
-                (level) => level * unlockCost[8]
+                (level) => level * unlockCost[7]
             };
 
             for (int i = 1; i < 8; i++)
             {
                 int level = PlayerPrefs.GetInt("Player" + (i + 1) + "Level");
+                if (level > 0)
+                {
+                    Currency.Crystal += unlockCost[i];
+                }
 
-                Currency.Crystal += unlockCost[i];
-                for(int j = 1; j < level; j++)
+                for (int j = 1; j < level; j++)
                 {
                     Currency.Gold += upgradeCost[i](j);
                 }
@@ -46,5 +48,7 @@ public class UpdateManager : MonoBehaviour
                 PlayerPrefs.SetInt("Player" + (i + 1) + "Level", 0);
             }
         }
+
+        GameManager.Instance.PlayerModelId = 0;
     }
 }
