@@ -26,9 +26,15 @@ public class RealtimeEventHandler : MonoBehaviour
 
     public event Action OnChangeDay;
     public event Action OnFirstLogin;
+    public event Action<float> OnUpdate;
 
     public int IntervalWithLastLoginDay { get; private set; }
     public bool isFirstLogin { get; private set; }
+    private float savedVersion
+    {
+        get => PlayerPrefs.GetFloat("version");
+        set => PlayerPrefs.SetFloat("version", value);
+    }
 
     private int today;
 
@@ -48,9 +54,17 @@ public class RealtimeEventHandler : MonoBehaviour
             return;
         }
 
+        float curruntVersion = float.Parse(Application.version);
         if (isFirstLogin)
         {
+            savedVersion = curruntVersion;
             OnFirstLogin?.Invoke();
+        }
+        else if (savedVersion != curruntVersion)
+        {
+            float originVersion = savedVersion;
+            savedVersion = curruntVersion;
+            OnUpdate?.Invoke(originVersion);
         }
     }
 
