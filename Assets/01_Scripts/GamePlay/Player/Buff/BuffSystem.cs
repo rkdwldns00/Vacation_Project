@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine;
 /* 코드 작성자 : 이기환 */
 public class BuffSystem : MonoBehaviour
 {
+    public event Action<Buff> OnAddBuff;
+    public event Action<Buff> OnRemoveBuff;
+
     private List<Buff> _buffs = new List<Buff>();
 
     public Buff AddBuff(Buff buff)
@@ -17,6 +21,8 @@ public class BuffSystem : MonoBehaviour
         {
             _buffs.Add(buff);
             buff.StartBuff(this);
+
+            OnAddBuff?.Invoke(buff);
 
             return buff;
         }
@@ -39,6 +45,8 @@ public class BuffSystem : MonoBehaviour
     {
         _buffs.Remove(buff);
         buff.EndBuff(this);
+
+        OnRemoveBuff?.Invoke(buff);
     }
 
     public bool ContainBuff<T>() where T : Buff

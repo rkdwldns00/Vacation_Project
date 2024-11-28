@@ -28,6 +28,8 @@ public class ResurrectionBuff : Buff
         _player.OnChangedBoostGazy += OnChargeBoost;
         _player.TakeDamage(2);
 
+        _buffSystem.OnAddBuff += OnAddBuff;
+
         _effect.SetActive(true);
     }
 
@@ -49,6 +51,7 @@ public class ResurrectionBuff : Buff
     public override void EndBuff(BuffSystem buffSystem)
     {
         _player.OnChangedBoostGazy -= OnChargeBoost;
+        _buffSystem.OnAddBuff -= OnAddBuff;
         if (_effect)
         {
             _effect.SetActive(false);
@@ -64,6 +67,14 @@ public class ResurrectionBuff : Buff
             _buffSystem.RemoveBuff(this);
             _player.TakeHeal(2);
             _player.ChargeBoost(2);
+        }
+    }
+
+    private void OnAddBuff(Buff addedBuff)
+    {
+        if (addedBuff != this)
+        {
+            _buffSystem.RemoveBuff(addedBuff);
         }
     }
 }

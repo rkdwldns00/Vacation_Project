@@ -13,11 +13,11 @@ public class ResurrectionPlayer : Player
         {
             if (PlayerLevel == 0)
             {
-                return string.Format("죽기 전 사망 유예 효과를\n얻고, 최대 {0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(MaxLevel));
+                return string.Format("사망 유예 효과를 얻고,\n최대 {0}초 안에 젬을 한칸 채우면\n부활합니다. 부활중 아이템을 얻지 못합니다.", GetResurrectionBuffDurationTime(MaxLevel));
             }
             else
             {
-                return string.Format("죽기 전 사망 유예 효과를\n얻고, {0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(PlayerLevel));
+                return string.Format("사망 유예 효과를 얻고,\n{0}초 안에 젬을 한칸 채우면\n부활합니다. 부활중 아이템을 얻지 못합니다.", GetResurrectionBuffDurationTime(PlayerLevel));
             }
         }
     }
