@@ -305,7 +305,7 @@ public class Player : MonoBehaviour
         DieHandler();
     }
 
-    private void DieHandler()
+    public void DieHandler()
     {
         if (_isDead) return;
 #if UNITY_EDITOR
