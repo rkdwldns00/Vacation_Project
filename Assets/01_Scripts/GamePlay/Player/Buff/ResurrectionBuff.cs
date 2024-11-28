@@ -42,14 +42,7 @@ public class ResurrectionBuff : Buff
         if (RemainingTime <= 0)
         {
             ResurrectionPlayer boostPlayer = _player as ResurrectionPlayer;
-            if (boostPlayer != null)
-            {
-                boostPlayer.ResurrectionFail();
-            }
-            else
-            {
-                _player.Kill();
-            }
+            _player.Kill();
         }
     }
 

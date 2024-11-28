@@ -13,11 +13,11 @@ public class ResurrectionPlayer : Player
         {
             if (PlayerLevel == 0)
             {
-                return string.Format("죽기전 무적 효과를 얻고,\n최대 {0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(MaxLevel));
+                return string.Format("죽기 전 사망 유예 효과를\n얻고, 최대 {0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(MaxLevel));
             }
             else
             {
-                return string.Format("죽기전 무적 효과를 얻고,\n{0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(PlayerLevel));
+                return string.Format("죽기 전 사망 유예 효과를\n얻고, {0}초 안에 젬을 한칸\n채우면 부활합니다.", GetResurrectionBuffDurationTime(PlayerLevel));
             }
         }
     }
@@ -29,20 +29,18 @@ public class ResurrectionPlayer : Player
 
     private float GetResurrectionBuffDurationTime(int playerLevel)
     {
-        return playerLevel * 1.5f;
+        return 6 + playerLevel * 0.2f;
     }
 
-    protected override void DieHandler()
+    public override void Kill()
     {
-        if (transform.position.y < -0.2f)
+        if (transform.position.y < -0.2f || _buffSystem.ContainBuff<ResurrectionBuff>())
         {
-            base.DieHandler();
+            base.Kill();
         }
-        _buffSystem.AddBuff(new ResurrectionBuff(GetResurrectionBuffDurationTime(PlayerLevel), _resurrectionEffect));
-    }
-
-    public void ResurrectionFail()
-    {
-        base.DieHandler();
+        else
+        {
+            _buffSystem.AddBuff(new ResurrectionBuff(GetResurrectionBuffDurationTime(PlayerLevel), _resurrectionEffect));
+        }
     }
 }

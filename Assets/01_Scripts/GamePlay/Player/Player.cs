@@ -281,7 +281,7 @@ public class Player : MonoBehaviour
 
         if (CurruntHealth <= 0)
         {
-            DieHandler();
+            Kill();
         }
     }
 
@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
         OnChangedHealth?.Invoke();
     }
 
-    public void Kill()
+    public virtual void Kill()
     {
         DieHandler();
     }
