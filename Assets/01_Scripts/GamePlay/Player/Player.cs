@@ -38,9 +38,12 @@ public class Player : MonoBehaviour
         {
             return _boostGazy;
         }
-        protected set
+        set
         {
+            float originBoostGazy = _boostGazy;
             _boostGazy = Mathf.Clamp(value, 0, MaxBoostGazy);
+
+            OnChangedBoostGazy?.Invoke(_boostGazy - originBoostGazy);
         }
     }
 
@@ -53,7 +56,7 @@ public class Player : MonoBehaviour
     public bool CanControl { get; set; } = true;
     public GameObject playerMesh;
     private Mesh _mesh;
-    private BuffSystem _buffSystem;
+    protected BuffSystem _buffSystem;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 
@@ -235,7 +238,6 @@ public class Player : MonoBehaviour
     {
         BoostGazy += value;
         GameManager.Instance.GemScore += 10;
-        OnChangedBoostGazy?.Invoke(value);
     }
 
     public virtual bool UseBoost()
@@ -243,7 +245,6 @@ public class Player : MonoBehaviour
         if (BoostGazy > 1)
         {
             BoostGazy -= 1;
-            OnChangedBoostGazy?.Invoke(-1);
             return true;
         }
         return false;
@@ -286,11 +287,11 @@ public class Player : MonoBehaviour
 
         if (CurruntHealth <= 0)
         {
-            DieHandler();
+            Kill();
         }
     }
 
-    public void TakeHeal(int heal = 1)
+    public virtual void TakeHeal(int heal = 1)
     {
         if (CurruntHealth == MaxHealth || _isDead) return;
 
@@ -300,7 +301,7 @@ public class Player : MonoBehaviour
         OnChangedHealth?.Invoke();
     }
 
-    public void Kill()
+    public virtual void Kill()
     {
         DieHandler();
     }

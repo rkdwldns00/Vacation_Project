@@ -5,20 +5,31 @@ using UnityEngine;
 public class MagnetBuff : Buff
 {
     private Player player;
-    private float _magnetStrength;
+    public float MagnetStrength { get; set; }
     private float _durationTime;
+    private bool _isDurationInfinity;
 
     public MagnetBuff(float magnetStrength, float durationTime)
     {
-        _magnetStrength = magnetStrength;
+        MagnetStrength = magnetStrength;
         _durationTime = durationTime;
+    }
+
+    public MagnetBuff(float magnetStrength)
+    {
+        MagnetStrength = magnetStrength;
+        _isDurationInfinity = true;
     }
 
     public override void MergeBuff<T>(T otherBuff)
     {
         MagnetBuff mergedBuff = otherBuff as MagnetBuff;
 
-        if (mergedBuff._durationTime > _durationTime)
+        if (mergedBuff._isDurationInfinity || _isDurationInfinity)
+        {
+            _isDurationInfinity = true;
+        }
+        else if (mergedBuff._durationTime > _durationTime)
         {
             _durationTime = mergedBuff._durationTime;
         }
@@ -33,9 +44,9 @@ public class MagnetBuff : Buff
     {
         _durationTime -= Time.deltaTime;
 
-        if (_durationTime <= 0) buffSystem.RemoveBuff(this);
+        if (_durationTime <= 0 && !_isDurationInfinity) buffSystem.RemoveBuff(this);
 
-        Collider[] gems = Physics.OverlapSphere(player.transform.position, _magnetStrength, LayerMask.GetMask("Gem"));
+        Collider[] gems = Physics.OverlapSphere(player.transform.position, MagnetStrength, LayerMask.GetMask("Gem"));
 
         foreach (Collider gem in gems)
         {

@@ -6,7 +6,7 @@ public class NeedGemPlayer : Player
 {
     public override int MaxLevel => 10;
     public override int UpgradeCost => base.UpgradeCost;
-    public override int UnlockCost => 50;
+    public override int UnlockCost => 100;
     public override string CarInfo
     {
         get
@@ -24,7 +24,7 @@ public class NeedGemPlayer : Player
 
     float GetNeedGem(int playerLevel)
     {
-        return 1 - playerLevel / 20f;
+        return 1 - playerLevel / 100f * 3;
     }
 
     public override bool UseBoost()

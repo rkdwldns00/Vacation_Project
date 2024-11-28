@@ -44,7 +44,6 @@ public class ObstacleShieldBuff : Buff
 
         if (_durationTime <= 0)
         {
-            if (_instantiatedShieldEffect != null) GameObject.Destroy(_instantiatedShieldEffect);
             buffSystem.RemoveBuff(this);
         }
         else if (_durationTime < 2f)
@@ -71,6 +70,6 @@ public class ObstacleShieldBuff : Buff
 
     public override void EndBuff(BuffSystem buffSystem)
     {
-
+        if (_instantiatedShieldEffect != null) GameObject.Destroy(_instantiatedShieldEffect);
     }
 }
