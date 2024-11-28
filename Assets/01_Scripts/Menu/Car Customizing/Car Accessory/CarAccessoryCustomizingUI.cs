@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class CarAccessoryCustomizingUI : MonoBehaviour
 {
     public static CarAccessoryCustomizingUI Instance;
+    public static CarAccessoryData EquippedCarAccessoryData;
 
     [SerializeField] private GameObject _layer;
     public CarAccessoryData[] CarAccessoryDatas { get => _carAccessoryDatas; }
@@ -36,7 +37,11 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
     private CarAccessoryElementUI _equippedAccessoryElement;
     private CarAccessoryElementUI _selectedAccessoryElement;
 
-    private const string _lastEquippedCarAccessory = "Last Car Accessory";
+    private string _lastEquippedCarAccessory
+    {
+        get => PlayerPrefs.GetString("Last Car Accessory");
+        set => PlayerPrefs.SetString("Last Car Accessory", value);
+    }
 
     private void Awake()
     {
@@ -60,7 +65,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
 
         foreach (Transform carAccessoryElement in _carAccessoryElementParent.transform)
         {
-            if (carAccessoryElement.GetComponent<CarAccessoryElementUI>()?.CarAccessoryData.Name == PlayerPrefs.GetString(_lastEquippedCarAccessory))
+            if (carAccessoryElement.GetComponent<CarAccessoryElementUI>()?.CarAccessoryData.Name == _lastEquippedCarAccessory)
             {
                 _selectedAccessoryElement = carAccessoryElement.GetComponent<CarAccessoryElementUI>();
                 EquipAccessory();
@@ -122,7 +127,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
 
             ChangeCarAccessory(_equippedAccessoryElement.CarAccessoryData);
 
-            PlayerPrefs.SetString(_lastEquippedCarAccessory, _equippedAccessoryElement.CarAccessoryData.Name);
+            _lastEquippedCarAccessory = _equippedAccessoryElement.CarAccessoryData.Name;
             PlayerPrefs.Save();
 
             _equipAccessoryButton.gameObject.SetActive(false);
@@ -139,7 +144,7 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
 
         ChangeCarAccessory(null);
 
-        PlayerPrefs.SetString(_lastEquippedCarAccessory, "");
+        _lastEquippedCarAccessory = "";
         PlayerPrefs.Save();
 
         _equippedAccessoryElement = null;
@@ -147,17 +152,14 @@ public class CarAccessoryCustomizingUI : MonoBehaviour
 
     private void ChangeCarAccessory(CarAccessoryData carAccessoryData)
     {
+        EquippedCarAccessoryData = carAccessoryData;
+
         foreach (GameObject model in _customizingCamera.Models)
         {
             model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
         }
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
-        {
-            model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
-        }
-
-        foreach (GameObject model in _playerSetting.PlayerModels)
         {
             model.GetComponentInChildren<CarAccessoryPositioner>().SetCarAccessoryObject(carAccessoryData);
         }
