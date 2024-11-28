@@ -29,6 +29,17 @@ public class ResurrectionBuff : Buff
         _player.TakeDamage(2);
 
         _buffSystem.OnAddBuff += OnAddBuff;
+        for (int i = 0; _buffSystem.Buffs.Count > 1;)
+        {
+            if (_buffSystem.Buffs[i] == this)
+            {
+                i++;
+            }
+            else
+            {
+                _buffSystem.RemoveBuff(_buffSystem.Buffs[i]);
+            }
+        }
 
         _effect.SetActive(true);
     }
