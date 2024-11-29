@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public virtual int UpgradeCost => PlayerLevel * UnlockCost;
     public virtual int UnlockCost => 0;
     public virtual string CarInfo => "기본 차량";
+    public virtual float CarInfoFontSize => 50;
 
     public int CurruntHealth { get; set; }
 
