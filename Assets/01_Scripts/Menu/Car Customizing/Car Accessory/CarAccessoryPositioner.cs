@@ -9,6 +9,11 @@ public class CarAccessoryPositioner : MonoBehaviour
     [SerializeField] private Transform _topAccessoryPosition;
     [SerializeField] private Transform _backAccessoryPosition;
 
+    private void Start()
+    {
+        SetCarAccessoryObject(CarAccessoryCustomizingUI.EquippedCarAccessoryData);
+    }
+
     public void SetCarAccessoryObject(CarAccessoryData carAccessoryData)
     {
         Vector3 carAccessoryPosition = _topAccessoryPosition.position;

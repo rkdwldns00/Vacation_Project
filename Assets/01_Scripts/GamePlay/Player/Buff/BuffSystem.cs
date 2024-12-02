@@ -1,45 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자 : 이기환 */
 public class BuffSystem : MonoBehaviour
 {
-    private List<Buff> _buffs = new List<Buff>();
+    public event Action<Buff> OnAddBuff;
+    public event Action<Buff> OnRemoveBuff;
 
-    public void AddBuff(Buff buff)
+    public List<Buff> Buffs { get; private set; } = new List<Buff>();
+
+    public Buff AddBuff(Buff buff)
     {
         if (ContainBuff(buff))
         {
-            MergeBuff(buff);
+            return MergeBuff(buff);
         }
         else
         {
-            _buffs.Add(buff);
+            Buffs.Add(buff);
             buff.StartBuff(this);
+
+            OnAddBuff?.Invoke(buff);
+
+            return buff;
         }
     }
 
-    public void MergeBuff(Buff buff)
+    public Buff MergeBuff(Buff buff)
     {
-        foreach (Buff hasBuff in _buffs)
+        foreach (Buff hasBuff in Buffs)
         {
             if (buff.GetType() == hasBuff.GetType())
             {
                 hasBuff.MergeBuff(buff);
-                break;
+                return hasBuff;
             }
         }
+        return null;
     }
 
     public void RemoveBuff(Buff buff)
     {
-        _buffs.Remove(buff);
+        Buffs.Remove(buff);
         buff.EndBuff(this);
+
+        OnRemoveBuff?.Invoke(buff);
     }
 
     public bool ContainBuff<T>() where T : Buff
     {
-        foreach (Buff buff in _buffs)
+        foreach (Buff buff in Buffs)
         {
             if (buff.GetType() == typeof(T)) return true;
         }
@@ -49,7 +61,7 @@ public class BuffSystem : MonoBehaviour
 
     public bool ContainBuff(Buff buff)
     {
-        foreach (Buff containBuff in _buffs)
+        foreach (Buff containBuff in Buffs)
         {
             if (buff.GetType() == containBuff.GetType()) return true;
         }
@@ -59,16 +71,16 @@ public class BuffSystem : MonoBehaviour
 
     private void Update()
     {
-        for (int i=0; i< _buffs.Count; i++)
+        for (int i=0; i< Buffs.Count; i++)
         {
-            _buffs[i].UpdateBuff(this);
+            Buffs[i].UpdateBuff(this);
         }
     }
 
     private void OnDestroy()
     {
-        while (_buffs.Count > 0) { 
-            RemoveBuff( _buffs[0]);
+        while (Buffs.Count > 0) { 
+            RemoveBuff( Buffs[0]);
         }
     }
 }

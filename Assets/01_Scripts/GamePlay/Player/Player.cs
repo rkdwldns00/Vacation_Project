@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
+/* 코드 작성자 : 강지운 */
 [DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class Player : MonoBehaviour
 
     public virtual int MaxLevel => 1;
     public virtual bool IsUpgradable => PlayerLevel < MaxLevel;
-    public virtual int UpgradeCost => PlayerLevel * UnlockCost * 10;
+    public virtual int UpgradeCost => PlayerLevel * UnlockCost;
     public virtual int UnlockCost => 0;
     public virtual string CarInfo => "기본 차량";
 
@@ -36,9 +38,12 @@ public class Player : MonoBehaviour
         {
             return _boostGazy;
         }
-        protected set
+        set
         {
+            float originBoostGazy = _boostGazy;
             _boostGazy = Mathf.Clamp(value, 0, MaxBoostGazy);
+
+            OnChangedBoostGazy?.Invoke(_boostGazy - originBoostGazy);
         }
     }
 
@@ -51,7 +56,7 @@ public class Player : MonoBehaviour
     public bool CanControl { get; set; } = true;
     public GameObject playerMesh;
     private Mesh _mesh;
-    private BuffSystem _buffSystem;
+    protected BuffSystem _buffSystem;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 
@@ -106,7 +111,7 @@ public class Player : MonoBehaviour
 
     protected virtual void Update()
     {
-        UpdaateDistanceScore();
+        UpdateDistanceScore();
         MoveHandler();
         IncreaseSpeedWithScore();
 
@@ -138,6 +143,12 @@ public class Player : MonoBehaviour
 
         rotation.x = -_rigid.velocity.y;
 
+        if (_buffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < 0.1f)
+        {
+            position.y = -0.1f;
+            _rigid.velocity = new Vector3(_rigid.velocity.x, 0, _rigid.velocity.z);
+        }
+
         _rigid.rotation = Quaternion.Euler(rotation);
         _rigid.MovePosition(position);
 
@@ -151,7 +162,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
+        if (!_buffSystem.ContainBuff<ObstacleShieldBuff>() && transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
         {
             DieHandler();
         }
@@ -181,18 +192,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected virtual void UpdaateDistanceScore()
+    protected virtual void UpdateDistanceScore()
     {
         GameManager.Instance.DistanceScore = (int)transform.position.z;
     }
 
     protected virtual void MoveHandler()
     {
-        if (!CanControl) return;
+        if (!CanControl || EventSystem.current.IsPointerOverGameObject()) return;
 
         if (Input.GetMouseButton(0))
         {
-            float xRate = (Input.mousePosition.x / Screen.width - 0.5f) / Mathf.Lerp(0.8f, 0.3f, SettingUI.moveSensitivity) + 0.5f;
+            float xRate = (Input.mousePosition.x / Screen.width - 0.5f) / Mathf.Lerp(0.8f, 0.3f, SettingUI.MoveSensitivity) + 0.5f;
             Move(xRate);
         }
         else if (Input.GetMouseButtonUp(0))
@@ -227,7 +238,6 @@ public class Player : MonoBehaviour
     {
         BoostGazy += value;
         GameManager.Instance.GemScore += 10;
-        OnChangedBoostGazy?.Invoke(value);
     }
 
     public virtual bool UseBoost()
@@ -235,7 +245,6 @@ public class Player : MonoBehaviour
         if (BoostGazy > 1)
         {
             BoostGazy -= 1;
-            OnChangedBoostGazy?.Invoke(-1);
             return true;
         }
         return false;
@@ -278,11 +287,11 @@ public class Player : MonoBehaviour
 
         if (CurruntHealth <= 0)
         {
-            DieHandler();
+            Kill();
         }
     }
 
-    public void TakeHeal(int heal = 1)
+    public virtual void TakeHeal(int heal = 1)
     {
         if (CurruntHealth == MaxHealth || _isDead) return;
 
@@ -292,12 +301,12 @@ public class Player : MonoBehaviour
         OnChangedHealth?.Invoke();
     }
 
-    public void Kill()
+    public virtual void Kill()
     {
         DieHandler();
     }
 
-    private void DieHandler()
+    public void DieHandler()
     {
         if (_isDead) return;
 #if UNITY_EDITOR

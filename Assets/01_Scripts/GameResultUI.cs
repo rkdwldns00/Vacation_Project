@@ -5,6 +5,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* 코드 작성자
+ * 부활, 공유, 보상 재화 구현 : 강지운
+ * 게임 결과 UI 구현 : 이기환
+ */
 public class GameResultUI : MonoBehaviour
 {
     public event Action OnOpen;
@@ -61,7 +65,7 @@ public class GameResultUI : MonoBehaviour
 
     public void TryAdResurrection()
     {
-        AdManager.Instance.ShowAds(Resurrection, ResurrectionFailed);
+        //AdManager.Instance.ShowAds(Resurrection, ResurrectionFailed);
     }
 
     public void TryCrystalResurrection()
@@ -83,6 +87,7 @@ public class GameResultUI : MonoBehaviour
 
         _layer.SetActive(false);
         PlayerSpawner.Instance.OnSpawned += (player) => player.GetComponent<BuffSystem>().AddBuff(new ObstacleShieldBuff(null, 1));
+        PlayerSpawner.Instance.OnSpawned += (player) => player.ChargeBoost(1);
         PlayerSpawner.Instance.SpawnPlayer();
     }
 
@@ -112,15 +117,13 @@ public class GameResultUI : MonoBehaviour
         if (Currency.Ticket > 0)
         {
             Currency.Ticket--;
-            GameManager.Instance.RewardGoldAdded = (int)(GameManager.Instance.RewardGold * 0.5f);
-            GameManager.Instance.RewardCrystalAdded = (int)(GameManager.Instance.RewardCrystal * 0.2f);
-        }
-        else
-        {
-            GameManager.Instance.RewardGoldAdded = 0;
-            GameManager.Instance.RewardCrystalAdded = 0;
+            GameManager.Instance.RewardGoldAdded += (int)(GameManager.Instance.RewardGold * 0.5f);
+            GameManager.Instance.RewardCrystalAdded += (int)(GameManager.Instance.RewardCrystal * 0.2f);
         }
         Currency.Gold += GameManager.Instance.RewardGold;
         Currency.Crystal += GameManager.Instance.RewardCrystal;
+
+        GameManager.Instance.RewardGoldAdded = 0;
+        GameManager.Instance.RewardCrystalAdded = 0;
     }
 }

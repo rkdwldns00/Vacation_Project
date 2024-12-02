@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+/* 코드 작성자 : 강지운 */
 public class GemSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _gemPrefab;
@@ -19,6 +20,8 @@ public class GemSpawner : MonoBehaviour
     private ScanDataType[,] _scanDatas;
 
     private int _scanDataStartZ => Mathf.Max(0, _playerZWhenLastScan - _zSize + 1);
+
+    private float _accumulatedProbability = 0f;
 
     private void Start()
     {
@@ -101,7 +104,9 @@ public class GemSpawner : MonoBehaviour
 
     private void SpawnGemHandler()
     {
-        if (Random.Range(0f, 100f) > _gemSpawnPercent)
+        _accumulatedProbability += _gemSpawnPercent;
+
+        if (Random.Range(0f, 100f) > _accumulatedProbability)
         {
             return;
         }
@@ -130,6 +135,8 @@ public class GemSpawner : MonoBehaviour
                 blankCount++;
             }
         }
+
+        _accumulatedProbability = 0;
     }
 
     private void SpawnGemPrefab(Vector3 position)

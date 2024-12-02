@@ -6,7 +6,7 @@ public class ScorePlayer : Player
 {
     public override int MaxLevel => 10;
     public override int UpgradeCost => base.UpgradeCost;
-    public override int UnlockCost => 200;
+    public override int UnlockCost => 125;
     public override string CarInfo
     {
         get
@@ -24,7 +24,7 @@ public class ScorePlayer : Player
 
     float GetBonus(int playerLevel)
     {
-        return 1.5f + playerLevel / 10;
+        return 0.7f + playerLevel / 10;
     }
 
     public override void ChargeBoost(float value)
@@ -34,7 +34,7 @@ public class ScorePlayer : Player
         RunOnChangedBoostGazy(value);
     }
 
-    protected override void UpdaateDistanceScore()
+    protected override void UpdateDistanceScore()
     {
         GameManager.Instance.DistanceScore = (int)(transform.position.z * GetBonus(PlayerLevel));
     }

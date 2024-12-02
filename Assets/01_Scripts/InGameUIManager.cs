@@ -5,6 +5,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/* 코드 작성자
+ * 일시정지, 추격자 UI 구현 : 강지운
+ * 체력, 부스트, 스코어 UI 구현 : 이기환
+ */
 public class InGameUIManager : MonoBehaviour
 {
     private static InGameUIManager _instance;
@@ -31,7 +35,9 @@ public class InGameUIManager : MonoBehaviour
 
     [Header("Pause UI")]
     [SerializeField] private GameObject _pauseLayer;
+    [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _cancelPauseButton;
+    [SerializeField] private Button _stopGameButton;
 
     [Header("Player UI")]
     [SerializeField] private GameObject _playerLossHpPrefab;
@@ -62,7 +68,13 @@ public class InGameUIManager : MonoBehaviour
         PlayerSpawner.Instance.OnSpawned += OnPlayerSpawned;
 
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
+        _pauseButton.onClick.AddListener(() => SetPause(true));
         _cancelPauseButton.onClick.AddListener(() => { SetPause(false); });
+        _stopGameButton.onClick.AddListener(() =>
+        {
+            Player.Instance.DieHandler();
+            SetPause(false);
+        });
     }
 
     private void Update()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+/* 코드 작성자 : 이기환 */
 public class ObjectPoolManager : MonoBehaviour
 {
     private static ObjectPoolManager _instance;

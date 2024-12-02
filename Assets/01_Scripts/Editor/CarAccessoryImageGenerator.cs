@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
+/* 코드 작성자 : 이기환 */
 [CustomEditor(typeof(CarAccessoryCustomizingUI))]
 public class CarAccessoryImageGenerator : Editor
 {
@@ -22,12 +23,19 @@ public class CarAccessoryImageGenerator : Editor
 
         if (GUILayout.Button("Generate Car Accessory Image"))
         {
-            _carAccessoryCustomizingUI.GenerateCarAccessoryImage(GenerateCarAccessoryImageCoroutine());
+            if (Application.isPlaying)
+            {
+                _carAccessoryCustomizingUI.GenerateCarAccessoryImage(GenerateCarAccessoryImageCoroutine());
+            }
+            else
+            {
+                Debug.LogWarning("자동차 액세서리 이미지 생성은 런타임에서만 실행됩니다.");
+            }
         }
 
         GUILayout.Space(10);
 
-        EditorGUILayout.HelpBox("자동차 액세서리 이미지 생성은 런타임에 실행하세요.\n" +
+        EditorGUILayout.HelpBox("자동차 액세서리 이미지 생성은 런타임에서만 실행됩니다.\n" +
             "이미지 저장 공간 : " + Application.dataPath + "/05_Sprites/Car Accessory Image", MessageType.Info);
     }
 

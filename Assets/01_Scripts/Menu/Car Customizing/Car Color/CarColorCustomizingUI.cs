@@ -5,9 +5,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* 코드 작성자 : 이기환 */
 public class CarColorCustomizingUI : MonoBehaviour
 {
     public static CarColorCustomizingUI Instance;
+    public static Material EquippedColorMaterial;
 
     [SerializeField] private GameObject _layer;
     [SerializeField] private CarColorData[] _carColorDatas;
@@ -36,7 +38,11 @@ public class CarColorCustomizingUI : MonoBehaviour
     private CarColorElementUI _equippedColorElement;
     private CarColorElementUI _selectedColorElement;
 
-    private const string _lastEquippedCarColor = "Last Car Color";
+    private string _lastEquippedCarColor
+    {
+        get => PlayerPrefs.GetString("Last Car Color");
+        set => PlayerPrefs.SetString("Last Car Color", value);
+    }
 
     private void Awake()
     {
@@ -49,15 +55,12 @@ public class CarColorCustomizingUI : MonoBehaviour
         _unequipColorButton.onClick.AddListener(UnequipColor);
         _unlockColorButton.onClick.AddListener(UnlockColor);
         _exitUIButton.onClick.AddListener(CloseUI);
+
+        EquippedColorMaterial = _originMaterial;
     }
 
     public void InstantiateCarColorElements()
     {
-        foreach(Transform child in _carColorElementParent.transform)
-        {
-            if (_carColorElementParent.transform != child) Destroy(child.gameObject);
-        }
-
         foreach (CarColorData carColorData in _carColorDatas)
         {
             Instantiate(_carColorElementPrefab, _carColorElementParent).GetComponent<CarColorElementUI>().InitElementUI(carColorData, this);
@@ -65,7 +68,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         foreach (Transform carColorElement in _carColorElementParent.transform)
         {
-            if (carColorElement.GetComponent<CarColorElementUI>()?.CarColorData.Name == PlayerPrefs.GetString(_lastEquippedCarColor))
+            if (carColorElement.GetComponent<CarColorElementUI>()?.CarColorData.Name == _lastEquippedCarColor)
             {
                 _selectedColorElement = carColorElement.GetComponent<CarColorElementUI>();
                 EquipColor();
@@ -127,7 +130,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
             ChangeCarColor(_equippedColorElement.CarColorData.ColorMaterial);
 
-            PlayerPrefs.SetString(_lastEquippedCarColor, _equippedColorElement.CarColorData.Name);
+            _lastEquippedCarColor = _equippedColorElement.CarColorData.Name;
             PlayerPrefs.Save();
 
             _equipColorButton.gameObject.SetActive(false);
@@ -144,7 +147,7 @@ public class CarColorCustomizingUI : MonoBehaviour
 
         ChangeCarColor(_originMaterial);
 
-        PlayerPrefs.SetString(_lastEquippedCarColor, "");
+        _lastEquippedCarColor = "";
         PlayerPrefs.Save();
 
         _equippedColorElement = null;
@@ -152,17 +155,14 @@ public class CarColorCustomizingUI : MonoBehaviour
 
     private void ChangeCarColor(Material colorMaterial)
     {
-        foreach(GameObject model in _customizingCamera.Models)
+        EquippedColorMaterial = colorMaterial;
+
+        foreach (GameObject model in _customizingCamera.Models)
         {
             model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
         }
 
         foreach (GameObject model in _customizingUI.MenuPlayerModels)
-        {
-            model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
-        }
-
-        foreach (GameObject model in _playerSetting.PlayerModels)
         {
             model.GetComponent<CarColorMeshRenderer>().ChangeCarColor(colorMaterial);
         }

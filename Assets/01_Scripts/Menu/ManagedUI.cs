@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자 : 강지운 */
 public enum EUIType
 {
     Page,
@@ -13,6 +14,8 @@ public abstract class ManagedUI : MonoBehaviour
 {
     public event Action OnOpenAction;
     public event Action OnCloseAction;
+
+    public bool IsOpen { get; private set; }
 
     public virtual void Awake()
     {
@@ -36,13 +39,23 @@ public abstract class ManagedUI : MonoBehaviour
     {
         if (active)
         {
-            OnOpen();
-            OnOpenAction?.Invoke();
+            if (!IsOpen)
+            {
+                OnOpen();
+                OnOpenAction?.Invoke();
+
+                IsOpen = true;
+            }
         }
         else
         {
-            OnClose();
-            OnCloseAction?.Invoke();
+            if (IsOpen)
+            {
+                OnClose();
+                OnCloseAction?.Invoke();
+                
+                IsOpen = false;
+            }
         }
     }
 

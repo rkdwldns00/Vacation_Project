@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* 코드 작성자 : 이기환 */
 public abstract class Item : ObjectPoolable
 {
     private const float _itemRotateSpeed = 120f;
