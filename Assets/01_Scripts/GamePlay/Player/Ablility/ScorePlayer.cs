@@ -13,18 +13,18 @@ public class ScorePlayer : Player
         {
             if (PlayerLevel == 0)
             {
-                return string.Format("점수 획득량이 최대 {0}% 늘어납니다.", (int)(GetBonus(MaxLevel) * 100 - 100));
+                return string.Format("점수 획득량이 최대 {0}% 늘어납니다.", Mathf.Round(GetBonus(MaxLevel) * 100 - 100));
             }
             else
             {
-                return string.Format("점수 획득량이 {0}% 늘어납니다.", (int)(GetBonus(PlayerLevel) * 100 - 100));
+                return string.Format("점수 획득량이 {0}% 늘어납니다.", Mathf.Round(GetBonus(PlayerLevel) * 100 - 100));
             }
         }
     }
 
     float GetBonus(int playerLevel)
     {
-        return 0.7f + playerLevel / 10;
+        return 1f + playerLevel * 0.07f;
     }
 
     public override void ChargeBoost(float value)
