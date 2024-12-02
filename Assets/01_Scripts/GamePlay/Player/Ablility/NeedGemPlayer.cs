@@ -13,18 +13,18 @@ public class NeedGemPlayer : Player
         {
             if (PlayerLevel == 0)
             {
-                return string.Format("젬 요구량이 최대 {0}% 줄어듭니다.", (int)(100 - GetNeedGem(MaxLevel) * 100));
+                return string.Format("젬 요구량이 최대 {0}% 줄어듭니다.", Mathf.Round(100 - GetNeedGem(MaxLevel) * 100));
             }
             else
             {
-                return string.Format("젬 요구량이 {0}% 줄어듭니다.", (int)(100 - GetNeedGem(PlayerLevel) * 100));
+                return string.Format("젬 요구량이 {0}% 줄어듭니다.", Mathf.Round(100 - GetNeedGem(PlayerLevel) * 100));
             }
         }
     }
 
     float GetNeedGem(int playerLevel)
     {
-        return 1 - playerLevel / 100f * 3;
+        return 1f - playerLevel * 0.03f;
     }
 
     public override bool UseBoost()
