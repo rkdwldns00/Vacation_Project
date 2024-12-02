@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
         position.z = _rigid.position.z + MoveSpeed * Time.fixedDeltaTime;
 
         position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
-        rotation.y = _rigid.position.x - position.x;
+        rotation.y = (position.x - _rigid.position.x) * 25;
 
         position.y = _rigid.position.y;
 
