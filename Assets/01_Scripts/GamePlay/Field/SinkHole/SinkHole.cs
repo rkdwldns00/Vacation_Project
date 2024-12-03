@@ -74,7 +74,8 @@ public class SinkHole : ObjectPoolable
         (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
         (after, middle) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.back, generateFrontWall, cuttedSliceUV);
 
-        Mesh result = MeshUtil.Merge(before, after);
+        Mesh result = before;
+        MeshUtil.Merge(result, after);
         Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
         Vector3 rightPoint = new Vector3(startX2, 0, startZ) + centor;
         Vector3 leftNormal = Vector3.Cross(leftPoint - new Vector3(endX1, 0, startZ + HoleDistance) - centor, Vector3.down);
@@ -84,16 +85,16 @@ public class SinkHole : ObjectPoolable
         {
             Mesh temp1, temp2;
             (temp1, _) = MeshUtil.Cut(middle, leftPoint, -leftNormal, true, cuttedSliceUV);
-            result = MeshUtil.Merge(result, temp1);
+            MeshUtil.Merge(result, temp1);
             (temp2, _) = MeshUtil.Cut(middle, rightPoint, -rightNormal, true, cuttedSliceUV);
-            result = MeshUtil.Merge(result, temp2);
+            MeshUtil.Merge(result, temp2);
         }
         else
         {
             Mesh temp;
             (temp, _) = MeshUtil.Cut(middle, leftPoint, leftNormal, true, cuttedSliceUV);
             (temp, _) = MeshUtil.Cut(temp, rightPoint, rightNormal, true, cuttedSliceUV);
-            result = MeshUtil.Merge(result, temp);
+            MeshUtil.Merge(result, temp);
 
             Mesh wallMesh = new Mesh();
             wallMesh.vertices = new Vector3[] {
@@ -105,7 +106,7 @@ public class SinkHole : ObjectPoolable
             wallMesh.triangles = new int[] { 0, 1, 2, 1, 3, 2 };
             wallMesh.normals = new Vector3[] { Vector3.right, Vector3.right, Vector3.right, Vector3.right };
             wallMesh.uv = new Vector2[] { cuttedSliceUV, cuttedSliceUV, cuttedSliceUV, cuttedSliceUV };
-            result = MeshUtil.Merge(result, wallMesh);
+            MeshUtil.Merge(result, wallMesh);
         }
 
         Mesh floorMesh = new Mesh();
@@ -118,7 +119,7 @@ public class SinkHole : ObjectPoolable
         floorMesh.triangles = new int[] { 0, 1, 2, 1, 3, 2 };
         floorMesh.normals = new Vector3[] { Vector3.up, Vector3.up, Vector3.up, Vector3.up };
         floorMesh.uv = new Vector2[] { cuttedSliceUV, cuttedSliceUV, cuttedSliceUV, cuttedSliceUV };
-        result = MeshUtil.Merge(result, floorMesh);
+        MeshUtil.Merge(result, floorMesh);
 
 
         return result;

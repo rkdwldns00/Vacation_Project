@@ -1,18 +1,61 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+//UnityEngine.Mesh와 호환성을 유지하기 위해 변수첫글자 소문자로 통일함
+public struct MeshData
+{
+    public Vector3[] vertices;
+    public Vector3[] normals;
+    public Vector2[] uv;
+    public int[] triangles;
+    public int vertexCount => vertices.Length;
+
+    public static MeshData MeshToData(Mesh mesh)
+    {
+        if (!mesh.isReadable)
+        {
+            Debug.LogError("Mesh 에셋의 Read/Write 설정이 비활성화 되어있어 메시를 읽을 수 없습니다.");
+            return new MeshData();
+        }
+
+        return new MeshData
+        {
+            vertices = mesh.vertices,
+            normals = mesh.normals,
+            uv = mesh.uv,
+            triangles = mesh.triangles,
+        };
+    }
+
+    public void DataToMesh(Mesh mesh)
+    {
+        if (!mesh.isReadable)
+        {
+            Debug.LogError("Mesh 에셋의 Read/Write 설정이 비활성화 되어있어 데이터를 대입할 수 없습니다.");
+        }
+
+        mesh.vertices = vertices;
+        mesh.normals = normals;
+        mesh.uv = uv;
+        mesh.triangles = triangles;
+    }
+}
 
 /* 코드 작성자 : 강지운 */
 public static class MeshUtil
 {
     const float BOTTOM_Y = -10f;
 
-    public static Mesh Merge(Mesh a, Mesh b)
+    private static Mesh _combineCache = new Mesh();
+
+    public static void Merge(Mesh a, Mesh b)
     {
-        return Merge(a, b, Vector3.zero);
+        Merge(a, b, Vector3.zero);
     }
 
-    public static Mesh Merge(Mesh a, Mesh b, Vector3 bPos)
+    public static void Merge(Mesh a, Mesh b, Vector3 bPos)
     {
         CombineInstance[] combine = new CombineInstance[2];
 
@@ -21,10 +64,13 @@ public static class MeshUtil
         combine[1].mesh = b;
         combine[1].transform = Matrix4x4.Translate(bPos);
 
-        Mesh result = new Mesh();
-        result.CombineMeshes(combine);
+        _combineCache.CombineMeshes(combine);
 
-        return result;
+        a.vertices = _combineCache.vertices;
+        a.triangles = _combineCache.triangles;
+        a.normals = _combineCache.normals;
+        a.uv = _combineCache.uv;
+        a.RecalculateBounds();
     }
 
     static VertexPointer[] vertices = new VertexPointer[60000];
@@ -33,27 +79,13 @@ public static class MeshUtil
     static List<int> backTri = new();
     static List<int> forwardTri = new();
 
-    /*const int RESULT_MESH_VERTICES_MAX_COUNT = 60000;
-    static Vector3[] backVertices = new Vector3[RESULT_MESH_VERTICES_MAX_COUNT];
-    static Vector3[] backNormals = new Vector3[RESULT_MESH_VERTICES_MAX_COUNT];
-    static Vector2[] backUv = new Vector2[RESULT_MESH_VERTICES_MAX_COUNT];
-    static Vector3[] forwardVertices = new Vector3[RESULT_MESH_VERTICES_MAX_COUNT];
-    static Vector3[] forwardNormals = new Vector3[RESULT_MESH_VERTICES_MAX_COUNT];
-    static Vector2[] forwardUv = new Vector2[RESULT_MESH_VERTICES_MAX_COUNT];*/
-
-    public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal)
+    public static (MeshData backMesh, MeshData forwordMesh) Cut(MeshData mesh, Vector3 cutterPoint, Vector3 cutterNormal)
     {
         return Cut(mesh, cutterPoint, cutterNormal, false, Vector2.zero);
     }
 
-    public static (Mesh backMesh, Mesh forwordMesh) Cut(Mesh mesh, Vector3 cutterPoint, Vector3 cutterNormal, bool showCuttedSlice, Vector2 cuttedSliceUV)
+    public static (MeshData backMesh, MeshData forwordMesh) Cut(MeshData mesh, Vector3 cutterPoint, Vector3 cutterNormal, bool showCuttedSlice, Vector2 cuttedSliceUV)
     {
-        if (!mesh.isReadable)
-        {
-            Debug.LogError("자를 Mesh 에셋의 Read/Write 설정이 비활성화 되어있어 메시를 읽을 수 없습니다.");
-            return (mesh, mesh);
-        }
-
         Vector3[] meshVertices = mesh.vertices;
         Vector3[] meshNormals = mesh.normals;
         Vector2[] meshUv = mesh.uv;
@@ -298,21 +330,19 @@ public static class MeshUtil
         }
 
         //메쉬 제작 및 리턴
-        Mesh backResult = new Mesh()
+        MeshData backResult = new MeshData()
         {
             vertices = backVertices,
             normals = backNormals,
             uv = backUv,
             triangles = backTri.ToArray(),
-            name = mesh.name
         };
-        Mesh forwardResult = new Mesh()
+        MeshData forwardResult = new MeshData()
         {
             vertices = forwardVertices,
             normals = forwardNormals,
             uv = forwardUv,
             triangles = forwardTri.ToArray(),
-            name = mesh.name
         };
         return (backResult, forwardResult);
     }

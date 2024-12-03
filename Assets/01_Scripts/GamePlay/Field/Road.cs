@@ -86,8 +86,8 @@ public class Road : MonoBehaviour
     }
 
     private void MoveMesh()
-    {
-        curruntRoadMesh = MeshUtil.Merge(curruntRoadMesh, originRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ));
+    {   
+        MeshUtil.Merge(curruntRoadMesh, originRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ));
         lastSummonedMeshMinZ += originRoadMeshLength;
 
         (curruntRoadMesh, _) = MeshUtil.Cut(curruntRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount), Vector3.back);
