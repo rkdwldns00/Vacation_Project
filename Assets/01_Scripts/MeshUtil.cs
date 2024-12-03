@@ -10,6 +10,7 @@ public struct MeshData
     public Vector3[] normals;
     public Vector2[] uv;
     public int[] triangles;
+    public Bounds bounds;
     public int vertexCount => vertices.Length;
 
     public static MeshData MeshToData(Mesh mesh)
@@ -26,6 +27,7 @@ public struct MeshData
             normals = mesh.normals,
             uv = mesh.uv,
             triangles = mesh.triangles,
+            bounds = mesh.bounds
         };
     }
 
@@ -36,10 +38,13 @@ public struct MeshData
             Debug.LogError("Mesh 에셋의 Read/Write 설정이 비활성화 되어있어 데이터를 대입할 수 없습니다.");
         }
 
+        mesh.Clear();
         mesh.vertices = vertices;
         mesh.normals = normals;
         mesh.uv = uv;
         mesh.triangles = triangles;
+        mesh.bounds = bounds;
+        mesh.RecalculateBounds();
     }
 }
 
@@ -48,29 +53,30 @@ public static class MeshUtil
 {
     const float BOTTOM_Y = -10f;
 
-    private static Mesh _combineCache = new Mesh();
+    private static Mesh _combineCacheA = new Mesh();
+    private static Mesh _combineCacheB = new Mesh();
+    private static Mesh _combineCacheResult = new Mesh();
 
-    public static void Merge(Mesh a, Mesh b)
+    public static MeshData Merge(MeshData a, MeshData b)
     {
-        Merge(a, b, Vector3.zero);
+        return Merge(a, b, Vector3.zero);
     }
 
-    public static void Merge(Mesh a, Mesh b, Vector3 bPos)
+    public static MeshData Merge(MeshData a, MeshData b, Vector3 bPos)
     {
+        a.DataToMesh(_combineCacheA);
+        b.DataToMesh(_combineCacheB);
+
         CombineInstance[] combine = new CombineInstance[2];
 
-        combine[0].mesh = a;
+        combine[0].mesh = _combineCacheA;
         combine[0].transform = Matrix4x4.identity;
-        combine[1].mesh = b;
+        combine[1].mesh = _combineCacheB;
         combine[1].transform = Matrix4x4.Translate(bPos);
 
-        _combineCache.CombineMeshes(combine);
+        _combineCacheResult.CombineMeshes(combine);
 
-        a.vertices = _combineCache.vertices;
-        a.triangles = _combineCache.triangles;
-        a.normals = _combineCache.normals;
-        a.uv = _combineCache.uv;
-        a.RecalculateBounds();
+        return MeshData.MeshToData(_combineCacheResult);
     }
 
     static VertexPointer[] vertices = new VertexPointer[60000];

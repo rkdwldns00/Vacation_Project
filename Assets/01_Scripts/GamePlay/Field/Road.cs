@@ -86,21 +86,20 @@ public class Road : MonoBehaviour
     }
 
     private void MoveMesh()
-    {   
-        MeshUtil.Merge(curruntRoadMesh, originRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ));
+    {
+        MeshData curruntRoadMeshData = MeshUtil.Merge(MeshData.MeshToData(curruntRoadMesh), MeshData.MeshToData(originRoadMesh), new Vector3(0, 0, lastSummonedMeshMinZ));
         lastSummonedMeshMinZ += originRoadMeshLength;
 
-        (curruntRoadMesh, _) = MeshUtil.Cut(curruntRoadMesh, new Vector3(0, 0, lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount), Vector3.back);
+        (curruntRoadMeshData, _) = MeshUtil.Cut(curruntRoadMeshData, new Vector3(0, 0, lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount), Vector3.back);
+        curruntRoadMeshData.DataToMesh(curruntRoadMesh);
 
         meshFilter.sharedMesh = curruntRoadMesh;
         meshCollider.sharedMesh = curruntRoadMesh;
-
-        curruntRoadMesh.RecalculateBounds();
     }
 
-    public void SetMesh(Mesh mesh)
+    public void SetMesh(MeshData mesh)
     {
-        curruntRoadMesh = mesh;
+        mesh.DataToMesh(curruntRoadMesh);
         meshFilter.sharedMesh = curruntRoadMesh;
         meshCollider.sharedMesh = curruntRoadMesh;
     }
