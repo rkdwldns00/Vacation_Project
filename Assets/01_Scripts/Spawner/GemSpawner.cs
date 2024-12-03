@@ -36,6 +36,8 @@ public class GemSpawner : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (!Application.isPlaying) return;
+
         for (int z = _scanDataStartZ; z < _scanDataStartZ + _zSize; z++)
         {
             for (int i = 0; i < _xSize; i++)
