@@ -36,12 +36,12 @@ public class SinkHole : ObjectPoolable
                     {
                         float distance = Random.Range(minDistance, maxDistance);
 
-                        if (transform.position.z - road.transform.position.z + totalDistance + distance > road.curruntRoadMesh.bounds.max.z - maxDistance)
+                        if (transform.position.z - road.transform.position.z + totalDistance + distance > road.currentRoadMesh.bounds.max.z - maxDistance)
                         {
                             i = count - 1;
                         }
 
-                        MeshData cutRoadData = CutRoad(MeshData.MeshToData(road.curruntRoadMesh),
+                        MeshData cutRoadData = CutRoad(MeshData.MeshToData(road.currentRoadMesh),
                             isHole,
                             transform.position.z - road.transform.position.z + totalDistance,
                             distance,

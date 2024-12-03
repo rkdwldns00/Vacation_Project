@@ -11,7 +11,7 @@ public class Road : MonoBehaviour
 
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
-    public Mesh curruntRoadMesh { get; private set; }
+    public Mesh currentRoadMesh { get; private set; }
     private float originRoadMeshMinZ;
     private float originRoadMeshLength;
 
@@ -33,7 +33,7 @@ public class Road : MonoBehaviour
         }
 
         Mesh copiedOriginRoadMesh = new Mesh();
-        copiedOriginRoadMesh.name = "Copyied originRoadMesh";
+        copiedOriginRoadMesh.name = "Copied originRoadMesh";
         copiedOriginRoadMesh.vertices = originRoadMesh.vertices;
         copiedOriginRoadMesh.triangles = originRoadMesh.triangles;
         copiedOriginRoadMesh.normals = originRoadMesh.normals;
@@ -69,7 +69,7 @@ public class Road : MonoBehaviour
         }
         originRoadMeshLength = maxZ - originRoadMeshMinZ;
         lastSummonedMeshMinZ = -playerBackSpaceLength;
-        curruntRoadMesh = new Mesh() { name = "Road" };
+        currentRoadMesh = new Mesh() { name = "Road" };
 
         for (int i = 0; i < roadMeshCount; i++)
         {
@@ -87,21 +87,21 @@ public class Road : MonoBehaviour
 
     private void MoveMesh()
     {
-        MeshData curruntRoadMeshData = MeshUtil.Merge(MeshData.MeshToData(curruntRoadMesh), MeshData.MeshToData(originRoadMesh), new Vector3(0, 0, lastSummonedMeshMinZ));
+        MeshData curruntRoadMeshData = MeshUtil.Merge(MeshData.MeshToData(currentRoadMesh), MeshData.MeshToData(originRoadMesh), new Vector3(0, 0, lastSummonedMeshMinZ));
         lastSummonedMeshMinZ += originRoadMeshLength;
 
         (curruntRoadMeshData, _) = MeshUtil.Cut(curruntRoadMeshData, new Vector3(0, 0, lastSummonedMeshMinZ - originRoadMeshLength * roadMeshCount), Vector3.back);
-        curruntRoadMeshData.DataToMesh(curruntRoadMesh);
+        curruntRoadMeshData.DataToMesh(currentRoadMesh);
 
-        meshFilter.sharedMesh = curruntRoadMesh;
-        meshCollider.sharedMesh = curruntRoadMesh;
+        meshFilter.sharedMesh = currentRoadMesh;
+        meshCollider.sharedMesh = currentRoadMesh;
     }
 
     public void SetMesh(MeshData mesh)
     {
-        mesh.DataToMesh(curruntRoadMesh);
-        meshFilter.sharedMesh = curruntRoadMesh;
-        meshCollider.sharedMesh = curruntRoadMesh;
+        mesh.DataToMesh(currentRoadMesh);
+        meshFilter.sharedMesh = currentRoadMesh;
+        meshCollider.sharedMesh = currentRoadMesh;
     }
 
 #if UNITY_EDITOR
@@ -114,7 +114,7 @@ public class Road : MonoBehaviour
                 float roadLength = originRoadMesh.bounds.max.z - originRoadMesh.bounds.min.z;
                 Gizmos.DrawMesh(originRoadMesh, new Vector3(-originRoadMesh.bounds.center.x, transform.position.y, roadLength * i));
             }
-            Gizmos.DrawWireMesh(curruntRoadMesh, transform.position);
+            Gizmos.DrawWireMesh(currentRoadMesh, transform.position);
         }
     }
 #endif
