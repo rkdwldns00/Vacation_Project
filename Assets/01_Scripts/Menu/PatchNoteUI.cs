@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*코드 작성자 : 강지운*/
+
 public class PatchNoteUI : ManagedUI
 {
     [SerializeField]private GameObject _layer;

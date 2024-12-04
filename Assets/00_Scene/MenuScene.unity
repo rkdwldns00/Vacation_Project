@@ -13080,6 +13080,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1089854765}
     m_Modifications:
+    - target: {fileID: 521341007724939461, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 521341007724939461, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235938925925665334, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367052563946194860, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367052563946194860, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367052563946194860, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418553233464537242, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418553233464537242, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418553233464537242, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4743302536439770809, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13167,6 +13203,26 @@ PrefabInstance:
     - target: {fileID: 4743302536439770810, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
       propertyPath: m_Name
       value: Patch Note UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6269196719331176197, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6269196719331176197, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154079511240520624, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154079511240520624, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7857738545015222824, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28472df0ea99d3941857bf58dad892b6, type: 3}
