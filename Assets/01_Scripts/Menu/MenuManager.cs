@@ -77,6 +77,12 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("최고점수 초기화")]
+    public void ClearBestScore()
+    {
+        PlayerPrefs.SetInt("BestScore", 0);
+    }
+
     public void StartGame()
     {
         TutorialManager.isActive = false;
