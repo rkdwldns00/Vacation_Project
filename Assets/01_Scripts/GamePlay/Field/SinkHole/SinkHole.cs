@@ -36,17 +36,19 @@ public class SinkHole : ObjectPoolable
                     {
                         float distance = Random.Range(minDistance, maxDistance);
 
-                        if (transform.position.z - road.transform.position.z + totalDistance + distance > road.curruntRoadMesh.bounds.max.z - maxDistance)
+                        if (transform.position.z - road.transform.position.z + totalDistance + distance > road.currentRoadMesh.bounds.max.z - maxDistance)
                         {
                             i = count - 1;
                         }
 
-                        road.SetMesh(CutRoad(road.curruntRoadMesh,
+                        MeshData cutRoadData = CutRoad(MeshData.MeshToData(road.currentRoadMesh),
                             isHole,
                             transform.position.z - road.transform.position.z + totalDistance,
                             distance,
                             startX1, startX1 + size,
-                            startX2, startX2 + size, count - 1 == i));
+                            startX2, startX2 + size, count - 1 == i);
+                        
+                        road.SetMesh(cutRoadData);
 
                         Debug.DrawLine(new Vector3(startX1, 0, totalDistance + transform.position.z), new Vector3(startX1 + size, 0, totalDistance + transform.position.z), Color.red, 1000);
                         Debug.DrawLine(new Vector3(startX1, 0, totalDistance + transform.position.z), new Vector3(startX2, 0, totalDistance + distance + transform.position.z), Color.red, 1000);
@@ -63,18 +65,19 @@ public class SinkHole : ObjectPoolable
         }
     }
 
-    public Mesh CutRoad(Mesh mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2, bool generateFrontWall)
+    public MeshData CutRoad(MeshData mesh, bool isHole, float startZ, float HoleDistance, float startX1, float startX2, float endX1, float endX2, bool generateFrontWall)
     {
         Vector3 centor = new Vector3(mesh.bounds.center.x, 0, 0);
 
-        Mesh before;
-        Mesh middle;
-        Mesh after;
+        MeshData before;
+        MeshData middle;
+        MeshData after;
 
         (before, middle) = MeshUtil.Cut(mesh, centor + Vector3.forward * startZ, Vector3.forward);
         (after, middle) = MeshUtil.Cut(middle, centor + Vector3.forward * (startZ + HoleDistance), Vector3.back, generateFrontWall, cuttedSliceUV);
 
-        Mesh result = MeshUtil.Merge(before, after);
+        MeshData result = before;
+        result = MeshUtil.Merge(result, after);
         Vector3 leftPoint = new Vector3(startX1, 0, startZ) + centor;
         Vector3 rightPoint = new Vector3(startX2, 0, startZ) + centor;
         Vector3 leftNormal = Vector3.Cross(leftPoint - new Vector3(endX1, 0, startZ + HoleDistance) - centor, Vector3.down);
@@ -82,7 +85,7 @@ public class SinkHole : ObjectPoolable
 
         if (isHole)
         {
-            Mesh temp1, temp2;
+            MeshData temp1, temp2;
             (temp1, _) = MeshUtil.Cut(middle, leftPoint, -leftNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp1);
             (temp2, _) = MeshUtil.Cut(middle, rightPoint, -rightNormal, true, cuttedSliceUV);
@@ -90,12 +93,12 @@ public class SinkHole : ObjectPoolable
         }
         else
         {
-            Mesh temp;
+            MeshData temp;
             (temp, _) = MeshUtil.Cut(middle, leftPoint, leftNormal, true, cuttedSliceUV);
             (temp, _) = MeshUtil.Cut(temp, rightPoint, rightNormal, true, cuttedSliceUV);
             result = MeshUtil.Merge(result, temp);
 
-            Mesh wallMesh = new Mesh();
+            MeshData wallMesh = new MeshData();
             wallMesh.vertices = new Vector3[] {
                 new Vector3(mesh.bounds.min.x,mesh.bounds.max.y,startZ),                //왼쪽 벽
                 new Vector3(mesh.bounds.min.x,mesh.bounds.max.y,startZ+HoleDistance),
@@ -108,7 +111,7 @@ public class SinkHole : ObjectPoolable
             result = MeshUtil.Merge(result, wallMesh);
         }
 
-        Mesh floorMesh = new Mesh();
+        MeshData floorMesh = new MeshData();
         floorMesh.vertices = new Vector3[] {
                 new Vector3(mesh.bounds.min.x, -10, startZ),
                 new Vector3(mesh.bounds.min.x, -10, startZ+HoleDistance),
