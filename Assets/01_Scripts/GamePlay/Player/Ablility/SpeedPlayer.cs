@@ -30,7 +30,7 @@ public class SpeedPlayer : Player
     protected override void Awake()
     {
         base.Awake();
-        _buffSystem.OnAddBuff += OnAddBuff;
+        BuffSystem.OnAddBuff += OnAddBuff;
     }
 
     private void OnAddBuff(Buff AddedBuff)

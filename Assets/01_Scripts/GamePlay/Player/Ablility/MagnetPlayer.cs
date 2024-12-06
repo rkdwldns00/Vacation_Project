@@ -32,7 +32,7 @@ public class MagnetPlayer : Player
     protected override void Start()
     {
         base.Start();
-        _magnetBuff = _buffSystem.AddBuff(new MagnetBuff(0)) as MagnetBuff;
+        _magnetBuff = BuffSystem.AddBuff(new MagnetBuff(0)) as MagnetBuff;
     }
 
     protected override void Update()
