@@ -31,6 +31,6 @@ public class GoldPlayer : Player
     {
         base.ChargeBoost(value);
 
-        GameManager.Instance.RewardGoldAdded += PlayerLevel;
+        GameManager.Instance.GoldPlayerGoldAdded += PlayerLevel;
     }
 }

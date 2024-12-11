@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
     protected virtual void Start()
     {
         SetGoldRate();
+        SetCrystalRate();
         OnChangedBoostGazy?.Invoke(0);
         SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.EngineSfx, SoundType.SFX, true);
     }
@@ -182,6 +183,11 @@ public class Player : MonoBehaviour
     protected virtual void SetGoldRate()
     {
         GameManager.Instance.RewardGoldRate = 0.1f;
+    }
+
+    protected virtual void SetCrystalRate()
+    {
+        GameManager.Instance.RewardCrystalRate = 0.01f;
     }
 
     private void IncreaseSpeedWithScore()

@@ -26,11 +26,13 @@ public class GameManager : MonoBehaviour
     public int DistanceScore { get; set; }
     public int GemScore { get; set; }
     public int Score { get => DistanceScore + GemScore; }
-    public float RewardGoldRate { set; private get; }
+    public float RewardGoldRate { set; get; }
     public float RewardGoldAdded { set; get; }
+    public int GoldPlayerGoldAdded { set; get; }
+    public int RewardGold => (int)(Score * RewardGoldRate + RewardGoldAdded + GoldPlayerGoldAdded);
+    public float RewardCrystalRate { set; get; }
     public float RewardCrystalAdded { set; get; }
-    public int RewardGold => (int)(Score * RewardGoldRate + RewardGoldAdded);
-    public int RewardCrystal => (int)(Score * 0.01f + RewardCrystalAdded);
+    public int RewardCrystal => (int)(Score * RewardCrystalRate + RewardCrystalAdded);
     public bool isBestScore { get; set; }
 
     public int BestScore
