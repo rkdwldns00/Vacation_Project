@@ -4190,14 +4190,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1423521492}
     m_Modifications:
-    - target: {fileID: 932671989645865689, guid: 1265ae317ace301499ac6ef4e49d30ba, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3490053351738016607, guid: 1265ae317ace301499ac6ef4e49d30ba, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5908888652883603382, guid: 1265ae317ace301499ac6ef4e49d30ba, type: 3}
       propertyPath: m_Name
       value: GameResultUI

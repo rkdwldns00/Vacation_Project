@@ -19,8 +19,13 @@ public class GameResultUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _distanceScoreText;
     [SerializeField] private TextMeshProUGUI _gemScoreText;
     [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private TextMeshProUGUI _goldText;
-    [SerializeField] private TextMeshProUGUI _crystalText;
+    [SerializeField] private TextMeshProUGUI _scoreGoldText;
+    [SerializeField] private TextMeshProUGUI _ticketGoldText;
+    [SerializeField] private TextMeshProUGUI _goldPlayerGoldText;
+    [SerializeField] private TextMeshProUGUI _totalGoldText;
+    [SerializeField] private TextMeshProUGUI _scoreCrystalText;
+    [SerializeField] private TextMeshProUGUI _ticketCrystalText;
+    [SerializeField] private TextMeshProUGUI _totalCrystalText;
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _crystalResurrectionButton;
     [SerializeField] private Button _adResurrectionButton;
@@ -42,8 +47,28 @@ public class GameResultUI : MonoBehaviour
         _distanceScoreText.text = "+ 거리 점수 : " + GameManager.Instance.DistanceScore;
         _gemScoreText.text = "+ 젬 점수 : " + GameManager.Instance.GemScore;
         _scoreText.text = "총 점수 : " + GameManager.Instance.Score;
-        _goldText.text = "골드 획득 : " + GameManager.Instance.RewardGold;
-        _crystalText.text = "크리스탈 획득 : " + GameManager.Instance.RewardCrystal;
+
+        int scoreGold = (int)(GameManager.Instance.Score * GameManager.Instance.RewardGoldRate);
+        int ticketGold = Currency.Ticket > 0 ? (int)((scoreGold + GameManager.Instance.GoldPlayerGoldAdded) * 0.5f) : 0;
+        int goldPlayerGold = GameManager.Instance.GoldPlayerGoldAdded;
+        int totalGold = scoreGold + ticketGold + goldPlayerGold;
+
+        _scoreGoldText.text = "+ 점수 골드 획득 : " + scoreGold;
+        _ticketGoldText.text = "+ 티켓 골드 획득 : " + ticketGold;
+        _ticketGoldText.gameObject.SetActive(Currency.Ticket > 0);
+        _goldPlayerGoldText.text = "+ 차량 골드 획득 : " + goldPlayerGold;
+        _goldPlayerGoldText.gameObject.SetActive(goldPlayerGold > 0);
+        _totalGoldText.text = "총 골드 획득 : " + totalGold;
+
+        float scoreCrystal = GameManager.Instance.Score * GameManager.Instance.RewardCrystalRate;
+        int ticketCrystal = (int)(scoreCrystal * 0.2f);
+        int totalCrystal = (int)scoreCrystal + ticketCrystal;
+
+        _scoreCrystalText.text = "+ 점수 크리스탈 획득 : " + (int)scoreCrystal;
+        _ticketCrystalText.text = "+ 티켓 크리스탈 획득 : " + ticketCrystal;
+        _ticketCrystalText.gameObject.SetActive(Currency.Ticket > 0);
+        _totalCrystalText.text = "총 크리스탈 획득 : " + totalCrystal;
+
         _bestScoreMassage.SetActive(GameManager.Instance.isBestScore);
 
         if (TutorialManager.isActive)
@@ -124,6 +149,7 @@ public class GameResultUI : MonoBehaviour
         Currency.Crystal += GameManager.Instance.RewardCrystal;
 
         GameManager.Instance.RewardGoldAdded = 0;
+        GameManager.Instance.GoldPlayerGoldAdded = 0;
         GameManager.Instance.RewardCrystalAdded = 0;
     }
 }
