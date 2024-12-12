@@ -35,13 +35,13 @@ public class ResurrectionPlayer : Player
 
     public override void Kill()
     {
-        if (transform.position.y < -0.2f || _buffSystem.ContainBuff<ResurrectionBuff>())
+        if (transform.position.y < -0.2f || BuffSystem.ContainBuff<ResurrectionBuff>())
         {
             base.Kill();
         }
         else
         {
-            _buffSystem.AddBuff(new ResurrectionBuff(GetResurrectionBuffDurationTime(PlayerLevel), _resurrectionEffect));
+            BuffSystem.AddBuff(new ResurrectionBuff(GetResurrectionBuffDurationTime(PlayerLevel), _resurrectionEffect));
         }
     }
 }

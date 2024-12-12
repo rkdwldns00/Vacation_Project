@@ -55,9 +55,9 @@ public class Player : MonoBehaviour
     }
 
     public bool CanControl { get; set; } = true;
+    public BuffSystem BuffSystem { get; set; }
     public GameObject playerMesh;
     private Mesh _mesh;
-    protected BuffSystem _buffSystem;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
-        _buffSystem = GetComponent<BuffSystem>();
+        BuffSystem = GetComponent<BuffSystem>();
 
         CurruntHealth = MaxHealth;
         OnChangedHealth?.Invoke();
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
 
         rotation.x = -_rigid.velocity.y;
 
-        if (_buffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < 0.1f)
+        if (BuffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < 0.1f)
         {
             position.y = -0.1f;
             _rigid.velocity = new Vector3(_rigid.velocity.x, 0, _rigid.velocity.z);
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!_buffSystem.ContainBuff<ObstacleShieldBuff>() && transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
+        if (!BuffSystem.ContainBuff<ObstacleShieldBuff>() && transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
         {
             DieHandler();
         }
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
 
     public virtual void Jump()
     {
-        if (_buffSystem.ContainBuff<BoostBuff>())
+        if (BuffSystem.ContainBuff<BoostBuff>())
         {
             return;
         }
@@ -249,6 +249,11 @@ public class Player : MonoBehaviour
 
     public virtual bool UseBoost()
     {
+        if (BuffSystem.ContainBuff<ResurrectionBuff>())
+        {
+            return false;
+        }
+
         if (BoostGazy > 1)
         {
             BoostGazy -= 1;

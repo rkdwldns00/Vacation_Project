@@ -67,6 +67,11 @@ public class Chaser : MonoBehaviour
 
     public void HitToPlayer()
     {
+        if (Player.Instance.BuffSystem.ContainBuff<ResurrectionBuff>())
+        {
+            return;
+        }
+
         if (Player.Instance.UseBoost())
         {
             Timer = _hitToPlayerTimer;
