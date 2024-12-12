@@ -5,12 +5,16 @@ using UnityEngine;
 /* 코드 작성자 : 강지운 */
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _itemPrefabs;
+    public static ItemSpawner Instance { get; private set; }
+
+    [SerializeField] private List<GameObject> _itemPrefabs;
     [SerializeField] private float _itemSpawnPercent;
     [SerializeField] private int _obstacleScanerZ;
     [SerializeField] private int _itemSpawnZ;
     [SerializeField] private int _minX;
     [SerializeField] private int _maxX;
+
+    public List<GameObject> ItemPrefabs => _itemPrefabs;
 
     private int _xSize => _maxX + 1 - _minX;
     private int _zSize => _obstacleScanerZ - _itemSpawnZ;
@@ -19,6 +23,11 @@ public class ItemSpawner : MonoBehaviour
     private ScanDataType[,] _scanDatas;
 
     private int _scanDataStartZ => Mathf.Max(0, _playerZWhenLastScan - _zSize + 1);
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -111,7 +120,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void SpawnItemPrefab(Vector3 position)
     {
-        int randIndex = Random.Range(0, _itemPrefabs.Length);
+        int randIndex = Random.Range(0, _itemPrefabs.Count);
         GameObject spawnItem = ObjectPoolManager.Instance.GetPooledGameObject(_itemPrefabs[randIndex]);
         spawnItem.transform.position = position;
     }
