@@ -67,10 +67,8 @@ public class ReviewUI : ManagedUI
 
     private void Start()
     {
-        if ((_lastBestScore < 30000 && GameManager.Instance.BestScore >= 30000 && ReviewRequestScore < 30000) ||
-            (_lastBestScore < 50000 && GameManager.Instance.BestScore >= 50000 && ReviewRequestScore < 50000) ||
-            (_lastBestScore < 70000 && GameManager.Instance.BestScore >= 70000 && ReviewRequestScore < 70000) ||
-            (_lastBestScore != GameManager.Instance.BestScore && ReviewRequestScore > 70000) && DidReview != 1)
+        if ((_lastBestScore < 5000 && GameManager.Instance.BestScore >= 5000 && ReviewRequestScore < 5000) ||
+            (_lastBestScore < 15000 && GameManager.Instance.BestScore >= 15000 && ReviewRequestScore < 15000) && DidReview != 1)
         {
             OpenUI();
         }

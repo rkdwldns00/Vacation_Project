@@ -1599,8 +1599,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uAD6C\uAE00 \uD50C\uB808\uC774\uC2A4\uD1A0\uC5B4\uC5D0 \uB9AC\uBDF0\uB97C
-    \uB0A8\uACA8\uC8FC\uC138\uC694!\n\n(\uC88C\uCE21 \uC0C1\uB2E8 UI\uB97C \uD1B5\uD574
-    \uB9AC\uBDF0 \uD654\uBA74\uC744 \uB2E4\uC2DC \uC5F4 \uC218 \uC788\uC2B5\uB2C8\uB2E4.)"
+    \uB0A8\uACA8\uC8FC\uC138\uC694!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6bc5d8264829a8349ba44cd2815e445e, type: 2}
   m_sharedMaterial: {fileID: -7096337535017947397, guid: 6bc5d8264829a8349ba44cd2815e445e, type: 2}
