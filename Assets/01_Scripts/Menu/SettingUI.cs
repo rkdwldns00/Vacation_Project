@@ -36,14 +36,10 @@ public class SettingUI : ManagedUI
 
         _moveSensitivityInputField.onEndEdit.AddListener((changedValue) =>
         {
-            float changedFloatValue = 0;
-            bool isValueFloat = float.TryParse(changedValue, out changedFloatValue);
+            float changedFloatValue = float.Parse(changedValue);
 
-            if (isValueFloat)
-            {
-                MoveSensitivity = Mathf.Clamp01(changedFloatValue);
-                _moveSensitivitySlider.value = MoveSensitivity;
-            }
+            MoveSensitivity = Mathf.Clamp01(changedFloatValue);
+            _moveSensitivitySlider.value = MoveSensitivity;
             _moveSensitivityInputField.text = MoveSensitivity.ToString("0.00");
         });
     }
