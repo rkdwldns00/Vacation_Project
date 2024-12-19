@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class BoostBuff : Buff
 {
-    private Rigidbody _playerRigid;
-    private Player _player;
+    protected Rigidbody playerRigid;
+    protected Player player;
+    protected BuffSystem buffSystem;
     public float BoostSpeed { get; private set; }
     public float DurationTime { get; private set; }
 
@@ -25,21 +26,21 @@ public class BoostBuff : Buff
 
     public override void StartBuff(BuffSystem buffSystem)
     {
-        _playerRigid = buffSystem.GetComponent<Rigidbody>();
-        _player = buffSystem.GetComponent<Player>();
-        _player.AddMoveSpeed(BoostSpeed);
+        this.buffSystem = buffSystem;
+
+        playerRigid = this.buffSystem.GetComponent<Rigidbody>();
+        player = this.buffSystem.GetComponent<Player>();
+        player.AddMoveSpeed(BoostSpeed);
     }
 
     public override void UpdateBuff(BuffSystem buffSystem)
     {
-        DurationTime -= Time.deltaTime;
-
-        if (DurationTime <= 0) buffSystem.RemoveBuff(this);
+        DurationTimeCheckHandler();
     }
 
     public override void EndBuff(BuffSystem buffSystem)
     {
-        _player.AddMoveSpeed(-BoostSpeed);
+        player.AddMoveSpeed(-BoostSpeed);
     }
 
     public void ChangeBoostSpeed(float speed)
@@ -47,6 +48,13 @@ public class BoostBuff : Buff
         float originSpeed = BoostSpeed;
         BoostSpeed = speed;
 
-        _player.AddMoveSpeed(speed - originSpeed);
+        player.AddMoveSpeed(speed - originSpeed);
+    }
+
+    protected virtual void DurationTimeCheckHandler()
+    {
+        DurationTime -= Time.deltaTime;
+
+        if (DurationTime <= 0) buffSystem.RemoveBuff(this);
     }
 }
