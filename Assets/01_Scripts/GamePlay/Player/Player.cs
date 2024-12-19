@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
 
         rotation.x = -_rigid.velocity.y;
 
-        if (_buffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < -0.1f)
+        if (BuffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < -0.1f)
         {
             position.y = -0.1f;
             _rigid.velocity = new Vector3(_rigid.velocity.x, 0, _rigid.velocity.z);
