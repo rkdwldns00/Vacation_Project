@@ -35,7 +35,9 @@ public class InGameUIManager : MonoBehaviour
 
     [Header("Pause UI")]
     [SerializeField] private GameObject _pauseLayer;
+    [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _cancelPauseButton;
+    [SerializeField] private Button _stopGameButton;
 
     [Header("Player UI")]
     [SerializeField] private GameObject _playerLossHpPrefab;
@@ -66,7 +68,13 @@ public class InGameUIManager : MonoBehaviour
         PlayerSpawner.Instance.OnSpawned += OnPlayerSpawned;
 
         _gameResultUI.OnClose += () => SceneManager.LoadScene("MenuScene");
+        _pauseButton.onClick.AddListener(() => SetPause(true));
         _cancelPauseButton.onClick.AddListener(() => { SetPause(false); });
+        _stopGameButton.onClick.AddListener(() =>
+        {
+            Player.Instance.DieHandler();
+            SetPause(false);
+        });
     }
 
     private void Update()

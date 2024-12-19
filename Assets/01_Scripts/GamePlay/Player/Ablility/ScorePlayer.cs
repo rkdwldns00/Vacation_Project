@@ -6,25 +6,25 @@ public class ScorePlayer : Player
 {
     public override int MaxLevel => 10;
     public override int UpgradeCost => base.UpgradeCost;
-    public override int UnlockCost => 200;
+    public override int UnlockCost => 125;
     public override string CarInfo
     {
         get
         {
             if (PlayerLevel == 0)
             {
-                return string.Format("점수 획득량이 최대 {0}% 늘어납니다.", (int)(GetBonus(MaxLevel) * 100 - 100));
+                return string.Format("점수 획득량이 최대 {0}% 늘어납니다.", Mathf.Round(GetBonus(MaxLevel) * 100 - 100));
             }
             else
             {
-                return string.Format("점수 획득량이 {0}% 늘어납니다.", (int)(GetBonus(PlayerLevel) * 100 - 100));
+                return string.Format("점수 획득량이 {0}% 늘어납니다.", Mathf.Round(GetBonus(PlayerLevel) * 100 - 100));
             }
         }
     }
 
     float GetBonus(int playerLevel)
     {
-        return 1.5f + playerLevel / 10;
+        return 1f + playerLevel * 0.07f;
     }
 
     public override void ChargeBoost(float value)
@@ -34,7 +34,7 @@ public class ScorePlayer : Player
         RunOnChangedBoostGazy(value);
     }
 
-    protected override void UpdaateDistanceScore()
+    protected override void UpdateDistanceScore()
     {
         GameManager.Instance.DistanceScore = (int)(transform.position.z * GetBonus(PlayerLevel));
     }

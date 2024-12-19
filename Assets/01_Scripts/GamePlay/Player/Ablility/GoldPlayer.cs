@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GoldPlayer : Player
 {
-    public override int MaxLevel => 10;
-    public override int UpgradeCost => base.UpgradeCost;
+    public override int MaxLevel => 3;
+    public override int UpgradeCost => base.UpgradeCost * 3;
     public override int UnlockCost => 200;
     public override string CarInfo
     {
@@ -13,22 +13,24 @@ public class GoldPlayer : Player
         {
             if (PlayerLevel == 0)
             {
-                return string.Format("골드획득량이 최대 {0}% 증가합니다.", (int)(GetGoldRate(MaxLevel) * 1000 - 100));
+                return string.Format("젬을 획득할 때 최대 {0}골드를 획득합니다.", GetGold(MaxLevel));
             }
             else
             {
-                return string.Format("골드획득량이 {0}% 증가합니다.", (int)(GetGoldRate(PlayerLevel) * 1000 - 100));
+                return string.Format("젬을 획득할 때 {0}골드를 획득합니다.", GetGold(PlayerLevel));
             }
         }
+    }   
+
+    private int GetGold(int playerLevel)
+    {
+        return playerLevel;
     }
 
-    private float GetGoldRate(int playerLevel)
+    public override void ChargeBoost(float value)
     {
-        return 0.12f + playerLevel * 0.005f;
-    }
+        base.ChargeBoost(value);
 
-    protected override void SetGoldRate()
-    {
-        GameManager.Instance.RewardGoldRate = GetGoldRate(PlayerLevel);
+        GameManager.Instance.GoldPlayerGoldAdded += PlayerLevel;
     }
 }

@@ -21,6 +21,8 @@ public class GemSpawner : MonoBehaviour
 
     private int _scanDataStartZ => Mathf.Max(0, _playerZWhenLastScan - _zSize + 1);
 
+    private float _accumGemSpawnProbability = 0f;
+
     private void Start()
     {
         _scanDatas = new ScanDataType[_xSize, _zSize];
@@ -34,6 +36,8 @@ public class GemSpawner : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (!Application.isPlaying) return;
+
         for (int z = _scanDataStartZ; z < _scanDataStartZ + _zSize; z++)
         {
             for (int i = 0; i < _xSize; i++)
@@ -102,7 +106,9 @@ public class GemSpawner : MonoBehaviour
 
     private void SpawnGemHandler()
     {
-        if (Random.Range(0f, 100f) > _gemSpawnPercent)
+        _accumGemSpawnProbability += _gemSpawnPercent;
+
+        if (Random.Range(0f, 100f) > _accumGemSpawnProbability)
         {
             return;
         }
@@ -131,6 +137,8 @@ public class GemSpawner : MonoBehaviour
                 blankCount++;
             }
         }
+
+        _accumGemSpawnProbability = 0;
     }
 
     private void SpawnGemPrefab(Vector3 position)

@@ -128,6 +128,7 @@ public class CustomizingUI : ManagedUI
         _upgradeButton.gameObject.SetActive(p.PlayerLevel > 0 && p.IsUpgradable);
         _selectButton.gameObject.SetActive(p.PlayerLevel > 0);
         _carInfoText.text = p.CarInfo;
+        _carInfoText.fontSize = p.CarInfoFontSize;
         _unlockCostText.text = p.UnlockCost.ToString();
         _upgradeCostText.text = p.UpgradeCost.ToString();
         _upgradeLevelText.text = p.PlayerLevel.ToString();

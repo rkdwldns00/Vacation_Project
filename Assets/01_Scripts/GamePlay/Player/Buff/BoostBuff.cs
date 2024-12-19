@@ -1,28 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BoostBuff : Buff
 {
     private Rigidbody _playerRigid;
-    private float _boostSpeed;
-    private float _durationTime;
     private Player _player;
+    public float BoostSpeed { get; private set; }
+    public float DurationTime { get; private set; }
 
     public BoostBuff(float boostSpeed, float durationTime)
     {
-        _boostSpeed = boostSpeed;
-        _durationTime = durationTime;
+        BoostSpeed = boostSpeed;
+        DurationTime = durationTime;
     }
 
     public override void MergeBuff<T>(T otherBuff)
     {
         BoostBuff mergedBuff = otherBuff as BoostBuff;
 
-        if (mergedBuff._durationTime > _durationTime)
+        if (mergedBuff.DurationTime > DurationTime)
         {
-            _durationTime = mergedBuff._durationTime;
+            DurationTime = mergedBuff.DurationTime;
         }
     }
 
@@ -30,18 +27,26 @@ public class BoostBuff : Buff
     {
         _playerRigid = buffSystem.GetComponent<Rigidbody>();
         _player = buffSystem.GetComponent<Player>();
-        _player.AddMoveSpeed(_boostSpeed);
+        _player.AddMoveSpeed(BoostSpeed);
     }
 
     public override void UpdateBuff(BuffSystem buffSystem)
     {
-        _durationTime -= Time.deltaTime;
+        DurationTime -= Time.deltaTime;
 
-        if (_durationTime <= 0) buffSystem.RemoveBuff(this);
+        if (DurationTime <= 0) buffSystem.RemoveBuff(this);
     }
 
     public override void EndBuff(BuffSystem buffSystem)
     {
-        _player.AddMoveSpeed(-_boostSpeed);
+        _player.AddMoveSpeed(-BoostSpeed);
+    }
+
+    public void ChangeBoostSpeed(float speed)
+    {
+        float originSpeed = BoostSpeed;
+        BoostSpeed = speed;
+
+        _player.AddMoveSpeed(speed - originSpeed);
     }
 }
