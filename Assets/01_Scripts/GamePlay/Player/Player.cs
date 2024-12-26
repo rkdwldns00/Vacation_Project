@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public virtual int UpgradeCost => PlayerLevel * UnlockCost;
     public virtual int UnlockCost => 0;
     public virtual string CarInfo => "기본 차량";
+    public virtual float CarInfoFontSize => 50;
 
     public int CurruntHealth { get; set; }
 
@@ -54,9 +55,9 @@ public class Player : MonoBehaviour
     }
 
     public bool CanControl { get; set; } = true;
+    public BuffSystem BuffSystem { get; set; }
     public GameObject playerMesh;
     private Mesh _mesh;
-    protected BuffSystem _buffSystem;
     [SerializeField] private int CarID;
     [SerializeField] private PlayerSetting _playerSetting;
 
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         _rigid = GetComponent<Rigidbody>();
-        _buffSystem = GetComponent<BuffSystem>();
+        BuffSystem = GetComponent<BuffSystem>();
 
         CurruntHealth = MaxHealth;
         OnChangedHealth?.Invoke();
@@ -105,6 +106,7 @@ public class Player : MonoBehaviour
     protected virtual void Start()
     {
         SetGoldRate();
+        SetCrystalRate();
         OnChangedBoostGazy?.Invoke(0);
         SoundManager.Instance.PlaySound(SoundManager.Instance.SoundData.EngineSfx, SoundType.SFX, true);
     }
@@ -137,13 +139,13 @@ public class Player : MonoBehaviour
         position.z = _rigid.position.z + MoveSpeed * Time.fixedDeltaTime;
 
         position.x = Mathf.Lerp(_rigid.position.x, _targetX, Time.fixedDeltaTime * 10);
-        rotation.y = _rigid.position.x - position.x;
+        rotation.y = (position.x - _rigid.position.x) * 25;
 
         position.y = _rigid.position.y;
 
         rotation.x = -_rigid.velocity.y;
 
-        if (_buffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < 0.1f)
+        if (BuffSystem.ContainBuff<ObstacleShieldBuff>() && position.y < -0.1f)
         {
             position.y = -0.1f;
             _rigid.velocity = new Vector3(_rigid.velocity.x, 0, _rigid.velocity.z);
@@ -162,7 +164,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!_buffSystem.ContainBuff<ObstacleShieldBuff>() && transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
+        if (!BuffSystem.ContainBuff<ObstacleShieldBuff>() && transform.position.y < _playerSetting.fallingSensorY && collision.transform.tag == "Road")
         {
             DieHandler();
         }
@@ -181,6 +183,11 @@ public class Player : MonoBehaviour
     protected virtual void SetGoldRate()
     {
         GameManager.Instance.RewardGoldRate = 0.1f;
+    }
+
+    protected virtual void SetCrystalRate()
+    {
+        GameManager.Instance.RewardCrystalRate = 0.01f;
     }
 
     private void IncreaseSpeedWithScore()
@@ -219,7 +226,7 @@ public class Player : MonoBehaviour
 
     public virtual void Jump()
     {
-        if (_buffSystem.ContainBuff<BoostBuff>())
+        if (BuffSystem.ContainBuff<BoostBuff>())
         {
             return;
         }
@@ -242,6 +249,11 @@ public class Player : MonoBehaviour
 
     public virtual bool UseBoost()
     {
+        if (BuffSystem.ContainBuff<ResurrectionBuff>())
+        {
+            return false;
+        }
+
         if (BoostGazy > 1)
         {
             BoostGazy -= 1;

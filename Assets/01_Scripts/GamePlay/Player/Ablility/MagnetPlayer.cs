@@ -32,7 +32,17 @@ public class MagnetPlayer : Player
     protected override void Start()
     {
         base.Start();
-        _magnetBuff = _buffSystem.AddBuff(new MagnetBuff(0)) as MagnetBuff;
+        _magnetBuff = BuffSystem.AddBuff(new MagnetBuff(0)) as MagnetBuff;
+
+        for (int i = 0; i < ItemSpawner.Instance.ItemPrefabs.Count; i++)
+        {
+            MagnetItem item = ItemSpawner.Instance.ItemPrefabs[i].GetComponent<MagnetItem>();
+            if (item != null)
+            {
+                ItemSpawner.Instance.ItemPrefabs.Remove(item.gameObject);
+                break;
+            }
+        }
     }
 
     protected override void Update()
